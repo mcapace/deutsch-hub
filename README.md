@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Deutsch Spirits Hub
+
+A premium landing page showcasing Bib & Tucker and Redemption whiskeys, presented by Whisky Advocate in partnership with Deutsch Family Wine & Spirits.
+
+Built with [Next.js](https://nextjs.org) and deployed on [Vercel](https://vercel.com).
 
 ## Getting Started
 
