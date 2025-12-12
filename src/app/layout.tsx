@@ -1,5 +1,18 @@
 import type { Metadata } from 'next';
+import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Deutsch Spirits Collection | Whisky Advocate',
@@ -40,8 +53,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="antialiased bg-[#0D0D0D] text-[#FAFAFA]">
+    <html lang="en" className={`scroll-smooth ${inter.variable} ${playfair.variable}`}>
+      <body className="antialiased font-sans bg-[#FAFAF8] text-[#1A1A1A]">
         {children}
       </body>
     </html>

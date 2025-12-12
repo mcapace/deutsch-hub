@@ -33,7 +33,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[#B87333]/10 blur-3xl"
+          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[#E8D4B8]/30 blur-3xl"
         />
         <motion.div
           animate={{
@@ -45,7 +45,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[#FD9419]/10 blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[#FCD9A0]/30 blur-3xl"
         />
         <motion.div
           animate={{
@@ -57,13 +57,13 @@ export default function Hero() {
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#C4956A]/5 blur-3xl"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#F5EDE0]/40 blur-3xl"
         />
       </div>
 
       {/* Decorative lines */}
       <div className="absolute inset-0 pointer-events-none">
-        <svg className="absolute w-full h-full opacity-20" viewBox="0 0 1920 1080">
+        <svg className="absolute w-full h-full opacity-10" viewBox="0 0 1920 1080">
           <motion.path
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
@@ -96,7 +96,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-[#C4956A] animate-pulse" />
-          <span className="text-sm text-[#A3A3A3]">Presented by Whisky Advocate</span>
+          <span className="text-sm text-[#6B6B6B]">Presented by Whisky Advocate</span>
         </motion.div>
 
         {/* Main headline */}
@@ -106,7 +106,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
         >
-          <span className="block text-[#FAFAFA]">Discover the Art of</span>
+          <span className="block text-[#1A1A1A]">Discover the Art of</span>
           <span className="block text-gradient mt-2">American Whiskey</span>
         </motion.h1>
 
@@ -115,7 +115,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="max-w-2xl mx-auto text-lg md:text-xl text-[#A3A3A3] mb-10"
+          className="max-w-2xl mx-auto text-lg md:text-xl text-[#4A4A4A] mb-10 leading-relaxed"
         >
           Explore the heritage, craftsmanship, and bold character of{' '}
           <span className="text-[#B87333]">Bib & Tucker</span> and{' '}
@@ -146,16 +146,16 @@ export default function Hero() {
           className="mt-20 flex items-center justify-center gap-12 flex-wrap"
         >
           <div className="flex flex-col items-center gap-3 opacity-60 hover:opacity-100 transition-opacity">
-            <div className="w-24 h-24 rounded-lg bg-[#B87333]/20 flex items-center justify-center border border-[#B87333]/30">
-              <span className="text-[#F5E6D3] text-xs font-medium text-center px-2">
+            <div className="w-24 h-24 rounded-xl bg-white/80 backdrop-blur-sm flex items-center justify-center border border-[#E5E3DD] shadow-sm hover:shadow-md transition-shadow">
+              <span className="text-[#B87333] text-xs font-semibold text-center px-2">
                 BIB & TUCKER
               </span>
             </div>
           </div>
-          <div className="w-px h-16 bg-gradient-to-b from-transparent via-[#C4956A]/50 to-transparent" />
+          <div className="w-px h-16 bg-gradient-to-b from-transparent via-[#D4D1C8] to-transparent" />
           <div className="flex flex-col items-center gap-3 opacity-60 hover:opacity-100 transition-opacity">
-            <div className="w-24 h-24 rounded-lg bg-[#FD9419]/20 flex items-center justify-center border border-[#FD9419]/30">
-              <span className="text-[#FFB347] text-xs font-medium text-center px-2">
+            <div className="w-24 h-24 rounded-xl bg-white/80 backdrop-blur-sm flex items-center justify-center border border-[#E5E3DD] shadow-sm hover:shadow-md transition-shadow">
+              <span className="text-[#D97706] text-xs font-semibold text-center px-2">
                 REDEMPTION
               </span>
             </div>
@@ -175,8 +175,8 @@ export default function Hero() {
           transition={{ duration: 1.5, repeat: Infinity }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="text-xs text-[#737373] uppercase tracking-widest">Scroll</span>
-          <div className="w-6 h-10 rounded-full border border-[#C4956A]/50 flex justify-center pt-2">
+          <span className="text-xs text-[#8B8B8B] uppercase tracking-widest">Scroll</span>
+          <div className="w-6 h-10 rounded-full border border-[#D4D1C8] flex justify-center pt-2">
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}

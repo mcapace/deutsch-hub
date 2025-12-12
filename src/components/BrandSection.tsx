@@ -100,7 +100,7 @@ export default function BrandSection({
           </motion.h2>
           <motion.p
             variants={itemVariants}
-            className="text-xl md:text-2xl text-[#A3A3A3] italic"
+            className="text-xl md:text-2xl text-[#6B6B6B] italic font-serif"
           >
             {tagline}
           </motion.p>
@@ -117,7 +117,7 @@ export default function BrandSection({
           >
             <div className={`relative aspect-[4/5] rounded-2xl overflow-hidden ${colors.glow}`}>
               {/* Placeholder bottle display */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#0D0D0D] flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#F5F3F0] to-[#EFECE6] flex items-center justify-center">
                 <div className="text-center p-8">
                   <div
                     className="w-32 h-48 mx-auto mb-6 rounded-lg border-2 border-dashed flex items-center justify-center"
@@ -132,7 +132,7 @@ export default function BrandSection({
                       <path d="M12 2C9.79 2 8 3.79 8 6v2H5v14h14V8h-3V6c0-2.21-1.79-4-4-4zm0 2c1.1 0 2 .9 2 2v2h-4V6c0-1.1.9-2 2-2z" />
                     </svg>
                   </div>
-                  <p className="text-[#737373] text-sm">Product Image Placeholder</p>
+                  <p className="text-[#8B8B8B] text-sm">Product Image Placeholder</p>
                 </div>
               </div>
               {/* Decorative overlay */}
@@ -153,18 +153,18 @@ export default function BrandSection({
             className={reversed ? 'lg:order-1' : ''}
           >
             <motion.div variants={itemVariants} className="mb-8">
-              <h3 className="text-2xl font-semibold text-[#FAFAFA] mb-4">The Story</h3>
-              <p className="text-[#A3A3A3] leading-relaxed">{description}</p>
+              <h3 className="text-2xl font-semibold text-[#1A1A1A] mb-4 font-serif">The Story</h3>
+              <p className="text-[#4A4A4A] leading-relaxed">{description}</p>
             </motion.div>
 
             <motion.div variants={itemVariants} className="mb-8">
-              <h3 className="text-2xl font-semibold text-[#FAFAFA] mb-4">Heritage</h3>
-              <p className="text-[#A3A3A3] leading-relaxed">{heritage}</p>
+              <h3 className="text-2xl font-semibold text-[#1A1A1A] mb-4 font-serif">Heritage</h3>
+              <p className="text-[#4A4A4A] leading-relaxed">{heritage}</p>
             </motion.div>
 
             {/* Products */}
             <motion.div variants={itemVariants}>
-              <h3 className="text-2xl font-semibold text-[#FAFAFA] mb-6">The Collection</h3>
+              <h3 className="text-2xl font-semibold text-[#1A1A1A] mb-6 font-serif">The Collection</h3>
               <div className="space-y-4">
                 {products.map((product, index) => (
                   <motion.div
@@ -176,11 +176,11 @@ export default function BrandSection({
                   >
                     <div className="flex justify-between items-start mb-3">
                       <h4 className={`font-semibold ${colors.accent}`}>{product.name}</h4>
-                      <span className="text-xs text-[#737373] bg-[#1a1a1a] px-2 py-1 rounded">
+                      <span className="text-xs text-[#6B6B6B] bg-[#F5F3F0] px-2 py-1 rounded">
                         {product.proof}
                       </span>
                     </div>
-                    <p className="text-sm text-[#A3A3A3] mb-3">{product.description}</p>
+                    <p className="text-sm text-[#4A4A4A] mb-3">{product.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {product.notes.map((note) => (
                         <span

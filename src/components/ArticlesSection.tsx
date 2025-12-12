@@ -60,12 +60,12 @@ export default function ArticlesSection() {
     <section
       id="articles"
       ref={ref}
-      className="relative py-24 md:py-32 bg-[#0D0D0D] noise-overlay"
+      className="relative py-24 md:py-32 bg-[#FAFAF8] noise-overlay"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-[#C4956A]/5 blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-[#FD9419]/5 blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-[#E8D4B8]/20 blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-[#FCD9A0]/20 blur-3xl" />
       </div>
 
       <div className="container-custom relative z-10">
@@ -80,7 +80,7 @@ export default function ArticlesSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
             Featured Stories
           </h2>
-          <p className="text-lg text-[#A3A3A3] max-w-2xl mx-auto">
+          <p className="text-lg text-[#4A4A4A] max-w-2xl mx-auto">
             Dive deeper into the world of premium American whiskey with exclusive content
             from Whisky Advocate.
           </p>
@@ -96,7 +96,7 @@ export default function ArticlesSection() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`group relative rounded-2xl overflow-hidden border ${colors.border} ${colors.hover} transition-all duration-500 bg-[#141414]`}
+                className={`group relative rounded-2xl overflow-hidden border ${colors.border} ${colors.hover} transition-all duration-500 bg-white shadow-sm hover:shadow-md`}
               >
                 {/* Image placeholder */}
                 <div className={`relative aspect-[16/9] bg-gradient-to-br ${colors.gradient} overflow-hidden`}>
@@ -110,7 +110,7 @@ export default function ArticlesSection() {
                       >
                         <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
                       </svg>
-                      <p className="text-[#737373] text-sm">Article Image Placeholder</p>
+                      <p className="text-[#8B8B8B] text-sm">Article Image Placeholder</p>
                     </div>
                   </div>
                   {/* Hover overlay */}
@@ -124,20 +124,20 @@ export default function ArticlesSection() {
                     <span className={`text-xs px-3 py-1 rounded-full ${colors.tag}`}>
                       {article.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'}
                     </span>
-                    <span className="text-xs text-[#737373]">{article.category}</span>
+                    <span className="text-xs text-[#8B8B8B]">{article.category}</span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#FAFAFA] mb-3 group-hover:text-[#C4956A] transition-colors duration-300">
+                  <h3 className="text-xl md:text-2xl font-semibold text-[#1A1A1A] mb-3 group-hover:text-[#C4956A] transition-colors duration-300 font-serif">
                     {article.title}
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-[#A3A3A3] leading-relaxed mb-6">{article.excerpt}</p>
+                  <p className="text-[#4A4A4A] leading-relaxed mb-6">{article.excerpt}</p>
 
                   {/* Footer */}
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-[#737373]">{article.readTime}</span>
+                    <span className="text-sm text-[#8B8B8B]">{article.readTime}</span>
                     <motion.button
                       whileHover={{ x: 5 }}
                       className="flex items-center gap-2 text-sm font-medium"
@@ -181,7 +181,7 @@ export default function ArticlesSection() {
           className="mt-16 text-center"
         >
           <div className="glass-card inline-block px-8 py-6 rounded-2xl">
-            <p className="text-[#A3A3A3] mb-4">
+            <p className="text-[#4A4A4A] mb-4">
               More stories and exclusive content coming soon.
             </p>
             <button className="btn-outline text-sm">
