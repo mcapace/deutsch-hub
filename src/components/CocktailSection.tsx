@@ -1,7 +1,8 @@
 'use client';
 
-import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { motion, useInView, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface Cocktail {
   id: string;
@@ -16,9 +17,60 @@ interface Cocktail {
   occasion: string;
   category: 'holiday' | 'winter' | 'nye' | 'classic';
   image?: string;
+  featured?: boolean; // For Gold Roast emphasis
 }
 
 const cocktails: Cocktail[] = [
+  // Gold Roast Featured - Big Push
+  {
+    id: 'gold-roast-fashioned',
+    name: 'Gold Roast Elevated',
+    brand: 'bib',
+    spirit: 'Bib & Tucker Gold Roast',
+    tagline: 'Coffee lovers rejoice',
+    category: 'classic',
+    featured: true,
+    ingredients: [
+      '2 oz Bib & Tucker Gold Roast',
+      '0.25 oz Demerara Syrup',
+      '2 dashes Angostura Bitters',
+    ],
+    instructions: [
+      'Add ingredients to a mixing glass with ice',
+      'Stir until well chilled',
+      'Strain over a large ice cube',
+      'Express orange peel over the drink',
+    ],
+    garnish: 'Orange peel',
+    glassware: 'Rocks glass',
+    occasion: 'After dinner',
+    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
+  },
+  {
+    id: 'gold-roast-espresso-martini',
+    name: 'Gold Roast Espresso Martini',
+    brand: 'bib',
+    spirit: 'Bib & Tucker Gold Roast',
+    tagline: 'Double coffee, double delight',
+    category: 'classic',
+    featured: true,
+    ingredients: [
+      '1.5 oz Bib & Tucker Gold Roast',
+      '1 oz Fresh Espresso',
+      '0.5 oz Coffee Liqueur',
+      '0.25 oz Simple Syrup',
+    ],
+    instructions: [
+      'Brew fresh espresso and let cool',
+      'Shake all ingredients vigorously with ice',
+      'Double strain into a chilled coupe',
+      'Garnish with coffee beans',
+    ],
+    garnish: '3 coffee beans',
+    glassware: 'Coupe',
+    occasion: 'Brunch or dessert',
+    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
+  },
   // Holiday Cocktails
   {
     id: 'campfire-old-fashioned',
@@ -42,6 +94,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Orange peel',
     glassware: 'Rocks glass',
     occasion: 'Fireside sipping',
+    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
   },
   {
     id: 'holiday-manhattan',
@@ -64,28 +117,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Luxardo cherry',
     glassware: 'Coupe',
     occasion: 'Elegant celebrations',
-  },
-  {
-    id: 'gold-rush',
-    name: 'Gold Rush',
-    brand: 'redemption',
-    spirit: 'Redemption Bourbon',
-    tagline: 'Smooth honey meets bold bourbon',
-    category: 'classic',
-    ingredients: [
-      '2 oz Redemption Bourbon',
-      '1 oz Honey Syrup',
-      '0.75 oz Fresh Lemon Juice',
-    ],
-    instructions: [
-      'Make honey syrup: equal parts honey and hot water',
-      'Shake all ingredients vigorously with ice',
-      'Strain over a large ice cube in a rocks glass',
-      'Garnish with lemon peel or bee pollen',
-    ],
-    garnish: 'Lemon peel',
-    glassware: 'Rocks glass',
-    occasion: 'Any celebration',
+    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
   },
   {
     id: 'tennessee-winter',
@@ -109,6 +141,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Orange peel, cinnamon stick',
     glassware: 'Coupe',
     occasion: 'Holiday dinners',
+    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
   },
   {
     id: 'spiced-gold-rush',
@@ -131,28 +164,30 @@ const cocktails: Cocktail[] = [
     garnish: 'Candied ginger',
     glassware: 'Rocks glass',
     occasion: 'Holiday entertaining',
+    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
   },
   {
-    id: 'gold-roast-fashioned',
-    name: 'Gold Roast Elevated',
-    brand: 'bib',
-    spirit: 'Bib & Tucker Gold Roast',
-    tagline: 'Coffee lovers rejoice',
+    id: 'gold-rush',
+    name: 'Gold Rush',
+    brand: 'redemption',
+    spirit: 'Redemption Bourbon',
+    tagline: 'Smooth honey meets bold bourbon',
     category: 'classic',
     ingredients: [
-      '2 oz Bib & Tucker Gold Roast',
-      '0.25 oz Demerara Syrup',
-      '2 dashes Angostura Bitters',
+      '2 oz Redemption Bourbon',
+      '1 oz Honey Syrup',
+      '0.75 oz Fresh Lemon Juice',
     ],
     instructions: [
-      'Add ingredients to a mixing glass with ice',
-      'Stir until well chilled',
-      'Strain over a large ice cube',
-      'Express orange peel over the drink',
+      'Make honey syrup: equal parts honey and hot water',
+      'Shake all ingredients vigorously with ice',
+      'Strain over a large ice cube in a rocks glass',
+      'Garnish with lemon peel or bee pollen',
     ],
-    garnish: 'Orange peel',
+    garnish: 'Lemon peel',
     glassware: 'Rocks glass',
-    occasion: 'After dinner',
+    occasion: 'Any celebration',
+    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
   },
   // Winter Warmers
   {
@@ -177,6 +212,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Cinnamon stick, lemon wheel',
     glassware: 'Mug',
     occasion: 'Cold nights',
+    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
   },
   {
     id: 'hot-buttered-bourbon',
@@ -201,6 +237,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Fresh grated nutmeg',
     glassware: 'Mug',
     occasion: 'Holiday gatherings',
+    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
   },
   {
     id: 'maple-apple-cider',
@@ -224,6 +261,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Apple slice, cinnamon stick',
     glassware: 'Mug',
     occasion: 'Cozy nights',
+    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
   },
   // NYE Cocktails
   {
@@ -248,6 +286,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Lemon twist',
     glassware: 'Coupe',
     occasion: "New Year's Eve",
+    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
   },
   {
     id: 'resolution-fizz',
@@ -271,6 +310,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Lemon twist',
     glassware: 'Flute',
     occasion: 'Celebrations',
+    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
   },
   {
     id: 'gold-rush-royale',
@@ -294,6 +334,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Lemon peel, gold sugar rim',
     glassware: 'Coupe',
     occasion: 'Midnight toast',
+    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
   },
   // Classic Cocktails
   {
@@ -318,6 +359,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Lemon peel (expressed)',
     glassware: 'Rocks glass',
     occasion: 'Sophisticated sipping',
+    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
   },
   {
     id: 'whiskey-sour',
@@ -341,26 +383,15 @@ const cocktails: Cocktail[] = [
     garnish: 'Luxardo cherry, orange slice',
     glassware: 'Rocks glass',
     occasion: 'Any occasion',
+    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
   },
 ];
 
-// Liquid fill animation component
-const LiquidFill = ({ isHovered, color }: { isHovered: boolean; color: string }) => (
-  <motion.div
-    initial={{ height: '0%' }}
-    animate={{ height: isHovered ? '100%' : '0%' }}
-    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-    className="absolute bottom-0 left-0 right-0 pointer-events-none rounded-2xl"
-    style={{
-      background: `linear-gradient(180deg, transparent 0%, ${color}15 100%)`,
-    }}
-  />
-);
-
-// Cocktail card component
+// Enhanced cocktail card with image
 const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const brandColors = {
     bib: {
@@ -368,12 +399,14 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
       secondary: '#BDA55D',
       bg: 'rgba(200, 90, 54, 0.08)',
       gradient: 'linear-gradient(135deg, #C85A36, #BDA55D)',
+      glow: 'rgba(200, 90, 54, 0.3)',
     },
     redemption: {
       primary: '#FD9419',
       secondary: '#D4A04A',
       bg: 'rgba(253, 148, 25, 0.08)',
       gradient: 'linear-gradient(135deg, #FD9419, #D4A04A)',
+      glow: 'rgba(253, 148, 25, 0.3)',
     },
   };
 
@@ -386,81 +419,161 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
 
   const colors = brandColors[cocktail.brand];
 
+  // ESC key to close
+  useEffect(() => {
+    if (!isExpanded) return;
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsExpanded(false);
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isExpanded]);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isExpanded) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isExpanded]);
+
   return (
     <>
       <motion.div
+        ref={cardRef}
         layout
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 40, scale: 0.9 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => setIsExpanded(true)}
         className="relative cursor-pointer group"
+        whileHover={{ y: -8 }}
       >
+        {/* Featured badge for Gold Roast */}
+        {cocktail.featured && (
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ delay: index * 0.1 + 0.3, type: 'spring' }}
+            className="absolute -top-3 -right-3 z-20 px-3 py-1 rounded-full text-xs font-bold text-white shadow-lg"
+            style={{ background: 'linear-gradient(135deg, #FFD700, #FFA500)' }}
+          >
+            ⭐ Featured
+          </motion.div>
+        )}
+
         {/* Animated border glow */}
         <motion.div
           animate={{
             opacity: isHovered ? 1 : 0,
-            scale: isHovered ? 1 : 0.95,
+            scale: isHovered ? 1.02 : 1,
           }}
           transition={{ duration: 0.3 }}
-          className="absolute -inset-0.5 rounded-2xl blur-sm"
-          style={{ background: colors.gradient }}
+          className="absolute -inset-1 rounded-3xl blur-xl"
+          style={{ background: colors.gradient, opacity: 0.4 }}
         />
 
         {/* Card content */}
-        <div className="relative glass-card rounded-2xl p-5 h-full overflow-hidden">
-          <LiquidFill isHovered={isHovered} color={colors.primary} />
-
-          {/* Category & Brand tags */}
-          <div className="flex items-center justify-between mb-3 relative z-10">
-            <div className="flex items-center gap-2">
-              <span className="text-lg">{categoryIcons[cocktail.category]}</span>
-              <span
-                className="text-xs font-bold uppercase tracking-wider px-2 py-1 rounded-full"
+        <div className="relative glass-card rounded-3xl overflow-hidden h-full backdrop-blur-xl">
+          {/* Image section */}
+          <div className="relative h-48 overflow-hidden">
+            {cocktail.image ? (
+              <motion.div
+                animate={{ scale: isHovered ? 1.1 : 1 }}
+                transition={{ duration: 0.6 }}
+                className="relative w-full h-full"
+              >
+                <Image
+                  src={cocktail.image}
+                  alt={cocktail.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  quality={85}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                />
+                {/* Gradient overlay */}
+                <div
+                  className="absolute inset-0"
                 style={{
-                  background: colors.bg,
-                  color: colors.primary,
-                }}
+                    background: `linear-gradient(180deg, transparent 0%, ${colors.primary}40 100%)`,
+                  }}
+                />
+              </motion.div>
+            ) : (
+              <div
+                className="w-full h-full flex items-center justify-center"
+                style={{ background: colors.gradient }}
+              >
+                <span className="text-6xl opacity-50">{categoryIcons[cocktail.category]}</span>
+              </div>
+            )}
+
+            {/* Category badge */}
+            <div className="absolute top-3 left-3">
+              <div
+                className="px-3 py-1.5 rounded-full backdrop-blur-md flex items-center gap-2"
+                style={{ background: 'rgba(255, 255, 255, 0.9)' }}
+              >
+                <span className="text-lg">{categoryIcons[cocktail.category]}</span>
+                <span
+                  className="text-xs font-bold uppercase tracking-wider"
+                  style={{ color: colors.primary }}
               >
                 {cocktail.brand === 'bib' ? 'B&T' : 'Redemption'}
               </span>
+              </div>
             </div>
+
+            {/* Hover overlay */}
             <motion.div
-              animate={{ rotate: isHovered ? 45 : 0 }}
-              transition={{ duration: 0.3 }}
-              className="w-7 h-7 rounded-full flex items-center justify-center"
-              style={{ background: colors.bg }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isHovered ? 1 : 0 }}
+              className="absolute inset-0 flex items-center justify-center bg-black/20"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: isHovered ? 1 : 0 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+                className="w-16 h-16 rounded-full backdrop-blur-md flex items-center justify-center"
+                style={{ background: 'rgba(255, 255, 255, 0.9)' }}
             >
               <svg
-                className="w-3.5 h-3.5"
+                  className="w-8 h-8"
                 style={{ color: colors.primary }}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
               </svg>
+              </motion.div>
             </motion.div>
           </div>
 
+          {/* Content section */}
+          <div className="p-5 relative">
           {/* Cocktail name */}
-          <h3
-            className="text-xl font-bold mb-1 relative z-10"
-            style={{ color: '#1A1410' }}
-          >
+            <h3 className="text-xl font-bold mb-1" style={{ color: '#1A1410' }}>
             {cocktail.name}
           </h3>
 
           {/* Tagline */}
-          <p className="text-sm mb-3 relative z-10" style={{ color: '#6B6B6B' }}>
+            <p className="text-sm mb-3 line-clamp-2" style={{ color: '#6B6B6B' }}>
             {cocktail.tagline}
           </p>
 
           {/* Spirit */}
-          <div className="flex items-center gap-2 mb-3 relative z-10">
+            <div className="flex items-center gap-2 mb-3">
             <div
               className="w-2 h-2 rounded-full"
               style={{ background: colors.gradient }}
@@ -471,94 +584,139 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
           </div>
 
           {/* Quick info */}
-          <div className="flex items-center gap-3 text-xs relative z-10" style={{ color: '#8B8B8B' }}>
+            <div className="flex items-center gap-3 text-xs" style={{ color: '#8B8B6B' }}>
             <span>{cocktail.glassware}</span>
             <span>•</span>
             <span>{cocktail.occasion}</span>
+            </div>
           </div>
         </div>
       </motion.div>
 
-      {/* Expanded modal */}
+      {/* Enhanced expanded modal */}
       <AnimatePresence>
         {isExpanded && (
+          <>
+            {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsExpanded(false)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-          >
+              className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md"
+            />
+
+            {/* Modal */}
             <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl"
+              className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-[101] w-full md:w-auto md:max-w-3xl max-h-[90vh] overflow-hidden rounded-3xl shadow-2xl"
               style={{ background: '#FAFAF8' }}
             >
-              {/* Header gradient */}
-              <div
-                className="h-28 relative"
+              {/* Header with image */}
+              <div className="relative h-64 overflow-hidden">
+                {cocktail.image ? (
+                  <Image
+                    src={cocktail.image}
+                    alt={cocktail.name}
+                    fill
+                    className="object-cover"
+                    quality={90}
+                    priority
+                  />
+                ) : (
+                  <div
+                    className="w-full h-full"
                 style={{ background: colors.gradient }}
-              >
-                <div className="absolute inset-0 bg-black/20" />
-                <button
+                  />
+                )}
+                {/* Gradient overlay */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(180deg, transparent 0%, ${colors.primary} 100%)`,
+                  }}
+                />
+
+                {/* Close button - Enhanced */}
+                <motion.button
                   onClick={() => setIsExpanded(false)}
-                  className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/20 backdrop-blur-xl flex items-center justify-center text-white hover:bg-white/30 transition-all shadow-lg z-10"
+                  aria-label="Close"
                 >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
                   </svg>
-                </button>
-                <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-lg">{categoryIcons[cocktail.category]}</span>
-                    <span className="text-sm font-medium opacity-80 uppercase tracking-wider">
+                </motion.button>
+
+                {/* Header content */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-2xl">{categoryIcons[cocktail.category]}</span>
+                    <span className="text-sm font-medium opacity-90 uppercase tracking-wider">
                       {cocktail.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'}
                     </span>
+                    {cocktail.featured && (
+                      <span className="px-2 py-1 rounded-full text-xs font-bold bg-yellow-400/30 backdrop-blur-sm">
+                        ⭐ Featured
+                      </span>
+                    )}
                   </div>
-                  <h2 className="text-2xl font-bold">{cocktail.name}</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-1">{cocktail.name}</h2>
+                  <p className="text-lg opacity-90">{cocktail.tagline}</p>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-5 space-y-5">
+              {/* Scrollable content */}
+              <div className="overflow-y-auto max-h-[calc(90vh-16rem)] p-6 space-y-6">
                 {/* Spirit highlight */}
                 <div
-                  className="flex items-center gap-3 p-3 rounded-xl"
+                  className="flex items-center gap-4 p-4 rounded-2xl"
                   style={{ background: colors.bg }}
                 >
                   <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center"
+                    className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg"
                     style={{ background: colors.gradient }}
                   >
-                    <span className="text-white text-lg">🥃</span>
+                    <span className="text-2xl">🥃</span>
                   </div>
                   <div>
-                    <p className="text-xs" style={{ color: '#6B6B6B' }}>Base Spirit</p>
-                    <p className="font-semibold" style={{ color: colors.primary }}>{cocktail.spirit}</p>
+                    <p className="text-xs uppercase tracking-wider mb-1" style={{ color: '#8B8B8B' }}>
+                      Base Spirit
+                    </p>
+                    <p className="text-lg font-bold" style={{ color: colors.primary }}>
+                      {cocktail.spirit}
+                    </p>
                   </div>
                 </div>
 
                 {/* Ingredients */}
                 <div>
-                  <h3 className="text-lg font-bold mb-2" style={{ color: '#1A1410' }}>Ingredients</h3>
-                  <ul className="space-y-1.5">
+                  <h3 className="text-xl font-bold mb-3" style={{ color: '#1A1410' }}>
+                    Ingredients
+                  </h3>
+                  <ul className="space-y-2">
                     {cocktail.ingredients.map((ingredient, i) => (
                       <motion.li
                         key={i}
-                        initial={{ opacity: 0, x: -10 }}
+                        initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        className="flex items-center gap-2"
+                        transition={{ delay: i * 0.05 }}
+                        className="flex items-center gap-3 p-3 rounded-xl"
+                        style={{ background: '#F5F3F0' }}
                       >
                         <div
-                          className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                          className="w-2 h-2 rounded-full flex-shrink-0"
                           style={{ background: colors.gradient }}
                         />
-                        <span className="text-sm" style={{ color: '#4A4A4A' }}>{ingredient}</span>
+                        <span className="text-sm font-medium" style={{ color: '#4A4A4A' }}>
+                          {ingredient}
+                        </span>
                       </motion.li>
                     ))}
                   </ul>
@@ -566,51 +724,67 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
 
                 {/* Instructions */}
                 <div>
-                  <h3 className="text-lg font-bold mb-2" style={{ color: '#1A1410' }}>Instructions</h3>
-                  <ol className="space-y-2">
+                  <h3 className="text-xl font-bold mb-3" style={{ color: '#1A1410' }}>
+                    Instructions
+                  </h3>
+                  <ol className="space-y-3">
                     {cocktail.instructions.map((step, i) => (
                       <motion.li
                         key={i}
-                        initial={{ opacity: 0, x: -10 }}
+                        initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 + i * 0.1 }}
-                        className="flex gap-2"
+                        transition={{ delay: 0.2 + i * 0.05 }}
+                        className="flex gap-4"
                       >
                         <span
-                          className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"
-                          style={{ background: colors.bg, color: colors.primary }}
+                          className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 shadow-sm"
+                          style={{ background: colors.gradient, color: '#FFFFFF' }}
                         >
                           {i + 1}
                         </span>
-                        <span className="text-sm" style={{ color: '#4A4A4A' }}>{step}</span>
+                        <span className="text-sm leading-relaxed pt-1" style={{ color: '#4A4A4A' }}>
+                          {step}
+                        </span>
                       </motion.li>
                     ))}
                   </ol>
                 </div>
 
                 {/* Garnish & Glassware */}
-                <div className="flex gap-3">
-                  <div className="flex-1 p-3 rounded-xl" style={{ background: '#F5F3F0' }}>
-                    <p className="text-xs uppercase tracking-wider mb-0.5" style={{ color: '#8B8B8B' }}>Garnish</p>
-                    <p className="font-medium text-sm" style={{ color: '#1A1410' }}>{cocktail.garnish}</p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 rounded-xl" style={{ background: '#F5F3F0' }}>
+                    <p className="text-xs uppercase tracking-wider mb-2" style={{ color: '#8B8B8B' }}>
+                      Garnish
+                    </p>
+                    <p className="font-semibold text-sm" style={{ color: '#1A1410' }}>
+                      {cocktail.garnish}
+                    </p>
                   </div>
-                  <div className="flex-1 p-3 rounded-xl" style={{ background: '#F5F3F0' }}>
-                    <p className="text-xs uppercase tracking-wider mb-0.5" style={{ color: '#8B8B8B' }}>Glassware</p>
-                    <p className="font-medium text-sm" style={{ color: '#1A1410' }}>{cocktail.glassware}</p>
+                  <div className="p-4 rounded-xl" style={{ background: '#F5F3F0' }}>
+                    <p className="text-xs uppercase tracking-wider mb-2" style={{ color: '#8B8B8B' }}>
+                      Glassware
+                    </p>
+                    <p className="font-semibold text-sm" style={{ color: '#1A1410' }}>
+                      {cocktail.glassware}
+                    </p>
                   </div>
                 </div>
 
                 {/* Perfect for */}
                 <div
-                  className="p-3 rounded-xl text-center"
+                  className="p-4 rounded-xl text-center"
                   style={{ background: colors.bg }}
                 >
-                  <p className="text-xs" style={{ color: '#6B6B6B' }}>Perfect for</p>
-                  <p className="font-semibold" style={{ color: colors.primary }}>{cocktail.occasion}</p>
+                  <p className="text-xs uppercase tracking-wider mb-1" style={{ color: '#8B8B8B' }}>
+                    Perfect for
+                  </p>
+                  <p className="text-lg font-bold" style={{ color: colors.primary }}>
+                    {cocktail.occasion}
+                  </p>
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
@@ -626,6 +800,13 @@ export default function CocktailSection() {
     if (activeFilter === 'all') return true;
     if (activeFilter === 'bib' || activeFilter === 'redemption') return c.brand === activeFilter;
     return c.category === activeFilter;
+  });
+
+  // Sort to show featured (Gold Roast) first
+  const sortedCocktails = [...filteredCocktails].sort((a, b) => {
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    return 0;
   });
 
   const filters = [
@@ -687,10 +868,12 @@ export default function CocktailSection() {
           className="flex flex-wrap justify-center gap-2 mb-10"
         >
           {filters.map((filter) => (
-            <button
+            <motion.button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id as typeof activeFilter)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-1.5 ${
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
                 activeFilter === filter.id
                   ? 'text-white shadow-lg'
                   : 'text-gray-600 hover:text-gray-900 bg-white/80'
@@ -704,14 +887,14 @@ export default function CocktailSection() {
             >
               <span>{filter.icon}</span>
               <span>{filter.label}</span>
-            </button>
+            </motion.button>
           ))}
         </motion.div>
 
         {/* Cocktail grid */}
-        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           <AnimatePresence mode="popLayout">
-            {filteredCocktails.map((cocktail, index) => (
+            {sortedCocktails.map((cocktail, index) => (
               <CocktailCard key={cocktail.id} cocktail={cocktail} index={index} />
             ))}
           </AnimatePresence>

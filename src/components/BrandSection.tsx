@@ -9,6 +9,7 @@ interface Product {
   description: string;
   proof: string;
   notes: string[];
+  featured?: boolean; // For Gold Roast emphasis
 }
 
 interface BrandSectionProps {
@@ -77,16 +78,33 @@ const ProductCard = ({
         style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})` }}
       />
 
+      {/* Featured badge for Gold Roast */}
+      {product.featured && (
+        <motion.div
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ delay: 0.4 + index * 0.15 + 0.2, type: 'spring', stiffness: 200 }}
+          className="absolute -top-3 -right-3 z-20 px-3 py-1.5 rounded-full text-xs font-bold text-white shadow-xl"
+          style={{ background: 'linear-gradient(135deg, #FFD700, #FFA500)' }}
+        >
+          ⭐ Featured
+        </motion.div>
+      )}
+
       {/* Card */}
       <motion.div
         animate={{
           y: isHovered ? -8 : 0,
           rotateX: isHovered ? 2 : 0,
           rotateY: isHovered ? -2 : 0,
+          borderColor: product.featured && isHovered ? '#FFD700' : 'transparent',
         }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="relative glass-card rounded-2xl p-6 h-full"
-        style={{ transformStyle: 'preserve-3d' }}
+        className={`relative glass-card rounded-2xl p-6 h-full ${product.featured ? 'border-2' : ''}`}
+        style={{
+          transformStyle: 'preserve-3d',
+          borderColor: product.featured ? 'rgba(255, 215, 0, 0.3)' : 'transparent',
+        }}
       >
         {/* Liquid fill effect */}
         <motion.div
@@ -105,15 +123,15 @@ const ProductCard = ({
           <div className="flex justify-between items-start mb-4">
             <h4
               className="text-xl font-bold leading-tight pr-4"
-              style={{ color: colors.primary }}
+              style={{ color: product.featured ? '#FF8C00' : colors.primary }}
             >
               {product.name}
             </h4>
             <span
               className="text-xs font-medium px-3 py-1.5 rounded-full whitespace-nowrap"
               style={{
-                background: colors.bg,
-                color: colors.primary,
+                background: product.featured ? 'rgba(255, 215, 0, 0.2)' : colors.bg,
+                color: product.featured ? '#FF8C00' : colors.primary,
               }}
             >
               {product.proof}
@@ -441,7 +459,11 @@ export default function BrandSection({
           </motion.h3>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {products.map((product, index) => (
+            {[...products].sort((a, b) => {
+              if (a.featured && !b.featured) return -1;
+              if (!a.featured && b.featured) return 1;
+              return 0;
+            }).map((product, index) => (
               <ProductCard
                 key={product.name}
                 product={product}

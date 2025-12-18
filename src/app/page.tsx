@@ -34,9 +34,10 @@ const bibAndTuckerData = {
     {
       name: 'Gold Roast Bourbon',
       description:
-        'Premium Arabica coffee beans steeped in cask strength 6-year whiskey, then expertly blended. A custom roast developed with a local Tennessee roaster.',
+        'Premium Arabica coffee beans steeped in cask strength 6-year whiskey, then expertly blended. A custom roast developed with a local Tennessee roaster. A truly one-of-a-kind bourbon that\'s complex, yet remarkably smooth with bold roasted notes.',
       proof: '92 Proof',
       notes: ['Fresh Coffee', 'Molasses', 'Milk Chocolate', 'Young Oak', 'Brown Spice'],
+      featured: true, // Gold Roast is a big push
     },
     {
       name: 'The Tennessee Ten',
