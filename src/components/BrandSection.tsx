@@ -115,14 +115,11 @@ export default function BrandSection({
             {bottleImage && !imageError ? (
               <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-white" style={{ boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08)' }}>
                 <div className="relative w-full h-full flex items-center justify-center p-8 md:p-12">
-                  <Image
+                  <img
                     src={bottleImage}
                     alt={`${brandName} bottle`}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    quality={90}
-                    priority
+                    className="max-w-full max-h-full object-contain"
+                    style={{ width: 'auto', height: 'auto' }}
                     onError={() => {
                       console.error('Image failed to load:', bottleImage);
                       setImageError(true);
@@ -206,10 +203,10 @@ export default function BrandSection({
               if (!a.featured && b.featured) return 1;
               return 0;
             }).map((product, index) => (
-              <motion.div
-                key={product.name}
+                  <motion.div
+                    key={product.name}
                 initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
                 className="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow"
               >
@@ -223,9 +220,9 @@ export default function BrandSection({
                     {product.name}
                   </h4>
                   <span className="text-xs font-medium px-3 py-1.5 rounded-full whitespace-nowrap" style={{ background: colors.accentBg, color: colors.primary }}>
-                    {product.proof}
-                  </span>
-                </div>
+                        {product.proof}
+                      </span>
+                    </div>
                 <p className="text-sm leading-relaxed mb-5" style={{ color: '#78716C' }}>
                   {product.description}
                 </p>
@@ -233,21 +230,21 @@ export default function BrandSection({
                   <p className="text-xs uppercase tracking-wider mb-3" style={{ color: '#8B8B8B' }}>
                     Tasting Notes
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    {product.notes.map((note) => (
-                      <span
-                        key={note}
+                    <div className="flex flex-wrap gap-2">
+                      {product.notes.map((note) => (
+                        <span
+                          key={note}
                         className="text-xs px-3 py-1.5 rounded-full font-medium"
                         style={{ background: colors.accentBg, color: colors.primary }}
-                      >
-                        {note}
-                      </span>
-                    ))}
+                        >
+                          {note}
+                        </span>
+                      ))}
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
         </div>
       </div>
     </section>
