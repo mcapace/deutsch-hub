@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     unoptimized: false,
     remotePatterns: [],
+    // Allow all local images
+    domains: [],
   },
   experimental: {
     optimizePackageImports: ['framer-motion', '@heroicons/react'],
