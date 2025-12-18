@@ -360,6 +360,11 @@ export default function HolidayHubSection() {
                     fill
                     className="object-contain"
                     sizes="64px"
+                    unoptimized={false}
+                    onError={(e) => {
+                      console.error('HolidayHub Bib & Tucker logo failed to load');
+                      e.currentTarget.style.display = 'none';
+                    }}
                   />
                 </div>
                 <div>

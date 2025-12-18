@@ -497,8 +497,11 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
                   className={cocktail.image.includes('Logo') ? 'object-contain p-4' : 'object-cover'}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   quality={85}
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                  unoptimized={false}
+                  onError={(e) => {
+                    console.error('Cocktail image failed to load:', cocktail.image);
+                    e.currentTarget.style.display = 'none';
+                  }}
                 />
                 {/* Gradient overlay */}
                 <div
@@ -530,7 +533,7 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
               >
                 {cocktail.brand === 'bib' ? 'B&T' : 'Redemption'}
               </span>
-              </div>
+            </div>
             </div>
 
             {/* Hover overlay */}
@@ -626,11 +629,16 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
                     className={cocktail.image.includes('Logo') ? 'object-contain p-6' : 'object-cover'}
                     quality={90}
                     priority
+                    unoptimized={false}
+                    onError={(e) => {
+                      console.error('Modal cocktail image failed to load:', cocktail.image);
+                      e.currentTarget.style.display = 'none';
+                    }}
                   />
                 ) : (
                   <div
                     className="w-full h-full"
-                    style={{ background: colors.gradient }}
+                style={{ background: colors.gradient }}
                   />
                 )}
                 {/* Gradient overlay */}

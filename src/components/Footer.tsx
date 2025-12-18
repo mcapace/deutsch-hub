@@ -21,6 +21,11 @@ export default function Footer() {
               height={60}
               className="h-12 md:h-16 w-auto object-contain"
               priority
+              unoptimized={false}
+              onError={(e) => {
+                console.error('Footer WA logo failed to load');
+                e.currentTarget.style.display = 'none';
+              }}
             />
           </Link>
         </div>

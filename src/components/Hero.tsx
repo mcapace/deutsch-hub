@@ -229,14 +229,21 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="mb-8 md:mb-10"
           >
-            <Image
-              src="/WA_BLUE-removebg-preview.png"
-              alt="Whisky Advocate"
-              width={250}
-              height={75}
-              className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain mx-auto"
-              priority
-            />
+            <div className="relative w-full flex justify-center">
+              <Image
+                src="/WA_BLUE-removebg-preview.png"
+                alt="Whisky Advocate"
+                width={250}
+                height={75}
+                className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain"
+                priority
+                unoptimized={false}
+                onError={(e) => {
+                  console.error('WA logo failed to load');
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
+            </div>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -246,19 +253,19 @@ export default function Hero() {
             >
               Deutsch Spirits Collection
             </motion.p>
-          </motion.div>
+        </motion.div>
 
           {/* Main headline with stagger animation */}
           <div className="overflow-hidden mb-3 md:mb-4">
-            <motion.h1
+        <motion.h1
               initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1]"
               style={{ color: 'var(--color-text-primary)' }}
-            >
+        >
               Discover the Art of
-            </motion.h1>
+        </motion.h1>
           </div>
 
           <div className="overflow-hidden mb-6 md:mb-8">
@@ -286,14 +293,14 @@ export default function Hero() {
           </div>
 
           {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
             className="max-w-2xl mx-auto text-base md:text-lg lg:text-xl leading-relaxed mb-10 md:mb-12 px-4"
             style={{ color: 'var(--color-text-secondary)' }}
-          >
-            Explore the heritage, craftsmanship, and bold character of{' '}
+        >
+          Explore the heritage, craftsmanship, and bold character of{' '}
             <motion.span
               whileHover={{ scale: 1.05 }}
               className="font-semibold inline-block cursor-pointer"
@@ -309,12 +316,12 @@ export default function Hero() {
             >
               Redemption
             </motion.span>
-          </motion.p>
+        </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.1 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
           >
@@ -334,7 +341,7 @@ export default function Hero() {
             >
               <span className="relative z-10">Discover Cocktails</span>
             </motion.a>
-          </motion.div>
+        </motion.div>
 
           {/* Brand showcase */}
           <motion.div
@@ -356,8 +363,13 @@ export default function Hero() {
                   width={120}
                   height={120}
                   className="object-contain transition-transform duration-500 group-hover:scale-110"
+                  unoptimized={false}
+                  onError={(e) => {
+                    console.error('Bib & Tucker logo failed to load');
+                    e.currentTarget.style.display = 'none';
+                  }}
                 />
-                <motion.div
+        <motion.div
                   className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
                     background: 'radial-gradient(circle at center, rgba(200, 90, 54, 0.1) 0%, transparent 70%)',
@@ -365,7 +377,7 @@ export default function Hero() {
                 />
               </div>
               <motion.p
-                initial={{ opacity: 0 }}
+          initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
                 className="text-center text-sm mt-3 font-medium"
                 style={{ color: '#C85A36' }}
@@ -397,12 +409,12 @@ export default function Hero() {
                     className="text-2xl md:text-3xl font-bold tracking-wider"
                     style={{ color: '#FD9419' }}
                   >
-                    REDEMPTION
-                  </span>
+                REDEMPTION
+              </span>
                   <div className="mt-2 text-xs tracking-[0.3em] uppercase" style={{ color: '#6B6B6B' }}>
                     Whiskey
-                  </div>
-                </div>
+            </div>
+          </div>
                 <motion.div
                   className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
@@ -460,3 +472,4 @@ export default function Hero() {
     </section>
   );
 }
+
