@@ -37,6 +37,8 @@ const bibAndTuckerData = {
     },
   ],
   theme: 'bib' as const,
+  bottleImage: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
+  logo: '/BAT_3D_Copper_Logo.png',
 };
 
 // Redemption data
@@ -73,6 +75,7 @@ const redemptionData = {
   ],
   theme: 'redemption' as const,
   reversed: true,
+  bottleImage: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
 };
 
 export default function Home() {

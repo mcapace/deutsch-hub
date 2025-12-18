@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import Image from 'next/image';
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -145,17 +146,21 @@ export default function Hero() {
           transition={{ duration: 1, delay: 1 }}
           className="mt-20 flex items-center justify-center gap-12 flex-wrap"
         >
-          <div className="flex flex-col items-center gap-3 opacity-60 hover:opacity-100 transition-opacity">
-            <div className="w-24 h-24 rounded-xl bg-white/80 backdrop-blur-sm flex items-center justify-center border border-[#E5E3DD] shadow-sm hover:shadow-md transition-shadow">
-              <span className="text-[#B87333] text-xs font-semibold text-center px-2">
-                BIB & TUCKER
-              </span>
+          <div className="flex flex-col items-center gap-3 opacity-70 hover:opacity-100 transition-opacity">
+            <div className="w-32 h-32 rounded-xl bg-white/90 backdrop-blur-sm flex items-center justify-center border border-[#E5E3DD] shadow-sm hover:shadow-md transition-all p-4">
+              <Image
+                src="/BAT_3D_Copper_Logo.png"
+                alt="Bib & Tucker Logo"
+                width={80}
+                height={80}
+                className="object-contain"
+              />
             </div>
           </div>
           <div className="w-px h-16 bg-gradient-to-b from-transparent via-[#D4D1C8] to-transparent" />
-          <div className="flex flex-col items-center gap-3 opacity-60 hover:opacity-100 transition-opacity">
-            <div className="w-24 h-24 rounded-xl bg-white/80 backdrop-blur-sm flex items-center justify-center border border-[#E5E3DD] shadow-sm hover:shadow-md transition-shadow">
-              <span className="text-[#D97706] text-xs font-semibold text-center px-2">
+          <div className="flex flex-col items-center gap-3 opacity-70 hover:opacity-100 transition-opacity">
+            <div className="w-32 h-32 rounded-xl bg-white/90 backdrop-blur-sm flex items-center justify-center border border-[#E5E3DD] shadow-sm hover:shadow-md transition-all">
+              <span className="text-[#D97706] text-sm font-bold text-center px-3 tracking-wide">
                 REDEMPTION
               </span>
             </div>

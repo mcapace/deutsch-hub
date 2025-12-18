@@ -20,6 +20,8 @@ interface BrandSectionProps {
   products: Product[];
   theme: 'bib' | 'redemption';
   reversed?: boolean;
+  bottleImage?: string;
+  logo?: string;
 }
 
 export default function BrandSection({
@@ -31,6 +33,8 @@ export default function BrandSection({
   products,
   theme,
   reversed = false,
+  bottleImage,
+  logo,
 }: BrandSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -115,33 +119,45 @@ export default function BrandSection({
             transition={{ duration: 0.8, delay: 0.3 }}
             className={reversed ? 'lg:order-2' : ''}
           >
-            <div className={`relative aspect-[4/5] rounded-2xl overflow-hidden ${colors.glow}`}>
-              {/* Placeholder bottle display */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#F5F3F0] to-[#EFECE6] flex items-center justify-center">
-                <div className="text-center p-8">
+            <div className={`relative aspect-[4/5] rounded-2xl overflow-hidden ${colors.glow} bg-gradient-to-br from-[#F5F3F0] to-[#EFECE6]`}>
+              {bottleImage ? (
+                <>
+                  <Image
+                    src={bottleImage}
+                    alt={`${brandName} bottle`}
+                    fill
+                    className="object-contain object-center p-8"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
+                  {/* Decorative overlay */}
                   <div
-                    className="w-32 h-48 mx-auto mb-6 rounded-lg border-2 border-dashed flex items-center justify-center"
-                    style={{ borderColor: colors.primary + '40' }}
-                  >
-                    <svg
-                      className="w-16 h-16 opacity-30"
-                      style={{ color: colors.primary }}
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: `linear-gradient(135deg, ${colors.primary}05 0%, transparent 50%, ${colors.secondary}05 100%)`,
+                    }}
+                  />
+                </>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <div
+                      className="w-32 h-48 mx-auto mb-6 rounded-lg border-2 border-dashed flex items-center justify-center"
+                      style={{ borderColor: colors.primary + '40' }}
                     >
-                      <path d="M12 2C9.79 2 8 3.79 8 6v2H5v14h14V8h-3V6c0-2.21-1.79-4-4-4zm0 2c1.1 0 2 .9 2 2v2h-4V6c0-1.1.9-2 2-2z" />
-                    </svg>
+                      <svg
+                        className="w-16 h-16 opacity-30"
+                        style={{ color: colors.primary }}
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 2C9.79 2 8 3.79 8 6v2H5v14h14V8h-3V6c0-2.21-1.79-4-4-4zm0 2c1.1 0 2 .9 2 2v2h-4V6c0-1.1.9-2 2-2z" />
+                      </svg>
+                    </div>
+                    <p className="text-[#8B8B8B] text-sm">Product Image Placeholder</p>
                   </div>
-                  <p className="text-[#8B8B8B] text-sm">Product Image Placeholder</p>
                 </div>
-              </div>
-              {/* Decorative overlay */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}10 0%, transparent 50%, ${colors.secondary}10 100%)`,
-                }}
-              />
+              )}
             </div>
           </motion.div>
 
