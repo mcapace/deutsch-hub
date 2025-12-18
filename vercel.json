@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "installCommand": "git lfs install && git config lfs.url https://github.com/mcapace/deutsch-hub.git/info/lfs && git lfs pull && npm install",
+  "installCommand": "git lfs install && git config lfs.url https://github.com/mcapace/deutsch-hub.git/info/lfs && git lfs fetch origin && git lfs checkout && npm install",
   "buildCommand": "git lfs pull && npm run build"
 }
 
