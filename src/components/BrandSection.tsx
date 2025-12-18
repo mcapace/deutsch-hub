@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 
 interface Product {
@@ -24,6 +24,144 @@ interface BrandSectionProps {
   logo?: string;
 }
 
+// Product card with 3D hover effect
+const ProductCard = ({
+  product,
+  theme,
+  index,
+  isInView,
+}: {
+  product: Product;
+  theme: 'bib' | 'redemption';
+  index: number;
+  isInView: boolean;
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const themeColors = {
+    bib: {
+      primary: '#C85A36',
+      secondary: '#BDA55D',
+      bg: 'rgba(200, 90, 54, 0.08)',
+      noteBg: 'rgba(200, 90, 54, 0.15)',
+      noteText: '#C85A36',
+    },
+    redemption: {
+      primary: '#FD9419',
+      secondary: '#D4A04A',
+      bg: 'rgba(253, 148, 25, 0.08)',
+      noteBg: 'rgba(253, 148, 25, 0.15)',
+      noteText: '#D4850A',
+    },
+  };
+
+  const colors = themeColors[theme];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: 0.4 + index * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative group"
+    >
+      {/* Glow effect on hover */}
+      <motion.div
+        animate={{
+          opacity: isHovered ? 0.5 : 0,
+          scale: isHovered ? 1 : 0.95,
+        }}
+        transition={{ duration: 0.4 }}
+        className="absolute -inset-1 rounded-2xl blur-xl"
+        style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})` }}
+      />
+
+      {/* Card */}
+      <motion.div
+        animate={{
+          y: isHovered ? -8 : 0,
+          rotateX: isHovered ? 2 : 0,
+          rotateY: isHovered ? -2 : 0,
+        }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="relative glass-card rounded-2xl p-6 h-full"
+        style={{ transformStyle: 'preserve-3d' }}
+      >
+        {/* Liquid fill effect */}
+        <motion.div
+          initial={{ height: '0%' }}
+          animate={{ height: isHovered ? '100%' : '0%' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute bottom-0 left-0 right-0 rounded-2xl pointer-events-none"
+          style={{
+            background: `linear-gradient(180deg, transparent 0%, ${colors.bg} 100%)`,
+          }}
+        />
+
+        {/* Content */}
+        <div className="relative z-10">
+          {/* Header */}
+          <div className="flex justify-between items-start mb-4">
+            <h4
+              className="text-xl font-bold leading-tight pr-4"
+              style={{ color: colors.primary }}
+            >
+              {product.name}
+            </h4>
+            <span
+              className="text-xs font-medium px-3 py-1.5 rounded-full whitespace-nowrap"
+              style={{
+                background: colors.bg,
+                color: colors.primary,
+              }}
+            >
+              {product.proof}
+            </span>
+          </div>
+
+          {/* Description */}
+          <p className="text-sm leading-relaxed mb-5" style={{ color: '#4A4A4A' }}>
+            {product.description}
+          </p>
+
+          {/* Tasting notes */}
+          <div>
+            <p className="text-xs uppercase tracking-wider mb-3" style={{ color: '#8B8B8B' }}>
+              Tasting Notes
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {product.notes.map((note, i) => (
+                <motion.span
+                  key={note}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ delay: 0.6 + index * 0.15 + i * 0.05, duration: 0.4 }}
+                  className="text-xs px-3 py-1.5 rounded-full font-medium"
+                  style={{
+                    background: colors.noteBg,
+                    color: colors.noteText,
+                  }}
+                >
+                  {note}
+                </motion.span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Decorative corner accent */}
+        <div
+          className="absolute top-0 right-0 w-24 h-24 opacity-5 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle at top right, ${colors.primary}, transparent 70%)`,
+          }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+};
+
 export default function BrandSection({
   id,
   brandName,
@@ -39,111 +177,148 @@ export default function BrandSection({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.95]);
+
   const themeColors = {
     bib: {
-      primary: '#B87333',
-      secondary: '#F5E6D3',
-      gradient: 'gradient-bib',
+      primary: '#C85A36',
+      secondary: '#BDA55D',
       textGradient: 'text-gradient-bib',
-      glow: 'glow-bib',
-      accent: 'text-[#B87333]',
-      accentBg: 'bg-[#B87333]',
-      border: 'border-[#B87333]',
+      bgGradient: 'linear-gradient(180deg, #FAFAF8 0%, rgba(200, 90, 54, 0.05) 50%, #FAFAF8 100%)',
+      accentBg: 'rgba(200, 90, 54, 0.08)',
     },
     redemption: {
       primary: '#FD9419',
-      secondary: '#FFB347',
-      gradient: 'gradient-redemption',
+      secondary: '#D4A04A',
       textGradient: 'text-gradient-redemption',
-      glow: 'glow-redemption',
-      accent: 'text-[#FD9419]',
-      accentBg: 'bg-[#FD9419]',
-      border: 'border-[#FD9419]',
+      bgGradient: 'linear-gradient(180deg, #FAFAF8 0%, rgba(253, 148, 25, 0.05) 50%, #FAFAF8 100%)',
+      accentBg: 'rgba(253, 148, 25, 0.08)',
     },
   };
 
   const colors = themeColors[theme];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
   return (
     <section
       id={id}
       ref={ref}
-      className={`relative py-24 md:py-32 overflow-hidden ${colors.gradient} noise-overlay`}
+      className="relative py-24 md:py-32 overflow-hidden"
+      style={{ background: colors.bgGradient }}
     >
-      <div className="container-custom">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          style={{ y: parallaxY }}
+          className="absolute -top-1/4 left-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-20"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 0.2 } : {}}
+          transition={{ duration: 1 }}
+        >
+          <div
+            className="w-full h-full rounded-full liquid-blob"
+            style={{ background: colors.primary }}
+          />
+        </motion.div>
+        <motion.div
+          style={{ y: parallaxY }}
+          className="absolute -bottom-1/4 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 0.15 } : {}}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
+          <div
+            className="w-full h-full rounded-full liquid-blob"
+            style={{ background: colors.secondary, animationDelay: '-5s' }}
+          />
+        </motion.div>
+      </div>
+
+      <div className="container-custom relative z-10">
         {/* Section Header */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
-          <motion.div variants={itemVariants} className="inline-block mb-4">
-            <div className={`decorative-line mx-auto mb-4`} style={{ background: `linear-gradient(90deg, ${colors.primary}, ${colors.secondary})` }} />
-          </motion.div>
-          <motion.h2
-            variants={itemVariants}
-            className={`text-4xl md:text-5xl lg:text-6xl font-bold ${colors.textGradient} mb-4`}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="decorative-line mx-auto mb-6"
+            style={{ background: `linear-gradient(90deg, ${colors.primary}, ${colors.secondary})` }}
+          />
+          <h2
+            className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 ${colors.textGradient}`}
           >
             {brandName}
-          </motion.h2>
-          <motion.p
-            variants={itemVariants}
-            className="text-xl md:text-2xl text-[#6B6B6B] italic font-serif"
-          >
-            {tagline}
-          </motion.p>
+          </h2>
+          <p className="text-xl md:text-2xl italic" style={{ color: '#6B6B6B' }}>
+            "{tagline}"
+          </p>
         </motion.div>
 
         {/* Main content grid */}
-        <div className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${reversed ? 'lg:flex-row-reverse' : ''}`}>
-          {/* Image/Placeholder side */}
+        <div
+          className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20 ${
+            reversed ? 'lg:flex-row-reverse' : ''
+          }`}
+        >
+          {/* Image side */}
           <motion.div
-            initial={{ opacity: 0, x: reversed ? 50 : -50 }}
+            initial={{ opacity: 0, x: reversed ? 60 : -60 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className={reversed ? 'lg:order-2' : ''}
           >
-            <div className={`relative aspect-[4/5] rounded-2xl overflow-hidden ${colors.glow} bg-gradient-to-br from-[#F5F3F0] to-[#EFECE6]`}>
+            <motion.div
+              style={{ scale: imageScale }}
+              className="relative aspect-[4/5] rounded-3xl overflow-hidden"
+            >
+              {/* Glass container */}
+              <div
+                className="absolute inset-0 rounded-3xl"
+                style={{
+                  background: `linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%)`,
+                  boxShadow: `
+                    0 25px 50px -12px rgba(0, 0, 0, 0.1),
+                    0 0 0 1px rgba(255, 255, 255, 0.5),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8)
+                  `,
+                }}
+              />
+
+              {/* Decorative glow */}
+              <div
+                className="absolute inset-0 rounded-3xl animate-glow-pulse"
+                style={{
+                  background: `radial-gradient(circle at 50% 100%, ${colors.primary}20 0%, transparent 60%)`,
+                }}
+              />
+
               {bottleImage ? (
-                <>
+                <div className="relative h-full flex items-center justify-center p-8">
                   <Image
                     src={bottleImage}
                     alt={`${brandName} bottle`}
                     fill
-                    className="object-contain object-center p-8"
+                    className="object-contain object-center p-8 whiskey-glow"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority
                   />
-                  {/* Decorative overlay */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background: `linear-gradient(135deg, ${colors.primary}05 0%, transparent 50%, ${colors.secondary}05 100%)`,
-                    }}
-                  />
-                </>
+                </div>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center p-8">
                     <div
                       className="w-32 h-48 mx-auto mb-6 rounded-lg border-2 border-dashed flex items-center justify-center"
-                      style={{ borderColor: colors.primary + '40' }}
+                      style={{ borderColor: `${colors.primary}40` }}
                     >
                       <svg
                         className="w-16 h-16 opacity-30"
@@ -154,82 +329,108 @@ export default function BrandSection({
                         <path d="M12 2C9.79 2 8 3.79 8 6v2H5v14h14V8h-3V6c0-2.21-1.79-4-4-4zm0 2c1.1 0 2 .9 2 2v2h-4V6c0-1.1.9-2 2-2z" />
                       </svg>
                     </div>
-                    <p className="text-[#8B8B8B] text-sm">Product Image Placeholder</p>
+                    <p style={{ color: '#8B8B8B' }} className="text-sm">
+                      Product Image
+                    </p>
                   </div>
                 </div>
               )}
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Content side */}
           <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
+            initial={{ opacity: 0, x: reversed ? -60 : 60 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className={reversed ? 'lg:order-1' : ''}
           >
-            <motion.div variants={itemVariants} className="mb-8">
-              <h3 className="text-2xl font-semibold text-[#1A1A1A] mb-4 font-serif">The Story</h3>
-              <p className="text-[#4A4A4A] leading-relaxed">{description}</p>
+            {/* Story */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="mb-8"
+            >
+              <h3
+                className="text-2xl font-bold mb-4"
+                style={{ color: '#1A1410' }}
+              >
+                The Story
+              </h3>
+              <p className="leading-relaxed" style={{ color: '#4A4A4A' }}>
+                {description}
+              </p>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="mb-8">
-              <h3 className="text-2xl font-semibold text-[#1A1A1A] mb-4 font-serif">Heritage</h3>
-              <p className="text-[#4A4A4A] leading-relaxed">{heritage}</p>
-            </motion.div>
-
-            {/* Products */}
-            <motion.div variants={itemVariants}>
-              <h3 className="text-2xl font-semibold text-[#1A1A1A] mb-6 font-serif">The Collection</h3>
-              <div className="space-y-4">
-                {products.map((product, index) => (
-                  <motion.div
-                    key={product.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.5 + index * 0.1 }}
-                    className="glass-card rounded-xl p-5 hover:scale-[1.02] transition-transform duration-300"
-                  >
-                    <div className="flex justify-between items-start mb-3">
-                      <h4 className={`font-semibold ${colors.accent}`}>{product.name}</h4>
-                      <span className="text-xs text-[#6B6B6B] bg-[#F5F3F0] px-2 py-1 rounded">
-                        {product.proof}
-                      </span>
-                    </div>
-                    <p className="text-sm text-[#4A4A4A] mb-3">{product.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {product.notes.map((note) => (
-                        <span
-                          key={note}
-                          className="text-xs px-2 py-1 rounded-full"
-                          style={{
-                            backgroundColor: colors.primary + '20',
-                            color: colors.secondary,
-                          }}
-                        >
-                          {note}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+            {/* Heritage */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="mb-8"
+            >
+              <h3
+                className="text-2xl font-bold mb-4"
+                style={{ color: '#1A1410' }}
+              >
+                Heritage
+              </h3>
+              <p className="leading-relaxed" style={{ color: '#4A4A4A' }}>
+                {heritage}
+              </p>
             </motion.div>
 
             {/* CTA */}
-            <motion.div variants={itemVariants} className="mt-8">
-              <a
-                href="#articles"
-                className="inline-flex items-center gap-2 text-sm font-medium transition-colors"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.7, duration: 0.6 }}
+            >
+              <motion.a
+                href="#cocktails"
+                whileHover={{ scale: 1.02, x: 5 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 font-medium transition-colors"
                 style={{ color: colors.primary }}
               >
-                Read the Full Story
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                Discover Cocktails
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
-              </a>
+              </motion.a>
             </motion.div>
           </motion.div>
+        </div>
+
+        {/* Products section */}
+        <div>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="text-3xl font-bold mb-8 text-center"
+            style={{ color: '#1A1410' }}
+          >
+            The Collection
+          </motion.h3>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {products.map((product, index) => (
+              <ProductCard
+                key={product.name}
+                product={product}
+                theme={theme}
+                index={index}
+                isInView={isInView}
+              />
+            ))}
+          </div>
         </div>
       </div>
 

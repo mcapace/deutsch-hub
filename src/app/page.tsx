@@ -1,39 +1,47 @@
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import BrandSection from '@/components/BrandSection';
+import CocktailSection from '@/components/CocktailSection';
 import ArticlesSection from '@/components/ArticlesSection';
 import Footer from '@/components/Footer';
 
-// Bib & Tucker data
+// Bib & Tucker data - VERIFIED from official website
 const bibAndTuckerData = {
   id: 'bib-tucker',
   brandName: 'Bib & Tucker',
   tagline: 'Where Bold and Refined Come Together',
   description:
-    'Bib & Tucker Small Batch Bourbon draws its name from the colloquial expression meaning "your finest attire." Just as you would dress in your best for a special occasion, Bib & Tucker represents bourbon at its finest—crafted with meticulous attention to detail and aged to perfection.',
+    'Bib & Tucker draws inspiration from the turn-of-the-century American era, when unprecedented progress and invention defined the age. Named after the colloquial expression for "finest attire," each bourbon is crafted worthy of your finest moments — a celebration of the Gilded Age spirit.',
   heritage:
-    'Inspired by the adventurous spirit of the early 1900s, when bold pioneers pushed the boundaries of American craftsmanship, Bib & Tucker pays homage to an era when quality was paramount and shortcuts were unheard of. Each bottle reflects the dedication and expertise of master distillers who understand that great bourbon is a work of art.',
+    'In the early 1900s, all bourbon was small batch, and great accomplishments were celebrated with quality spirits. Bib & Tucker honors this tradition with Tennessee whiskey made using the Lincoln County process — filtered through sugar maple charcoal for exceptional smoothness.',
   products: [
     {
-      name: 'Bib & Tucker 6 Year Small Batch',
+      name: 'The Classic Six',
       description:
-        'A harmonious blend of hand-selected barrels aged for six years, delivering a smooth yet complex profile.',
+        'Aged 6 years in new American white oak with light char, then filtered through sugar maple charcoal in the Tennessee tradition. Complex yet refined with a chestnut finish.',
       proof: '92 Proof',
-      notes: ['Vanilla', 'Caramel', 'Oak', 'Honey'],
+      notes: ['Oak', 'Caramel', 'Vanilla', 'Dried Dark Fruit', 'Toasted Corn'],
     },
     {
-      name: 'Bib & Tucker 10 Year',
+      name: 'Double Char',
       description:
-        'A decade of patient aging creates an exceptionally refined bourbon with deep character.',
-      proof: '92 Proof',
-      notes: ['Dried Fruit', 'Leather', 'Dark Chocolate', 'Spice'],
+        'First aged 6 years in Tennessee, then finished minimum 5 months in heavily charred barrels smoked with sugar maple. Fire-forged for a smoky, savory profile.',
+      proof: '88 Proof',
+      notes: ['White Smoke', 'Sugar Maple', 'Dulce de Leche', 'Toasted Cinnamon', 'Vanilla'],
     },
     {
-      name: 'Bib & Tucker Double Char',
+      name: 'Gold Roast Bourbon',
       description:
-        'Finished in double-charred barrels for an extra layer of smoky sweetness.',
+        'Premium Arabica coffee beans steeped in cask strength 6-year whiskey, then expertly blended. A custom roast developed with a local Tennessee roaster.',
       proof: '92 Proof',
-      notes: ['Smoke', 'Brown Sugar', 'Toasted Oak', 'Maple'],
+      notes: ['Fresh Coffee', 'Molasses', 'Milk Chocolate', 'Young Oak', 'Brown Spice'],
+    },
+    {
+      name: 'The Tennessee Ten',
+      description:
+        'A decade of patient aging creates an exceptionally refined bourbon with powerful depth. Subtle oak and vanilla meet complex character.',
+      proof: '92 Proof',
+      notes: ['Refined Oak', 'Vanilla', 'Leather', 'Dark Chocolate', 'Deep Spice'],
     },
   ],
   theme: 'bib' as const,
@@ -41,36 +49,43 @@ const bibAndTuckerData = {
   logo: '/BAT_3D_Copper_Logo.png',
 };
 
-// Redemption data
+// Redemption data - VERIFIED from official website with mash bills
 const redemptionData = {
   id: 'redemption',
   brandName: 'Redemption',
-  tagline: 'High Rye. High Standards.',
+  tagline: 'This is the Rye Revival',
   description:
-    'Redemption Whiskey stands as a testament to the revival of pre-Prohibition whiskey-making traditions. With a distinctively high rye content, Redemption delivers bold, spicy character that sets it apart from conventional bourbons—a true redemption of American whiskey heritage.',
+    'Redemption stands at the forefront of reviving pre-Prohibition American rye whiskey culture. Before Prohibition, rye was America\'s #1 spirit — nearly eliminated for a century. Our mission: reintroduce you to the spirit of your ancestors through rye-forward recipes inspired by historical formulations.',
   heritage:
-    'Founded on the principle that great whiskey should honor its roots while pushing boundaries, Redemption has quickly become a favorite among enthusiasts who appreciate complexity and craftsmanship. Each expression showcases the versatility of high-rye mashbills, from approachable everyday sippers to premium aged releases.',
+    'Born from the golden age of classic cocktails, Redemption whiskeys are bartenders\' whiskeys. Sourced from MGP in Indiana — renowned for quality rye production — and crafted with the spice and character that defined American whiskey before Prohibition changed everything.',
   products: [
     {
       name: 'Redemption Bourbon',
       description:
-        'A high-rye bourbon that delivers exceptional smoothness with a spicy kick.',
-      proof: '84 Proof',
-      notes: ['Rye Spice', 'Vanilla', 'Citrus', 'Caramel'],
+        '75% corn, 21% rye, 4% malt. A truly easy drinking whiskey with a classic sweet backbone and assertive rye spice. Toffee, baking spice, and anise on the palate.',
+      proof: '88 Proof',
+      notes: ['Caramel', 'Baking Spice', 'Anise', 'Black Pepper', 'Toffee'],
     },
     {
-      name: 'Redemption High-Rye Bourbon',
+      name: 'Redemption Rye',
       description:
-        'Even bolder rye character for those who crave intensity and complexity.',
+        '95% rye, 5% malt. Big and spicy with toasted oak, allspice, and anise on the nose. The rye-forward profile pairs beautifully with classic cocktails.',
       proof: '92 Proof',
-      notes: ['Pepper', 'Cinnamon', 'Dark Fruit', 'Toast'],
+      notes: ['Toasted Oak', 'Allspice', 'Anise', 'Mint', 'Black Pepper'],
     },
     {
-      name: 'Redemption Wheated Bourbon',
+      name: 'High Rye Bourbon',
       description:
-        'A softer, sweeter expression featuring wheat in the mashbill.',
+        '60% corn, 36% rye, 4% malt. Approaching the upper limit for bourbon, delivering bold spice with silky texture. Vanilla, red berries, and fennel-like licorice.',
+      proof: '92 Proof',
+      notes: ['Vanilla', 'Red Berries', 'Fennel', 'Black Pepper', 'Spiced Oak'],
+    },
+    {
+      name: 'Wheated Bourbon',
+      description:
+        '51% corn, 45% wheat, 4% malt. Double Gold winner with candied ginger, sage, and lavender. Silky and harmonious yet robust — fresh pear over vanilla and cedar.',
       proof: '96 Proof',
-      notes: ['Honey', 'Wheat', 'Butterscotch', 'Vanilla'],
+      notes: ['Candied Ginger', 'Lavender', 'Hazelnut', 'Coffee', 'Toasted Bread'],
     },
   ],
   theme: 'redemption' as const,
@@ -85,6 +100,7 @@ export default function Home() {
       <Hero />
       <BrandSection {...bibAndTuckerData} />
       <BrandSection {...redemptionData} />
+      <CocktailSection />
       <ArticlesSection />
       <Footer />
     </main>
