@@ -222,22 +222,30 @@ export default function Hero() {
           style={{ x: smoothMouseX, y: smoothMouseY }}
           className="relative"
         >
-          {/* Presented by badge */}
+          {/* Whisky Advocate Logo - Prominent */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full mb-10 glass-card"
+            className="mb-8 md:mb-10"
           >
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-2 h-2 rounded-full"
-              style={{ background: 'linear-gradient(135deg, #C85A36, #BDA55D)' }}
+            <Image
+              src="/WA_BLUE-removebg-preview.png"
+              alt="Whisky Advocate"
+              width={250}
+              height={75}
+              className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain mx-auto"
+              priority
             />
-            <span className="text-sm tracking-wide" style={{ color: '#6B6B6B' }}>
-              Presented by <span className="font-semibold" style={{ color: '#1A1410' }}>Whisky Advocate</span>
-            </span>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="text-xs md:text-sm font-medium tracking-wider mt-3 text-center"
+              style={{ color: 'var(--color-text-muted)' }}
+            >
+              Deutsch Spirits Collection
+            </motion.p>
           </motion.div>
 
           {/* Main headline with stagger animation */}

@@ -452,8 +452,7 @@ export default function BrandSection({
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-3xl font-bold mb-8 text-center"
-            className="text-xl md:text-2xl font-bold leading-tight"
+            className="text-xl md:text-2xl font-bold leading-tight mb-8 text-center"
             style={{ color: 'var(--color-text-primary)' }}
           >
             The Collection

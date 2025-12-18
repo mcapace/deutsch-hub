@@ -2,116 +2,218 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t" style={{ background: 'var(--color-bg-secondary)', borderColor: 'var(--color-border)' }}>
-      {/* Decorative gradient */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--bt-rust)]/50 to-transparent" />
+    <footer className="bg-warmWhite text-charcoal border-t border-charcoal/10" style={{ background: 'var(--color-bg-secondary)', borderColor: 'var(--color-border)' }}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        {/* Logo - Centered */}
+        <div className="flex justify-center mb-8">
+          <Link href="#hero" className="inline-block focus:outline-none focus:ring-2 focus:ring-amber focus:ring-offset-2 rounded">
+            <Image
+              src="/WA_BLUE-removebg-preview.png"
+              alt="Whisky Advocate"
+              width={200}
+              height={60}
+              className="h-12 md:h-16 w-auto object-contain"
+              priority
+            />
+          </Link>
+        </div>
 
-      <div className="container-custom py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Brand column */}
-          <div className="lg:col-span-2">
-            <Link href="#hero" className="inline-flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--bt-rust), var(--bt-copper))' }}>
-                <span className="font-bold text-lg" style={{ color: 'var(--color-text-primary)' }}>WA</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-semibold" style={{ color: 'var(--color-text-primary)' }}>WHISKY ADVOCATE</span>
-                <span className="text-xs" style={{ color: 'var(--bt-rust)' }}>Deutsch Spirits Collection</span>
-              </div>
+        {/* Social Media Icons - Centered */}
+        <div className="flex justify-center items-center gap-4 mb-8">
+          <a
+            href="https://www.facebook.com/whiskyadvocate"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200"
+            style={{ 
+              background: 'var(--color-text-primary)',
+              color: 'var(--color-bg-primary)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--bt-rust)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--color-text-primary)';
+            }}
+            aria-label="Facebook"
+          >
+            <Facebook size={18} />
+          </a>
+          <a
+            href="https://x.com/whiskyadvocate"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200"
+            style={{ 
+              background: 'var(--color-text-primary)',
+              color: 'var(--color-bg-primary)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--bt-rust)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--color-text-primary)';
+            }}
+            aria-label="Twitter/X"
+          >
+            <Twitter size={18} />
+          </a>
+          <a
+            href="https://www.instagram.com/whiskyadvocate"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200"
+            style={{ 
+              background: 'var(--color-text-primary)',
+              color: 'var(--color-bg-primary)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--bt-rust)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--color-text-primary)';
+            }}
+            aria-label="Instagram"
+          >
+            <Instagram size={18} />
+          </a>
+          <a
+            href="https://www.linkedin.com/company/whisky-advocate"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200"
+            style={{ 
+              background: 'var(--color-text-primary)',
+              color: 'var(--color-bg-primary)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--bt-rust)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--color-text-primary)';
+            }}
+            aria-label="LinkedIn"
+          >
+            <Linkedin size={18} />
+          </a>
+        </div>
+
+        {/* Divider with color accent */}
+        <div className="border-t-2 mb-8" style={{ borderColor: 'rgba(200, 90, 54, 0.3)' }} />
+
+        {/* Navigation Links - Three Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {/* Column 1 */}
+          <div className="space-y-2 text-center">
+            <Link
+              href="#bib-tucker"
+              className="block transition-colors duration-200 font-serif text-sm font-medium"
+              style={{ color: 'var(--color-text-secondary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+            >
+              Bib & Tucker
             </Link>
-            <p className="max-w-md mb-6" style={{ color: 'var(--color-text-secondary)' }}>
-              Whisky Advocate is the world's leading whisky authority, providing expert
-              reviews, ratings, and insights into the finest spirits from around the globe.
-            </p>
-            <div className="flex items-center gap-4">
-              {/* Social icons placeholders */}
-              {['twitter', 'instagram', 'facebook', 'youtube'].map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  className="w-10 h-10 rounded-full border flex items-center justify-center transition-all shadow-sm hover:shadow-md"
-                  style={{ 
-                    background: 'var(--color-bg-card-solid)',
-                    borderColor: 'var(--color-border)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--bt-rust)';
-                    e.currentTarget.style.background = 'var(--color-bg-primary)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-border)';
-                    e.currentTarget.style.background = 'var(--color-bg-card-solid)';
-                  }}
-                  aria-label={social}
-                >
-                  <div className="w-4 h-4 rounded" style={{ background: 'var(--bt-rust)' }} />
-                </a>
-              ))}
-            </div>
+            <Link
+              href="#redemption"
+              className="block transition-colors duration-200 font-serif text-sm font-medium"
+              style={{ color: 'var(--color-text-secondary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+            >
+              Redemption
+            </Link>
+            <Link
+              href="#cocktails"
+              className="block transition-colors duration-200 font-serif text-sm font-medium"
+              style={{ color: 'var(--color-text-secondary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+            >
+              Holiday Cocktails
+            </Link>
           </div>
 
-          {/* Quick links */}
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--color-text-primary)' }}>
-              Explore
-            </h4>
-            <ul className="space-y-3">
-              {[
-                { name: 'Bib & Tucker', href: '#bib-tucker' },
-                { name: 'Redemption', href: '#redemption' },
-                { name: 'Featured Stories', href: '#articles' },
-                { name: 'About Whisky Advocate', href: '#' },
-              ].map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="transition-colors text-sm"
-                    style={{ color: 'var(--color-text-secondary)' }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Column 2 */}
+          <div className="space-y-2 text-center">
+            <Link
+              href="#pairings"
+              className="block transition-colors duration-200 font-serif text-sm font-medium"
+              style={{ color: 'var(--color-text-secondary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+            >
+              Food Pairings
+            </Link>
+            <Link
+              href="#articles"
+              className="block transition-colors duration-200 font-serif text-sm font-medium"
+              style={{ color: 'var(--color-text-secondary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+            >
+              Featured Stories
+            </Link>
+            <Link
+              href="https://whiskyadvocate.com/about"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block transition-colors duration-200 font-serif text-sm font-medium"
+              style={{ color: 'var(--color-text-secondary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+            >
+              About Whisky Advocate
+            </Link>
           </div>
 
-          {/* Legal */}
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--color-text-primary)' }}>
-              Legal
-            </h4>
-            <ul className="space-y-3">
-              {[
-                { name: 'Privacy Policy', href: '#' },
-                { name: 'Terms of Service', href: '#' },
-                { name: 'Cookie Policy', href: '#' },
-                { name: 'Accessibility', href: '#' },
-              ].map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="transition-colors text-sm"
-                    style={{ color: 'var(--color-text-secondary)' }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Column 3 */}
+          <div className="space-y-2 text-center">
+            <Link
+              href="https://whiskyadvocate.com/subscribe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block transition-colors duration-200 font-serif text-sm font-medium"
+              style={{ color: 'var(--color-text-secondary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+            >
+              Subscribe
+            </Link>
+            <Link
+              href="https://whiskyadvocate.com/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block transition-colors duration-200 font-serif text-sm font-medium"
+              style={{ color: 'var(--color-text-secondary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="https://whiskyadvocate.com/contact"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block transition-colors duration-200 font-serif text-sm font-medium"
+              style={{ color: 'var(--color-text-secondary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+            >
+              Contact Us
+            </Link>
           </div>
         </div>
 
-        {/* Age verification notice */}
-        <div className="glass-card rounded-xl p-6 mb-12">
+        {/* Age Verification Notice */}
+        <div className="glass-card rounded-xl p-6 mb-8">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
             <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center" style={{ background: 'rgba(200, 90, 54, 0.15)' }}>
               <span className="font-bold text-lg" style={{ color: 'var(--bt-rust)' }}>21+</span>
@@ -129,22 +231,19 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 border-t" style={{ borderColor: 'var(--color-border)' }}>
+        {/* Bottom Divider */}
+        <div className="border-t-2 pt-8" style={{ borderColor: 'rgba(200, 90, 54, 0.3)' }}>
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-              &copy; {currentYear} Whisky Advocate. All rights reserved.
+            <p className="text-center text-xs font-sans" style={{ color: 'var(--color-text-muted)' }}>
+              © {currentYear} Whisky Advocate. All rights reserved.
             </p>
-            <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+            <p className="text-center text-xs font-sans" style={{ color: 'var(--color-text-muted)' }}>
               Sponsored content presented in partnership with{' '}
               <span style={{ color: 'var(--bt-rust)' }}>Deutsch Family Wine & Spirits</span>
             </p>
           </div>
         </div>
       </div>
-
-      {/* Decorative bottom gradient */}
-      <div className="h-1" style={{ background: 'linear-gradient(90deg, var(--bt-cream), var(--bt-rust), var(--redemption-cream))' }} />
     </footer>
   );
 }
