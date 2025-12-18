@@ -54,17 +54,12 @@ export default function Navigation() {
               className="flex items-center focus:outline-none focus:ring-2 focus:ring-amber focus:ring-offset-2 rounded flex-shrink-0 group"
             >
               <Image
-                src="/WA_BLUE-removebg-preview.png"
+                src="/images/logos/WA_BLUE-removebg-preview.png"
                 alt="Whisky Advocate"
                 width={200}
                 height={60}
                 className="h-8 md:h-10 lg:h-12 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
                 priority
-                unoptimized={false}
-                onError={(e) => {
-                  console.error('Navigation WA logo failed to load');
-                  e.currentTarget.style.display = 'none';
-                }}
               />
               <span className="ml-3 text-xs font-medium tracking-wide opacity-70 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--color-text-muted)' }}>
                 Deutsch Spirits Collection

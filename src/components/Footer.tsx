@@ -15,17 +15,12 @@ export default function Footer() {
         <div className="flex justify-center mb-8">
           <Link href="#hero" className="inline-block focus:outline-none focus:ring-2 focus:ring-amber focus:ring-offset-2 rounded">
             <Image
-              src="/WA_BLUE-removebg-preview.png"
+              src="/images/logos/WA_BLUE-removebg-preview.png"
               alt="Whisky Advocate"
               width={200}
               height={60}
               className="h-12 md:h-16 w-auto object-contain"
               priority
-              unoptimized={false}
-              onError={(e) => {
-                console.error('Footer WA logo failed to load');
-                e.currentTarget.style.display = 'none';
-              }}
             />
           </Link>
         </div>

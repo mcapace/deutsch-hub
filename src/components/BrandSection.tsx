@@ -229,32 +229,10 @@ export default function BrandSection({
       className="relative py-24 md:py-32 overflow-hidden"
       style={{ background: colors.bgGradient }}
     >
-      {/* Background decoration */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          style={{ y: parallaxY }}
-          className="absolute -top-1/4 left-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-20"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 0.2 } : {}}
-          transition={{ duration: 1 }}
-        >
-          <div
-            className="w-full h-full rounded-full liquid-blob"
-            style={{ background: colors.primary }}
-          />
-        </motion.div>
-        <motion.div
-          style={{ y: parallaxY }}
-          className="absolute -bottom-1/4 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 0.15 } : {}}
-          transition={{ duration: 1, delay: 0.3 }}
-        >
-          <div
-            className="w-full h-full rounded-full liquid-blob"
-            style={{ background: colors.secondary, animationDelay: '-5s' }}
-          />
-        </motion.div>
+      {/* Simple background decoration */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: colors.primary }} />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: colors.secondary }} />
       </div>
 
       <div className="container-custom relative z-10">
@@ -295,88 +273,32 @@ export default function BrandSection({
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className={reversed ? 'lg:order-2' : ''}
           >
-            <motion.div
-              style={{ scale: imageScale }}
-              className="relative aspect-[4/5] rounded-3xl overflow-hidden"
-            >
-              {/* Glass container */}
-              <div
-                className="absolute inset-0 rounded-3xl"
-                style={{
-                  background: `linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%)`,
-                  boxShadow: `
-                    0 25px 50px -12px rgba(0, 0, 0, 0.1),
-                    0 0 0 1px rgba(255, 255, 255, 0.5),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.8)
-                  `,
-                }}
-              />
-
-              {/* Decorative glow */}
-              <div
-                className="absolute inset-0 rounded-3xl animate-glow-pulse"
-                style={{
-                  background: `radial-gradient(circle at 50% 100%, ${colors.primary}20 0%, transparent 60%)`,
-                }}
-              />
-
+            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-white" style={{ boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)' }}>
               {bottleImage ? (
-                <motion.div
-                  whileHover={{ scale: 1.05, rotateY: -5 }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
-                  className="relative h-full flex items-center justify-center p-8 perspective-1000 group cursor-pointer"
-                >
-                  <motion.div
-                    whileHover={{ rotateY: -10, rotateX: 3 }}
-                    transition={{ duration: 0.6, ease: 'easeOut' }}
-                    className="relative w-full h-full preserve-3d"
-                  >
-                    <Image
-                      src={bottleImage}
-                      alt={`${brandName} bottle`}
-                      fill
-                      className="object-contain object-center p-8 whiskey-glow transition-all duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      quality={90}
-                      priority
-                      unoptimized={false}
-                      onError={(e) => {
-                        console.error('Image failed to load:', bottleImage);
-                        e.currentTarget.style.display = 'none';
-                      }}
-                    />
-                    {/* Enhanced decorative overlay */}
-                    <div
-                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{
-                        background: `linear-gradient(135deg, ${colors.primary}10 0%, transparent 50%, ${colors.secondary}10 100%)`,
-                      }}
-                    />
-                  </motion.div>
-                </motion.div>
+                <div className="relative w-full h-full flex items-center justify-center p-12">
+                  <Image
+                    src={bottleImage}
+                    alt={`${brandName} bottle`}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={90}
+                    priority
+                  />
+                </div>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div
-                    className="w-32 h-48 mx-auto mb-6 rounded-lg border-2 border-dashed flex items-center justify-center"
-                      style={{ borderColor: `${colors.primary}40` }}
-                  >
-                    <svg
-                      className="w-16 h-16 opacity-30"
-                      style={{ color: colors.primary }}
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2C9.79 2 8 3.79 8 6v2H5v14h14V8h-3V6c0-2.21-1.79-4-4-4zm0 2c1.1 0 2 .9 2 2v2h-4V6c0-1.1.9-2 2-2z" />
-                    </svg>
-                  </div>
-                    <p style={{ color: '#8B8B8B' }} className="text-sm">
-                      Product Image
-                    </p>
+                  <div className="text-center p-8">
+                    <div className="w-32 h-48 mx-auto mb-6 rounded-lg border-2 border-dashed flex items-center justify-center" style={{ borderColor: `${colors.primary}40` }}>
+                      <svg className="w-16 h-16 opacity-30" style={{ color: colors.primary }} fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C9.79 2 8 3.79 8 6v2H5v14h14V8h-3V6c0-2.21-1.79-4-4-4zm0 2c1.1 0 2 .9 2 2v2h-4V6c0-1.1.9-2 2-2z" />
+                      </svg>
+                    </div>
+                    <p style={{ color: '#8B8B8B' }} className="text-sm">Product Image</p>
                   </div>
                 </div>
               )}
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* Content side */}
