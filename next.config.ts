@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    unoptimized: false, // Keep optimization enabled
+    unoptimized: false,
     remotePatterns: [],
   },
   experimental: {
