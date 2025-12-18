@@ -241,24 +241,24 @@ export default function Hero() {
           </motion.div>
 
           {/* Main headline with stagger animation */}
-          <div className="overflow-hidden mb-4">
+          <div className="overflow-hidden mb-3 md:mb-4">
             <motion.h1
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95]"
-              style={{ color: '#1A1410' }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1]"
+              style={{ color: 'var(--color-text-primary)' }}
             >
               Discover the Art of
             </motion.h1>
           </div>
 
-          <div className="overflow-hidden mb-8">
+          <div className="overflow-hidden mb-6 md:mb-8">
             <motion.div
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95]"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1]"
             >
               <span className="text-gradient inline-block">
                 {titleText.split('').map((char, i) => (
@@ -268,7 +268,7 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7 + i * 0.03, duration: 0.5 }}
                     className="inline-block"
-                    style={{ textShadow: '0 0 40px rgba(200, 90, 54, 0.3)' }}
+                    style={{ textShadow: '0 0 30px rgba(200, 90, 54, 0.2)' }}
                   >
                     {char === ' ' ? '\u00A0' : char}
                   </motion.span>
@@ -282,14 +282,14 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="max-w-2xl mx-auto text-lg md:text-xl lg:text-2xl leading-relaxed mb-12"
-            style={{ color: '#4A4A4A' }}
+            className="max-w-2xl mx-auto text-base md:text-lg lg:text-xl leading-relaxed mb-10 md:mb-12 px-4"
+            style={{ color: 'var(--color-text-secondary)' }}
           >
             Explore the heritage, craftsmanship, and bold character of{' '}
             <motion.span
               whileHover={{ scale: 1.05 }}
               className="font-semibold inline-block cursor-pointer"
-              style={{ color: '#C85A36' }}
+              style={{ color: 'var(--bt-rust)' }}
             >
               Bib & Tucker
             </motion.span>{' '}
@@ -297,7 +297,7 @@ export default function Hero() {
             <motion.span
               whileHover={{ scale: 1.05 }}
               className="font-semibold inline-block cursor-pointer"
-              style={{ color: '#FD9419' }}
+              style={{ color: 'var(--redemption-orange)' }}
             >
               Redemption
             </motion.span>

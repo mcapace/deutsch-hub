@@ -51,18 +51,18 @@ const holidayFeatures: HolidayFeature[] = [
 
 const brandColors = {
   bib: {
-    primary: '#C85A36',
-    secondary: '#BDA55D',
-    gradient: 'linear-gradient(135deg, #C85A36, #BDA55D)',
-    bg: 'rgba(200, 90, 54, 0.1)',
-    glow: 'rgba(200, 90, 54, 0.3)',
+    primary: 'var(--bt-rust)',
+    secondary: 'var(--bt-gold)',
+    gradient: 'linear-gradient(135deg, var(--bt-rust), var(--bt-gold))',
+    bg: 'rgba(200, 90, 54, 0.08)',
+    glow: 'rgba(200, 90, 54, 0.2)',
   },
   redemption: {
-    primary: '#FD9419',
-    secondary: '#D4A04A',
-    gradient: 'linear-gradient(135deg, #FD9419, #D4A04A)',
-    bg: 'rgba(253, 148, 25, 0.1)',
-    glow: 'rgba(253, 148, 25, 0.3)',
+    primary: 'var(--redemption-orange)',
+    secondary: 'var(--redemption-gold)',
+    gradient: 'linear-gradient(135deg, var(--redemption-orange), var(--redemption-gold))',
+    bg: 'rgba(253, 148, 25, 0.08)',
+    glow: 'rgba(253, 148, 25, 0.2)',
   },
 };
 
@@ -81,8 +81,8 @@ const Snowflake = ({ delay, x, duration }: { delay: number; x: number; duration:
       initial={{ y: -100, opacity: 0 }}
       animate={{
         y: height + 100,
-        opacity: [0, 1, 1, 0],
-        x: [x, x + 50, x - 50, x],
+        opacity: [0, 0.3, 0.3, 0],
+        x: [x, x + 30, x - 30, x],
       }}
       transition={{
         duration,
@@ -90,7 +90,7 @@ const Snowflake = ({ delay, x, duration }: { delay: number; x: number; duration:
         repeat: Infinity,
         ease: 'linear',
       }}
-      className="absolute text-white/30 text-2xl pointer-events-none"
+      className="absolute text-white/20 text-xl pointer-events-none"
       style={{ left: `${x}%` }}
     >
       ❄️
@@ -114,65 +114,63 @@ const HolidayFeatureCard = ({
       ? brandColors.bib
       : feature.brand === 'redemption'
         ? brandColors.redemption
-        : { gradient: 'linear-gradient(135deg, #C85A36, #FD9419)', bg: 'rgba(200, 90, 54, 0.1)' };
+        : { gradient: 'linear-gradient(135deg, var(--bt-rust), var(--redemption-orange))', bg: 'rgba(200, 90, 54, 0.08)' };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, scale: 0.9 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="relative group"
     >
-      <Link href={feature.link || '#'}>
+      <Link href={feature.link || '#'} className="block h-full">
         <motion.div
           animate={{
-            y: isHovered ? -8 : 0,
-            scale: isHovered ? 1.02 : 1,
+            y: isHovered ? -6 : 0,
           }}
-          transition={{ duration: 0.3 }}
-          className="relative glass-card rounded-3xl p-6 h-full cursor-pointer overflow-hidden"
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="relative glass-card rounded-2xl p-6 h-full cursor-pointer overflow-hidden"
         >
-          {/* Animated background gradient */}
+          {/* Subtle background gradient on hover */}
           <motion.div
             animate={{
-              opacity: isHovered ? 1 : 0,
-              scale: isHovered ? 1.1 : 1,
+              opacity: isHovered ? 0.08 : 0,
             }}
-            transition={{ duration: 0.4 }}
-            className="absolute inset-0 rounded-3xl"
-            style={{ background: colors.gradient, opacity: 0.1 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 rounded-2xl"
+            style={{ background: colors.gradient }}
           />
 
           {/* Icon */}
           <motion.div
-            animate={{ scale: isHovered ? 1.2 : 1, rotate: isHovered ? 5 : 0 }}
+            animate={{ scale: isHovered ? 1.1 : 1 }}
             transition={{ duration: 0.3 }}
-            className="text-5xl mb-4 relative z-10"
+            className="text-4xl mb-4 relative z-10"
           >
             {feature.icon}
           </motion.div>
 
           {/* Content */}
           <div className="relative z-10">
-            <h3 className="text-xl font-bold mb-2" style={{ color: '#1A1410' }}>
+            <h3 className="text-lg font-semibold mb-2 leading-tight" style={{ color: 'var(--color-text-primary)' }}>
               {feature.title}
             </h3>
-            <p className="text-sm leading-relaxed" style={{ color: '#6B6B6B' }}>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
               {feature.description}
             </p>
           </div>
 
           {/* Hover arrow */}
           <motion.div
-            initial={{ x: -10, opacity: 0 }}
-            animate={{ x: isHovered ? 0 : -10, opacity: isHovered ? 1 : 0 }}
-            className="absolute bottom-6 right-6"
+            initial={{ x: -8, opacity: 0 }}
+            animate={{ x: isHovered ? 0 : -8, opacity: isHovered ? 1 : 0 }}
+            className="absolute bottom-5 right-5"
           >
             <svg
-              className="w-6 h-6"
-              style={{ color: feature.brand === 'bib' ? brandColors.bib.primary : feature.brand === 'redemption' ? brandColors.redemption.primary : '#C85A36' }}
+              className="w-5 h-5"
+              style={{ color: feature.brand === 'bib' ? 'var(--bt-rust)' : feature.brand === 'redemption' ? 'var(--redemption-orange)' : 'var(--bt-rust)' }}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -180,16 +178,6 @@ const HolidayFeatureCard = ({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </motion.div>
-
-          {/* Shimmer effect */}
-          {isHovered && (
-            <motion.div
-              initial={{ x: '-100%' }}
-              animate={{ x: '100%' }}
-              transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 1 }}
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-            />
-          )}
         </motion.div>
       </Link>
     </motion.div>
@@ -206,14 +194,14 @@ export default function HolidayHubSection() {
     offset: ['start end', 'end start'],
   });
 
-  const parallaxY = useTransform(scrollYProgress, [0, 1], ['-20%', '20%']);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ['-15%', '15%']);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
-  // Generate snowflakes
-  const snowflakes = Array.from({ length: 20 }, (_, i) => ({
-    delay: i * 0.5,
+  // Generate fewer, more subtle snowflakes
+  const snowflakes = Array.from({ length: 12 }, (_, i) => ({
+    delay: i * 0.8,
     x: Math.random() * 100,
-    duration: 10 + Math.random() * 10,
+    duration: 15 + Math.random() * 10,
   }));
 
   const filteredFeatures =
@@ -225,24 +213,24 @@ export default function HolidayHubSection() {
     <section
       ref={ref}
       id="holiday-hub"
-      className="relative py-32 md:py-40 overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #FAFAF8 0%, #F5EDE0 30%, #FAFAF8 100%)',
+        background: 'linear-gradient(180deg, var(--color-bg-primary) 0%, var(--bt-cream) 25%, var(--color-bg-primary) 100%)',
       }}
     >
-      {/* Animated background elements */}
+      {/* Subtle background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Snowflakes */}
         {snowflakes.map((snow, i) => (
           <Snowflake key={i} {...snow} />
         ))}
 
-        {/* Floating orbs */}
+        {/* Floating orbs - more subtle */}
         <motion.div
           style={{
             y: parallaxY,
             opacity,
-            background: 'radial-gradient(circle, rgba(200, 90, 54, 0.15) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(200, 90, 54, 0.08) 0%, transparent 70%)',
           }}
           className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl"
         />
@@ -250,42 +238,30 @@ export default function HolidayHubSection() {
           style={{
             y: parallaxY,
             opacity,
-            background: 'radial-gradient(circle, rgba(253, 148, 25, 0.15) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(253, 148, 25, 0.08) 0%, transparent 70%)',
           }}
           className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl"
-        />
-
-        {/* Decorative grid */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(200, 90, 54, 0.5) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(200, 90, 54, 0.5) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
-          }}
         />
       </div>
 
       <div className="container-custom relative z-10">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-12 md:mb-16"
         >
           {/* Holiday badge */}
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={isInView ? { scale: 1, rotate: 0 } : {}}
             transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full mb-6"
-            style={{ background: 'linear-gradient(135deg, #C85A36, #FD9419)' }}
+            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-6"
+            style={{ background: 'linear-gradient(135deg, var(--bt-rust), var(--redemption-orange))' }}
           >
-            <span className="text-2xl">🎄</span>
-            <span className="text-sm font-bold text-white uppercase tracking-wider">
+            <span className="text-xl">🎄</span>
+            <span className="text-xs font-semibold text-white uppercase tracking-wider">
               Holiday Hub
             </span>
           </motion.div>
@@ -293,16 +269,16 @@ export default function HolidayHubSection() {
           <motion.div
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="decorative-line mx-auto mb-8"
           />
 
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6" style={{ color: '#1A1410' }}>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-5 leading-tight" style={{ color: 'var(--color-text-primary)' }}>
             Celebrate the{' '}
             <span
               className="inline-block"
               style={{
-                background: 'linear-gradient(135deg, #C85A36, #FD9419)',
+                background: 'linear-gradient(135deg, var(--bt-rust), var(--redemption-orange))',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -311,7 +287,7 @@ export default function HolidayHubSection() {
               Season
             </span>
           </h2>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#6B6B6B' }}>
+          <p className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed px-4" style={{ color: 'var(--color-text-muted)' }}>
             Discover how Bib & Tucker and Redemption elevate every holiday moment — from intimate
             gatherings to grand celebrations.
           </p>
@@ -319,10 +295,10 @@ export default function HolidayHubSection() {
 
         {/* Brand toggle */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex justify-center gap-3 mb-12"
+          transition={{ duration: 0.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-wrap justify-center gap-2.5 mb-10 md:mb-12 px-4"
         >
           {[
             { id: 'both', label: 'Both Brands', icon: '🎁' },
@@ -332,9 +308,9 @@ export default function HolidayHubSection() {
             <motion.button
               key={brand.id}
               onClick={() => setActiveBrand(brand.id as typeof activeBrand)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2"
               style={{
                 background:
                   activeBrand === brand.id
@@ -342,65 +318,67 @@ export default function HolidayHubSection() {
                       ? brandColors.bib.gradient
                       : brand.id === 'redemption'
                         ? brandColors.redemption.gradient
-                        : 'linear-gradient(135deg, #C85A36, #FD9419)'
-                    : 'rgba(255, 255, 255, 0.8)',
-                color: activeBrand === brand.id ? '#FFFFFF' : '#6B6B6B',
+                        : 'linear-gradient(135deg, var(--bt-rust), var(--redemption-orange))'
+                    : 'var(--glass-bg)',
+                color: activeBrand === brand.id ? '#FFFFFF' : 'var(--color-text-muted)',
                 boxShadow:
                   activeBrand === brand.id
-                    ? `0 8px 30px ${brand.id === 'bib' ? brandColors.bib.glow : brand.id === 'redemption' ? brandColors.redemption.glow : 'rgba(200, 90, 54, 0.3)'}`
+                    ? `0 4px 20px ${brand.id === 'bib' ? brandColors.bib.glow : brand.id === 'redemption' ? brandColors.redemption.glow : 'rgba(200, 90, 54, 0.2)'}`
                     : 'none',
               }}
             >
-              <span>{brand.icon}</span>
+              <span className="text-base">{brand.icon}</span>
               <span>{brand.label}</span>
             </motion.button>
           ))}
         </motion.div>
 
         {/* Features grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 mb-12 md:mb-16 px-4">
           {filteredFeatures.map((feature, index) => (
             <HolidayFeatureCard key={feature.id} feature={feature} index={index} isInView={isInView} />
           ))}
         </div>
 
         {/* Split brand showcase */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-16">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16 px-4">
           {/* Bib & Tucker Holiday */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="relative rounded-3xl overflow-hidden group cursor-pointer"
+            transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="relative rounded-2xl overflow-hidden group cursor-pointer"
             style={{ background: brandColors.bib.gradient }}
           >
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors" />
-            <div className="relative p-8 md:p-12 text-white">
-              <div className="flex items-center gap-3 mb-4">
-                <Image
-                  src="/BAT_3D_Copper_Logo.png"
-                  alt="Bib & Tucker"
-                  width={60}
-                  height={60}
-                  className="object-contain"
-                />
+            <div className="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors duration-300" />
+            <div className="relative p-6 md:p-10 text-white">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="relative w-14 h-14 md:w-16 md:h-16 flex-shrink-0">
+                  <Image
+                    src="/BAT_3D_Copper_Logo.png"
+                    alt="Bib & Tucker"
+                    fill
+                    className="object-contain"
+                    sizes="64px"
+                  />
+                </div>
                 <div>
-                  <h3 className="text-2xl font-bold">Bib & Tucker</h3>
-                  <p className="text-sm opacity-90">Holiday Collection</p>
+                  <h3 className="text-xl md:text-2xl font-bold leading-tight">Bib & Tucker</h3>
+                  <p className="text-xs md:text-sm opacity-90 mt-0.5">Holiday Collection</p>
                 </div>
               </div>
-              <h4 className="text-3xl md:text-4xl font-bold mb-4">
+              <h4 className="text-2xl md:text-3xl font-bold mb-4 leading-tight">
                 Tennessee Tradition Meets Holiday Spirit
               </h4>
-              <p className="text-lg mb-6 opacity-90 leading-relaxed">
+              <p className="text-sm md:text-base mb-6 opacity-90 leading-relaxed">
                 From Gold Roast after-dinner sipping to Double Char by the fire, discover how our
                 award-winning bourbons elevate every holiday moment.
               </p>
               <Link href="#bib-tucker">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 rounded-full font-semibold bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-5 py-2.5 rounded-full text-sm font-semibold bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-colors"
                 >
                   Explore Collection →
                 </motion.button>
@@ -410,35 +388,35 @@ export default function HolidayHubSection() {
 
           {/* Redemption Holiday */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="relative rounded-3xl overflow-hidden group cursor-pointer"
+            transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="relative rounded-2xl overflow-hidden group cursor-pointer"
             style={{ background: brandColors.redemption.gradient }}
           >
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors" />
-            <div className="relative p-8 md:p-12 text-white">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                  <span className="text-2xl font-bold">REDEMPTION</span>
+            <div className="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors duration-300" />
+            <div className="relative p-6 md:p-10 text-white">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                  <span className="text-lg md:text-xl font-bold leading-none">REDEMPTION</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold">Redemption</h3>
-                  <p className="text-sm opacity-90">Rye Revival</p>
+                  <h3 className="text-xl md:text-2xl font-bold leading-tight">Redemption</h3>
+                  <p className="text-xs md:text-sm opacity-90 mt-0.5">Rye Revival</p>
                 </div>
               </div>
-              <h4 className="text-3xl md:text-4xl font-bold mb-4">
+              <h4 className="text-2xl md:text-3xl font-bold mb-4 leading-tight">
                 Classic Cocktails for Modern Celebrations
               </h4>
-              <p className="text-lg mb-6 opacity-90 leading-relaxed">
+              <p className="text-sm md:text-base mb-6 opacity-90 leading-relaxed">
                 High-rye character meets holiday warmth. Perfect for Manhattans, Old Fashioneds, and
                 all your favorite classic cocktails.
               </p>
               <Link href="#redemption">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 rounded-full font-semibold bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-5 py-2.5 rounded-full text-sm font-semibold bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-colors"
                 >
                   Explore Collection →
                 </motion.button>
@@ -449,41 +427,41 @@ export default function HolidayHubSection() {
 
         {/* Holiday CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center"
+          transition={{ duration: 0.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center px-4"
         >
-          <div className="glass-card rounded-3xl p-8 md:p-12 max-w-4xl mx-auto">
+          <div className="glass-card rounded-2xl p-8 md:p-10 max-w-3xl mx-auto">
             <motion.div
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="text-6xl mb-6"
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              className="text-5xl mb-5"
             >
               🎄
             </motion.div>
-            <h3 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1A1410' }}>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 leading-tight" style={{ color: 'var(--color-text-primary)' }}>
               Make This Holiday Unforgettable
             </h3>
-            <p className="text-lg mb-8 max-w-2xl mx-auto" style={{ color: '#6B6B6B' }}>
+            <p className="text-base md:text-lg mb-8 max-w-xl mx-auto leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
               Whether you're hosting a gathering or finding the perfect gift, our collections offer
               something special for every whiskey lover.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="#cocktails">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="btn-primary"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="btn-primary text-sm px-6 py-3"
                 >
                   View Holiday Cocktails
                 </motion.button>
               </Link>
               <Link href="#pairings">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="btn-outline"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="btn-outline text-sm px-6 py-3"
                 >
                   Explore Food Pairings
                 </motion.button>
@@ -495,4 +473,3 @@ export default function HolidayHubSection() {
     </section>
   );
 }
-
