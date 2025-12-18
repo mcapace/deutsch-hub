@@ -87,14 +87,17 @@ export default function BrandSection({
           >
             {bottleImage ? (
               <div className="relative aspect-[3/4] bg-white rounded-lg overflow-hidden shadow-lg">
-                <Image
-                  src={bottleImage}
-                  alt={`${brandName} bottle`}
-                  fill
-                  className="object-contain p-8 md:p-12"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={bottleImage}
+                    alt={`${brandName} bottle`}
+                    fill
+                    className="object-contain p-8 md:p-12"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                    unoptimized={true}
+                  />
+                </div>
               </div>
             ) : (
               <div className="relative aspect-[3/4] bg-gray-100 rounded-lg flex items-center justify-center">
