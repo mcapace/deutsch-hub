@@ -94,7 +94,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Orange peel',
     glassware: 'Rocks glass',
     occasion: 'Fireside sipping',
-    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
+    image: '/BAT_FY24_DoubleChar_Logo.png',
   },
   {
     id: 'holiday-manhattan',
@@ -117,7 +117,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Luxardo cherry',
     glassware: 'Coupe',
     occasion: 'Elegant celebrations',
-    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
+    image: '/Redemption Bottle Images/dfws_rdpn_trio-set_750ml_BLK_14OCT25.png',
   },
   {
     id: 'tennessee-winter',
@@ -359,7 +359,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Lemon peel (expressed)',
     glassware: 'Rocks glass',
     occasion: 'Sophisticated sipping',
-    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
+    image: '/Redemption Bottle Images/dfws_rdpn_trio-set_750ml_BLK_14OCT25.png',
   },
   {
     id: 'whiskey-sour',
@@ -395,18 +395,18 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
 
   const brandColors = {
     bib: {
-      primary: '#C85A36',
-      secondary: '#BDA55D',
+      primary: 'var(--bt-rust)',
+      secondary: 'var(--bt-gold)',
       bg: 'rgba(200, 90, 54, 0.08)',
-      gradient: 'linear-gradient(135deg, #C85A36, #BDA55D)',
-      glow: 'rgba(200, 90, 54, 0.3)',
+      gradient: 'linear-gradient(135deg, var(--bt-rust), var(--bt-gold))',
+      glow: 'rgba(200, 90, 54, 0.2)',
     },
     redemption: {
-      primary: '#FD9419',
-      secondary: '#D4A04A',
+      primary: 'var(--redemption-orange)',
+      secondary: 'var(--redemption-gold)',
       bg: 'rgba(253, 148, 25, 0.08)',
-      gradient: 'linear-gradient(135deg, #FD9419, #D4A04A)',
-      glow: 'rgba(253, 148, 25, 0.3)',
+      gradient: 'linear-gradient(135deg, var(--redemption-orange), var(--redemption-gold))',
+      glow: 'rgba(253, 148, 25, 0.2)',
     },
   };
 
@@ -483,10 +483,10 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
         {/* Card content */}
         <div className="relative glass-card rounded-3xl overflow-hidden h-full backdrop-blur-xl">
           {/* Image section */}
-          <div className="relative h-48 overflow-hidden">
+          <div className="relative h-48 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
             {cocktail.image ? (
               <motion.div
-                animate={{ scale: isHovered ? 1.1 : 1 }}
+                animate={{ scale: isHovered ? 1.05 : 1 }}
                 transition={{ duration: 0.6 }}
                 className="relative w-full h-full"
               >
@@ -494,7 +494,7 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
                   src={cocktail.image}
                   alt={cocktail.name}
                   fill
-                  className="object-cover"
+                  className={cocktail.image.includes('Logo') ? 'object-contain p-4' : 'object-cover'}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   quality={85}
                   placeholder="blur"
@@ -617,20 +617,20 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
               style={{ background: '#FAFAF8' }}
             >
               {/* Header with image */}
-              <div className="relative h-64 overflow-hidden">
+              <div className={`relative h-64 overflow-hidden ${cocktail.image?.includes('Logo') ? 'bg-gradient-to-br from-gray-50 to-gray-100' : ''}`}>
                 {cocktail.image ? (
                   <Image
                     src={cocktail.image}
                     alt={cocktail.name}
                     fill
-                    className="object-cover"
+                    className={cocktail.image.includes('Logo') ? 'object-contain p-6' : 'object-cover'}
                     quality={90}
                     priority
                   />
                 ) : (
                   <div
                     className="w-full h-full"
-                style={{ background: colors.gradient }}
+                    style={{ background: colors.gradient }}
                   />
                 )}
                 {/* Gradient overlay */}

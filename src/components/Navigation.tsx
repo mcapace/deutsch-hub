@@ -33,25 +33,29 @@ export default function Navigation() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-xl shadow-md shadow-black/5 border-b border-[#E5E3DD]'
+            ? 'backdrop-blur-xl shadow-md shadow-black/5 border-b'
             : 'bg-transparent'
         }`}
+        style={isScrolled ? {
+          background: 'rgba(255, 255, 255, 0.95)',
+          borderColor: 'var(--color-border)',
+        } : {}}
       >
         <div className="container-custom">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="#hero" className="flex items-center gap-3 group">
               <div className="relative">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#C4956A] to-[#A67B52] flex items-center justify-center">
-                  <span className="text-[#0D0D0D] font-bold text-lg">WA</span>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--bt-rust), var(--bt-copper))' }}>
+                  <span className="font-bold text-lg" style={{ color: 'var(--color-text-primary)' }}>WA</span>
                 </div>
-                <div className="absolute inset-0 rounded-full bg-[#C4956A] opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-300" />
+                <div className="absolute inset-0 rounded-full blur-xl transition-opacity duration-300 opacity-0 group-hover:opacity-30" style={{ background: 'var(--bt-rust)' }} />
               </div>
               <div className="flex flex-col">
-                <span className="text-sm font-semibold text-[#1A1A1A] tracking-wide">
+                <span className="text-sm font-semibold tracking-wide" style={{ color: 'var(--color-text-primary)' }}>
                   WHISKY ADVOCATE
                 </span>
-                <span className="text-xs text-[#C4956A]">Deutsch Spirits Collection</span>
+                <span className="text-xs" style={{ color: 'var(--bt-rust)' }}>Deutsch Spirits Collection</span>
               </div>
             </Link>
 
@@ -61,10 +65,13 @@ export default function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="relative text-sm font-medium text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors duration-300 group"
+                  className="relative text-sm font-medium transition-colors duration-300 group"
+                  style={{ color: 'var(--color-text-muted)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-text-primary)'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-muted)'}
                 >
                   {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#C4956A] to-[#E8A849] group-hover:w-full transition-all duration-300" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300" style={{ background: 'linear-gradient(90deg, var(--bt-rust), var(--bt-gold))' }} />
                 </Link>
               ))}
             </div>

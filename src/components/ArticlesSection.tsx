@@ -81,24 +81,24 @@ const articles: Article[] = [
 
 const themeColors = {
   bib: {
-    primary: '#C85A36',
-    secondary: '#BDA55D',
+    primary: 'var(--bt-rust)',
+    secondary: 'var(--bt-gold)',
     gradient: 'linear-gradient(135deg, rgba(200, 90, 54, 0.15), rgba(189, 165, 93, 0.1))',
-    border: '#C85A36',
+    border: 'var(--bt-rust)',
     tagBg: 'rgba(200, 90, 54, 0.15)',
   },
   redemption: {
-    primary: '#FD9419',
-    secondary: '#D4A04A',
+    primary: 'var(--redemption-orange)',
+    secondary: 'var(--redemption-gold)',
     gradient: 'linear-gradient(135deg, rgba(253, 148, 25, 0.15), rgba(212, 160, 74, 0.1))',
-    border: '#FD9419',
+    border: 'var(--redemption-orange)',
     tagBg: 'rgba(253, 148, 25, 0.15)',
   },
   general: {
-    primary: '#6B6B6B',
-    secondary: '#8B8B8B',
+    primary: 'var(--color-text-muted)',
+    secondary: 'var(--color-text-light)',
     gradient: 'linear-gradient(135deg, rgba(107, 107, 107, 0.1), rgba(139, 139, 139, 0.05))',
-    border: '#8B8B8B',
+    border: 'var(--color-text-light)',
     tagBg: 'rgba(107, 107, 107, 0.15)',
   },
 };

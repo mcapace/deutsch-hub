@@ -7,24 +7,24 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#F5F3F0] border-t border-[#E5E3DD]">
+    <footer className="relative border-t" style={{ background: 'var(--color-bg-secondary)', borderColor: 'var(--color-border)' }}>
       {/* Decorative gradient */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C4956A]/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--bt-rust)]/50 to-transparent" />
 
       <div className="container-custom py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand column */}
           <div className="lg:col-span-2">
             <Link href="#hero" className="inline-flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#C4956A] to-[#A67B52] flex items-center justify-center">
-                <span className="text-[#0D0D0D] font-bold text-lg">WA</span>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--bt-rust), var(--bt-copper))' }}>
+                <span className="font-bold text-lg" style={{ color: 'var(--color-text-primary)' }}>WA</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-sm font-semibold text-[#1A1A1A]">WHISKY ADVOCATE</span>
-                <span className="text-xs text-[#C4956A]">Deutsch Spirits Collection</span>
+                <span className="text-sm font-semibold" style={{ color: 'var(--color-text-primary)' }}>WHISKY ADVOCATE</span>
+                <span className="text-xs" style={{ color: 'var(--bt-rust)' }}>Deutsch Spirits Collection</span>
               </div>
             </Link>
-            <p className="text-[#4A4A4A] max-w-md mb-6">
+            <p className="max-w-md mb-6" style={{ color: 'var(--color-text-secondary)' }}>
               Whisky Advocate is the world's leading whisky authority, providing expert
               reviews, ratings, and insights into the finest spirits from around the globe.
             </p>
@@ -34,10 +34,22 @@ export default function Footer() {
                 <a
                   key={social}
                   href="#"
-                  className="w-10 h-10 rounded-full bg-white border border-[#E5E3DD] flex items-center justify-center hover:border-[#C4956A] hover:bg-[#FAFAF8] transition-all shadow-sm hover:shadow-md"
+                  className="w-10 h-10 rounded-full border flex items-center justify-center transition-all shadow-sm hover:shadow-md"
+                  style={{ 
+                    background: 'var(--color-bg-card-solid)',
+                    borderColor: 'var(--color-border)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--bt-rust)';
+                    e.currentTarget.style.background = 'var(--color-bg-primary)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-border)';
+                    e.currentTarget.style.background = 'var(--color-bg-card-solid)';
+                  }}
                   aria-label={social}
                 >
-                  <div className="w-4 h-4 rounded bg-[#C4956A]/30" />
+                  <div className="w-4 h-4 rounded" style={{ background: 'var(--bt-rust)' }} />
                 </a>
               ))}
             </div>
@@ -45,7 +57,7 @@ export default function Footer() {
 
           {/* Quick links */}
           <div>
-            <h4 className="text-sm font-semibold text-[#1A1A1A] uppercase tracking-wider mb-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--color-text-primary)' }}>
               Explore
             </h4>
             <ul className="space-y-3">
@@ -58,7 +70,10 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-[#4A4A4A] hover:text-[#C4956A] transition-colors text-sm"
+                    className="transition-colors text-sm"
+                    style={{ color: 'var(--color-text-secondary)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
                   >
                     {link.name}
                   </Link>
@@ -69,7 +84,7 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h4 className="text-sm font-semibold text-[#1A1A1A] uppercase tracking-wider mb-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--color-text-primary)' }}>
               Legal
             </h4>
             <ul className="space-y-3">
@@ -82,7 +97,10 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-[#4A4A4A] hover:text-[#C4956A] transition-colors text-sm"
+                    className="transition-colors text-sm"
+                    style={{ color: 'var(--color-text-secondary)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--bt-rust)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
                   >
                     {link.name}
                   </Link>
@@ -95,14 +113,14 @@ export default function Footer() {
         {/* Age verification notice */}
         <div className="glass-card rounded-xl p-6 mb-12">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#C4956A]/20 flex items-center justify-center">
-              <span className="text-[#C4956A] font-bold text-lg">21+</span>
+            <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center" style={{ background: 'rgba(200, 90, 54, 0.15)' }}>
+              <span className="font-bold text-lg" style={{ color: 'var(--bt-rust)' }}>21+</span>
             </div>
             <div>
-              <p className="text-[#1A1A1A] font-medium mb-1">
+              <p className="font-medium mb-1" style={{ color: 'var(--color-text-primary)' }}>
                 Please Drink Responsibly
               </p>
-              <p className="text-sm text-[#4A4A4A]">
+              <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
                 This website is intended for adults of legal drinking age. Please enjoy
                 our content and products responsibly. Do not share with anyone under the
                 legal drinking age.
@@ -112,21 +130,21 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-[#E5E3DD]">
+        <div className="pt-8 border-t" style={{ borderColor: 'var(--color-border)' }}>
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-[#6B6B6B]">
+            <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
               &copy; {currentYear} Whisky Advocate. All rights reserved.
             </p>
-            <p className="text-sm text-[#6B6B6B]">
+            <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
               Sponsored content presented in partnership with{' '}
-              <span className="text-[#C4956A]">Deutsch Family Wine & Spirits</span>
+              <span style={{ color: 'var(--bt-rust)' }}>Deutsch Family Wine & Spirits</span>
             </p>
           </div>
         </div>
       </div>
 
       {/* Decorative bottom gradient */}
-      <div className="h-1 bg-gradient-to-r from-[#E8D4B8] via-[#C4956A] to-[#FCD9A0]" />
+      <div className="h-1" style={{ background: 'linear-gradient(90deg, var(--bt-cream), var(--bt-rust), var(--redemption-cream))' }} />
     </footer>
   );
 }

@@ -139,13 +139,13 @@ const ProductCard = ({
           </div>
 
           {/* Description */}
-          <p className="text-sm leading-relaxed mb-5" style={{ color: '#4A4A4A' }}>
+          <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--color-text-secondary)' }}>
             {product.description}
           </p>
 
           {/* Tasting notes */}
           <div>
-            <p className="text-xs uppercase tracking-wider mb-3" style={{ color: '#8B8B8B' }}>
+            <p className="text-xs uppercase tracking-wider mb-3" style={{ color: 'var(--color-text-light)' }}>
               Tasting Notes
             </p>
             <div className="flex flex-wrap gap-2">
@@ -205,17 +205,17 @@ export default function BrandSection({
 
   const themeColors = {
     bib: {
-      primary: '#C85A36',
-      secondary: '#BDA55D',
+      primary: 'var(--bt-rust)',
+      secondary: 'var(--bt-gold)',
       textGradient: 'text-gradient-bib',
-      bgGradient: 'linear-gradient(180deg, #FAFAF8 0%, rgba(200, 90, 54, 0.05) 50%, #FAFAF8 100%)',
+      bgGradient: 'linear-gradient(180deg, var(--color-bg-primary) 0%, rgba(200, 90, 54, 0.05) 50%, var(--color-bg-primary) 100%)',
       accentBg: 'rgba(200, 90, 54, 0.08)',
     },
     redemption: {
-      primary: '#FD9419',
-      secondary: '#D4A04A',
+      primary: 'var(--redemption-orange)',
+      secondary: 'var(--redemption-gold)',
       textGradient: 'text-gradient-redemption',
-      bgGradient: 'linear-gradient(180deg, #FAFAF8 0%, rgba(253, 148, 25, 0.05) 50%, #FAFAF8 100%)',
+      bgGradient: 'linear-gradient(180deg, var(--color-bg-primary) 0%, rgba(253, 148, 25, 0.05) 50%, var(--color-bg-primary) 100%)',
       accentBg: 'rgba(253, 148, 25, 0.08)',
     },
   };
@@ -273,11 +273,11 @@ export default function BrandSection({
             style={{ background: `linear-gradient(90deg, ${colors.primary}, ${colors.secondary})` }}
           />
           <h2
-            className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 ${colors.textGradient}`}
+            className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-5 leading-tight ${colors.textGradient}`}
           >
             {brandName}
           </h2>
-          <p className="text-xl md:text-2xl italic" style={{ color: '#6B6B6B' }}>
+          <p className="text-lg md:text-xl italic leading-relaxed px-4" style={{ color: 'var(--color-text-muted)' }}>
             "{tagline}"
           </p>
         </motion.div>
@@ -453,7 +453,8 @@ export default function BrandSection({
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-3xl font-bold mb-8 text-center"
-            style={{ color: '#1A1410' }}
+            className="text-xl md:text-2xl font-bold leading-tight"
+            style={{ color: 'var(--color-text-primary)' }}
           >
             The Collection
           </motion.h3>

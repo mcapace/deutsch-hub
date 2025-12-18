@@ -191,8 +191,8 @@ const WhiskeyAccordion = ({
   onToggle: () => void;
 }) => {
   const colors = {
-    bib: { primary: '#C85A36', secondary: '#BDA55D' },
-    redemption: { primary: '#FD9419', secondary: '#D4A04A' },
+    bib: { primary: 'var(--bt-rust)', secondary: 'var(--bt-gold)' },
+    redemption: { primary: 'var(--redemption-orange)', secondary: 'var(--redemption-gold)' },
   };
 
   const brandColors = colors[brandId];
@@ -270,8 +270,8 @@ export default function FoodPairingsSection() {
 
   const currentBrand = pairingsData.find((b) => b.brandId === activeBrand)!;
   const brandColors = {
-    bib: { primary: '#C85A36', secondary: '#BDA55D', bg: 'rgba(200, 90, 54, 0.05)' },
-    redemption: { primary: '#FD9419', secondary: '#D4A04A', bg: 'rgba(253, 148, 25, 0.05)' },
+    bib: { primary: 'var(--bt-rust)', secondary: 'var(--bt-gold)', bg: 'rgba(200, 90, 54, 0.05)' },
+    redemption: { primary: 'var(--redemption-orange)', secondary: 'var(--redemption-gold)', bg: 'rgba(253, 148, 25, 0.05)' },
   };
 
   return (
