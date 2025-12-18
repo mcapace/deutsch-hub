@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "installCommand": "git lfs install && REMOTE_URL=$(git remote get-url origin 2>/dev/null || echo 'https://github.com/mcapace/deutsch-hub.git') && git config lfs.url ${REMOTE_URL%/}.git/info/lfs && (git lfs pull || echo 'LFS pull failed, continuing...') && npm install",
+  "installCommand": "git lfs install && git config lfs.url https://github.com/mcapace/deutsch-hub.git/info/lfs && (git lfs pull || echo 'LFS pull failed, continuing...') && npm install",
   "buildCommand": "(git lfs pull || echo 'LFS pull failed, continuing build...') && npm run build"
 }
 
