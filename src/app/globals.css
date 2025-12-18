@@ -399,6 +399,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ========================================
+   3D TRANSFORM UTILITIES
+   ======================================== */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* ========================================
    SHIMMER & SHINE EFFECTS
    ======================================== */
 .shimmer {
@@ -765,8 +776,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .reveal-up.revealed {
   opacity: 1;
-  transform: translateY(0);
-}
+    transform: translateY(0);
+  }
 
 .reveal-left {
   opacity: 0;

@@ -303,32 +303,52 @@ export default function BrandSection({
               />
 
               {bottleImage ? (
-                <div className="relative h-full flex items-center justify-center p-8">
-                  <Image
-                    src={bottleImage}
-                    alt={`${brandName} bottle`}
-                    fill
-                    className="object-contain object-center p-8 whiskey-glow"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
-                  />
-                </div>
+                <motion.div
+                  whileHover={{ scale: 1.05, rotateY: -5 }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  className="relative h-full flex items-center justify-center p-8 perspective-1000 group cursor-pointer"
+                >
+                  <motion.div
+                    whileHover={{ rotateY: -10, rotateX: 3 }}
+                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                    className="relative w-full h-full preserve-3d"
+                  >
+                    <Image
+                      src={bottleImage}
+                      alt={`${brandName} bottle`}
+                      fill
+                      className="object-contain object-center p-8 whiskey-glow transition-all duration-700 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      quality={90}
+                      priority
+                      placeholder="blur"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                    />
+                    {/* Enhanced decorative overlay */}
+                    <div
+                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{
+                        background: `linear-gradient(135deg, ${colors.primary}10 0%, transparent 50%, ${colors.secondary}10 100%)`,
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div
-                      className="w-32 h-48 mx-auto mb-6 rounded-lg border-2 border-dashed flex items-center justify-center"
+                <div className="text-center p-8">
+                  <div
+                    className="w-32 h-48 mx-auto mb-6 rounded-lg border-2 border-dashed flex items-center justify-center"
                       style={{ borderColor: `${colors.primary}40` }}
+                  >
+                    <svg
+                      className="w-16 h-16 opacity-30"
+                      style={{ color: colors.primary }}
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      <svg
-                        className="w-16 h-16 opacity-30"
-                        style={{ color: colors.primary }}
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 2C9.79 2 8 3.79 8 6v2H5v14h14V8h-3V6c0-2.21-1.79-4-4-4zm0 2c1.1 0 2 .9 2 2v2h-4V6c0-1.1.9-2 2-2z" />
-                      </svg>
-                    </div>
+                      <path d="M12 2C9.79 2 8 3.79 8 6v2H5v14h14V8h-3V6c0-2.21-1.79-4-4-4zm0 2c1.1 0 2 .9 2 2v2h-4V6c0-1.1.9-2 2-2z" />
+                    </svg>
+                  </div>
                     <p style={{ color: '#8B8B8B' }} className="text-sm">
                       Product Image
                     </p>
@@ -364,9 +384,9 @@ export default function BrandSection({
             </motion.div>
 
             {/* Heritage */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6, duration: 0.6 }}
               className="mb-8"
             >
