@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "installCommand": "which git-lfs || (echo 'Git LFS not found, installing...' && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && apt-get install -y git-lfs) && git lfs install && git lfs pull && npm install",
+  "installCommand": "git lfs install && git lfs pull && npm install",
   "buildCommand": "git lfs pull && npm run build"
 }
 
