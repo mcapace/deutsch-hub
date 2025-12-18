@@ -2,6 +2,8 @@ import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import BrandSection from '@/components/BrandSection';
 import CocktailSection from '@/components/CocktailSection';
+import FoodPairingsSection from '@/components/FoodPairingsSection';
+import CocktailQuiz from '@/components/CocktailQuiz';
 import ArticlesSection from '@/components/ArticlesSection';
 import Footer from '@/components/Footer';
 
@@ -101,8 +103,10 @@ export default function Home() {
       <BrandSection {...bibAndTuckerData} />
       <BrandSection {...redemptionData} />
       <CocktailSection />
+      <FoodPairingsSection />
       <ArticlesSection />
       <Footer />
+      <CocktailQuiz />
     </main>
   );
 }
