@@ -60,6 +60,7 @@ export default function Navigation() {
                 height={60}
                 className="h-8 md:h-10 lg:h-12 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
                 priority
+                unoptimized={true}
               />
               <span className="ml-3 text-xs font-medium tracking-wide opacity-70 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--color-text-muted)' }}>
                 Deutsch Spirits Collection

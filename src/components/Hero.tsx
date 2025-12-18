@@ -41,6 +41,7 @@ export default function Hero() {
             height={75}
             className="h-16 md:h-24 w-auto object-contain mx-auto"
             priority
+            unoptimized={true}
           />
         </motion.div>
 

@@ -493,6 +493,7 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
                   className={cocktail.image.includes('Logo') ? 'object-contain p-4' : 'object-cover'}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   quality={90}
+                  unoptimized={true}
                 />
                 {/* Gradient overlay */}
                 <div
@@ -620,6 +621,7 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
                     className={cocktail.image.includes('Logo') ? 'object-contain p-6' : 'object-cover'}
                     quality={90}
                     priority
+                    unoptimized={true}
                   />
                 ) : (
                   <div

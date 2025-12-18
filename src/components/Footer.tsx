@@ -21,6 +21,7 @@ export default function Footer() {
               height={60}
               className="h-12 md:h-16 w-auto object-contain"
               priority
+              unoptimized={true}
             />
           </Link>
         </div>

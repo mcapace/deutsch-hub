@@ -360,6 +360,7 @@ export default function HolidayHubSection() {
                     fill
                     className="object-contain"
                     sizes="64px"
+                    unoptimized={true}
                   />
                 </div>
                 <div>
