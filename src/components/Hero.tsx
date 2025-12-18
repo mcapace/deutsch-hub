@@ -1,195 +1,454 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
+
+// Particle component for floating effects
+const Particle = ({ delay, duration, x, size }: { delay: number; duration: number; x: number; size: number }) => (
+  <motion.div
+    initial={{ y: '100vh', opacity: 0, scale: 0 }}
+    animate={{
+      y: '-10vh',
+      opacity: [0, 1, 1, 0],
+      scale: [0, 1, 1, 0.5],
+    }}
+    transition={{
+      duration,
+      delay,
+      repeat: Infinity,
+      ease: 'linear',
+    }}
+    className="absolute rounded-full"
+    style={{
+      left: `${x}%`,
+      width: size,
+      height: size,
+      background: `radial-gradient(circle, rgba(189, 165, 93, 0.6) 0%, transparent 70%)`,
+    }}
+  />
+);
+
+// Liquid blob background
+const LiquidBlob = ({ className, color, delay = 0 }: { className: string; color: string; delay?: number }) => (
+  <motion.div
+    initial={{ scale: 0.8, opacity: 0 }}
+    animate={{
+      scale: [0.8, 1.1, 0.9, 1, 0.8],
+      opacity: [0.3, 0.5, 0.4, 0.5, 0.3],
+      borderRadius: [
+        '60% 40% 30% 70% / 60% 30% 70% 40%',
+        '30% 60% 70% 40% / 50% 60% 30% 60%',
+        '50% 60% 30% 60% / 30% 40% 70% 50%',
+        '60% 40% 60% 30% / 70% 50% 40% 60%',
+        '60% 40% 30% 70% / 60% 30% 70% 40%',
+      ],
+    }}
+    transition={{
+      duration: 20,
+      delay,
+      repeat: Infinity,
+      ease: 'easeInOut',
+    }}
+    className={`absolute blur-3xl ${className}`}
+    style={{ background: color }}
+  />
+);
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+  // Parallax transforms
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
+  const blur = useTransform(scrollYProgress, [0, 0.5], [0, 10]);
+
+  // Mouse parallax
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      mouseX.set((clientX - innerWidth / 2) / 50);
+      mouseY.set((clientY - innerHeight / 2) / 50);
+      setMousePosition({ x: clientX, y: clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  // Generate particles
+  const particles = Array.from({ length: 15 }, (_, i) => ({
+    delay: i * 2,
+    duration: 15 + Math.random() * 10,
+    x: Math.random() * 100,
+    size: 4 + Math.random() * 8,
+  }));
+
+  // Text animation variants
+  const letterVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.03,
+        duration: 0.5,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    }),
+  };
+
+  const titleText = "American Whiskey";
 
   return (
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero noise-overlay"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #FAFAF8 0%, #F5EDE0 100%)' }}
     >
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating orbs */}
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[#E8D4B8]/30 blur-3xl"
+      {/* Animated gradient background */}
+      <div className="absolute inset-0">
+        {/* Liquid blobs */}
+        <LiquidBlob
+          className="w-[600px] h-[600px] top-0 -left-48"
+          color="rgba(200, 90, 54, 0.15)"
+          delay={0}
         />
-        <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 80, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[#FCD9A0]/30 blur-3xl"
+        <LiquidBlob
+          className="w-[500px] h-[500px] bottom-0 right-0"
+          color="rgba(189, 165, 93, 0.2)"
+          delay={5}
         />
+        <LiquidBlob
+          className="w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          color="rgba(184, 115, 51, 0.1)"
+          delay={10}
+        />
+
+        {/* Redemption accent blob */}
         <motion.div
           animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.1, 0.2, 0.1],
+            x: [0, 30, 0],
+            y: [0, -20, 0],
+            scale: [1, 1.1, 1],
           }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#F5EDE0]/40 blur-3xl"
+          transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-1/3 right-1/4 w-[300px] h-[300px] rounded-full blur-3xl"
+          style={{ background: 'rgba(253, 148, 25, 0.12)' }}
         />
       </div>
 
-      {/* Decorative lines */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg className="absolute w-full h-full opacity-10" viewBox="0 0 1920 1080">
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {particles.map((particle, i) => (
+          <Particle key={i} {...particle} />
+        ))}
+      </div>
+
+      {/* Decorative grid pattern */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(200, 90, 54, 0.5) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(200, 90, 54, 0.5) 1px, transparent 1px)
+            `,
+            backgroundSize: '100px 100px',
+          }}
+        />
+      </div>
+
+      {/* Animated decorative lines */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <svg className="absolute w-full h-full" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="heroLineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#C85A36" stopOpacity="0" />
+              <stop offset="30%" stopColor="#C85A36" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="#BDA55D" stopOpacity="0.5" />
+              <stop offset="70%" stopColor="#C85A36" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#C85A36" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="heroLineGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#BDA55D" stopOpacity="0" />
+              <stop offset="50%" stopColor="#BDA55D" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#BDA55D" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
           <motion.path
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2, ease: 'easeInOut' }}
-            d="M0,540 Q480,200 960,540 T1920,540"
-            stroke="url(#lineGradient)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 2, ease: 'easeInOut', delay: 0.5 }}
+            d="M0,400 Q480,200 960,400 T1920,400"
+            stroke="url(#heroLineGradient)"
+            strokeWidth="1.5"
+            fill="none"
+          />
+          <motion.path
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 2.5, ease: 'easeInOut', delay: 0.8 }}
+            d="M0,600 Q480,800 960,600 T1920,600"
+            stroke="url(#heroLineGradient2)"
             strokeWidth="1"
             fill="none"
           />
-          <defs>
-            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#B87333" stopOpacity="0" />
-              <stop offset="50%" stopColor="#C4956A" stopOpacity="1" />
-              <stop offset="100%" stopColor="#FD9419" stopOpacity="0" />
-            </linearGradient>
-          </defs>
         </svg>
       </div>
 
-      {/* Content */}
+      {/* Main content with parallax */}
       <motion.div
         style={{ y, opacity, scale }}
-        className="relative z-10 container-custom text-center"
+        className="relative z-10 container-custom text-center px-4"
       >
-        {/* Badge */}
+        {/* 3D perspective wrapper */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8"
+          style={{ x: smoothMouseX, y: smoothMouseY }}
+          className="relative"
         >
-          <span className="w-2 h-2 rounded-full bg-[#C4956A] animate-pulse" />
-          <span className="text-sm text-[#6B6B6B]">Presented by Whisky Advocate</span>
-        </motion.div>
+          {/* Presented by badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full mb-10 glass-card"
+          >
+            <motion.span
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-2 h-2 rounded-full"
+              style={{ background: 'linear-gradient(135deg, #C85A36, #BDA55D)' }}
+            />
+            <span className="text-sm tracking-wide" style={{ color: '#6B6B6B' }}>
+              Presented by <span className="font-semibold" style={{ color: '#1A1410' }}>Whisky Advocate</span>
+            </span>
+          </motion.div>
 
-        {/* Main headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
-        >
-          <span className="block text-[#1A1A1A]">Discover the Art of</span>
-          <span className="block text-gradient mt-2">American Whiskey</span>
-        </motion.h1>
+          {/* Main headline with stagger animation */}
+          <div className="overflow-hidden mb-4">
+            <motion.h1
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95]"
+              style={{ color: '#1A1410' }}
+            >
+              Discover the Art of
+            </motion.h1>
+          </div>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="max-w-2xl mx-auto text-lg md:text-xl text-[#4A4A4A] mb-10 leading-relaxed"
-        >
-          Explore the heritage, craftsmanship, and bold character of{' '}
-          <span className="text-[#B87333]">Bib & Tucker</span> and{' '}
-          <span className="text-[#FD9419]">Redemption</span> — two exceptional expressions
-          from the Deutsch Family portfolio.
-        </motion.p>
+          <div className="overflow-hidden mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95]"
+            >
+              <span className="text-gradient inline-block">
+                {titleText.split('').map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 + i * 0.03, duration: 0.5 }}
+                    className="inline-block"
+                    style={{ textShadow: '0 0 40px rgba(200, 90, 54, 0.3)' }}
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </motion.span>
+                ))}
+              </span>
+            </motion.div>
+          </div>
 
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <a href="#bib-tucker" className="btn-primary">
-            Explore the Collection
-          </a>
-          <a href="#articles" className="btn-outline">
-            Read Featured Stories
-          </a>
-        </motion.div>
+          {/* Tagline */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="max-w-2xl mx-auto text-lg md:text-xl lg:text-2xl leading-relaxed mb-12"
+            style={{ color: '#4A4A4A' }}
+          >
+            Explore the heritage, craftsmanship, and bold character of{' '}
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              className="font-semibold inline-block cursor-pointer"
+              style={{ color: '#C85A36' }}
+            >
+              Bib & Tucker
+            </motion.span>{' '}
+            and{' '}
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              className="font-semibold inline-block cursor-pointer"
+              style={{ color: '#FD9419' }}
+            >
+              Redemption
+            </motion.span>
+          </motion.p>
 
-        {/* Brand logos placeholder */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="mt-20 flex items-center justify-center gap-12 flex-wrap"
-        >
-          <div className="flex flex-col items-center gap-3 opacity-70 hover:opacity-100 transition-opacity">
-            <div className="w-32 h-32 rounded-xl bg-white/90 backdrop-blur-sm flex items-center justify-center border border-[#E5E3DD] shadow-sm hover:shadow-md transition-all p-4">
-              <Image
-                src="/BAT_3D_Copper_Logo.png"
-                alt="Bib & Tucker Logo"
-                width={80}
-                height={80}
-                className="object-contain"
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+          >
+            <motion.a
+              href="#bib-tucker"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="btn-primary shimmer relative group"
+            >
+              <span className="relative z-10">Explore the Collection</span>
+            </motion.a>
+            <motion.a
+              href="#cocktails"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="btn-outline relative overflow-hidden"
+            >
+              <span className="relative z-10">Discover Cocktails</span>
+            </motion.a>
+          </motion.div>
+
+          {/* Brand showcase */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.4 }}
+            className="mt-20 flex items-center justify-center gap-8 md:gap-16 flex-wrap"
+          >
+            {/* Bib & Tucker Logo */}
+            <motion.div
+              whileHover={{ scale: 1.05, y: -5 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="group cursor-pointer"
+            >
+              <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-2xl glass-card flex items-center justify-center p-5 glow-border">
+                <Image
+                  src="/BAT_3D_Copper_Logo.png"
+                  alt="Bib & Tucker Logo"
+                  width={120}
+                  height={120}
+                  className="object-contain transition-transform duration-500 group-hover:scale-110"
+                />
+                <motion.div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: 'radial-gradient(circle at center, rgba(200, 90, 54, 0.1) 0%, transparent 70%)',
+                  }}
+                />
+              </div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                className="text-center text-sm mt-3 font-medium"
+                style={{ color: '#C85A36' }}
+              >
+                Tennessee Bourbon
+              </motion.p>
+            </motion.div>
+
+            {/* Decorative divider */}
+            <div className="hidden md:block">
+              <motion.div
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 1, delay: 1.6 }}
+                className="w-px h-24 origin-top"
+                style={{ background: 'linear-gradient(180deg, transparent, #BDA55D, transparent)' }}
               />
             </div>
-          </div>
-          <div className="w-px h-16 bg-gradient-to-b from-transparent via-[#D4D1C8] to-transparent" />
-          <div className="flex flex-col items-center gap-3 opacity-70 hover:opacity-100 transition-opacity">
-            <div className="w-32 h-32 rounded-xl bg-white/90 backdrop-blur-sm flex items-center justify-center border border-[#E5E3DD] shadow-sm hover:shadow-md transition-all">
-              <span className="text-[#D97706] text-sm font-bold text-center px-3 tracking-wide">
-                REDEMPTION
-              </span>
-            </div>
-          </div>
+
+            {/* Redemption Logo */}
+            <motion.div
+              whileHover={{ scale: 1.05, y: -5 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="group cursor-pointer"
+            >
+              <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-2xl glass-card flex items-center justify-center p-5 glow-border">
+                <div className="text-center">
+                  <span
+                    className="text-2xl md:text-3xl font-bold tracking-wider"
+                    style={{ color: '#FD9419' }}
+                  >
+                    REDEMPTION
+                  </span>
+                  <div className="mt-2 text-xs tracking-[0.3em] uppercase" style={{ color: '#6B6B6B' }}>
+                    Whiskey
+                  </div>
+                </div>
+                <motion.div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: 'radial-gradient(circle at center, rgba(253, 148, 25, 0.1) 0%, transparent 70%)',
+                  }}
+                />
+              </div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                className="text-center text-sm mt-3 font-medium"
+                style={{ color: '#FD9419' }}
+              >
+                Rye Revival
+              </motion.p>
+            </motion.div>
+          </motion.div>
         </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 0.8 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="flex flex-col items-center gap-2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          className="flex flex-col items-center gap-3"
         >
-          <span className="text-xs text-[#8B8B8B] uppercase tracking-widest">Scroll</span>
-          <div className="w-6 h-10 rounded-full border border-[#D4D1C8] flex justify-center pt-2">
+          <span className="text-xs uppercase tracking-[0.2em]" style={{ color: '#8B8B8B' }}>
+            Scroll to Explore
+          </span>
+          <div
+            className="w-7 h-12 rounded-full flex justify-center pt-3"
+            style={{ border: '2px solid #C2B8A3' }}
+          >
             <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1.5 h-1.5 rounded-full bg-[#C4956A]"
+              animate={{ y: [0, 16, 0], opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-1.5 h-1.5 rounded-full"
+              style={{ background: 'linear-gradient(180deg, #C85A36, #BDA55D)' }}
             />
           </div>
         </motion.div>
       </motion.div>
+
+      {/* Bottom gradient fade */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        style={{ background: 'linear-gradient(180deg, transparent, #FAFAF8)' }}
+      />
     </section>
   );
 }

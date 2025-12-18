@@ -20,7 +20,9 @@ export default function Navigation() {
     { name: 'Home', href: '#hero' },
     { name: 'Bib & Tucker', href: '#bib-tucker' },
     { name: 'Redemption', href: '#redemption' },
-    { name: 'Featured Stories', href: '#articles' },
+    { name: 'Cocktails', href: '#cocktails' },
+    { name: 'Pairings', href: '#pairings' },
+    { name: 'Stories', href: '#articles' },
   ];
 
   return (

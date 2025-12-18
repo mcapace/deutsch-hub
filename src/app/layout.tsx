@@ -1,21 +1,8 @@
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  display: 'swap',
-});
-
 export const metadata: Metadata = {
-  title: 'Deutsch Spirits Collection | Whisky Advocate',
+  title: 'Deutsch Spirits Hub | Bib & Tucker + Redemption',
   description:
     'Explore the heritage and craftsmanship of Bib & Tucker and Redemption whiskeys. Presented by Whisky Advocate in partnership with Deutsch Family Wine & Spirits.',
   keywords: [
@@ -25,19 +12,22 @@ export const metadata: Metadata = {
     'Whisky Advocate',
     'Bourbon',
     'American Whiskey',
+    'Tennessee Whiskey',
+    'Rye Whiskey',
     'Premium Spirits',
+    'Cocktail Recipes',
   ],
   authors: [{ name: 'Whisky Advocate' }],
   openGraph: {
-    title: 'Deutsch Spirits Collection | Whisky Advocate',
+    title: 'Deutsch Spirits Hub | Bib & Tucker + Redemption',
     description:
-      'Discover the bold character of Bib & Tucker and Redemption whiskeys.',
+      'Discover the bold character of Bib & Tucker and Redemption whiskeys. Explore cocktail recipes, brand stories, and more.',
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Deutsch Spirits Collection | Whisky Advocate',
+    title: 'Deutsch Spirits Hub | Bib & Tucker + Redemption',
     description:
       'Discover the bold character of Bib & Tucker and Redemption whiskeys.',
   },
@@ -53,8 +43,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable} ${playfair.variable}`}>
-      <body className="antialiased font-sans bg-[#FAFAF8] text-[#1A1A1A]">
+    <html lang="en" className="scroll-smooth">
+      <body
+        className="antialiased"
+        style={{
+          fontFamily: "Georgia, 'Times New Roman', Times, serif",
+          backgroundColor: '#FAFAF8',
+          color: '#1A1410',
+        }}
+      >
         {children}
       </body>
     </html>
