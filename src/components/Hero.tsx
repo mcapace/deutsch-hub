@@ -12,7 +12,7 @@ export default function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
@@ -20,89 +20,70 @@ export default function Hero() {
       id="hero"
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, #FAF7F2 0%, #FFFDF9 100%)' }}
+      style={{ background: '#FAF7F2' }}
     >
-      {/* Simple background gradient */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: 'rgba(200, 90, 54, 0.1)' }} />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: 'rgba(253, 148, 25, 0.1)' }} />
-      </div>
-
       {/* Main content */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 container-custom text-center px-4"
+        className="relative z-10 max-w-6xl mx-auto px-6 text-center"
       >
         {/* Whisky Advocate Logo */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8 md:mb-12"
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-12"
         >
           <Image
             src="/images/logos/WA_BLUE-removebg-preview.png"
             alt="Whisky Advocate"
             width={250}
             height={75}
-            className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain mx-auto"
+            className="h-14 md:h-20 lg:h-24 w-auto object-contain mx-auto"
             priority
           />
-          <p className="text-xs md:text-sm font-medium tracking-wider mt-4 text-center" style={{ color: '#78716C' }}>
-            Deutsch Spirits Collection
-          </p>
         </motion.div>
 
-        {/* Main headline */}
+        {/* Main headline - Elegant and refined */}
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold leading-tight mb-6"
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold leading-[0.9] mb-8 tracking-tight"
           style={{ color: '#2D2926' }}
         >
           Discover the Art of
           <br />
-          <span
-            className="inline-block mt-2"
-            style={{
-              background: 'linear-gradient(135deg, #C85A36, #FD9419)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            American Whiskey
-          </span>
+          <span style={{ color: '#C85A36' }}>American Whiskey</span>
         </motion.h1>
 
         {/* Tagline */}
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="max-w-2xl mx-auto text-lg md:text-xl lg:text-2xl leading-relaxed mb-12"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="max-w-2xl mx-auto text-xl md:text-2xl leading-relaxed mb-16 font-light"
           style={{ color: '#78716C' }}
         >
           Explore the heritage, craftsmanship, and bold character of{' '}
-          <span className="font-semibold" style={{ color: '#C85A36' }}>Bib & Tucker</span>
+          <span className="font-medium" style={{ color: '#2D2926' }}>Bib & Tucker</span>
           {' '}and{' '}
-          <span className="font-semibold" style={{ color: '#FD9419' }}>Redemption</span>
+          <span className="font-medium" style={{ color: '#2D2926' }}>Redemption</span>
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons - Refined */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-24"
         >
           <motion.a
             href="#bib-tucker"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="px-8 py-4 rounded-full font-semibold text-white transition-all"
-            style={{ background: 'linear-gradient(135deg, #C85A36, #BDA55D)' }}
+            className="px-10 py-4 rounded-full font-medium text-white transition-all text-lg"
+            style={{ background: '#C85A36' }}
           >
             Explore the Collection
           </motion.a>
@@ -110,85 +91,34 @@ export default function Hero() {
             href="#cocktails"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="px-8 py-4 rounded-full font-semibold border-2 transition-all"
+            className="px-10 py-4 rounded-full font-medium border-2 transition-all text-lg"
             style={{ 
-              borderColor: '#C85A36',
-              color: '#C85A36',
+              borderColor: '#2D2926',
+              color: '#2D2926',
               background: 'transparent',
             }}
           >
             Discover Cocktails
           </motion.a>
         </motion.div>
-
-        {/* Brand showcase */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="mt-20 flex items-center justify-center gap-12 md:gap-20 flex-wrap"
-        >
-          {/* Bib & Tucker Logo */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl flex items-center justify-center p-6" style={{ background: 'rgba(255, 255, 255, 0.8)', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
-              <Image
-                src="/BAT_3D_Copper_Logo.png"
-                alt="Bib & Tucker Logo"
-                width={120}
-                height={120}
-                className="object-contain"
-              />
-            </div>
-            <p className="text-sm mt-4 font-medium" style={{ color: '#C85A36' }}>
-              Tennessee Bourbon
-            </p>
-          </div>
-
-          {/* Decorative divider */}
-          <div className="hidden md:block w-px h-24" style={{ background: 'linear-gradient(180deg, transparent, #BDA55D, transparent)' }} />
-
-          {/* Redemption Logo */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl flex items-center justify-center p-6" style={{ background: 'rgba(255, 255, 255, 0.8)', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
-              <div className="text-center">
-                <span className="text-2xl md:text-3xl font-bold tracking-wider" style={{ color: '#FD9419' }}>
-                  REDEMPTION
-                </span>
-                <div className="mt-2 text-xs tracking-[0.3em] uppercase" style={{ color: '#78716C' }}>
-                  Whiskey
-                </div>
-              </div>
-            </div>
-            <p className="text-sm mt-4 font-medium" style={{ color: '#FD9419' }}>
-              Rye Revival
-            </p>
-          </div>
-        </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Elegant scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
+        transition={{ delay: 1, duration: 0.6 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-2"
+          className="flex flex-col items-center gap-3"
         >
-          <span className="text-xs uppercase tracking-wider" style={{ color: '#78716C' }}>
-            Scroll to Explore
+          <span className="text-xs uppercase tracking-[0.2em] font-medium" style={{ color: '#78716C' }}>
+            Scroll to explore
           </span>
-          <div className="w-6 h-10 rounded-full flex justify-center pt-2" style={{ border: '2px solid #C2B8A3' }}>
-            <motion.div
-              animate={{ y: [0, 12, 0], opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-1.5 h-1.5 rounded-full"
-              style={{ background: 'linear-gradient(180deg, #C85A36, #BDA55D)' }}
-            />
-          </div>
+          <div className="w-px h-12" style={{ background: 'linear-gradient(180deg, #2D2926, transparent)' }} />
         </motion.div>
       </motion.div>
     </section>

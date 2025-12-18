@@ -226,43 +226,37 @@ export default function BrandSection({
     <section
       id={id}
       ref={ref}
-      className="relative py-24 md:py-32 overflow-hidden"
-      style={{ background: colors.bgGradient }}
+      className="relative py-32 md:py-40 overflow-hidden"
+      style={{ background: '#FAF7F2' }}
     >
-      {/* Simple background decoration */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: colors.primary }} />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: colors.secondary }} />
+      {/* Minimal background decoration */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl" style={{ background: colors.primary }} />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl" style={{ background: colors.secondary }} />
       </div>
 
       <div className="container-custom relative z-10">
-        {/* Section Header */}
+        {/* Section Header - Elegant and refined */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-20"
         >
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="decorative-line mx-auto mb-6"
-            style={{ background: `linear-gradient(90deg, ${colors.primary}, ${colors.secondary})` }}
-          />
           <h2
-            className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-5 leading-tight ${colors.textGradient}`}
+            className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-tight tracking-tight"
+            style={{ color: '#2D2926' }}
           >
             {brandName}
           </h2>
-          <p className="text-lg md:text-xl italic leading-relaxed px-4" style={{ color: 'var(--color-text-muted)' }}>
-            "{tagline}"
+          <p className="text-xl md:text-2xl font-light italic leading-relaxed max-w-2xl mx-auto" style={{ color: '#78716C' }}>
+            {tagline}
           </p>
         </motion.div>
 
-        {/* Main content grid */}
+        {/* Main content grid - Generous spacing */}
         <div
-          className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20 ${
+          className={`grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-24 ${
             reversed ? 'lg:flex-row-reverse' : ''
           }`}
         >
@@ -273,9 +267,9 @@ export default function BrandSection({
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className={reversed ? 'lg:order-2' : ''}
           >
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-white" style={{ boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)' }}>
+            <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-white" style={{ boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08)' }}>
               {bottleImage ? (
-                <div className="relative w-full h-full flex items-center justify-center p-12">
+                <div className="relative w-full h-full flex items-center justify-center p-16">
                   <Image
                     src={bottleImage}
                     alt={`${brandName} bottle`}
@@ -288,11 +282,11 @@ export default function BrandSection({
                 </div>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-8">
+                <div className="text-center p-8">
                     <div className="w-32 h-48 mx-auto mb-6 rounded-lg border-2 border-dashed flex items-center justify-center" style={{ borderColor: `${colors.primary}40` }}>
                       <svg className="w-16 h-16 opacity-30" style={{ color: colors.primary }} fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C9.79 2 8 3.79 8 6v2H5v14h14V8h-3V6c0-2.21-1.79-4-4-4zm0 2c1.1 0 2 .9 2 2v2h-4V6c0-1.1.9-2 2-2z" />
-                      </svg>
+                      <path d="M12 2C9.79 2 8 3.79 8 6v2H5v14h14V8h-3V6c0-2.21-1.79-4-4-4zm0 2c1.1 0 2 .9 2 2v2h-4V6c0-1.1.9-2 2-2z" />
+                    </svg>
                     </div>
                     <p style={{ color: '#8B8B8B' }} className="text-sm">Product Image</p>
                   </div>
@@ -377,8 +371,8 @@ export default function BrandSection({
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-xl md:text-2xl font-bold leading-tight mb-8 text-center"
-            style={{ color: 'var(--color-text-primary)' }}
+            className="text-3xl md:text-4xl font-serif font-bold leading-tight mb-12 text-center"
+            style={{ color: '#2D2926' }}
           >
             The Collection
           </motion.h3>
