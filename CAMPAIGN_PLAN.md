@@ -1,339 +1,613 @@
-# Deutsch Spirits Hub - Campaign Enhancement Plan
+# Deutsch Spirits Hub - Updated Campaign Plan
 ## Campaign Duration: December 2024 - February 2026
+## Last Updated: December 2024
 
 ---
 
 ## Executive Summary
 
-This plan outlines enhancements for the Deutsch Spirits Hub featuring **Bib & Tucker** bourbon and **Redemption** whiskey. The hub will serve as a dynamic marketing platform that can be updated throughout the campaign with seasonal content, cocktail recipes, and brand storytelling.
+This plan outlines the Deutsch Spirits Hub featuring **Bib & Tucker** bourbon and **Redemption** whiskey. The hub serves as a dynamic marketing platform for Whisky Advocate in partnership with Deutsch Family Wine & Spirits, updated throughout the campaign with seasonal content, cocktail recipes, and brand storytelling.
+
+**Key Insight:** Both brands share a heritage story rooted in American whiskey history—Bib & Tucker channels the Gilded Age spirit of the 1880s, while Redemption champions the pre-Prohibition rye revival. This creates a compelling narrative of American whiskey's past and present.
 
 ---
 
-## Brand Deep Dive (Research Findings)
+## Brand Deep Dive (Verified from Official Websites)
 
 ### Bib & Tucker
-**Heritage:** Named after the colloquial expression for "finest attire" - inspired by the adventurous spirit of the early 1900s when bold pioneers pushed American craftsmanship boundaries.
 
-**Product Lineup:**
-| Expression | Proof | Key Notes |
-|------------|-------|-----------|
-| 6-Year Small Batch | 92 | Oak, caramel, vanilla, dried dark fruit, toasted corn |
-| 10-Year Barrel Select | 92 | Deep oak, vanilla, powerful depth of flavor |
-| Double Char | 88 | Smoke, sugar maple, dulce de leche, toasted cinnamon |
+**Brand Positioning:** "Where Bold and Refined Come Together"
 
-**Unique Selling Points:**
-- Tennessee whiskey with Lincoln County process (sugar maple charcoal filtering)
-- Double Char uses a unique fire-forged double aging method
-- Second barrel smoked with sugar maple before filling
-- Gilded Age inspiration - "great accomplishments celebrated with small batch bourbon"
+**Heritage Story:** Named after the colloquial expression for "finest attire," Bib & Tucker draws inspiration from the turn-of-the-century American era (1880s). The brand positions itself around a time when "all bourbon was small batch" and great accomplishments were celebrated with quality spirits. Crafts bourbons "worthy of your finest moments" for life's grand adventures.
 
-### Redemption
-**Heritage:** Revival of pre-Prohibition whiskey-making traditions. "Bartenders' whiskeys, born from the golden age of classic cocktails."
+**Unique Production:** Tennessee whiskey using Lincoln County process (sugar maple charcoal filtering)
 
-**Product Lineup:**
-| Expression | Proof | Mash Bill | Key Notes |
-|------------|-------|-----------|-----------|
-| Bourbon | 84 | 75% corn, 21% rye, 4% barley | Classic sweet backbone with rye spice |
-| High-Rye Bourbon | 92 | 60% corn, 36% rye, 4% barley | Honey, toffee, roasted nuts |
-| Wheated Bourbon | 96 | 51% corn, 45% wheat, 4% barley | Coffee bean, hazelnut, cardamom, mint |
-| Rye | 92 | 95% rye, 5% barley | Bold, spicy, pre-Prohibition style |
+**Product Lineup (Verified):**
 
-**Unique Selling Points:**
-- "Rye-forward" whiskey - pushes boundaries of rye content
-- Sourced from MGP (Indiana) - known for quality
-- Multiple Double Gold medals at San Francisco World Spirits Competition
-- Perfect for classic cocktails (Manhattan, Old Fashioned, Whiskey Sour)
+| Expression | Proof | Age | Key Details |
+|------------|-------|-----|-------------|
+| **The Classic Six** | 92 | 6 years | Small batch, chestnut finish, "complex yet refined" |
+| **Double Char** | 88 | 6+ years + 5mo | Fire-forged double aging in sugar maple smoked barrels |
+| **Gold Roast Bourbon** | 92 | 6 years | Infused with premium Arabica coffee beans |
+| **The Tennessee Ten** | 92 | 10 years | Oak, vanilla, powerful depth |
+| **12-Year Single Barrel Select** | TBD | 12 years | Premium single barrel, each barrel unique |
+
+**Awards & Recognition:**
+- 93 points - Whisky Advocate Top 20 Whiskies of 2021
+- 96 points - The Tasting Panel (Classic Six)
+- Inside Hook: "smoky sweet BBQ in a bottle" (Double Char)
+- Men's Journal: "the smoothest" bourbon tested
+
+**Detailed Tasting Notes (from official site):**
+
+**Double Char:**
+- *Aroma:* Touch of smoke, toasted oak, dulce de leche, cinnamon, clove
+- *Taste:* Vanilla and sugar maple surrounded with white smoke, sweet corn, toasted cinnamon
+- *Finish:* Medium to long with oak, white smoke, and vanilla
+
+**Gold Roast:**
+- *Aroma:* Freshly brewed coffee, rich molasses, sweet corn, spice
+- *Taste:* Smooth vanilla, young oak, milk chocolate
+- *Finish:* Medium-long with lingering oak, vanilla, dark roast coffee, brown spice
 
 ---
 
-## Proposed Hub Enhancements
+### Redemption
 
-### 1. Seasonal Cocktail Section (NEW)
+**Brand Positioning:** "This is the Rye Revival"
 
-A dynamic section that rotates cocktails based on the season/holiday.
+**Heritage Story:** Redemption focuses on reviving pre-Prohibition American rye whiskey culture. Before Prohibition, rye was "America's #1 spirit" - nearly eliminated for a century. Their mission: reintroduce consumers to "the spirit of their ancestors" through rye-forward recipes inspired by historical formulations. "Bartenders' whiskeys, born from the golden age of classic cocktails."
 
-#### Holiday Season (December 2024 - January 2025)
+**Sourcing:** MGP (Indiana) - renowned for quality rye production
 
-**Bib & Tucker Cocktails:**
-1. **Campfire Old Fashioned** (Official B&T recipe)
+**Product Lineup (Verified with Mash Bills):**
+
+#### Classics Series
+
+| Expression | Proof | Mash Bill | Key Notes |
+|------------|-------|-----------|-----------|
+| **Bourbon** | 88 | 75% corn, 21% rye, 4% malt | Caramel, baking spice, anise, easy drinking |
+| **Rye** | 92 | 95% rye, 5% malt | Big spicy, toasted oak, allspice, anise, mint finish |
+| **High Rye Bourbon** | 92 | 60% corn, 36% rye, 4% malt | Vanilla, red berries, fennel, black pepper |
+
+#### Specialty Series
+
+| Expression | Proof | Mash Bill | Key Notes |
+|------------|-------|-----------|-----------|
+| **Wheated Bourbon** | 96 | 51% corn, 45% wheat, 4% malt | Candied ginger, lavender, pear, coffee, hazelnut |
+| **Rum Cask Finish** | 94 | 95% rye, 5% malt | Apricot, golden raisins, cinnamon, tropical notes |
+| **Cognac Cask Finish** | 94 | TBD | Rich, complex finish |
+| **Sur Lee Rye** | TBD | TBD | Unique finishing process |
+
+#### Aged Barrel Proofs
+
+| Expression | Proof | Age | Key Notes |
+|------------|-------|-----|-----------|
+| **10 Year Barrel Proof Rye** | 116.2 | 10 years | Oak, leather, jasmine, honeysuckle, vanilla, caramel |
+| **9 Year Barrel Proof Bourbon** | TBD | 9 years | Premium aged expression |
+| **10 Year Barrel Proof High Rye** | TBD | 10 years | Concentrated high-rye flavor |
+
+#### Ancients Collection (Ultra-Premium)
+- 18 Year Old Bourbon
+- 18 Year Old Rye
+- 36 Year Old Bourbon
+
+**Awards & Recognition:**
+- Best American Rye Whiskey - 2021 World Whiskies Competition (Rum Cask)
+- 2023 San Diego Wine & Spirits: Best Rye Whiskey, 95 Points (10 Year BP Rye)
+- 2021 San Francisco World Spirits: Double Gold (Rye)
+- World Whiskies Awards 2023 Category Winner
+- Multiple 94-95 point ratings across expressions
+
+**Detailed Tasting Notes (from official site):**
+
+**Bourbon (88 proof):**
+- *Nose:* Caramel with touch of spice, hints of over-ripe bananas
+- *Palate:* Toffee, kola nut, baking spice, anise, black pepper
+- *Finish:* Smooth with sweet and spicy balance, cracked pepper
+
+**Rye (92 proof):**
+- *Nose:* Big and spicy, toasted oak, vegetal notes, allspice, anise
+- *Palate:* Rye spice with light floral and citrus, dark spices, black pepper
+- *Finish:* Slight mint, versatile for cocktails
+
+**High Rye Bourbon (92 proof):**
+- *Nose:* Light vanilla, red berry fruitiness, hint of oak
+- *Palate:* Spicy, woody, minty, fennel-like licorice, black pepper
+- *Finish:* Long and smooth with nice rye spice
+
+**Wheated Bourbon (96 proof):**
+- *Nose:* Candied ginger, sage, lavender, fresh pear, vanilla, cedar
+- *Palate:* Silky and harmonious yet robust—roasted coffee, smoked meats, hazelnut, cardamom
+- *Finish:* Fresh baked bread with toasted crust, malty sweetness
+
+---
+
+## Verified Cocktail Recipes (from Redemption Barkeep)
+
+### Classic Cocktails
+
+**Manhattan** (Rye)
+- 2 parts Redemption Rye
+- 1 part Sweet Vermouth
+- 2 dashes Angostura Bitters
+- *Instructions:* Stir with ice, strain into coupe, garnish with cherries
+- *Why Redemption:* "The rye-forward profile pairs beautifully with herbaceous vermouth"
+
+**Sazerac** (Rye)
+- 2 oz Redemption Rye
+- ½ oz simple syrup
+- 3 dashes Peychaud's bitters
+- Absinthe, to rinse
+- *Instructions:* Rinse chilled rocks glass with absinthe, stir rye, syrup, bitters with ice, strain neat into glass, express lemon peel
+- *Historical Note:* Absinthe was banned in the U.S. from 1912 to 2007
+
+**Gold Rush** (Bourbon)
+- 2 parts Redemption Bourbon
+- 1 part honey syrup (equal parts honey + hot water)
+- ¾ parts fresh lemon juice
+- *Instructions:* Shake with ice, strain over large ice cube, garnish lemon peel or bee pollen
+- *Origin:* Created at Milk & Honey, NYC by TJ Siegal
+
+### Suggested Cocktails by Expression
+
+**Redemption Bourbon:** Gold Rush, Bourbon Bramble, Whiskey Sour
+**Redemption Rye:** The Waldorf, Vices, Ryem Thyme
+**High Rye Bourbon:** Fig & Fury, Watermelon Sugar Rye, High Rye Cobbler
+
+---
+
+## Seasonal Content Strategy
+
+### Phase 1: Holiday Season (December 2024 - Early January 2025)
+
+**Theme:** "Spirits of the Season" / "Toast to Tradition"
+
+#### Featured Cocktails
+
+**Bib & Tucker Holiday Cocktails:**
+
+1. **Campfire Old Fashioned** (Double Char Signature)
    - 2 oz Bib & Tucker Double Char
    - 0.25 oz Maple Syrup
    - 2 dashes Coffee Pecan Bitters
    - 2 dashes Black Walnut Bitters
    - Orange peel garnish
+   - *Perfect for:* Fireside sipping, post-dinner
 
-2. **Manhattan Skyscraper**
-   - 1.5 oz Bib & Tucker 6-Year
-   - Sweet vermouth
-   - Angostura bitters
-   - Garnish: orange peel + chocolate square
+2. **Gold Roast Elevated Old Fashioned** (Gold Roast)
+   - 2 oz Bib & Tucker Gold Roast
+   - 0.25 oz Demerara syrup
+   - 2 dashes Angostura
+   - Express orange peel
+   - *Perfect for:* Coffee lovers, morning (brunch) cocktails
 
-3. **Winter Fireside** (Holiday Special)
-   - 2 oz Bib & Tucker 10-Year
+3. **Tennessee Winter** (Classic Six)
+   - 2 oz Bib & Tucker Classic Six
    - 0.5 oz port wine
-   - Allspice dram
-   - Orange bitters
+   - 0.25 oz allspice dram
+   - 2 dashes orange bitters
+   - *Perfect for:* Holiday dinners, gift-giving celebrations
 
-**Redemption Cocktails:**
-1. **Christmas Old Fashioned**
+**Redemption Holiday Cocktails:**
+
+1. **Holiday Manhattan** (Rye)
    - 2 oz Redemption Rye
-   - Cranberry simple syrup
-   - Angostura bitters
-   - Cranberry garnish
+   - 1 oz sweet vermouth
+   - 2 dashes Angostura
+   - Luxardo cherry garnish
+   - *Perfect for:* Elegant holiday parties
 
-2. **Gold Rush**
-   - 2 oz Redemption High-Rye Bourbon
-   - 0.75 oz honey syrup
-   - 0.75 oz fresh lemon juice
-
-3. **Ginger-Cranberry Whiskey Sour**
+2. **Spiced Gold Rush** (Bourbon)
    - 2 oz Redemption Bourbon
-   - Ginger syrup
-   - Cranberry juice
-   - Lemon juice
+   - 1 oz honey-ginger syrup
+   - ¾ oz fresh lemon
+   - Candied ginger garnish
+   - *Perfect for:* Holiday entertaining, approachable crowd-pleaser
 
-#### New Year's Eve Special (Late December - January)
+3. **Christmas Rye** (High Rye Bourbon)
+   - 2 oz Redemption High Rye Bourbon
+   - 0.5 oz cranberry simple syrup
+   - 2 dashes Angostura
+   - Fresh cranberry garnish
+   - *Perfect for:* Christmas dinner, red-themed parties
 
-**Celebratory Cocktails:**
-1. **Honey Bourbon Bubbly** (Redemption)
-   - Bourbon, honey, Prosecco
-
-2. **Midnight Manhattan** (Bib & Tucker)
-   - B&T 6-Year, sweet vermouth, champagne float
-
-3. **Resolution Rye** (Redemption)
-   - Redemption Rye, elderflower, sparkling wine
-
-#### Winter Warmers (January - February)
-
-1. **Hot Toddy** - Both brands
-2. **Hot Buttered Bourbon** - Bib & Tucker
-3. **Maple Cider** - Redemption
-
-#### Spring Refresh (March - May)
-
-Fresh, lighter cocktails for warming weather
-
-#### Summer Sipping (June - August)
-
-Refreshing bourbon cocktails, highballs, whiskey lemonades
-
-#### Fall Harvest (September - November)
-
-Apple, pear, cinnamon-forward cocktails
+#### Holiday Content Ideas:
+- "Gift Guide: Choosing the Right Whiskey" (occasions for each expression)
+- "Holiday Entertaining: Batch Cocktail Recipes"
+- "The Art of the Toast: Whiskey Etiquette for Celebrations"
+- "5 Cocktails to Impress Your Holiday Guests"
 
 ---
 
-### 2. Enhanced Brand Sections
+### Phase 2: New Year's Eve & January (Late December - January 2025)
 
-#### Update Product Information
+**Theme:** "Raise the Bar" / "New Year, New Discoveries"
 
-**Bib & Tucker - More Accurate Data:**
-```javascript
-products: [
-  {
-    name: 'Bib & Tucker 6 Year Small Batch',
-    description: 'Aged in new American white oak with light char. Filtered through sugar maple charcoal in the Tennessee tradition.',
-    proof: '92 Proof',
-    notes: ['Oak', 'Caramel', 'Vanilla', 'Dried Dark Fruit', 'Toasted Corn'],
-  },
-  {
-    name: 'Bib & Tucker 10 Year Barrel Select',
-    description: 'A decade of patient aging creates an exceptionally refined bourbon with deep character. Subtle oak and vanilla meet powerful depth of flavor.',
-    proof: '92 Proof',
-    notes: ['Refined Oak', 'Vanilla', 'Leather', 'Dark Chocolate', 'Spice'],
-  },
-  {
-    name: 'Bib & Tucker Double Char',
-    description: 'First aged 6 years in Tennessee, then finished minimum 5 months in heavily charred barrels smoked with sugar maple. Fire-forged for rich, deep flavor.',
-    proof: '88 Proof',
-    notes: ['White Smoke', 'Sugar Maple', 'Dulce de Leche', 'Toasted Cinnamon', 'Vanilla'],
-  },
-]
-```
+#### Celebratory Cocktails
 
-**Redemption - More Accurate Data:**
-```javascript
-products: [
-  {
-    name: 'Redemption Bourbon',
-    description: 'A high-rye bourbon (75% corn, 21% rye, 4% barley) that delivers the classic sweet backbone of bourbon with assertive rye spice.',
-    proof: '84 Proof',
-    notes: ['Vanilla', 'Caramel', 'Rye Spice', 'Citrus'],
-  },
-  {
-    name: 'Redemption High-Rye Bourbon',
-    description: 'With 36% rye in the mash bill - approaching the upper limit for bourbon - this expression delivers bold spice with silky texture.',
-    proof: '92 Proof',
-    notes: ['Honey', 'Toffee', 'Roasted Nuts', 'Pepper', 'Cinnamon'],
-  },
-  {
-    name: 'Redemption Wheated Bourbon',
-    description: 'A softer expression featuring 45% winter wheat. Four years aged for complex, nuanced character. Double Gold winner.',
-    proof: '96 Proof',
-    notes: ['Roasted Coffee', 'Hazelnut', 'Cardamom', 'Vanilla', 'Burnt Toffee'],
-  },
-]
-```
+**New Year's Eve Specials:**
 
----
+1. **Midnight Manhattan** (Bib & Tucker Classic Six)
+   - Classic Manhattan topped with champagne float
+   - Elegant, celebratory
 
-### 3. "Perfect Pairings" Section (NEW)
+2. **Resolution Fizz** (Redemption Rye)
+   - 1.5 oz Redemption Rye
+   - 0.5 oz elderflower liqueur
+   - 0.5 oz lemon
+   - Top with sparkling wine
+   - *For:* Countdown toasts
 
-Food pairing suggestions for each brand/expression:
+3. **Gold Rush Royale** (Redemption Bourbon)
+   - Gold Rush base
+   - Top with prosecco
+   - Gold luster dust rim
 
-**Bib & Tucker:**
-- 6-Year: Grilled steak, dark chocolate, aged cheeses
-- 10-Year: Charcuterie, pecan pie, crème brûlée
-- Double Char: BBQ ribs, smoked meats, s'mores
+#### Winter Warmers (January-February):
 
-**Redemption:**
-- Bourbon: Bacon-wrapped dates, brie, holiday hors d'oeuvres
-- High-Rye: Spiced nuts, gingerbread, sharp cheddar
-- Wheated: Coffee desserts, hazelnut dishes, holiday ham
+1. **Classic Hot Toddy** (Both brands)
+   - 2 oz whiskey of choice
+   - 0.75 oz honey
+   - 0.5 oz lemon juice
+   - 4 oz hot water
+   - Cinnamon stick, lemon wheel
+
+2. **Hot Buttered Bourbon** (Bib & Tucker)
+   - 2 oz Bib & Tucker Classic Six
+   - Hot water
+   - Butter, brown sugar, spice mix
+   - Nutmeg garnish
+
+3. **Maple Apple Cider** (Redemption)
+   - 2 oz Redemption Bourbon
+   - 4 oz warm apple cider
+   - 0.5 oz maple syrup
+   - Cinnamon stick
+
+#### January Content Ideas:
+- "The Best Whiskeys for Cold Nights"
+- "Hot Cocktails That Actually Taste Good"
+- "Whiskey Resolutions: Expanding Your Palate"
+- "Cozy Night In: Perfect Pairings for Winter"
 
 ---
 
-### 4. "Occasions" Section (NEW)
+### Phase 3: Valentine's Day (February 2025)
 
-Content organized by occasion rather than just brand:
+**Theme:** "An Evening to Savor"
 
-- **Holiday Entertaining** - Party punches, batch cocktails
-- **Cozy Nights In** - Hot toddies, warming drinks
-- **New Year's Eve** - Champagne cocktails, celebratory serves
-- **Game Day** - Easy highballs, crowd-pleasers
-- **Valentine's Day** - Romantic cocktails for two
-- **Gift Guide** - Which expression for which recipient
+#### Romantic Cocktails:
 
----
+1. **The Velvet Manhattan** (Redemption Rye)
+   - 2 oz Redemption Rye
+   - 1 oz ruby port (instead of vermouth)
+   - 2 dashes chocolate bitters
+   - Dark chocolate garnish
 
-### 5. Interactive Elements
+2. **Tennessee Kiss** (Bib & Tucker Double Char)
+   - 1.5 oz Bib & Tucker Double Char
+   - 0.5 oz amaretto
+   - 0.25 oz cherry liqueur
+   - Angostura bitters
+   - Brandied cherry garnish
 
-#### Cocktail Finder
-Simple quiz: "Find Your Perfect Holiday Cocktail"
-- Sweet vs Spicy preference
-- Warm vs Cold drink
-- Simple vs Complex
-- → Recommends specific cocktail + brand
+3. **Honey Love** (Redemption Wheated)
+   - 2 oz Redemption Wheated Bourbon
+   - 0.75 oz honey syrup
+   - 0.5 oz lemon
+   - Few drops rose water
+   - Edible flower garnish
 
-#### Taste Profile Comparison
-Visual comparison of the two brands' flavor profiles
-
----
-
-### 6. Articles/Stories Section Enhancement
-
-Current section has placeholder content. Proposed articles:
-
-**Holiday Season:**
-1. "The Art of the Holiday Toast: Elevating Your Celebrations"
-2. "Bourbon & Rye: A Tale of Two American Spirits"
-3. "5 Cocktails to Impress Your Holiday Guests"
-
-**New Year:**
-4. "Ring in 2025 with These Celebratory Whiskey Cocktails"
-5. "Whiskey Resolutions: Exploring New Expressions"
-
-**Winter:**
-6. "Warming Up: The Best Hot Whiskey Drinks"
-7. "The Perfect Nightcap: Whiskey for Cold Nights"
-
-**Evergreen:**
-8. "The Story Behind Bib & Tucker: Gilded Age Inspiration"
-9. "Redemption's Rise: Reviving Pre-Prohibition Traditions"
-10. "The High-Rye Revolution: Why Spice is Nice"
+#### Content Ideas:
+- "Date Night Cocktails for Two"
+- "Perfect Pairings: Whiskey & Chocolate"
+- "The Most Romantic Whiskey Cocktails"
+- "His & Hers: Finding Your Perfect Expressions"
 
 ---
 
-## Technical Implementation Roadmap
+### Phase 4: Spring (March - May 2025)
 
-### Phase 1: Foundation (Week 1)
-- [ ] Update brand data with accurate product info
-- [ ] Add cocktail data structure to support recipes
-- [ ] Create CocktailCard component
-- [ ] Create CocktailSection component
+**Theme:** "Fresh Start" / "Derby Season"
 
-### Phase 2: Seasonal Content (Week 2)
-- [ ] Implement seasonal cocktail section
-- [ ] Add holiday-themed styling/decorative elements
-- [ ] Create cocktail detail modal/page
-- [ ] Add recipe printing capability
+#### Spring Cocktails:
 
-### Phase 3: Enhanced Content (Week 3)
-- [ ] Build "Perfect Pairings" section
-- [ ] Create "Occasions" navigation
-- [ ] Enhance articles section with real content
-- [ ] Add sharing functionality
+1. **Bourbon Bramble** (Redemption Bourbon)
+   - 2 oz Redemption Bourbon
+   - 0.75 oz lemon juice
+   - 0.5 oz simple syrup
+   - 0.5 oz blackberry liqueur
+   - Fresh blackberries
 
-### Phase 4: Interactivity (Week 4+)
-- [ ] Cocktail finder quiz
-- [ ] Taste profile visualizations
-- [ ] Newsletter signup integration
-- [ ] Age gate improvement
+2. **Tennessee Mule** (Bib & Tucker Classic Six)
+   - 2 oz Bib & Tucker Classic Six
+   - 0.5 oz lime juice
+   - Ginger beer
+   - Fresh mint, lime wheel
 
----
+3. **Classic Mint Julep** (Both - Derby Special)
+   - 2 oz bourbon
+   - 0.5 oz simple syrup
+   - Fresh mint
+   - Crushed ice
 
-## Content Calendar
-
-| Period | Theme | Focus |
-|--------|-------|-------|
-| Dec 2024 | Holiday Cheer | Holiday cocktails, gift guide, entertaining tips |
-| Jan 2025 | New Year / Winter | NYE cocktails, warming drinks, resolution content |
-| Feb 2025 | Valentine's | Romantic cocktails, date night pairings |
-| Mar 2025 | Spring Awakening | Lighter cocktails, refreshing serves |
-| Apr-May 2025 | Derby Season | Mint juleps, bourbon heritage |
-| Jun-Aug 2025 | Summer Sipping | Highballs, refreshers, outdoor entertaining |
-| Sep-Nov 2025 | Fall Harvest | Apple/cinnamon cocktails, Thanksgiving |
-| Dec 2025 - Feb 2026 | Holiday Redux | Updated holiday content, campaign wrap |
+#### Content Ideas:
+- "Derby Day: The Perfect Mint Julep"
+- "Spring Refresh: Lighter Whiskey Cocktails"
+- "Outdoor Entertaining with Bourbon"
 
 ---
 
-## Design Considerations
+### Phase 5: Summer (June - August 2025)
 
-### Holiday Theme Additions
-- Subtle festive accents (not overwhelming)
-- Warm, cozy imagery
-- Fireplace/gathering imagery
-- Gold and copper metallic accents (already in palette)
+**Theme:** "Summer Sipping"
 
-### Animation Ideas
-- Snowfall effect (subtle, optional)
-- Steam animation for hot cocktails
-- Pour animation for cocktail cards
-- Countdown timer for NYE
+#### Summer Cocktails:
+
+1. **Whiskey Highball** (Redemption Rye)
+   - 2 oz Redemption Rye
+   - 4-5 oz sparkling water
+   - Lemon twist
+   - *Simple, refreshing, showcases the whiskey*
+
+2. **Bourbon Lemonade** (Bib & Tucker Classic Six)
+   - 2 oz Bib & Tucker Classic Six
+   - 3 oz fresh lemonade
+   - Splash of iced tea (Arnold Palmer style)
+   - Lemon wheel, mint
+
+3. **Watermelon Whiskey Smash** (Redemption High Rye)
+   - 2 oz Redemption High Rye Bourbon
+   - Fresh watermelon chunks (muddled)
+   - 0.5 oz lime juice
+   - 0.5 oz simple syrup
+   - Mint
+
+4. **Fig & Fury** (Redemption - Official Suggestion)
+   - Recommended with High Rye Bourbon
+   - Summer seasonal special
+
+#### Content Ideas:
+- "Whiskey on the Rocks: A Summer Guide"
+- "Pool Party Batch Cocktails"
+- "Grilling & Bourbon: Perfect Pairings"
+- "The Summer Highball Revival"
+
+---
+
+### Phase 6: Fall Harvest (September - November 2025)
+
+**Theme:** "Harvest Season"
+
+#### Fall Cocktails:
+
+1. **Apple Cider Old Fashioned** (Both brands)
+   - 2 oz whiskey
+   - 1 oz apple cider
+   - 0.25 oz maple syrup
+   - 2 dashes Angostura
+   - Apple slice garnish
+
+2. **Pumpkin Spice Manhattan** (Redemption Rye)
+   - 2 oz Redemption Rye
+   - 1 oz pumpkin spice vermouth
+   - 2 dashes orange bitters
+   - Cinnamon stick
+
+3. **Thanksgiving Old Fashioned** (Bib & Tucker Double Char)
+   - 2 oz Bib & Tucker Double Char
+   - 0.25 oz cranberry syrup
+   - 2 dashes walnut bitters
+   - Orange peel
+
+#### Content Ideas:
+- "Thanksgiving Whiskey Guide"
+- "Fall Food Pairings with Bourbon"
+- "Cozy Cocktails for Sweater Weather"
+- "The Perfect After-Dinner Pour"
+
+---
+
+### Phase 7: Holiday Redux (December 2025 - February 2026)
+
+**Theme:** "Tradition Continues"
+
+- Refresh holiday cocktails with new variations
+- Year-in-review content
+- "Best Of" roundups
+- Campaign wrap-up celebration content
+
+---
+
+## Perfect Pairings Section
+
+### Bib & Tucker Pairings
+
+**Classic Six (92 proof):**
+- Grilled ribeye steak
+- Dark chocolate truffles
+- Aged cheddar
+- Pecan pie
+- Vanilla crème brûlée
+
+**Double Char (88 proof):**
+- BBQ brisket
+- Smoked salmon
+- Maple-glazed bacon
+- S'mores
+- Charred corn dishes
+
+**Gold Roast (92 proof):**
+- Coffee-rubbed meats
+- Tiramisu
+- Chocolate-covered espresso beans
+- Brunch dishes
+- Affogato desserts
+
+**Tennessee Ten (92 proof):**
+- Charcuterie board
+- Aged gouda
+- Crème brûlée
+- Dried fruit and nut plates
+- Fine cigars (for those who partake)
+
+### Redemption Pairings
+
+**Bourbon (88 proof):**
+- Bacon-wrapped dates
+- Brie and crackers
+- Holiday ham
+- Caramel desserts
+- Mild BBQ
+
+**Rye (92 proof):**
+- Pastrami on rye
+- Sharp aged cheeses
+- Spiced nuts
+- Rye bread with smoked fish
+- Charcuterie
+
+**High Rye Bourbon (92 proof):**
+- Gingerbread
+- Spicy dishes
+- Sharp cheddar
+- Spiced pecans
+- Dark chocolate with chili
+
+**Wheated Bourbon (96 proof):**
+- Coffee desserts
+- Hazelnut anything
+- French toast
+- Honeyed dishes
+- Soft cheeses
+
+---
+
+## Interactive Features
+
+### Cocktail Finder Quiz
+
+**"Find Your Perfect Pour"**
+
+Questions:
+1. What's the occasion? (Quiet night in / Party / Special celebration / Gift)
+2. Flavor preference? (Sweet & smooth / Bold & spicy / Smoky & complex)
+3. Temperature? (Neat/rocks / Shaken cold / Warm & cozy)
+4. Complexity? (Simple 2-3 ingredients / Classic recipe / Impressive showstopper)
+
+→ Returns personalized recommendation with:
+- Suggested whiskey expression
+- Cocktail recipe
+- Food pairing
+
+### Taste Profile Comparison
+
+Visual side-by-side comparing:
+- Sweetness
+- Spice
+- Smokiness
+- Oak
+- Complexity
+- Best for (neat/cocktails/both)
+
+---
+
+## Technical Implementation Priorities
+
+### Immediate (This Week)
+
+1. **Update Product Data** - Replace current product info with verified details
+   - Correct proof ratings (Double Char is 88, not 92)
+   - Add accurate tasting notes from official sources
+   - Add mash bill information for Redemption
+
+2. **Add Cocktail Section**
+   - Create CocktailCard component
+   - Create CocktailSection component
+   - Add 6-8 holiday cocktails (3-4 per brand)
+   - Include "View Recipe" modal with full instructions
+
+3. **Enhance Brand Sections**
+   - Add Gold Roast to Bib & Tucker lineup
+   - Add Rye to Redemption lineup
+   - Update descriptions with official language
+
+### Near Term (Before Holidays)
+
+4. **Add Seasonal Content Toggle**
+   - Holiday theme elements
+   - Seasonal cocktail rotation system
+
+5. **Build Pairings Section**
+   - Simple card-based layout
+   - Whiskey → Food suggestions
+
+6. **Enhance Articles Section**
+   - Replace placeholder content
+   - Add 2-3 real articles
+
+### Future Phases
+
+7. **Interactive Quiz** (January)
+8. **Taste Profile Visualizations** (January)
+9. **Newsletter Integration** (February)
+10. **Age Gate Enhancement** (As needed)
+
+---
+
+## Content Calendar Summary
+
+| Period | Theme | Key Content |
+|--------|-------|-------------|
+| **Dec 2024** | Holiday Cheer | Holiday cocktails, gift guide, entertaining |
+| **Jan 2025** | New Year / Winter | NYE cocktails, hot toddies, warming drinks |
+| **Feb 2025** | Valentine's Day | Romantic cocktails, chocolate pairings |
+| **Mar-May 2025** | Spring / Derby | Fresh cocktails, Mint Julep, outdoor entertaining |
+| **Jun-Aug 2025** | Summer Sipping | Highballs, lemonades, refreshers |
+| **Sep-Nov 2025** | Fall Harvest | Apple cider cocktails, Thanksgiving |
+| **Dec '25-Feb '26** | Holiday Redux | Refresh content, campaign wrap |
 
 ---
 
 ## Success Metrics
 
-- Time on site
-- Cocktail recipe views/prints
+- Time on site (target: 2+ minutes)
+- Cocktail recipe views
+- Recipe saves/prints
 - Social shares
 - Newsletter signups
-- Click-through to purchase (if applicable)
-
----
-
-## Next Steps
-
-1. **Immediate:** Update product information with accurate data from research
-2. **This Week:** Build cocktail section with holiday recipes
-3. **Before Holidays:** Launch seasonal content
-4. **Ongoing:** Update content per calendar above
+- Section engagement (scroll depth)
 
 ---
 
 ## Sources & References
 
-### Brand Information
+### Official Brand Sites (Primary Sources)
 - [Bib & Tucker Official](https://www.bibandtuckerbourbon.com/)
-- [Redemption Official Cocktails](https://www.redemptionwhiskey.com/cocktails/)
-- [Breaking Bourbon - Bib & Tucker Review](https://www.breakingbourbon.com/review/bib-tucker-bourbon)
-- [Liquor Laboratory - Redemption Guide](https://liquorlaboratory.com/redemption-bourbon/)
+- [Redemption Official](https://www.redemptionwhiskey.com/)
+- [Redemption Barkeep (Cocktails)](https://www.redemptionwhiskey.com/barkeep/)
 
-### Cocktail Recipes
-- [WhiskyCast - Campfire Old Fashioned](https://whiskycast.com/bib-tuckers-campfire-old-fashioned/)
-- [The Manual - Double Char Old Fashioned](https://www.themanual.com/food-and-drink/old-fashioned-recipe-with-double-char-bourbon/)
-- [Whiskey Wash - NYE Cocktails 2025](https://thewhiskeywash.com/whiskey-articles/new-years-eve-whiskey-cocktails-to-welcome-2025/)
-- [Delish - Winter Whiskey Cocktails](https://www.delish.com/cooking/g1270/winter-whiskey-cocktail-recipes/)
-- [A Couple Cooks - Bourbon Christmas Cocktails](https://www.acouplecooks.com/bourbon-christmas-cocktails/)
+### Product Pages Referenced
+- Bib & Tucker Double Char: `/bourbons/double-char`
+- Bib & Tucker Gold Roast: `/bourbons/gold-roast`
+- Redemption Bourbon: `/whiskeys/bourbon/`
+- Redemption Rye: `/whiskeys/rye/`
+- Redemption High Rye: `/whiskeys/high-rye-bourbon/`
+- Redemption Wheated: `/whiskeys/wheated-bourbon/`
+- Redemption Rum Cask: `/whiskeys/rum-cask-finish/`
+- Redemption 10 Year BP Rye: `/whiskeys/10-year-barrel-proof-rye/`
+
+### Cocktail Recipes Referenced
+- Manhattan: `/barkeep/manhattan/`
+- Sazerac: `/barkeep/sazerac/`
+- Gold Rush: `/barkeep/gold-rush/`
+
+---
+
+## Notes
+
+- Client materials pending - this plan uses verified website information
+- Design assets (bottle images, logos) already in place via Git LFS
+- Campaign runs December 2024 - February 2026 (14 months)
+- Hub should be flexible for seasonal content updates throughout campaign
