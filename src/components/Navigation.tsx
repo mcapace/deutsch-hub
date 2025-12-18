@@ -39,8 +39,12 @@ export default function Navigation() {
         }`}
         style={isScrolled ? {
           background: 'rgba(250, 247, 242, 0.98)',
+          backdropFilter: 'blur(12px)',
           borderColor: 'rgba(45, 41, 38, 0.15)',
-        } : {}}
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+        } : {
+          backdropFilter: 'blur(12px)',
+        }}
       >
         <div className="container-custom">
           <div className="flex items-center justify-between h-20">
