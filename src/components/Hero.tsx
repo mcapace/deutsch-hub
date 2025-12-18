@@ -12,7 +12,7 @@ export default function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
@@ -31,7 +31,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6 }}
           className="mb-12"
         >
           <Image
@@ -39,16 +39,16 @@ export default function Hero() {
             alt="Whisky Advocate"
             width={250}
             height={75}
-            className="h-14 md:h-20 lg:h-24 w-auto object-contain mx-auto"
+            className="h-16 md:h-24 w-auto object-contain mx-auto"
             priority
           />
         </motion.div>
 
-        {/* Main headline - Elegant and refined */}
+        {/* Main headline */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold leading-[0.9] mb-8 tracking-tight"
           style={{ color: '#2D2926' }}
         >
@@ -62,7 +62,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="max-w-2xl mx-auto text-xl md:text-2xl leading-relaxed mb-16 font-light"
+          className="max-w-2xl mx-auto text-xl md:text-2xl leading-relaxed mb-12 font-light"
           style={{ color: '#78716C' }}
         >
           Explore the heritage, craftsmanship, and bold character of{' '}
@@ -71,18 +71,18 @@ export default function Hero() {
           <span className="font-medium" style={{ color: '#2D2926' }}>Redemption</span>
         </motion.p>
 
-        {/* CTA Buttons - Refined */}
+        {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-24"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <motion.a
             href="#bib-tucker"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="px-10 py-4 rounded-full font-medium text-white transition-all text-lg"
+            className="px-10 py-4 rounded-full font-medium text-white text-lg"
             style={{ background: '#C85A36' }}
           >
             Explore the Collection
@@ -91,11 +91,10 @@ export default function Hero() {
             href="#cocktails"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="px-10 py-4 rounded-full font-medium border-2 transition-all text-lg"
+            className="px-10 py-4 rounded-full font-medium border-2 text-lg"
             style={{ 
               borderColor: '#2D2926',
               color: '#2D2926',
-              background: 'transparent',
             }}
           >
             Discover Cocktails
@@ -103,19 +102,19 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Elegant scroll indicator */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.6 }}
+        transition={{ delay: 1 }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-3"
+          className="flex flex-col items-center gap-2"
         >
-          <span className="text-xs uppercase tracking-[0.2em] font-medium" style={{ color: '#78716C' }}>
+          <span className="text-xs uppercase tracking-wider" style={{ color: '#78716C' }}>
             Scroll to explore
           </span>
           <div className="w-px h-12" style={{ background: 'linear-gradient(180deg, #2D2926, transparent)' }} />

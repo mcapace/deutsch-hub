@@ -354,14 +354,12 @@ export default function HolidayHubSection() {
             <div className="relative p-6 md:p-10 text-white">
               <div className="flex items-center gap-3 mb-5">
                 <div className="relative w-14 h-14 md:w-16 md:h-16 flex-shrink-0">
-                  <img
+                  <Image
                     src="/BAT_3D_Copper_Logo.png"
                     alt="Bib & Tucker"
-                    className="w-full h-full object-contain"
-                    onError={(e) => {
-                      console.error('HolidayHub Bib & Tucker logo failed to load');
-                      e.currentTarget.style.display = 'none';
-                    }}
+                    fill
+                    className="object-contain"
+                    sizes="64px"
                   />
                 </div>
                 <div>

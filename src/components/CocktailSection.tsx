@@ -483,30 +483,25 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
         {/* Card content */}
         <div className="relative glass-card rounded-3xl overflow-hidden h-full backdrop-blur-xl">
           {/* Image section */}
-          <div className="relative h-48 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+          <div className="relative h-48 overflow-hidden bg-white">
             {cocktail.image ? (
-              <motion.div
-                animate={{ scale: isHovered ? 1.05 : 1 }}
-                transition={{ duration: 0.6 }}
-                className="relative w-full h-full"
-              >
-                <img
+              <div className="relative w-full h-full">
+                <Image
                   src={cocktail.image}
                   alt={cocktail.name}
-                  className={`w-full h-full ${cocktail.image.includes('Logo') ? 'object-contain p-4' : 'object-cover'}`}
-                  onError={(e) => {
-                    console.error('Cocktail image failed to load:', cocktail.image);
-                    e.currentTarget.style.display = 'none';
-                  }}
+                  fill
+                  className={cocktail.image.includes('Logo') ? 'object-contain p-4' : 'object-cover'}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  quality={90}
                 />
                 {/* Gradient overlay */}
                 <div
                   className="absolute inset-0"
-                style={{
+                  style={{
                     background: `linear-gradient(180deg, transparent 0%, ${colors.primary}40 100%)`,
                   }}
                 />
-              </motion.div>
+              </div>
             ) : (
               <div
                 className="w-full h-full flex items-center justify-center"
@@ -618,14 +613,13 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
               {/* Header with image */}
               <div className={`relative h-64 overflow-hidden ${cocktail.image?.includes('Logo') ? 'bg-gradient-to-br from-gray-50 to-gray-100' : ''}`}>
                 {cocktail.image ? (
-                  <img
+                  <Image
                     src={cocktail.image}
                     alt={cocktail.name}
-                    className={`w-full h-full ${cocktail.image.includes('Logo') ? 'object-contain p-6' : 'object-cover'}`}
-                    onError={(e) => {
-                      console.error('Modal cocktail image failed to load:', cocktail.image);
-                      e.currentTarget.style.display = 'none';
-                    }}
+                    fill
+                    className={cocktail.image.includes('Logo') ? 'object-contain p-6' : 'object-cover'}
+                    quality={90}
+                    priority
                   />
                 ) : (
                   <div
