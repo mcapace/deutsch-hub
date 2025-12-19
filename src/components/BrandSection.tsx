@@ -38,7 +38,7 @@ export default function BrandSection({
   logo,
 }: BrandSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
 
   const themeColors = {
     bib: {
@@ -57,42 +57,42 @@ export default function BrandSection({
     <section
       id={id}
       ref={ref}
-      className="relative py-20 md:py-32"
+      className="relative py-16 md:py-24"
       style={{ background: '#FAF7F2' }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section Header - More refined */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
         >
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4" style={{ color: '#2D2926' }}>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-3" style={{ color: '#2D2926' }}>
             {brandName}
           </h2>
-          <p className="text-xl md:text-2xl font-light italic" style={{ color: '#78716C' }}>
+          <p className="text-lg md:text-xl font-light italic" style={{ color: '#78716C' }}>
             {tagline}
           </p>
         </motion.div>
 
-        {/* Main content grid */}
-        <div className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20 ${reversed ? 'lg:flex-row-reverse' : ''}`}>
+        {/* Main content grid - Better spacing */}
+        <div className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-16 ${reversed ? 'lg:flex-row-reverse' : ''}`}>
           {/* Image side */}
           <motion.div
-            initial={{ opacity: 0, x: reversed ? 40 : -40 }}
+            initial={{ opacity: 0, x: reversed ? 30 : -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className={reversed ? 'lg:order-2' : ''}
           >
             {bottleImage ? (
-              <div className="relative aspect-[3/4] bg-white rounded-lg overflow-hidden shadow-lg">
+              <div className="relative aspect-[3/4] bg-white rounded-lg overflow-hidden shadow-md">
                 <div className="relative w-full h-full">
                   <Image
                     src={bottleImage}
                     alt={`${brandName} bottle`}
                     fill
-                    className="object-contain p-8 md:p-12"
+                    className="object-contain p-8 md:p-10"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority
                     unoptimized={true}
@@ -101,45 +101,47 @@ export default function BrandSection({
               </div>
             ) : (
               <div className="relative aspect-[3/4] bg-gray-100 rounded-lg flex items-center justify-center">
-                <p style={{ color: '#8B8B8B' }}>Product Image</p>
+                <p style={{ color: '#8B8B8B' }} className="text-sm">Product Image</p>
               </div>
             )}
           </motion.div>
 
-          {/* Content side */}
+          {/* Content side - Better storytelling */}
           <motion.div
-            initial={{ opacity: 0, x: reversed ? -40 : 40 }}
+            initial={{ opacity: 0, x: reversed ? -30 : 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className={reversed ? 'lg:order-1' : ''}
           >
-            <div className="mb-10">
-              <h3 className="text-3xl font-serif font-bold mb-5" style={{ color: '#2D2926' }}>
+            {/* Story */}
+            <div className="mb-8">
+              <h3 className="text-2xl md:text-3xl font-serif font-bold mb-4" style={{ color: '#2D2926' }}>
                 The Story
               </h3>
-              <p className="text-lg leading-relaxed mb-10" style={{ color: '#78716C' }}>
+              <p className="text-base md:text-lg leading-relaxed mb-6" style={{ color: '#78716C' }}>
                 {description}
               </p>
             </div>
 
+            {/* Heritage */}
             <div>
-              <h3 className="text-3xl font-serif font-bold mb-5" style={{ color: '#2D2926' }}>
+              <h3 className="text-2xl md:text-3xl font-serif font-bold mb-4" style={{ color: '#2D2926' }}>
                 Heritage
               </h3>
-              <p className="text-lg leading-relaxed" style={{ color: '#78716C' }}>
+              <p className="text-base md:text-lg leading-relaxed" style={{ color: '#78716C' }}>
                 {heritage}
               </p>
             </div>
           </motion.div>
         </div>
 
-        {/* Products Collection */}
+        {/* Products Collection - More refined grid */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <h3 className="text-4xl font-serif font-bold mb-12 text-center" style={{ color: '#2D2926' }}>
+          <h3 className="text-3xl md:text-4xl font-serif font-bold mb-10 text-center" style={{ color: '#2D2926' }}>
             The Collection
           </h3>
 
@@ -151,7 +153,7 @@ export default function BrandSection({
             }).map((product) => (
               <div
                 key={product.name}
-                className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+                className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300"
               >
                 {product.featured && (
                   <div className="inline-block px-3 py-1 rounded-full text-xs font-bold text-white mb-3" style={{ background: 'linear-gradient(135deg, #FFD700, #FFA500)' }}>
@@ -159,10 +161,10 @@ export default function BrandSection({
                   </div>
                 )}
                 <div className="flex justify-between items-start mb-3">
-                  <h4 className="text-xl font-bold" style={{ color: '#2D2926' }}>
+                  <h4 className="text-lg md:text-xl font-bold pr-2" style={{ color: '#2D2926' }}>
                     {product.name}
                   </h4>
-                  <span className="text-xs font-medium px-3 py-1 rounded-full" style={{ background: `${colors.primary}15`, color: colors.primary }}>
+                  <span className="text-xs font-medium px-2.5 py-1 rounded-full whitespace-nowrap" style={{ background: `${colors.primary}15`, color: colors.primary }}>
                     {product.proof}
                   </span>
                 </div>
@@ -173,11 +175,11 @@ export default function BrandSection({
                   <p className="text-xs uppercase tracking-wider mb-2" style={{ color: '#8B8B8B' }}>
                     Tasting Notes
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {product.notes.map((note) => (
                       <span
                         key={note}
-                        className="text-xs px-3 py-1 rounded-full font-medium"
+                        className="text-xs px-2.5 py-1 rounded-full font-medium"
                         style={{ background: `${colors.primary}15`, color: colors.primary }}
                       >
                         {note}

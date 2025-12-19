@@ -12,115 +12,111 @@ export default function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative py-16 md:py-24 overflow-hidden"
       style={{ background: '#FAF7F2' }}
     >
-      {/* Main content */}
-      <motion.div
-        style={{ y, opacity }}
-        className="relative z-10 max-w-6xl mx-auto px-6 text-center"
-      >
-        {/* Whisky Advocate Logo */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Whisky Advocate Logo - Smaller, more refined */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
+          transition={{ duration: 0.5 }}
+          className="mb-8 text-center"
         >
           <Image
             src="/images/logos/WA_BLUE-removebg-preview.png"
             alt="Whisky Advocate"
-            width={250}
-            height={75}
-            className="h-16 md:h-24 w-auto object-contain mx-auto"
+            width={200}
+            height={60}
+            className="h-10 md:h-14 w-auto object-contain mx-auto"
             priority
             unoptimized={true}
           />
+          <p className="text-xs mt-2 tracking-wider" style={{ color: '#78716C' }}>
+            Deutsch Spirits Collection
+          </p>
         </motion.div>
 
-        {/* Main headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold leading-[0.9] mb-8 tracking-tight"
-          style={{ color: '#2D2926' }}
-        >
-          Discover the Art of
-          <br />
-          <span style={{ color: '#C85A36' }}>American Whiskey</span>
-        </motion.h1>
-
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="max-w-2xl mx-auto text-xl md:text-2xl leading-relaxed mb-12 font-light"
-          style={{ color: '#78716C' }}
-        >
-          Explore the heritage, craftsmanship, and bold character of{' '}
-          <span className="font-medium" style={{ color: '#2D2926' }}>Bib & Tucker</span>
-          {' '}and{' '}
-          <span className="font-medium" style={{ color: '#2D2926' }}>Redemption</span>
-        </motion.p>
-
-        {/* CTA Buttons */}
+        {/* Main headline - More refined, smaller */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          style={{ y, opacity }}
+          className="text-center max-w-4xl mx-auto"
         >
-          <motion.a
-            href="#bib-tucker"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="px-10 py-4 rounded-full font-medium text-white text-lg"
-            style={{ background: '#C85A36' }}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 leading-tight tracking-tight"
+            style={{ color: '#2D2926' }}
           >
-            Explore the Collection
-          </motion.a>
-          <motion.a
-            href="#cocktails"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="px-10 py-4 rounded-full font-medium border-2 text-lg"
-            style={{ 
-              borderColor: '#2D2926',
-              color: '#2D2926',
-            }}
-          >
-            Discover Cocktails
-          </motion.a>
-        </motion.div>
-      </motion.div>
+            Discover the Art of
+            <br />
+            <span style={{ color: '#C85A36' }}>American Whiskey</span>
+          </motion.h1>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-2"
-        >
-          <span className="text-xs uppercase tracking-wider" style={{ color: '#78716C' }}>
-            Scroll to explore
-          </span>
-          <div className="w-px h-12" style={{ background: 'linear-gradient(180deg, #2D2926, transparent)' }} />
+          {/* Tagline - More refined */}
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg md:text-xl leading-relaxed mb-8 font-light max-w-2xl mx-auto"
+            style={{ color: '#78716C' }}
+          >
+            Explore the heritage, craftsmanship, and bold character of{' '}
+            <span className="font-medium" style={{ color: '#2D2926' }}>Bib & Tucker</span>
+            {' '}and{' '}
+            <span className="font-medium" style={{ color: '#2D2926' }}>Redemption</span>
+          </motion.p>
+
+          {/* Holiday CTA - More prominent */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6"
+          >
+            <motion.a
+              href="#holiday-hub"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-8 py-3 rounded-full font-medium text-white text-base"
+              style={{ background: '#C85A36' }}
+            >
+              Holiday Inspiration
+            </motion.a>
+            <motion.a
+              href="#bib-tucker"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-8 py-3 rounded-full font-medium border-2 text-base"
+              style={{ 
+                borderColor: '#2D2926',
+                color: '#2D2926',
+              }}
+            >
+              Explore Collections
+            </motion.a>
+          </motion.div>
+
+          {/* Storytelling element */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-sm md:text-base italic max-w-xl mx-auto"
+            style={{ color: '#8B8B8B' }}
+          >
+            Where tradition meets innovation, and every sip tells a story
+          </motion.p>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
