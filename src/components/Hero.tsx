@@ -81,9 +81,9 @@ export default function Hero() {
             <Image
               src="/BAT_3D_Copper_Logo.png"
               alt="Bib & Tucker"
-              width={160}
-              height={60}
-              className="h-14 w-auto object-contain mb-2 group-hover:scale-105 transition-transform duration-300"
+              width={220}
+              height={80}
+              className="h-20 md:h-24 w-auto object-contain mb-2 group-hover:scale-105 transition-transform duration-300"
               unoptimized={true}
             />
             <span className="text-[10px] tracking-[0.2em] uppercase text-[#78716C]">
@@ -91,15 +91,15 @@ export default function Hero() {
             </span>
           </a>
 
-          <span className="w-px h-16 bg-[#D4D1C8]" />
+          <span className="w-px h-20 bg-[#D4D1C8]" />
 
           <a href="#redemption" className="group text-center flex flex-col items-center">
             <Image
               src="/Redemption logo /Redemption_Whiskey_Logo.png"
               alt="Redemption"
-              width={160}
-              height={60}
-              className="h-14 w-auto object-contain mb-2 group-hover:scale-105 transition-transform duration-300"
+              width={220}
+              height={80}
+              className="h-20 md:h-24 w-auto object-contain mb-2 group-hover:scale-105 transition-transform duration-300"
               unoptimized={true}
             />
             <span className="text-[10px] tracking-[0.2em] uppercase text-[#78716C]">
