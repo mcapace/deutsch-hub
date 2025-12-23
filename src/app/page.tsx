@@ -6,6 +6,10 @@ import FoodPairingsSection from '@/components/FoodPairingsSection';
 import CocktailQuiz from '@/components/CocktailQuiz';
 import ArticlesSection from '@/components/ArticlesSection';
 import Footer from '@/components/Footer';
+import AgeGate from '@/components/AgeGate';
+import Preloader from '@/components/Preloader';
+import ScrollProgress from '@/components/ScrollProgress';
+import CustomCursor from '@/components/CustomCursor';
 
 // Bib & Tucker data - VERIFIED from official website
 const bibAndTuckerData = {
@@ -97,16 +101,30 @@ const redemptionData = {
 
 export default function Home() {
   return (
-    <main className="relative">
-      <Navigation />
-      <Hero />
-      <BrandSection {...bibAndTuckerData} />
-      <BrandSection {...redemptionData} />
-      <CocktailSection />
-      <FoodPairingsSection />
-      <ArticlesSection />
-      <Footer />
-      <CocktailQuiz />
-    </main>
+    <>
+      {/* Preloader - shows on initial load */}
+      <Preloader />
+
+      {/* Age Gate - required for spirits sites */}
+      <AgeGate />
+
+      {/* Scroll progress bar and back-to-top button */}
+      <ScrollProgress />
+
+      {/* Custom cursor for desktop */}
+      <CustomCursor />
+
+      <main className="relative">
+        <Navigation />
+        <Hero />
+        <BrandSection {...bibAndTuckerData} />
+        <BrandSection {...redemptionData} />
+        <CocktailSection />
+        <FoodPairingsSection />
+        <ArticlesSection />
+        <Footer />
+        <CocktailQuiz />
+      </main>
+    </>
   );
 }
