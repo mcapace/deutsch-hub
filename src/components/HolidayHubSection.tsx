@@ -176,7 +176,7 @@ export default function HolidayHubSection() {
                     </svg>
                   </Link>
                   <a
-                    href="https://store.whiskyadvocate.com/products/bib-tucker-6-year-old-small-batch-no-24?_pos=1&_psq=bib&_ss=e&_v=1.0"
+                    href="https://store.whiskyadvocate.com/products/bib-tucker-gold-roast-small-batch-bourbon-whiskey"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 bg-white/20 hover:bg-white/30 transition-colors"
@@ -215,7 +215,7 @@ export default function HolidayHubSection() {
                     </svg>
                   </Link>
                   <a
-                    href="https://store.whiskyadvocate.com/products/redemption-sur-lee-straight-rye-whiskey?_pos=1&_psq=redempt&_ss=e&_v=1.0"
+                    href="https://store.whiskyadvocate.com/products/redemption-rye-whiskey"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 bg-white/20 hover:bg-white/30 transition-colors"

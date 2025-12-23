@@ -31,6 +31,7 @@ const bibAndTuckerData = {
         'First aged 6 years in Tennessee, then finished minimum 5 months in heavily charred barrels smoked with sugar maple. Fire-forged for a smoky, savory profile.',
       proof: '88 Proof',
       notes: ['White Smoke', 'Sugar Maple', 'Dulce de Leche', 'Toasted Cinnamon', 'Vanilla'],
+      shopUrl: 'https://store.whiskyadvocate.com/products/bib-tucker-double-char-small-batch-bourbon-whiskey',
     },
     {
       name: 'Gold Roast Bourbon',
@@ -39,6 +40,7 @@ const bibAndTuckerData = {
       proof: '92 Proof',
       notes: ['Fresh Coffee', 'Molasses', 'Milk Chocolate', 'Young Oak', 'Brown Spice'],
       featured: true,
+      shopUrl: 'https://store.whiskyadvocate.com/products/bib-tucker-gold-roast-small-batch-bourbon-whiskey',
     },
     {
       name: 'The Tennessee Ten',
@@ -69,6 +71,7 @@ const redemptionData = {
         '75% corn, 21% rye, 4% malt. A truly easy drinking whiskey with a classic sweet backbone and assertive rye spice. Toffee, baking spice, and anise on the palate.',
       proof: '88 Proof',
       notes: ['Caramel', 'Baking Spice', 'Anise', 'Black Pepper', 'Toffee'],
+      shopUrl: 'https://store.whiskyadvocate.com/products/redemption-bourbon-whiskey',
     },
     {
       name: 'Redemption Rye',
@@ -76,6 +79,7 @@ const redemptionData = {
         '95% rye, 5% malt. Big and spicy with toasted oak, allspice, and anise on the nose. The rye-forward profile pairs beautifully with classic cocktails.',
       proof: '92 Proof',
       notes: ['Toasted Oak', 'Allspice', 'Anise', 'Mint', 'Black Pepper'],
+      shopUrl: 'https://store.whiskyadvocate.com/products/redemption-rye-whiskey',
     },
     {
       name: 'High Rye Bourbon',
@@ -83,6 +87,7 @@ const redemptionData = {
         '60% corn, 36% rye, 4% malt. Approaching the upper limit for bourbon, delivering bold spice with silky texture. Vanilla, red berries, and fennel-like licorice.',
       proof: '92 Proof',
       notes: ['Vanilla', 'Red Berries', 'Fennel', 'Black Pepper', 'Spiced Oak'],
+      shopUrl: 'https://store.whiskyadvocate.com/products/redemption-high-rye-bourbon-whiskey',
     },
     {
       name: 'Wheated Bourbon',
@@ -90,6 +95,7 @@ const redemptionData = {
         '51% corn, 45% wheat, 4% malt. Double Gold winner with candied ginger, sage, and lavender. Silky and harmonious yet robust — fresh pear over vanilla and cedar.',
       proof: '96 Proof',
       notes: ['Candied Ginger', 'Lavender', 'Hazelnut', 'Coffee', 'Toasted Bread'],
+      shopUrl: 'https://store.whiskyadvocate.com/products/redemption-wheated-bourbon-whiskey',
     },
   ],
   theme: 'redemption' as const,
