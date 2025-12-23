@@ -7,6 +7,10 @@ import FoodPairingsSection from '@/components/FoodPairingsSection';
 import CocktailQuiz from '@/components/CocktailQuiz';
 import ArticlesSection from '@/components/ArticlesSection';
 import Footer from '@/components/Footer';
+import AgeGate from '@/components/AgeGate';
+import Preloader from '@/components/Preloader';
+import ScrollProgress from '@/components/ScrollProgress';
+import CustomCursor from '@/components/CustomCursor';
 
 // Bib & Tucker data - VERIFIED from official website
 const bibAndTuckerData = {
@@ -38,7 +42,7 @@ const bibAndTuckerData = {
         'Premium Arabica coffee beans steeped in cask strength 6-year whiskey, then expertly blended. A custom roast developed with a local Tennessee roaster. A truly one-of-a-kind bourbon that\'s complex, yet remarkably smooth with bold roasted notes.',
       proof: '92 Proof',
       notes: ['Fresh Coffee', 'Molasses', 'Milk Chocolate', 'Young Oak', 'Brown Spice'],
-      featured: true, // Gold Roast is a big push
+      featured: true,
     },
     {
       name: 'The Tennessee Ten',
@@ -99,17 +103,31 @@ const redemptionData = {
 
 export default function Home() {
   return (
-    <main className="relative">
-      <Navigation />
-      <Hero />
-      <ArticlesSection />
-      <BrandSection {...bibAndTuckerData} />
-      <BrandSection {...redemptionData} />
-      <HolidayHubSection />
-      <CocktailSection />
-      <FoodPairingsSection />
-      <Footer />
-      <CocktailQuiz />
-    </main>
+    <>
+      {/* Preloader - shows on initial load */}
+      <Preloader />
+
+      {/* Age Gate - required for spirits sites */}
+      <AgeGate />
+
+      {/* Scroll progress bar and back-to-top button */}
+      <ScrollProgress />
+
+      {/* Custom cursor for desktop */}
+      <CustomCursor />
+
+      <main className="relative">
+        <Navigation />
+        <Hero />
+        <ArticlesSection />
+        <BrandSection {...bibAndTuckerData} />
+        <BrandSection {...redemptionData} />
+        <HolidayHubSection />
+        <CocktailSection />
+        <FoodPairingsSection />
+        <Footer />
+        <CocktailQuiz />
+      </main>
+    </>
   );
 }
