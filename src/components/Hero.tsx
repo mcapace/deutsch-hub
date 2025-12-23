@@ -70,29 +70,39 @@ export default function Hero() {
           <strong className="font-semibold text-[#1A1410]">Redemption</strong>.
         </motion.p>
 
-        {/* Brand Links - Symmetric */}
+        {/* Brand Logos - Symmetric */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex items-center justify-center gap-12 mb-12"
+          className="flex items-center justify-center gap-16 mb-12"
         >
-          <a href="#bib-tucker" className="group text-center">
-            <span className="block text-2xl font-serif text-[#C85A36] group-hover:text-[#A34828] transition-colors">
-              Bib & Tucker
-            </span>
-            <span className="text-[11px] tracking-[0.2em] uppercase text-[#78716C]">
+          <a href="#bib-tucker" className="group text-center flex flex-col items-center">
+            <Image
+              src="/BAT_3D_Copper_Logo.png"
+              alt="Bib & Tucker"
+              width={160}
+              height={60}
+              className="h-14 w-auto object-contain mb-2 group-hover:scale-105 transition-transform duration-300"
+              unoptimized={true}
+            />
+            <span className="text-[10px] tracking-[0.2em] uppercase text-[#78716C]">
               Tennessee Bourbon
             </span>
           </a>
 
-          <span className="w-px h-10 bg-[#D4D1C8]" />
+          <span className="w-px h-16 bg-[#D4D1C8]" />
 
-          <a href="#redemption" className="group text-center">
-            <span className="block text-2xl font-serif text-[#D4872B] group-hover:text-[#B36E1F] transition-colors">
-              Redemption
-            </span>
-            <span className="text-[11px] tracking-[0.2em] uppercase text-[#78716C]">
+          <a href="#redemption" className="group text-center flex flex-col items-center">
+            <Image
+              src="/Redemption Bottle Images/dfws_rdpn_trio-set_750ml_BLK_14OCT25.png"
+              alt="Redemption"
+              width={160}
+              height={60}
+              className="h-14 w-auto object-contain mb-2 group-hover:scale-105 transition-transform duration-300"
+              unoptimized={true}
+            />
+            <span className="text-[10px] tracking-[0.2em] uppercase text-[#78716C]">
               American Rye
             </span>
           </a>
