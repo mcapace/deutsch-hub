@@ -6,7 +6,6 @@ import { useRef, useState } from 'react';
 interface Pairing {
   food: string;
   description: string;
-  icon: string;
 }
 
 interface WhiskeyPairing {
@@ -32,40 +31,40 @@ const pairingsData: BrandPairings[] = [
         name: 'The Classic Six',
         proof: '92 Proof',
         pairings: [
-          { food: 'Grilled Ribeye', description: 'The caramel notes complement charred meat beautifully', icon: '🥩' },
-          { food: 'Dark Chocolate Truffles', description: 'Vanilla and oak meet rich cocoa', icon: '🍫' },
-          { food: 'Aged Cheddar', description: 'Sharp cheese balances the bourbon sweetness', icon: '🧀' },
-          { food: 'Pecan Pie', description: 'A Southern classic pairing', icon: '🥧' },
+          { food: 'Grilled Ribeye', description: 'The caramel notes complement charred meat beautifully' },
+          { food: 'Dark Chocolate Truffles', description: 'Vanilla and oak meet rich cocoa' },
+          { food: 'Aged Cheddar', description: 'Sharp cheese balances the bourbon sweetness' },
+          { food: 'Pecan Pie', description: 'A Southern classic pairing' },
         ],
       },
       {
         name: 'Double Char',
         proof: '88 Proof',
         pairings: [
-          { food: 'BBQ Brisket', description: 'Smoke meets smoke in perfect harmony', icon: '🍖' },
-          { food: 'Maple-Glazed Bacon', description: 'Sugar maple notes amplified', icon: '🥓' },
-          { food: 'Smoked Salmon', description: 'Elegant smokiness pairs beautifully', icon: '🐟' },
-          { food: "S'mores", description: 'Campfire flavors come alive', icon: '🏕️' },
+          { food: 'BBQ Brisket', description: 'Smoke meets smoke in perfect harmony' },
+          { food: 'Maple-Glazed Bacon', description: 'Sugar maple notes amplified' },
+          { food: 'Smoked Salmon', description: 'Elegant smokiness pairs beautifully' },
+          { food: "S'mores", description: 'Campfire flavors come alive' },
         ],
       },
       {
         name: 'Gold Roast',
         proof: '92 Proof',
         pairings: [
-          { food: 'Tiramisu', description: 'Coffee meets coffee in dessert heaven', icon: '🍰' },
-          { food: 'Chocolate Espresso Beans', description: 'Triple coffee indulgence', icon: '☕' },
-          { food: 'Brunch Dishes', description: 'Perfect morning-after pairing', icon: '🍳' },
-          { food: 'Affogato', description: 'Pour over vanilla ice cream', icon: '🍨' },
+          { food: 'Tiramisu', description: 'Coffee meets coffee in dessert heaven' },
+          { food: 'Chocolate Espresso Beans', description: 'Triple coffee indulgence' },
+          { food: 'Brunch Dishes', description: 'Perfect morning-after pairing' },
+          { food: 'Affogato', description: 'Pour over vanilla ice cream' },
         ],
       },
       {
         name: 'Tennessee Ten',
         proof: '92 Proof',
         pairings: [
-          { food: 'Charcuterie Board', description: 'Complex flavors for complex whiskey', icon: '🍽️' },
-          { food: 'Aged Gouda', description: 'Deep, nutty notes complement each other', icon: '🧀' },
-          { food: 'Crème Brûlée', description: 'Caramelized sugar and vanilla', icon: '🍮' },
-          { food: 'Dark Chocolate', description: 'Rich cocoa and oak tannins', icon: '🍫' },
+          { food: 'Charcuterie Board', description: 'Complex flavors for complex whiskey' },
+          { food: 'Aged Gouda', description: 'Deep, nutty notes complement each other' },
+          { food: 'Crème Brûlée', description: 'Caramelized sugar and vanilla' },
+          { food: 'Dark Chocolate', description: 'Rich cocoa and oak tannins' },
         ],
       },
     ],
@@ -79,47 +78,47 @@ const pairingsData: BrandPairings[] = [
         name: 'Bourbon',
         proof: '88 Proof',
         pairings: [
-          { food: 'Bacon-Wrapped Dates', description: 'Sweet and savory with caramel notes', icon: '🥓' },
-          { food: 'Brie & Crackers', description: 'Creamy cheese softens the spice', icon: '🧀' },
-          { food: 'Holiday Ham', description: 'Classic holiday pairing', icon: '🍖' },
-          { food: 'Caramel Desserts', description: 'Toffee notes shine through', icon: '🍬' },
+          { food: 'Bacon-Wrapped Dates', description: 'Sweet and savory with caramel notes' },
+          { food: 'Brie & Crackers', description: 'Creamy cheese softens the spice' },
+          { food: 'Holiday Ham', description: 'Classic holiday pairing' },
+          { food: 'Caramel Desserts', description: 'Toffee notes shine through' },
         ],
       },
       {
         name: 'Rye',
         proof: '92 Proof',
         pairings: [
-          { food: 'Pastrami on Rye', description: 'The ultimate rye-on-rye experience', icon: '🥪' },
-          { food: 'Sharp Aged Cheese', description: 'Bold flavors match bold whiskey', icon: '🧀' },
-          { food: 'Spiced Nuts', description: 'Spice meets spice', icon: '🥜' },
-          { food: 'Smoked Fish', description: 'Allspice and anise complement smoke', icon: '🐟' },
+          { food: 'Pastrami on Rye', description: 'The ultimate rye-on-rye experience' },
+          { food: 'Sharp Aged Cheese', description: 'Bold flavors match bold whiskey' },
+          { food: 'Spiced Nuts', description: 'Spice meets spice' },
+          { food: 'Smoked Fish', description: 'Allspice and anise complement smoke' },
         ],
       },
       {
         name: 'High Rye Bourbon',
         proof: '92 Proof',
         pairings: [
-          { food: 'Gingerbread', description: 'Spiced perfection', icon: '🍪' },
-          { food: 'Spicy Thai Food', description: 'Heat meets heat harmoniously', icon: '🌶️' },
-          { food: 'Dark Chocolate Chili', description: 'Complex spice layers', icon: '🍫' },
-          { food: 'Spiced Pecans', description: 'Cinnamon and pepper unite', icon: '🥜' },
+          { food: 'Gingerbread', description: 'Spiced perfection' },
+          { food: 'Spicy Thai Food', description: 'Heat meets heat harmoniously' },
+          { food: 'Dark Chocolate Chili', description: 'Complex spice layers' },
+          { food: 'Spiced Pecans', description: 'Cinnamon and pepper unite' },
         ],
       },
       {
         name: 'Wheated Bourbon',
         proof: '96 Proof',
         pairings: [
-          { food: 'Hazelnut Desserts', description: 'Nutty notes amplified', icon: '🌰' },
-          { food: 'French Toast', description: 'Bread and malty sweetness', icon: '🍞' },
-          { food: 'Coffee Cake', description: 'Coffee and lavender notes', icon: '🍰' },
-          { food: 'Soft Cheeses', description: 'Silky texture matches silky whiskey', icon: '🧀' },
+          { food: 'Hazelnut Desserts', description: 'Nutty notes amplified' },
+          { food: 'French Toast', description: 'Bread and malty sweetness' },
+          { food: 'Coffee Cake', description: 'Coffee and lavender notes' },
+          { food: 'Soft Cheeses', description: 'Silky texture matches silky whiskey' },
         ],
       },
     ],
   },
 ];
 
-// Pairing card component
+// Pairing card component - elegant, no emojis
 const PairingCard = ({
   pairing,
   index,
@@ -129,51 +128,31 @@ const PairingCard = ({
   index: number;
   brandColor: string;
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative group"
+      transition={{ delay: index * 0.05, duration: 0.5 }}
+      className="group"
     >
-      <motion.div
-        animate={{ scale: isHovered ? 1.02 : 1, y: isHovered ? -4 : 0 }}
-        transition={{ duration: 0.3 }}
-        className="glass-card rounded-xl p-4 h-full cursor-pointer"
-      >
-        {/* Icon */}
-        <motion.div
-          animate={{ scale: isHovered ? 1.2 : 1, rotate: isHovered ? 10 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="text-3xl mb-3"
-        >
-          {pairing.icon}
-        </motion.div>
-
+      <div className="bg-white border border-[#E5E2DC] p-5 h-full hover:border-[#BDA55D]/50 hover:shadow-md transition-all duration-300">
         {/* Food name */}
-        <h4 className="font-bold text-lg mb-2" style={{ color: '#1A1410' }}>
+        <h4 className="font-serif text-lg mb-2 text-[#1A1410] group-hover:text-[#C85A36] transition-colors">
           {pairing.food}
         </h4>
 
         {/* Description */}
-        <p className="text-sm" style={{ color: '#6B6B6B' }}>
+        <p className="text-sm text-[#5C5552] leading-relaxed">
           {pairing.description}
         </p>
 
-        {/* Hover accent */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="absolute bottom-0 left-0 right-0 h-1 rounded-b-xl origin-left"
+        {/* Bottom accent line */}
+        <div
+          className="mt-4 h-px w-0 group-hover:w-full transition-all duration-300"
           style={{ background: brandColor }}
         />
-      </motion.div>
+      </div>
     </motion.div>
   );
 };
@@ -384,15 +363,11 @@ export default function FoodPairingsSection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-12 max-w-2xl mx-auto"
         >
-          <div
-            className="glass-card rounded-2xl p-6 text-center"
-            style={{ background: brandColors[activeBrand].bg }}
-          >
-            <span className="text-2xl mb-3 block">💡</span>
-            <h4 className="font-bold mb-2" style={{ color: '#1A1410' }}>
+          <div className="border border-[#E5E2DC] bg-white p-8 text-center">
+            <span className="text-xs tracking-[0.25em] uppercase text-[#BDA55D] font-medium block mb-3">
               Pro Tip
-            </h4>
-            <p className="text-sm" style={{ color: '#6B6B6B' }}>
+            </span>
+            <p className="text-[#3A3735] leading-relaxed">
               Let your whiskey sit for a few minutes after pouring to open up the flavors.
               Take small sips between bites to cleanse your palate and enhance both the food and whiskey experience.
             </p>

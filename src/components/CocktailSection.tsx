@@ -209,11 +209,12 @@ const brandColors = {
   },
 };
 
-const categoryIcons = {
-  holiday: '🎄',
-  winter: '❄️',
-  nye: '🎆',
-  classic: '🥃',
+// Elegant category labels (no emojis)
+const categoryLabels = {
+  holiday: 'Holiday',
+  winter: 'Winter',
+  nye: 'New Year',
+  classic: 'Classic',
 };
 
 // Simplified Cocktail Card
@@ -245,12 +246,12 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center" style={{ background: colors.gradient }}>
-              <span className="text-5xl opacity-50">{categoryIcons[cocktail.category]}</span>
+              <span className="text-sm font-medium text-white/60 uppercase tracking-wider">{categoryLabels[cocktail.category]}</span>
             </div>
           )}
           {cocktail.featured && (
-            <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold text-white" style={{ background: 'linear-gradient(135deg, #FFD700, #FFA500)' }}>
-              ⭐ Featured
+            <div className="absolute top-4 right-4 px-3 py-1 text-[10px] font-semibold text-white uppercase tracking-wider" style={{ background: colors.primary }}>
+              Featured
             </div>
           )}
         </div>
@@ -261,8 +262,8 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
             <span className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: colors.bg, color: colors.primary }}>
               {cocktail.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'}
             </span>
-            <span className="text-xs" style={{ color: '#8B8B8B' }}>
-              {categoryIcons[cocktail.category]}
+            <span className="text-[10px] uppercase tracking-wider" style={{ color: '#8B8B8B' }}>
+              {categoryLabels[cocktail.category]}
             </span>
           </div>
           <h3 className="text-xl font-bold mb-2" style={{ color: '#2D2926' }}>
@@ -313,7 +314,7 @@ const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center" style={{ background: colors.gradient }}>
-                      <span className="text-6xl opacity-50">{categoryIcons[cocktail.category]}</span>
+                      <span className="text-lg font-medium text-white/60 uppercase tracking-wider">{categoryLabels[cocktail.category]}</span>
                     </div>
                   )}
                   <button
