@@ -107,13 +107,23 @@ export default function Hero() {
         >
           <a
             href="#bib-tucker"
-            className="px-8 py-4 bg-[#1A1410] text-white text-sm tracking-[0.1em] uppercase font-medium hover:bg-[#2D2926] transition-colors"
+            className="px-8 py-4 text-sm tracking-[0.15em] uppercase font-medium transition-all duration-300 hover:opacity-90"
+            style={{ backgroundColor: '#C85A36', color: '#FFFFFF' }}
           >
-            Explore Collection
+            Explore the Collection
           </a>
           <a
             href="#cocktails"
-            className="px-8 py-4 border-2 border-[#1A1410] text-[#1A1410] text-sm tracking-[0.1em] uppercase font-medium hover:bg-[#1A1410] hover:text-white transition-all"
+            className="px-8 py-4 border text-sm tracking-[0.15em] uppercase font-medium transition-all duration-300"
+            style={{ borderColor: '#2D2926', color: '#2D2926' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#C85A36';
+              e.currentTarget.style.color = '#C85A36';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = '#2D2926';
+              e.currentTarget.style.color = '#2D2926';
+            }}
           >
             Cocktails
           </a>
