@@ -150,20 +150,23 @@ export default function HolidayHubSection() {
           ))}
         </div>
 
-        {/* Brand showcase - simplified */}
+        {/* Brand showcase - symmetric boxes */}
         <div className="grid lg:grid-cols-2 gap-6 mb-16">
           {/* Bib & Tucker */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <Link href="#bib-tucker" className="block group">
-              <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #C85A36, #BDA55D)' }}>
-                <div className="p-8 md:p-10 text-white">
+            <Link href="#bib-tucker" className="block group h-full">
+              <div
+                className="relative overflow-hidden h-full"
+                style={{ background: 'linear-gradient(135deg, #C85A36, #BDA55D)', minHeight: '280px' }}
+              >
+                <div className="p-8 md:p-10 text-white flex flex-col h-full">
                   <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">Tennessee Bourbon</span>
                   <h3 className="font-serif text-3xl md:text-4xl mb-3">Bib & Tucker</h3>
-                  <p className="text-sm md:text-base opacity-90 mb-6 max-w-sm">
+                  <p className="text-sm md:text-base opacity-90 mb-6 flex-grow">
                     From Gold Roast after-dinner sipping to Double Char by the fire — award-winning bourbons for every moment.
                   </p>
                   <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all">
@@ -179,16 +182,19 @@ export default function HolidayHubSection() {
 
           {/* Redemption */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <Link href="#redemption" className="block group">
-              <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #D4872B, #BDA55D)' }}>
-                <div className="p-8 md:p-10 text-white">
+            <Link href="#redemption" className="block group h-full">
+              <div
+                className="relative overflow-hidden h-full"
+                style={{ background: 'linear-gradient(135deg, #D4872B, #BDA55D)', minHeight: '280px' }}
+              >
+                <div className="p-8 md:p-10 text-white flex flex-col h-full">
                   <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">American Rye</span>
                   <h3 className="font-serif text-3xl md:text-4xl mb-3">Redemption</h3>
-                  <p className="text-sm md:text-base opacity-90 mb-6 max-w-sm">
+                  <p className="text-sm md:text-base opacity-90 mb-6 flex-grow">
                     High-rye character meets holiday warmth. Perfect for Manhattans and all your favorite classics.
                   </p>
                   <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all">
@@ -218,10 +224,18 @@ export default function HolidayHubSection() {
               Whether hosting a gathering or finding the perfect gift, our collections offer something special for every whiskey lover.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="#cocktails" className="px-8 py-4 bg-[#1A1410] text-white text-sm tracking-[0.1em] uppercase font-medium hover:bg-[#2D2926] transition-colors">
+              <Link
+                href="#cocktails"
+                className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-opacity hover:opacity-90"
+                style={{ backgroundColor: '#C85A36', color: '#FFFFFF' }}
+              >
                 View Cocktails
               </Link>
-              <Link href="#pairings" className="px-8 py-4 border-2 border-[#1A1410] text-[#1A1410] text-sm tracking-[0.1em] uppercase font-medium hover:bg-[#1A1410] hover:text-white transition-all">
+              <Link
+                href="#pairings"
+                className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-all"
+                style={{ border: '2px solid #1A1410', color: '#1A1410' }}
+              >
                 Food Pairings
               </Link>
             </div>
