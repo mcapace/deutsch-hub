@@ -95,7 +95,7 @@ export default function Hero() {
 
           <a href="#redemption" className="group text-center flex flex-col items-center">
             <Image
-              src="/Redemption Bottle Images/dfws_rdpn_trio-set_750ml_BLK_14OCT25.png"
+              src="/Redemption logo /Redemption_Whiskey_Logo.png"
               alt="Redemption"
               width={160}
               height={60}
