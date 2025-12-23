@@ -1,8 +1,7 @@
 'use client';
 
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
-import Image from 'next/image';
+import { useRef, useState } from 'react';
 
 interface Cocktail {
   id: string;
@@ -16,13 +15,10 @@ interface Cocktail {
   glassware: string;
   occasion: string;
   category: 'holiday' | 'winter' | 'nye' | 'classic';
-  image?: string;
   featured?: boolean;
 }
 
-// Curated selection - only the best, most relevant cocktails
 const cocktails: Cocktail[] = [
-  // Featured Gold Roast cocktails
   {
     id: 'gold-roast-fashioned',
     name: 'Gold Roast Elevated',
@@ -45,7 +41,6 @@ const cocktails: Cocktail[] = [
     garnish: 'Orange peel',
     glassware: 'Rocks glass',
     occasion: 'After dinner',
-    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
   },
   {
     id: 'gold-roast-espresso-martini',
@@ -70,9 +65,7 @@ const cocktails: Cocktail[] = [
     garnish: '3 coffee beans',
     glassware: 'Coupe',
     occasion: 'Brunch or dessert',
-    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
   },
-  // Holiday favorites
   {
     id: 'campfire-old-fashioned',
     name: 'Campfire Old Fashioned',
@@ -95,7 +88,6 @@ const cocktails: Cocktail[] = [
     garnish: 'Orange peel',
     glassware: 'Rocks glass',
     occasion: 'Fireside sipping',
-    image: '/BAT_FY24_DoubleChar_Logo.png',
   },
   {
     id: 'holiday-manhattan',
@@ -118,9 +110,7 @@ const cocktails: Cocktail[] = [
     garnish: 'Brandied cherry',
     glassware: 'Coupe',
     occasion: 'Holiday gatherings',
-    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
   },
-  // Redemption classics
   {
     id: 'sazerac',
     name: 'Sazerac',
@@ -131,7 +121,7 @@ const cocktails: Cocktail[] = [
     ingredients: [
       '2 oz Redemption Rye',
       '0.5 oz Simple Syrup',
-      '3 dashes Peychaud\'s Bitters',
+      "3 dashes Peychaud's Bitters",
       'Absinthe rinse',
     ],
     instructions: [
@@ -143,7 +133,6 @@ const cocktails: Cocktail[] = [
     garnish: 'Lemon peel',
     glassware: 'Rocks glass',
     occasion: 'Classic cocktail hour',
-    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
   },
   {
     id: 'redemption-manhattan',
@@ -165,32 +154,6 @@ const cocktails: Cocktail[] = [
     garnish: 'Brandied cherry',
     glassware: 'Coupe',
     occasion: 'Evening sipping',
-    image: '/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png',
-  },
-  // NYE special
-  {
-    id: 'midnight-manhattan',
-    name: 'Midnight Manhattan',
-    brand: 'bib',
-    spirit: 'Bib & Tucker Classic Six',
-    tagline: 'Toast to the new year',
-    category: 'nye',
-    ingredients: [
-      '1.5 oz Bib & Tucker Classic Six',
-      '0.75 oz Sweet Vermouth',
-      '2 dashes Angostura Bitters',
-      'Champagne Float',
-    ],
-    instructions: [
-      'Stir bourbon, vermouth, and bitters with ice',
-      'Strain into a coupe glass',
-      'Top with a float of champagne',
-      'Garnish with a lemon twist',
-    ],
-    garnish: 'Lemon twist',
-    glassware: 'Coupe',
-    occasion: "New Year's Eve",
-    image: '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png',
   },
 ];
 
@@ -198,300 +161,292 @@ const brandColors = {
   bib: {
     primary: '#C85A36',
     secondary: '#BDA55D',
-    bg: 'rgba(200, 90, 54, 0.08)',
-    gradient: 'linear-gradient(135deg, #C85A36, #BDA55D)',
   },
   redemption: {
-    primary: '#FD9419',
+    primary: '#D4872B',
     secondary: '#D4A04A',
-    bg: 'rgba(253, 148, 25, 0.08)',
-    gradient: 'linear-gradient(135deg, #FD9419, #D4A04A)',
   },
 };
 
-// Elegant category labels (no emojis)
-const categoryLabels = {
-  holiday: 'Holiday',
-  winter: 'Winter',
-  nye: 'New Year',
-  classic: 'Classic',
-};
-
-// Simplified Cocktail Card
-const CocktailCard = ({ cocktail, index }: { cocktail: Cocktail; index: number }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+// Elegant Cocktail Card - Text-focused, no images
+const CocktailCard = ({ cocktail, index, onSelect }: { cocktail: Cocktail; index: number; onSelect: () => void }) => {
   const colors = brandColors[cocktail.brand];
 
   return (
-    <>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-50px' }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        onClick={() => setIsExpanded(true)}
-        className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group"
-      >
-        {/* Image */}
-        <div className="relative h-56 overflow-hidden bg-white">
-          {cocktail.image ? (
-            <Image
-              src={cocktail.image}
-              alt={cocktail.name}
-              fill
-              className={cocktail.image.includes('Logo') ? 'object-contain p-6' : 'object-cover'}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              quality={90}
-              unoptimized={true}
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center" style={{ background: colors.gradient }}>
-              <span className="text-sm font-medium text-white/60 uppercase tracking-wider">{categoryLabels[cocktail.category]}</span>
-            </div>
-          )}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      onClick={onSelect}
+      className="group cursor-pointer"
+    >
+      <div className="bg-white border border-[#E8E4DE] p-8 h-full transition-all duration-300 hover:border-[#BDA55D]/50 hover:shadow-lg">
+        {/* Top Row - Brand & Category */}
+        <div className="flex items-center justify-between mb-6">
+          <span
+            className="text-[10px] font-semibold uppercase tracking-[0.2em]"
+            style={{ color: colors.primary }}
+          >
+            {cocktail.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'}
+          </span>
           {cocktail.featured && (
-            <div className="absolute top-4 right-4 px-3 py-1 text-[10px] font-semibold text-white uppercase tracking-wider" style={{ background: colors.primary }}>
+            <span className="text-[9px] uppercase tracking-[0.15em] px-2 py-1 border" style={{ borderColor: colors.primary, color: colors.primary }}>
               Featured
-            </div>
+            </span>
           )}
+        </div>
+
+        {/* Name */}
+        <h3 className="font-serif text-2xl text-[#1A1410] mb-2 group-hover:text-[#C85A36] transition-colors">
+          {cocktail.name}
+        </h3>
+
+        {/* Tagline */}
+        <p className="text-sm text-[#78716C] mb-6 leading-relaxed">
+          {cocktail.tagline}
+        </p>
+
+        {/* Spirit */}
+        <div className="border-t border-[#E8E4DE] pt-5 mb-5">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-[#9A9590] mb-1">Base Spirit</p>
+          <p className="text-sm font-medium text-[#3A3735]">{cocktail.spirit}</p>
+        </div>
+
+        {/* Key Info Row */}
+        <div className="flex items-center justify-between text-xs text-[#78716C]">
+          <span>{cocktail.glassware}</span>
+          <span className="w-1 h-1 rounded-full bg-[#BDA55D]" />
+          <span>{cocktail.occasion}</span>
+        </div>
+
+        {/* View Recipe Link */}
+        <div className="mt-6 pt-5 border-t border-[#E8E4DE]">
+          <span
+            className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] transition-colors"
+            style={{ color: colors.primary }}
+          >
+            View Recipe
+            <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Recipe Modal
+const RecipeModal = ({ cocktail, onClose }: { cocktail: Cocktail; onClose: () => void }) => {
+  const colors = brandColors[cocktail.brand];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4"
+      style={{ backgroundColor: 'rgba(26, 20, 16, 0.85)' }}
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 30, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 30, scale: 0.98 }}
+        transition={{ duration: 0.3 }}
+        className="max-w-2xl w-full bg-[#FDFBF7] overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="relative px-10 pt-10 pb-8 border-b border-[#E8E4DE]">
+          <button
+            onClick={onClose}
+            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-[#78716C] hover:text-[#1A1410] transition-colors"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <span
+            className="text-[10px] font-semibold uppercase tracking-[0.2em] mb-3 block"
+            style={{ color: colors.primary }}
+          >
+            {cocktail.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'} — {cocktail.spirit}
+          </span>
+          <h2 className="font-serif text-4xl text-[#1A1410] mb-2">{cocktail.name}</h2>
+          <p className="text-[#78716C]">{cocktail.tagline}</p>
         </div>
 
         {/* Content */}
-        <div className="p-6">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: colors.bg, color: colors.primary }}>
-              {cocktail.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'}
-            </span>
-            <span className="text-[10px] uppercase tracking-wider" style={{ color: '#8B8B8B' }}>
-              {categoryLabels[cocktail.category]}
-            </span>
+        <div className="px-10 py-8">
+          {/* Two Column Layout */}
+          <div className="grid md:grid-cols-2 gap-10">
+            {/* Ingredients */}
+            <div>
+              <h3 className="text-[11px] uppercase tracking-[0.2em] text-[#9A9590] mb-4 font-semibold">Ingredients</h3>
+              <ul className="space-y-3">
+                {cocktail.ingredients.map((ingredient, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: colors.primary }} />
+                    <span className="text-[#3A3735]">{ingredient}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Details */}
+            <div>
+              <h3 className="text-[11px] uppercase tracking-[0.2em] text-[#9A9590] mb-4 font-semibold">Details</h3>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.15em] text-[#9A9590] mb-1">Glassware</p>
+                  <p className="text-[#3A3735] font-medium">{cocktail.glassware}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.15em] text-[#9A9590] mb-1">Garnish</p>
+                  <p className="text-[#3A3735] font-medium">{cocktail.garnish}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.15em] text-[#9A9590] mb-1">Occasion</p>
+                  <p className="text-[#3A3735] font-medium">{cocktail.occasion}</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <h3 className="text-xl font-bold mb-2" style={{ color: '#2D2926' }}>
-            {cocktail.name}
-          </h3>
-          <p className="text-sm mb-4" style={{ color: '#78716C' }}>
-            {cocktail.tagline}
-          </p>
-          <div className="flex items-center gap-2 text-sm font-medium" style={{ color: colors.primary }}>
-            <span>View Recipe</span>
-            <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+
+          {/* Instructions */}
+          <div className="mt-10 pt-8 border-t border-[#E8E4DE]">
+            <h3 className="text-[11px] uppercase tracking-[0.2em] text-[#9A9590] mb-6 font-semibold">Method</h3>
+            <ol className="space-y-4">
+              {cocktail.instructions.map((step, i) => (
+                <li key={i} className="flex gap-4">
+                  <span
+                    className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0"
+                    style={{ backgroundColor: colors.primary, color: '#FFFFFF' }}
+                  >
+                    {i + 1}
+                  </span>
+                  <span className="text-[#3A3735] leading-relaxed pt-0.5">{step}</span>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </motion.div>
-
-      {/* Modal */}
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 overflow-y-auto"
-            style={{ background: 'rgba(0, 0, 0, 0.8)' }}
-            onClick={() => setIsExpanded(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
-              className="min-h-screen flex items-center justify-center p-4"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="max-w-2xl w-full bg-white rounded-xl shadow-2xl overflow-hidden">
-                {/* Header */}
-                <div className="relative h-64 overflow-hidden bg-white">
-                  {cocktail.image ? (
-                    <Image
-                      src={cocktail.image}
-                      alt={cocktail.name}
-                      fill
-                      className={cocktail.image.includes('Logo') ? 'object-contain p-8' : 'object-cover'}
-                      quality={90}
-                      priority
-                      unoptimized={true}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center" style={{ background: colors.gradient }}>
-                      <span className="text-lg font-medium text-white/60 uppercase tracking-wider">{categoryLabels[cocktail.category]}</span>
-                    </div>
-                  )}
-                  <button
-                    onClick={() => setIsExpanded(false)}
-                    className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-600 hover:text-gray-900 transition-colors"
-                  >
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-
-                {/* Content */}
-                <div className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full" style={{ background: colors.bg, color: colors.primary }}>
-                      {cocktail.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'}
-                    </span>
-                    <span className="text-sm" style={{ color: '#8B8B8B' }}>
-                      {cocktail.spirit}
-                    </span>
-                  </div>
-                  <h2 className="text-3xl font-bold mb-2" style={{ color: '#2D2926' }}>
-                    {cocktail.name}
-                  </h2>
-                  <p className="text-lg mb-8" style={{ color: '#78716C' }}>
-                    {cocktail.tagline}
-                  </p>
-
-                  {/* Ingredients */}
-                  <div className="mb-8">
-                    <h3 className="text-xl font-bold mb-4" style={{ color: '#2D2926' }}>
-                      Ingredients
-                    </h3>
-                    <ul className="space-y-2">
-                      {cocktail.ingredients.map((ingredient, i) => (
-                        <li key={i} className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full" style={{ background: colors.primary }} />
-                          <span className="text-base" style={{ color: '#4A4A4A' }}>
-                            {ingredient}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Instructions */}
-                  <div className="mb-8">
-                    <h3 className="text-xl font-bold mb-4" style={{ color: '#2D2926' }}>
-                      Instructions
-                    </h3>
-                    <ol className="space-y-3">
-                      {cocktail.instructions.map((step, i) => (
-                        <li key={i} className="flex gap-4">
-                          <span className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style={{ background: colors.gradient, color: '#FFFFFF' }}>
-                            {i + 1}
-                          </span>
-                          <span className="text-base leading-relaxed pt-1" style={{ color: '#4A4A4A' }}>
-                            {step}
-                          </span>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
-
-                  {/* Details */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 rounded-lg" style={{ background: '#F5F3F0' }}>
-                      <p className="text-xs uppercase tracking-wider mb-2" style={{ color: '#8B8B8B' }}>
-                        Garnish
-                      </p>
-                      <p className="font-semibold" style={{ color: '#2D2926' }}>
-                        {cocktail.garnish}
-                      </p>
-                    </div>
-                    <div className="p-4 rounded-lg" style={{ background: '#F5F3F0' }}>
-                      <p className="text-xs uppercase tracking-wider mb-2" style={{ color: '#8B8B8B' }}>
-                        Glassware
-                      </p>
-                      <p className="font-semibold" style={{ color: '#2D2926' }}>
-                        {cocktail.glassware}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+    </motion.div>
   );
 };
 
 export default function CocktailSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
-  const [activeFilter, setActiveFilter] = useState<'all' | 'holiday' | 'classic' | 'nye' | 'bib' | 'redemption'>('all');
+  const [activeFilter, setActiveFilter] = useState<'all' | 'bib' | 'redemption'>('all');
+  const [selectedCocktail, setSelectedCocktail] = useState<Cocktail | null>(null);
 
   const filteredCocktails = cocktails.filter((c) => {
     if (activeFilter === 'all') return true;
-    if (activeFilter === 'bib' || activeFilter === 'redemption') return c.brand === activeFilter;
-    return c.category === activeFilter;
+    return c.brand === activeFilter;
   });
-
-  const filters = [
-    { id: 'all', label: 'All' },
-    { id: 'holiday', label: 'Holiday' },
-    { id: 'classic', label: 'Classic' },
-    { id: 'bib', label: 'Bib & Tucker' },
-    { id: 'redemption', label: 'Redemption' },
-  ] as const;
 
   return (
     <section
       id="cocktails"
       ref={ref}
-      className="relative py-16 md:py-24"
-      style={{ background: '#FAF7F2' }}
+      className="relative py-24 md:py-32"
+      style={{ backgroundColor: '#FAF8F5' }}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4" style={{ color: '#2D2926' }}>
+          <span className="text-[11px] uppercase tracking-[0.3em] text-[#BDA55D] font-medium mb-4 block">
+            Crafted Recipes
+          </span>
+          <h2 className="font-serif text-4xl md:text-5xl text-[#1A1410] mb-4">
             Signature Cocktails
           </h2>
-          <p className="text-lg md:text-xl font-light" style={{ color: '#78716C' }}>
-            Curated recipes for every occasion
+          <p className="text-lg text-[#78716C] font-light max-w-xl mx-auto">
+            Expertly crafted recipes that showcase the distinct character of each spirit.
           </p>
         </motion.div>
 
-        {/* Filters - Simplified */}
+        {/* Elegant Filter Tabs */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex justify-center gap-3 mb-12 flex-wrap"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="flex justify-center mb-14"
         >
-          {filters.map((filter) => (
-            <button
-              key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
-                activeFilter === filter.id
-                  ? 'text-white shadow-md'
-                  : 'bg-white text-gray-600 hover:bg-gray-50'
-              }`}
-              style={
-                activeFilter === filter.id
-                  ? {
-                      background:
-                        filter.id === 'bib'
-                          ? 'linear-gradient(135deg, #C85A36, #BDA55D)'
-                          : filter.id === 'redemption'
-                            ? 'linear-gradient(135deg, #FD9419, #D4A04A)'
-                            : 'linear-gradient(135deg, #2D2926, #4A4A4A)',
-                    }
-                  : {}
-              }
-            >
-              {filter.label}
-            </button>
-          ))}
+          <div className="inline-flex border border-[#E8E4DE] bg-white">
+            {[
+              { id: 'all', label: 'All Recipes' },
+              { id: 'bib', label: 'Bib & Tucker' },
+              { id: 'redemption', label: 'Redemption' },
+            ].map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => setActiveFilter(filter.id as 'all' | 'bib' | 'redemption')}
+                className={`px-8 py-3 text-xs uppercase tracking-[0.15em] font-medium transition-all duration-300 ${
+                  activeFilter === filter.id
+                    ? 'text-white'
+                    : 'text-[#5C5552] hover:text-[#1A1410]'
+                }`}
+                style={
+                  activeFilter === filter.id
+                    ? {
+                        backgroundColor: filter.id === 'bib' ? '#C85A36' : filter.id === 'redemption' ? '#D4872B' : '#1A1410'
+                      }
+                    : {}
+                }
+              >
+                {filter.label}
+              </button>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Cocktails Grid - Cleaner, less cluttered */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredCocktails.map((cocktail, index) => (
-            <CocktailCard key={cocktail.id} cocktail={cocktail} index={index} />
-          ))}
+        {/* Cocktails Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence mode="wait">
+            {filteredCocktails.map((cocktail, index) => (
+              <CocktailCard
+                key={cocktail.id}
+                cocktail={cocktail}
+                index={index}
+                onSelect={() => setSelectedCocktail(cocktail)}
+              />
+            ))}
+          </AnimatePresence>
         </div>
+
+        {/* Recipe Count */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-center mt-12 pt-12 border-t border-[#E8E4DE]"
+        >
+          <p className="text-sm text-[#9A9590]">
+            Showing {filteredCocktails.length} of {cocktails.length} recipes
+          </p>
+        </motion.div>
       </div>
+
+      {/* Recipe Modal */}
+      <AnimatePresence>
+        {selectedCocktail && (
+          <RecipeModal
+            cocktail={selectedCocktail}
+            onClose={() => setSelectedCocktail(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
