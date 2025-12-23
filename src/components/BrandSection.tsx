@@ -63,7 +63,7 @@ export default function BrandSection({
       <div className="absolute top-0 left-0 right-0 h-px bg-[#E5E2DC]" />
 
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        {/* Section Header - Centered */}
+        {/* Section Header - Centered with Logo */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -71,14 +71,21 @@ export default function BrandSection({
           className="text-center mb-16"
         >
           <span
-            className="inline-block text-xs tracking-[0.25em] uppercase mb-3 font-medium"
+            className="inline-block text-xs tracking-[0.25em] uppercase mb-4 font-medium"
             style={{ color: colors.primary }}
           >
             {theme === 'bib' ? 'Tennessee Bourbon' : 'American Rye'}
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-[#1A1410] mb-3">
-            {brandName}
-          </h2>
+          <div className="flex justify-center mb-4">
+            <Image
+              src={theme === 'bib' ? '/BAT_3D_Copper_Logo.png' : '/Redemption logo /Redemption_Whiskey_Logo.png'}
+              alt={brandName}
+              width={280}
+              height={100}
+              className="h-20 md:h-28 w-auto object-contain"
+              unoptimized={true}
+            />
+          </div>
           <p className="text-lg text-[#5C5552] italic">{tagline}</p>
         </motion.div>
 
