@@ -1,6 +1,7 @@
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import BrandSection from '@/components/BrandSection';
+import HolidayHubSection from '@/components/HolidayHubSection';
 import CocktailSection from '@/components/CocktailSection';
 import FoodPairingsSection from '@/components/FoodPairingsSection';
 import CocktailQuiz from '@/components/CocktailQuiz';
@@ -38,9 +39,10 @@ const bibAndTuckerData = {
     {
       name: 'Gold Roast Bourbon',
       description:
-        'Premium Arabica coffee beans steeped in cask strength 6-year whiskey, then expertly blended. A custom roast developed with a local Tennessee roaster.',
+        'Premium Arabica coffee beans steeped in cask strength 6-year whiskey, then expertly blended. A custom roast developed with a local Tennessee roaster. A truly one-of-a-kind bourbon that\'s complex, yet remarkably smooth with bold roasted notes.',
       proof: '92 Proof',
       notes: ['Fresh Coffee', 'Molasses', 'Milk Chocolate', 'Young Oak', 'Brown Spice'],
+      featured: true,
     },
     {
       name: 'The Tennessee Ten',
@@ -117,11 +119,12 @@ export default function Home() {
       <main className="relative">
         <Navigation />
         <Hero />
+        <ArticlesSection />
         <BrandSection {...bibAndTuckerData} />
         <BrandSection {...redemptionData} />
+        <HolidayHubSection />
         <CocktailSection />
         <FoodPairingsSection />
-        <ArticlesSection />
         <Footer />
         <CocktailQuiz />
       </main>
