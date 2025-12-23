@@ -102,12 +102,12 @@ export default function Home() {
     <main className="relative bg-[#FDFBF7]">
       <Navigation />
       <Hero />
+      <ArticlesSection />
       <BrandSection {...bibAndTuckerData} />
       <BrandSection {...redemptionData} />
       <HolidayHubSection />
       <CocktailSection />
       <FoodPairingsSection />
-      <ArticlesSection />
       <Footer />
       <CocktailQuiz />
     </main>
