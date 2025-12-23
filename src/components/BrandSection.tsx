@@ -52,6 +52,11 @@ export default function BrandSection({
 
   const colors = themeColors[theme];
 
+  const shopLinks = {
+    bib: 'https://store.whiskyadvocate.com/products/bib-tucker-6-year-old-small-batch-no-24?_pos=1&_psq=bib&_ss=e&_v=1.0',
+    redemption: 'https://store.whiskyadvocate.com/products/redemption-sur-lee-straight-rye-whiskey?_pos=1&_psq=redempt&_ss=e&_v=1.0',
+  };
+
   return (
     <section
       id={id}
@@ -239,6 +244,30 @@ export default function BrandSection({
               </motion.article>
             ))}
         </div>
+
+        {/* Shop CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-12 pt-10 border-t border-[#E5E2DC]"
+        >
+          <p className="text-sm text-[#5C5552] mb-4">
+            Ready to experience {brandName}?
+          </p>
+          <a
+            href={shopLinks[theme]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-opacity hover:opacity-90"
+            style={{ backgroundColor: colors.primary, color: '#FFFFFF' }}
+          >
+            Shop Now
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </motion.div>
       </div>
     </section>
   );
