@@ -392,17 +392,14 @@ export default function CocktailSection() {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id as 'all' | 'bib' | 'redemption')}
-                className={`px-8 py-3 text-xs uppercase tracking-[0.15em] font-medium transition-all duration-300 ${
-                  activeFilter === filter.id
-                    ? 'text-white'
-                    : 'text-[#5C5552] hover:text-[#1A1410]'
-                }`}
+                className="px-8 py-3 text-xs uppercase tracking-[0.15em] font-medium transition-all duration-300"
                 style={
                   activeFilter === filter.id
                     ? {
-                        backgroundColor: filter.id === 'bib' ? '#C85A36' : filter.id === 'redemption' ? '#D4872B' : '#1A1410'
+                        backgroundColor: filter.id === 'bib' ? '#C85A36' : filter.id === 'redemption' ? '#D4872B' : '#1A1410',
+                        color: '#FFFFFF'
                       }
-                    : {}
+                    : { color: '#5C5552' }
                 }
               >
                 {filter.label}

@@ -10,6 +10,7 @@ interface Product {
   proof: string;
   notes: string[];
   featured?: boolean;
+  shopUrl?: string;
 }
 
 interface BrandSectionProps {
@@ -51,6 +52,11 @@ export default function BrandSection({
   };
 
   const colors = themeColors[theme];
+
+  const shopLinks = {
+    bib: 'https://store.whiskyadvocate.com/products/bib-tucker-gold-roast-small-batch-bourbon-whiskey',
+    redemption: 'https://store.whiskyadvocate.com/products/redemption-rye-whiskey',
+  };
 
   return (
     <section
@@ -217,7 +223,7 @@ export default function BrandSection({
                 </p>
 
                 {/* Tasting Notes - Better contrast */}
-                <div>
+                <div className="mb-6">
                   <span className="text-[10px] tracking-[0.2em] uppercase text-[#78716C] font-medium block mb-3">
                     Tasting Notes
                   </span>
@@ -236,9 +242,49 @@ export default function BrandSection({
                     ))}
                   </div>
                 </div>
+
+                {/* Shop Link */}
+                {product.shopUrl && (
+                  <a
+                    href={product.shopUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.1em] transition-colors hover:opacity-80"
+                    style={{ color: colors.primary }}
+                  >
+                    Shop This Bottle
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                )}
               </motion.article>
             ))}
         </div>
+
+        {/* Shop CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-12 pt-10 border-t border-[#E5E2DC]"
+        >
+          <p className="text-sm text-[#5C5552] mb-4">
+            Ready to experience {brandName}?
+          </p>
+          <a
+            href={shopLinks[theme]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-opacity hover:opacity-90"
+            style={{ backgroundColor: colors.primary, color: '#FFFFFF' }}
+          >
+            Shop Now
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </motion.div>
       </div>
     </section>
   );

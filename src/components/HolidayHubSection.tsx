@@ -158,26 +158,37 @@ export default function HolidayHubSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <Link href="#bib-tucker" className="block group h-full">
-              <div
-                className="relative overflow-hidden h-full"
-                style={{ background: 'linear-gradient(135deg, #C85A36, #BDA55D)', minHeight: '280px' }}
-              >
-                <div className="p-8 md:p-10 text-white flex flex-col h-full">
-                  <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">Tennessee Bourbon</span>
-                  <h3 className="font-serif text-3xl md:text-4xl mb-3">Bib & Tucker</h3>
-                  <p className="text-sm md:text-base opacity-90 mb-6 flex-grow">
-                    From Gold Roast after-dinner sipping to Double Char by the fire — award-winning bourbons for every moment.
-                  </p>
-                  <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all">
+            <div
+              className="relative overflow-hidden h-full"
+              style={{ background: 'linear-gradient(135deg, #C85A36, #BDA55D)', minHeight: '280px' }}
+            >
+              <div className="p-8 md:p-10 text-white flex flex-col h-full">
+                <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">Tennessee Bourbon</span>
+                <h3 className="font-serif text-3xl md:text-4xl mb-3">Bib & Tucker</h3>
+                <p className="text-sm md:text-base opacity-90 mb-6 flex-grow">
+                  From Gold Roast after-dinner sipping to Double Char by the fire — award-winning bourbons for every moment.
+                </p>
+                <div className="flex flex-wrap items-center gap-4">
+                  <Link href="#bib-tucker" className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all">
                     Explore Collection
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                  </span>
+                  </Link>
+                  <a
+                    href="https://store.whiskyadvocate.com/products/bib-tucker-gold-roast-small-batch-bourbon-whiskey"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 bg-white/20 hover:bg-white/30 transition-colors"
+                  >
+                    Shop Now
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
                 </div>
               </div>
-            </Link>
+            </div>
           </motion.div>
 
           {/* Redemption */}
@@ -186,26 +197,37 @@ export default function HolidayHubSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <Link href="#redemption" className="block group h-full">
-              <div
-                className="relative overflow-hidden h-full"
-                style={{ background: 'linear-gradient(135deg, #D4872B, #BDA55D)', minHeight: '280px' }}
-              >
-                <div className="p-8 md:p-10 text-white flex flex-col h-full">
-                  <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">American Rye</span>
-                  <h3 className="font-serif text-3xl md:text-4xl mb-3">Redemption</h3>
-                  <p className="text-sm md:text-base opacity-90 mb-6 flex-grow">
-                    High-rye character meets holiday warmth. Perfect for Manhattans and all your favorite classics.
-                  </p>
-                  <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all">
+            <div
+              className="relative overflow-hidden h-full"
+              style={{ background: 'linear-gradient(135deg, #D4872B, #BDA55D)', minHeight: '280px' }}
+            >
+              <div className="p-8 md:p-10 text-white flex flex-col h-full">
+                <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">American Rye</span>
+                <h3 className="font-serif text-3xl md:text-4xl mb-3">Redemption</h3>
+                <p className="text-sm md:text-base opacity-90 mb-6 flex-grow">
+                  High-rye character meets holiday warmth. Perfect for Manhattans and all your favorite classics.
+                </p>
+                <div className="flex flex-wrap items-center gap-4">
+                  <Link href="#redemption" className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all">
                     Explore Collection
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                  </span>
+                  </Link>
+                  <a
+                    href="https://store.whiskyadvocate.com/products/redemption-rye-whiskey"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 bg-white/20 hover:bg-white/30 transition-colors"
+                  >
+                    Shop Now
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
                 </div>
               </div>
-            </Link>
+            </div>
           </motion.div>
         </div>
 

@@ -26,14 +26,25 @@ export default function Navigation() {
 
   return (
     <>
+      {/* Sponsored Content Disclaimer Bar */}
+      <div
+        className="fixed top-0 left-0 right-0 z-50 py-2 text-center"
+        style={{ backgroundColor: '#1A1410' }}
+      >
+        <p className="text-[10px] md:text-xs tracking-[0.15em] uppercase" style={{ color: '#BDA55D' }}>
+          Sponsored Content from Deutsch Family Wine & Spirits
+        </p>
+      </div>
+
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled ? 'py-4' : 'py-6'
         }`}
         style={{
+          top: '32px',
           background: isScrolled
             ? 'rgba(253, 251, 247, 0.95)'
             : 'transparent',
@@ -112,6 +123,7 @@ export default function Navigation() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 lg:hidden"
+            style={{ top: '32px' }}
           >
             {/* Backdrop */}
             <motion.div
