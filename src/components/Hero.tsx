@@ -7,161 +7,133 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, #FDFBF7 0%, #F5F0E8 100%)' }}
+      className="relative min-h-screen flex items-center justify-center"
+      style={{ background: '#FDFBF7' }}
     >
-      {/* Subtle texture overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* Elegant gold accent line */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#BDA55D]/40 to-transparent" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 py-32 text-center">
-        {/* Whisky Advocate Badge */}
+      {/* Content Container - Focused */}
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-24 text-center">
+        {/* Whisky Advocate Logo */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-12"
+          transition={{ duration: 0.8 }}
+          className="mb-16"
         >
-          <div className="inline-flex flex-col items-center">
-            <Image
-              src="/images/logos/WA_BLUE-removebg-preview.png"
-              alt="Whisky Advocate"
-              width={180}
-              height={54}
-              className="h-10 w-auto object-contain mb-4"
-              priority
-              unoptimized={true}
-            />
-            <div className="flex items-center gap-4">
-              <span className="h-[1px] w-12 bg-[#2D2926]/20" />
-              <span className="text-[11px] tracking-[0.3em] uppercase text-[#78716C] font-light">
-                Presents
-              </span>
-              <span className="h-[1px] w-12 bg-[#2D2926]/20" />
-            </div>
-          </div>
+          <Image
+            src="/images/logos/WA_BLUE-removebg-preview.png"
+            alt="Whisky Advocate"
+            width={200}
+            height={60}
+            className="h-12 w-auto object-contain mx-auto mb-3"
+            priority
+            unoptimized={true}
+          />
+          <p className="text-xs tracking-[0.25em] uppercase text-[#78716C]">
+            Presents
+          </p>
         </motion.div>
 
-        {/* Main Headline */}
-        <motion.div
+        {/* Main Headline - Centered Focus */}
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-8"
+          transition={{ duration: 1, delay: 0.2 }}
+          className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-[#1A1410] leading-[1.1] mb-6"
         >
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight text-[#1A1410] leading-[0.95]">
-            The Art of
-            <br />
-            <span className="font-normal italic text-[#C85A36]">American Whiskey</span>
-          </h1>
-        </motion.div>
+          The Art of
+          <br />
+          <span className="italic text-[#C85A36]">American Whiskey</span>
+        </motion.h1>
 
-        {/* Elegant Divider */}
+        {/* Centered Divider */}
         <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="flex items-center justify-center gap-4 mb-10"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex items-center justify-center gap-3 mb-8"
         >
-          <span className="h-[1px] w-16 bg-gradient-to-r from-transparent to-[#BDA55D]/60" />
-          <span className="w-1.5 h-1.5 rotate-45 border border-[#BDA55D]/60" />
-          <span className="h-[1px] w-16 bg-gradient-to-l from-transparent to-[#BDA55D]/60" />
+          <span className="h-px w-12 bg-[#BDA55D]" />
+          <span className="w-2 h-2 rotate-45 border border-[#BDA55D]" />
+          <span className="h-px w-12 bg-[#BDA55D]" />
         </motion.div>
 
         {/* Subheadline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-lg md:text-xl text-[#5C5552] font-light leading-relaxed max-w-2xl mx-auto mb-12"
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="text-lg md:text-xl text-[#4A4543] leading-relaxed max-w-xl mx-auto mb-12"
         >
           Discover the heritage and craftsmanship of{' '}
-          <span className="text-[#1A1410] font-medium">Bib & Tucker</span>
+          <strong className="font-semibold text-[#1A1410]">Bib & Tucker</strong>
           {' '}and{' '}
-          <span className="text-[#1A1410] font-medium">Redemption</span>
-          {' '}— two expressions of American whiskey tradition.
+          <strong className="font-semibold text-[#1A1410]">Redemption</strong>.
         </motion.p>
 
-        {/* Brand Showcase */}
+        {/* Brand Links - Symmetric */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 mb-16"
+          className="flex items-center justify-center gap-12 mb-12"
         >
-          <a
-            href="#bib-tucker"
-            className="group flex flex-col items-center"
-          >
-            <span className="text-2xl md:text-3xl font-serif text-[#C85A36] tracking-wide group-hover:text-[#A34828] transition-colors duration-300">
+          <a href="#bib-tucker" className="group text-center">
+            <span className="block text-2xl font-serif text-[#C85A36] group-hover:text-[#A34828] transition-colors">
               Bib & Tucker
             </span>
-            <span className="text-xs tracking-[0.2em] uppercase text-[#8B8685] mt-1 group-hover:text-[#C85A36] transition-colors duration-300">
+            <span className="text-[11px] tracking-[0.2em] uppercase text-[#78716C]">
               Tennessee Bourbon
             </span>
           </a>
 
-          <div className="hidden sm:block w-[1px] h-12 bg-[#2D2926]/10" />
+          <span className="w-px h-10 bg-[#D4D1C8]" />
 
-          <a
-            href="#redemption"
-            className="group flex flex-col items-center"
-          >
-            <span className="text-2xl md:text-3xl font-serif text-[#D4872B] tracking-wide group-hover:text-[#B36E1F] transition-colors duration-300">
+          <a href="#redemption" className="group text-center">
+            <span className="block text-2xl font-serif text-[#D4872B] group-hover:text-[#B36E1F] transition-colors">
               Redemption
             </span>
-            <span className="text-xs tracking-[0.2em] uppercase text-[#8B8685] mt-1 group-hover:text-[#D4872B] transition-colors duration-300">
-              Rye Whiskey
+            <span className="text-[11px] tracking-[0.2em] uppercase text-[#78716C]">
+              American Rye
             </span>
           </a>
         </motion.div>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons - Symmetric */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex items-center justify-center gap-4"
         >
           <a
             href="#bib-tucker"
-            className="group relative px-8 py-4 bg-[#1A1410] text-white text-sm tracking-[0.15em] uppercase font-medium overflow-hidden transition-all duration-500 hover:bg-[#2D2926]"
+            className="px-8 py-4 bg-[#1A1410] text-white text-sm tracking-[0.1em] uppercase font-medium hover:bg-[#2D2926] transition-colors"
           >
-            <span className="relative z-10">Explore the Collection</span>
+            Explore Collection
           </a>
           <a
             href="#cocktails"
-            className="px-8 py-4 border border-[#2D2926]/30 text-[#2D2926] text-sm tracking-[0.15em] uppercase font-medium hover:border-[#C85A36] hover:text-[#C85A36] transition-all duration-300"
+            className="px-8 py-4 border-2 border-[#1A1410] text-[#1A1410] text-sm tracking-[0.1em] uppercase font-medium hover:bg-[#1A1410] hover:text-white transition-all"
           >
-            Cocktail Recipes
+            Cocktails
           </a>
         </motion.div>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#F5F0E8] to-transparent" />
-
-      {/* Scroll indicator */}
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center"
       >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#8B8685]">Scroll</span>
-          <div className="w-[1px] h-8 bg-gradient-to-b from-[#BDA55D]/60 to-transparent" />
+          <svg className="w-6 h-6 text-[#BDA55D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
         </motion.div>
       </motion.div>
     </section>
