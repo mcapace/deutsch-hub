@@ -1,0 +1,296 @@
+<!--
+  Deutsch Family Wine & Spirits - Store Hub
+
+  HOW TO USE IN SHOPIFY:
+  1. Go to Online Store > Pages > Add page
+  2. Click "Show HTML" button (<>) in the editor
+  3. Paste this entire code
+  4. Save the page
+
+  Or use as a Custom Liquid section in your theme.
+-->
+
+<style>
+.dsh{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:#FDFBF7;color:#3A3735;line-height:1.6;-webkit-font-smoothing:antialiased;margin:0;padding:0}
+.dsh *{box-sizing:border-box;margin:0;padding:0}
+.dsh-container{max-width:1200px;margin:0 auto;padding:0 24px}
+.dsh-sponsored{background:#1A1410;padding:12px 24px;text-align:center}
+.dsh-sponsored p{color:#BDA55D;font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:0}
+.dsh-hero{background:linear-gradient(180deg,#1A1410 0%,#2D2622 100%);padding:80px 24px;text-align:center;position:relative;overflow:hidden}
+.dsh-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,rgba(189,165,93,.1) 0%,transparent 70%);pointer-events:none}
+.dsh-hero-content{position:relative;z-index:1;max-width:800px;margin:0 auto}
+.dsh-hero h1{font-family:Georgia,'Times New Roman',serif;font-size:42px;color:#fff;margin-bottom:16px;font-weight:400}
+.dsh-hero .subtitle{color:#BDA55D;font-size:14px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:32px}
+.dsh-hero .desc{color:rgba(255,255,255,.7);font-size:16px;letter-spacing:.05em}
+.dsh-divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:24px 0}
+.dsh-divider span:first-child,.dsh-divider span:last-child{width:40px;height:1px;background:#BDA55D}
+.dsh-divider span:nth-child(2){width:6px;height:6px;background:#BDA55D;transform:rotate(45deg)}
+.dsh-section{padding:80px 24px;border-top:1px solid #E5E2DC}
+.dsh-header{text-align:center;margin-bottom:48px}
+.dsh-label{display:block;font-size:12px;letter-spacing:.25em;text-transform:uppercase;font-weight:500;margin-bottom:16px}
+.dsh-label.bib{color:#C85A36}
+.dsh-label.red{color:#D4872B}
+.dsh-logo{max-height:80px;width:auto;margin-bottom:12px}
+.dsh-brand-name{font-family:Georgia,'Times New Roman',serif;font-size:30px;color:#1A1410;margin-bottom:8px}
+.dsh-tagline{font-size:18px;color:#5C5552;font-style:italic;margin-top:12px}
+.dsh-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+@media(max-width:768px){.dsh-hero h1{font-size:32px}.dsh-grid{grid-template-columns:1fr}.dsh-logo{max-height:70px}}
+.dsh-card{background:#fff;border:1px solid #E5E2DC;padding:24px;position:relative;transition:all .3s ease}
+@media(min-width:768px){.dsh-card{padding:32px}}
+.dsh-card:hover{border-color:rgba(189,165,93,.5);box-shadow:0 10px 40px rgba(0,0,0,.08)}
+.dsh-featured{position:absolute;top:-12px;left:24px;padding:4px 12px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#fff;font-weight:500}
+.dsh-featured.bib{background:#C85A36}
+.dsh-featured.red{background:#D4872B}
+.dsh-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:16px}
+.dsh-product-name{font-family:Georgia,'Times New Roman',serif;font-size:20px;color:#1A1410}
+@media(min-width:768px){.dsh-product-name{font-size:24px}}
+.dsh-proof{flex-shrink:0;font-size:12px;font-weight:600;padding:4px 12px}
+.dsh-proof.bib{background:rgba(200,90,54,.1);color:#C85A36}
+.dsh-proof.red{background:rgba(212,135,43,.1);color:#D4872B}
+.dsh-desc{color:#3A3735;font-size:14px;line-height:1.7;margin-bottom:24px}
+@media(min-width:768px){.dsh-desc{font-size:15px}}
+.dsh-notes-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#78716C;font-weight:500;display:block;margin-bottom:12px}
+.dsh-notes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.dsh-note{font-size:12px;padding:6px 12px;background:#F5F3F0;color:#3A3735;font-weight:500}
+.dsh-shop-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;transition:opacity .3s}
+.dsh-shop-link:hover{opacity:.8}
+.dsh-shop-link.bib{color:#C85A36}
+.dsh-shop-link.red{color:#D4872B}
+.dsh-cta{text-align:center;margin-top:48px;padding-top:40px;border-top:1px solid #E5E2DC}
+.dsh-cta p{font-size:14px;color:#5C5552;margin-bottom:16px}
+.dsh-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;text-decoration:none;color:#fff;transition:opacity .3s}
+.dsh-cta-btn:hover{opacity:.9;color:#fff}
+.dsh-cta-btn.bib{background:#C85A36}
+.dsh-cta-btn.red{background:#D4872B}
+.dsh-footer{background:#1A1410;padding:48px 24px;text-align:center}
+.dsh-footer p{color:#78716C;font-size:12px;margin-bottom:8px}
+.dsh-footer .legal{font-size:11px;color:#5C5552}
+</style>
+
+<div class="dsh">
+  <!-- Sponsored Disclaimer -->
+  <div class="dsh-sponsored">
+    <p>Sponsored Content from Deutsch Family Wine &amp; Spirits</p>
+  </div>
+
+  <!-- Hero -->
+  <div class="dsh-hero">
+    <div class="dsh-hero-content">
+      <p class="subtitle">Premium American Whiskey</p>
+      <h1>The Deutsch Spirits Collection</h1>
+      <div class="dsh-divider">
+        <span></span><span></span><span></span>
+      </div>
+      <p class="desc">Discover our curated selection of award-winning bourbons and ryes</p>
+    </div>
+  </div>
+
+  <!-- Bib & Tucker -->
+  <section class="dsh-section">
+    <div class="dsh-container">
+      <div class="dsh-header">
+        <span class="dsh-label bib">Tennessee Bourbon</span>
+        <h2 class="dsh-brand-name">Bib &amp; Tucker</h2>
+        <p class="dsh-tagline">Where Bold and Refined Come Together</p>
+      </div>
+
+      <div class="dsh-grid">
+        <!-- Gold Roast -->
+        <div class="dsh-card">
+          <span class="dsh-featured bib">Featured</span>
+          <div class="dsh-card-header">
+            <h3 class="dsh-product-name">Gold Roast Bourbon</h3>
+            <span class="dsh-proof bib">92 Proof</span>
+          </div>
+          <p class="dsh-desc">Premium Arabica coffee beans steeped in cask strength 6-year whiskey, then expertly blended. A truly one-of-a-kind bourbon that's complex, yet remarkably smooth with bold roasted notes.</p>
+          <span class="dsh-notes-label">Tasting Notes</span>
+          <div class="dsh-notes">
+            <span class="dsh-note">Fresh Coffee</span>
+            <span class="dsh-note">Molasses</span>
+            <span class="dsh-note">Milk Chocolate</span>
+            <span class="dsh-note">Young Oak</span>
+            <span class="dsh-note">Brown Spice</span>
+          </div>
+          <a href="https://store.whiskyadvocate.com/products/bib-tucker-gold-roast-small-batch-bourbon-whiskey" target="_blank" rel="noopener noreferrer" class="dsh-shop-link bib">
+            Shop This Bottle
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+
+        <!-- Double Char -->
+        <div class="dsh-card">
+          <div class="dsh-card-header">
+            <h3 class="dsh-product-name">Double Char</h3>
+            <span class="dsh-proof bib">88 Proof</span>
+          </div>
+          <p class="dsh-desc">First aged 6 years in Tennessee, then finished minimum 5 months in heavily charred barrels smoked with sugar maple. Fire-forged for a smoky, savory profile.</p>
+          <span class="dsh-notes-label">Tasting Notes</span>
+          <div class="dsh-notes">
+            <span class="dsh-note">White Smoke</span>
+            <span class="dsh-note">Sugar Maple</span>
+            <span class="dsh-note">Dulce de Leche</span>
+            <span class="dsh-note">Toasted Cinnamon</span>
+            <span class="dsh-note">Vanilla</span>
+          </div>
+          <a href="https://store.whiskyadvocate.com/products/bib-tucker-double-char-small-batch-bourbon-whiskey" target="_blank" rel="noopener noreferrer" class="dsh-shop-link bib">
+            Shop This Bottle
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+
+        <!-- Classic Six -->
+        <div class="dsh-card">
+          <div class="dsh-card-header">
+            <h3 class="dsh-product-name">The Classic Six</h3>
+            <span class="dsh-proof bib">92 Proof</span>
+          </div>
+          <p class="dsh-desc">Aged 6 years in new American white oak with light char, then filtered through sugar maple charcoal in the Tennessee tradition. Complex yet refined with a chestnut finish.</p>
+          <span class="dsh-notes-label">Tasting Notes</span>
+          <div class="dsh-notes">
+            <span class="dsh-note">Oak</span>
+            <span class="dsh-note">Caramel</span>
+            <span class="dsh-note">Vanilla</span>
+            <span class="dsh-note">Dried Dark Fruit</span>
+            <span class="dsh-note">Toasted Corn</span>
+          </div>
+        </div>
+
+        <!-- Tennessee Ten -->
+        <div class="dsh-card">
+          <div class="dsh-card-header">
+            <h3 class="dsh-product-name">The Tennessee Ten</h3>
+            <span class="dsh-proof bib">92 Proof</span>
+          </div>
+          <p class="dsh-desc">A decade of patient aging creates an exceptionally refined bourbon with powerful depth. Subtle oak and vanilla meet complex character.</p>
+          <span class="dsh-notes-label">Tasting Notes</span>
+          <div class="dsh-notes">
+            <span class="dsh-note">Refined Oak</span>
+            <span class="dsh-note">Vanilla</span>
+            <span class="dsh-note">Leather</span>
+            <span class="dsh-note">Dark Chocolate</span>
+            <span class="dsh-note">Deep Spice</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dsh-cta">
+        <p>Ready to experience Bib &amp; Tucker?</p>
+        <a href="https://store.whiskyadvocate.com/products/bib-tucker-gold-roast-small-batch-bourbon-whiskey" target="_blank" rel="noopener noreferrer" class="dsh-cta-btn bib">
+          Shop Now
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Redemption -->
+  <section class="dsh-section">
+    <div class="dsh-container">
+      <div class="dsh-header">
+        <span class="dsh-label red">American Rye</span>
+        <h2 class="dsh-brand-name">Redemption</h2>
+        <p class="dsh-tagline">This is the Rye Revival</p>
+      </div>
+
+      <div class="dsh-grid">
+        <!-- Redemption Rye -->
+        <div class="dsh-card">
+          <div class="dsh-card-header">
+            <h3 class="dsh-product-name">Redemption Rye</h3>
+            <span class="dsh-proof red">92 Proof</span>
+          </div>
+          <p class="dsh-desc">95% rye, 5% malt. Big and spicy with toasted oak, allspice, and anise on the nose. The rye-forward profile pairs beautifully with classic cocktails.</p>
+          <span class="dsh-notes-label">Tasting Notes</span>
+          <div class="dsh-notes">
+            <span class="dsh-note">Toasted Oak</span>
+            <span class="dsh-note">Allspice</span>
+            <span class="dsh-note">Anise</span>
+            <span class="dsh-note">Mint</span>
+            <span class="dsh-note">Black Pepper</span>
+          </div>
+          <a href="https://store.whiskyadvocate.com/products/redemption-rye-whiskey" target="_blank" rel="noopener noreferrer" class="dsh-shop-link red">
+            Shop This Bottle
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+
+        <!-- Redemption Bourbon -->
+        <div class="dsh-card">
+          <div class="dsh-card-header">
+            <h3 class="dsh-product-name">Redemption Bourbon</h3>
+            <span class="dsh-proof red">88 Proof</span>
+          </div>
+          <p class="dsh-desc">75% corn, 21% rye, 4% malt. A truly easy drinking whiskey with a classic sweet backbone and assertive rye spice. Toffee, baking spice, and anise on the palate.</p>
+          <span class="dsh-notes-label">Tasting Notes</span>
+          <div class="dsh-notes">
+            <span class="dsh-note">Caramel</span>
+            <span class="dsh-note">Baking Spice</span>
+            <span class="dsh-note">Anise</span>
+            <span class="dsh-note">Black Pepper</span>
+            <span class="dsh-note">Toffee</span>
+          </div>
+          <a href="https://store.whiskyadvocate.com/products/redemption-bourbon-whiskey" target="_blank" rel="noopener noreferrer" class="dsh-shop-link red">
+            Shop This Bottle
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+
+        <!-- High Rye Bourbon -->
+        <div class="dsh-card">
+          <div class="dsh-card-header">
+            <h3 class="dsh-product-name">High Rye Bourbon</h3>
+            <span class="dsh-proof red">92 Proof</span>
+          </div>
+          <p class="dsh-desc">60% corn, 36% rye, 4% malt. Approaching the upper limit for bourbon, delivering bold spice with silky texture. Vanilla, red berries, and fennel-like licorice.</p>
+          <span class="dsh-notes-label">Tasting Notes</span>
+          <div class="dsh-notes">
+            <span class="dsh-note">Vanilla</span>
+            <span class="dsh-note">Red Berries</span>
+            <span class="dsh-note">Fennel</span>
+            <span class="dsh-note">Black Pepper</span>
+            <span class="dsh-note">Spiced Oak</span>
+          </div>
+          <a href="https://store.whiskyadvocate.com/products/redemption-high-rye-bourbon-whiskey" target="_blank" rel="noopener noreferrer" class="dsh-shop-link red">
+            Shop This Bottle
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+
+        <!-- Wheated Bourbon -->
+        <div class="dsh-card">
+          <div class="dsh-card-header">
+            <h3 class="dsh-product-name">Wheated Bourbon</h3>
+            <span class="dsh-proof red">96 Proof</span>
+          </div>
+          <p class="dsh-desc">51% corn, 45% wheat, 4% malt. Double Gold winner with candied ginger, sage, and lavender. Silky and harmonious yet robust — fresh pear over vanilla and cedar.</p>
+          <span class="dsh-notes-label">Tasting Notes</span>
+          <div class="dsh-notes">
+            <span class="dsh-note">Candied Ginger</span>
+            <span class="dsh-note">Lavender</span>
+            <span class="dsh-note">Hazelnut</span>
+            <span class="dsh-note">Coffee</span>
+            <span class="dsh-note">Toasted Bread</span>
+          </div>
+          <a href="https://store.whiskyadvocate.com/products/redemption-wheated-bourbon-whiskey" target="_blank" rel="noopener noreferrer" class="dsh-shop-link red">
+            Shop This Bottle
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="dsh-cta">
+        <p>Ready to experience Redemption?</p>
+        <a href="https://store.whiskyadvocate.com/products/redemption-rye-whiskey" target="_blank" rel="noopener noreferrer" class="dsh-cta-btn red">
+          Shop Now
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="dsh-footer">
+    <p>&copy; 2024 Deutsch Family Wine &amp; Spirits</p>
+    <p class="legal">Please enjoy responsibly. Must be 21+ to purchase.</p>
+  </div>
+</div>
