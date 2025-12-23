@@ -153,41 +153,41 @@ export default function ArticlesSection() {
 
   return (
     <>
-      <section
-        id="articles"
-        ref={ref}
-        className="relative py-16 md:py-24"
+    <section
+      id="articles"
+      ref={ref}
+        className="relative py-20 md:py-32"
         style={{ background: '#FAF7F2' }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Section Header */}
-          <motion.div
+          {/* Section Header - More prominent */}
+        <motion.div
             initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4" style={{ color: '#2D2926' }}>
-              Featured Stories
-            </h2>
-            <p className="text-lg md:text-xl font-light" style={{ color: '#78716C' }}>
+          className="text-center mb-16"
+        >
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6" style={{ color: '#2D2926' }}>
+            Featured Stories
+          </h2>
+            <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto" style={{ color: '#78716C' }}>
               Discover the heritage, craftsmanship, and stories behind American whiskey
-            </p>
-          </motion.div>
+          </p>
+        </motion.div>
 
-          {/* Articles Grid */}
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+          {/* Articles Grid - Larger, more prominent */}
+          <div className="grid md:grid-cols-2 gap-10 lg:gap-16 max-w-6xl mx-auto">
             {articles.map((article, index) => (
               <motion.article
                 key={article.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group"
+                className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group"
                 onClick={() => setSelectedArticle(article)}
               >
-                {/* Article Header */}
-                <div className="p-8">
+                {/* Article Header - Larger padding */}
+                <div className="p-10 md:p-12">
                   <div className="flex items-center gap-3 mb-4">
                     <span
                       className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full"
@@ -216,7 +216,7 @@ export default function ArticlesSection() {
                     <span>Read Full Story</span>
                     <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                      </svg>
                   </div>
                 </div>
               </motion.article>
@@ -303,12 +303,12 @@ function ArticleModal({ article, onClose }: { article: Article; onClose: () => v
                   <p key={index} className="mb-6 leading-relaxed text-base md:text-lg">
                     {paragraph}
                   </p>
-                );
-              })}
-            </div>
+            );
+          })}
+        </div>
           </div>
         </div>
       </motion.div>
-    </motion.div>
+        </motion.div>
   );
 }
