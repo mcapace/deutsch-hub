@@ -132,15 +132,25 @@ export default function Hero() {
         >
           <a
             href="#bib-tucker"
-            className="group relative px-8 py-4 bg-[#1A1410] text-white text-sm tracking-[0.15em] uppercase font-medium overflow-hidden transition-all duration-500 hover:bg-[#2D2926]"
+            className="px-8 py-4 text-sm tracking-[0.15em] uppercase font-medium transition-all duration-300 hover:opacity-90"
+            style={{ backgroundColor: '#C85A36', color: '#FFFFFF' }}
           >
-            <span className="relative z-10">Explore the Collection</span>
+            Explore the Collection
           </a>
           <a
             href="#cocktails"
-            className="px-8 py-4 border border-[#2D2926]/30 text-[#2D2926] text-sm tracking-[0.15em] uppercase font-medium hover:border-[#C85A36] hover:text-[#C85A36] transition-all duration-300"
+            className="px-8 py-4 border text-sm tracking-[0.15em] uppercase font-medium transition-all duration-300"
+            style={{ borderColor: '#2D2926', color: '#2D2926' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#C85A36';
+              e.currentTarget.style.color = '#C85A36';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = '#2D2926';
+              e.currentTarget.style.color = '#2D2926';
+            }}
           >
-            Cocktail Recipes
+            Cocktails
           </a>
         </motion.div>
       </div>
