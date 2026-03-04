@@ -64,10 +64,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-lg md:text-xl text-[#4A4543] leading-relaxed max-w-xl mx-auto mb-12"
         >
-          Discover the heritage and craftsmanship of{' '}
-          <strong className="font-semibold text-[#1A1410]">Bib & Tucker</strong>
-          {' '}and{' '}
-          <strong className="font-semibold text-[#1A1410]">Redemption</strong>.
+          Discover the heritage and craftsmanship of Bib & Tucker and Redemption.
         </motion.p>
 
         {/* Brand Logos - Symmetric */}
