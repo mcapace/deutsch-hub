@@ -107,3 +107,4 @@ export default function ImageGallery({ images, alt, className = '' }: ImageGalle
   );
 }
 
+

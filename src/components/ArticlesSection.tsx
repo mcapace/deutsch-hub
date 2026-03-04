@@ -56,9 +56,9 @@ The result is a bourbon with a touch of smoke on the nose—toasted oak and dulc
 
 The Tennessee Ten takes a different path: patience. Aged for a full decade and deliberately not chill-filtered, it offers greater depth of flavor than standard practice allows. The nose reveals vanilla layered with sweet roasted corn, toasted oak, and pipe tobacco. The palate has a velvety entry with balanced sweetness, evolving into a warm, slightly dry mid-palate touched with cocoa. The finish enrobes the senses with spicy cedar and kettle corn.
 
-**Celebrating Holidays and Tradition**
+**Celebrating Tradition Year-Round**
 
-The holidays are full of rituals—some meaningful, some obligatory. The morning coffee rushed before wrapping gifts. The evening drink after the guests have gone. The moments between chaos and connection.
+Special occasions are full of rituals—some meaningful, some simple. The morning coffee before a busy day. The evening drink after the guests have gone. The moments between chaos and connection.
 
 Bib & Tucker's portfolio offers something for each of those moments. Gold Roast for when morning and evening feel like they should meet in the middle. The Classic Six for celebrations that deserve something smooth and sophisticated. Double Char for quiet evenings by the fire. The Tennessee Ten for the moments worth remembering.
 
@@ -131,13 +131,13 @@ The nose is big and spicy: toasted oak, vegetal notes, allspice and anise. The p
 
 This isn't a compromise or a nod to history—it's a full commitment to what American rye was meant to be.
 
-**What It Means for the Holidays**
+**What It Means for Every Occasion**
 
-New Year's Eve has always been about fresh starts—resolutions, new beginnings, the turning of a page. There's something fitting about toasting that moment with a spirit that embodies the same idea.
+From New Year's toasts to quiet evenings, Redemption fits the moment. Fresh starts, celebrations, or simply the turn of a page—there's something fitting about a spirit that embodies second chances and revival.
 
 Redemption isn't just a name on a label. It's a reminder that what was lost can be found again. That traditions worth keeping don't disappear forever—they wait for someone to bring them back. That a spirit strong enough to help found a nation is strong enough to survive a century in the shadows and emerge again.
 
-Whether it's the rye-kissed bourbon with its smooth balance of sweet and spice, the High Rye for those who want bolder character, or the 95% rye that brings pre-Prohibition America into the modern glass—each expression offers something worth raising to the new year ahead.
+Whether it's the rye-kissed bourbon with its smooth balance of sweet and spice, the High Rye for those who want bolder character, or the 95% rye that brings pre-Prohibition America into the modern glass—each expression offers something worth raising, any time of year.
 
 This is the Rye Revival.`,
     brand: 'redemption',

@@ -80,7 +80,7 @@ const pairingsData: BrandPairings[] = [
         pairings: [
           { food: 'Bacon-Wrapped Dates', description: 'Sweet and savory with caramel notes' },
           { food: 'Brie & Crackers', description: 'Creamy cheese softens the spice' },
-          { food: 'Holiday Ham', description: 'Classic holiday pairing' },
+          { food: 'Glazed Ham', description: 'Classic sweet and savory pairing' },
           { food: 'Caramel Desserts', description: 'Toffee notes shine through' },
         ],
       },

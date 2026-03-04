@@ -14,7 +14,7 @@ interface Cocktail {
   garnish: string;
   glassware: string;
   occasion: string;
-  category: 'holiday' | 'winter' | 'nye' | 'classic';
+  category: 'seasonal' | 'winter' | 'nye' | 'classic';
   featured?: boolean;
 }
 
@@ -72,7 +72,7 @@ const cocktails: Cocktail[] = [
     brand: 'bib',
     spirit: 'Bib & Tucker Double Char',
     tagline: 'Smoky, rich, unforgettable',
-    category: 'holiday',
+    category: 'seasonal',
     ingredients: [
       '2 oz Bib & Tucker Double Char',
       '0.25 oz Maple Syrup',
@@ -90,12 +90,12 @@ const cocktails: Cocktail[] = [
     occasion: 'Fireside sipping',
   },
   {
-    id: 'holiday-manhattan',
-    name: 'Holiday Manhattan',
+    id: 'classic-manhattan',
+    name: 'Classic Manhattan',
     brand: 'bib',
     spirit: 'Bib & Tucker Classic Six',
     tagline: 'Classic elegance',
-    category: 'holiday',
+    category: 'seasonal',
     ingredients: [
       '2 oz Bib & Tucker Classic Six',
       '1 oz Sweet Vermouth',
@@ -109,7 +109,7 @@ const cocktails: Cocktail[] = [
     ],
     garnish: 'Brandied cherry',
     glassware: 'Coupe',
-    occasion: 'Holiday gatherings',
+    occasion: 'Dinner parties & gatherings',
   },
   {
     id: 'sazerac',

@@ -1,7 +1,7 @@
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import BrandSection from '@/components/BrandSection';
-import HolidayHubSection from '@/components/HolidayHubSection';
+import CollectionHubSection from '@/components/CollectionHubSection';
 import CocktailSection from '@/components/CocktailSection';
 import FoodPairingsSection from '@/components/FoodPairingsSection';
 import CocktailQuiz from '@/components/CocktailQuiz';
@@ -111,7 +111,7 @@ export default function Home() {
       <ArticlesSection />
       <BrandSection {...bibAndTuckerData} />
       <BrandSection {...redemptionData} />
-      <HolidayHubSection />
+      <CollectionHubSection />
       <CocktailSection />
       <FoodPairingsSection />
       <Footer />
