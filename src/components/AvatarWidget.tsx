@@ -33,9 +33,16 @@ function useDIDStream() {
     return JSON.parse(text) as Promise<Record<string, unknown>>;
   }, []);
 
+  type CreateSession = {
+    streamId: string;
+    sessionId: string;
+    offer: RTCSessionDescriptionInit;
+    iceServers?: RTCIceServer[];
+  };
+
   const connect = useCallback(
     async (videoEl: HTMLVideoElement) => {
-      const session = await call('create', {});
+      const session = (await call('create', {})) as CreateSession;
       sessionRef.current = { streamId: session.streamId, sessionId: session.sessionId };
 
       const peer = new RTCPeerConnection({
