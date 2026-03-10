@@ -1,74 +1,23 @@
 'use client';
 
 import { useRef, useState, useEffect, useCallback } from 'react';
-import * as did from '@d-id/client-sdk';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const agentId = process.env.NEXT_PUBLIC_DID_AGENT_ID;
+const presenterId = process.env.NEXT_PUBLIC_DID_PRESENTER_ID;
 
 export default function AvatarWidget() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const agentRef = useRef<Awaited<ReturnType<typeof did.createAgentManager>> | null>(null);
+  const pcRef = useRef<RTCPeerConnection | null>(null);
   const [expanded, setExpanded] = useState(false);
   const [status, setStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
 
-  const connect = useCallback(async () => {
-    if (!agentId?.trim()) {
-      setStatus('error');
-      setErrorMessage('Set NEXT_PUBLIC_DID_AGENT_ID in .env.local (create an agent at studio.d-id.com)');
-      return;
-    }
-
-    setStatus('loading');
-    setErrorMessage(null);
-
-    try {
-      const res = await fetch('/api/d-id/client-key');
-      const data = await res.json();
-      if (!res.ok || !data.clientKey) {
-        setStatus('error');
-        setErrorMessage(data.error || data.details || 'Could not get D-ID client key');
-        return;
-      }
-
-      const callbacks = {
-        onSrcObjectReady(value: MediaStream) {
-          if (videoRef.current) {
-            videoRef.current.srcObject = value;
-            setStatus('ready');
-          }
-        },
-        onConnectionStateChange(state: string) {
-          if (state === 'failed' || state === 'disconnected') {
-            setStatus('idle');
-          }
-        },
-        onNewMessage() {},
-      };
-
-      const manager = await did.createAgentManager(agentId, {
-        auth: { type: 'key', clientKey: data.clientKey },
-        callbacks,
-        streamOptions: { compatibilityMode: 'auto', streamWarmup: true },
-      });
-
-      agentRef.current = manager;
-      await manager.connect();
-    } catch (e) {
-      setStatus('error');
-      setErrorMessage(e instanceof Error ? e.message : String(e));
-    }
-  }, []);
-
-  const disconnect = useCallback(async () => {
-    if (agentRef.current) {
-      try {
-        await agentRef.current.disconnect();
-      } catch {}
-      agentRef.current = null;
+  const disconnect = useCallback(() => {
+    if (pcRef.current) {
+      pcRef.current.close();
+      pcRef.current = null;
     }
     setStatus('idle');
     if (videoRef.current) {
@@ -76,19 +25,100 @@ export default function AvatarWidget() {
     }
   }, []);
 
+  const connect = useCallback(async () => {
+    if (!presenterId?.trim()) {
+      setStatus('error');
+      setErrorMessage('NEXT_PUBLIC_DID_PRESENTER_ID is not set in .env.local');
+      return;
+    }
+
+    setStatus('loading');
+    setErrorMessage(null);
+
+    try {
+      const createRes = await fetch('/api/d-id/create-stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ script: 'Welcome. How can I help you today?' }),
+      });
+      const createData = await createRes.json();
+
+      if (!createRes.ok) {
+        setStatus('error');
+        setErrorMessage(createData.details ?? createData.error ?? 'Failed to create stream');
+        return;
+      }
+
+      const { id: streamId, session_id, offer, ice_servers } = createData;
+      if (!streamId || !offer) {
+        setStatus('error');
+        setErrorMessage('Invalid create-stream response (missing id or offer)');
+        return;
+      }
+
+      const pc = new RTCPeerConnection({
+        iceServers: ice_servers?.length ? ice_servers : [{ urls: 'stun:stun.l.google.com:19302' }],
+      });
+      pcRef.current = pc;
+
+      const remoteStream = new MediaStream();
+      pc.ontrack = (e) => {
+        if (e.streams?.[0]) {
+          e.streams[0].getTracks().forEach((t) => remoteStream.addTrack(t));
+        } else {
+          remoteStream.addTrack(e.track);
+        }
+        if (videoRef.current) {
+          videoRef.current.srcObject = remoteStream;
+          setStatus('ready');
+        }
+      };
+
+      const offerSdp = typeof offer === 'string' ? offer : offer.sdp ?? offer;
+      await pc.setRemoteDescription(
+        typeof offerSdp === 'string' ? { type: 'offer', sdp: offerSdp } : offer
+      );
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+
+      const sdpRes = await fetch(`/api/d-id/stream-sdp/${streamId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          answer: { type: answer.type, sdp: answer.sdp },
+          session_id,
+        }),
+      });
+
+      if (!sdpRes.ok) {
+        const errData = await sdpRes.json().catch(() => ({}));
+        setStatus('error');
+        setErrorMessage(errData.details ?? errData.error ?? 'Failed to start stream');
+        pc.close();
+        pcRef.current = null;
+        return;
+      }
+    } catch (e) {
+      setStatus('error');
+      setErrorMessage(e instanceof Error ? e.message : String(e));
+      if (pcRef.current) {
+        pcRef.current.close();
+        pcRef.current = null;
+      }
+    }
+  }, []);
+
   useEffect(() => {
     return () => {
-      if (agentRef.current) {
-        agentRef.current.disconnect().catch(() => {});
+      if (pcRef.current) {
+        pcRef.current.close();
       }
     };
   }, []);
 
   const handleOpen = () => {
     setExpanded(true);
-    if (status === 'idle') {
-      connect();
-    }
+    if (status === 'idle') connect();
   };
 
   const handleClose = () => {
@@ -98,33 +128,36 @@ export default function AvatarWidget() {
 
   const handleSendMessage = async () => {
     const text = message.trim();
-    if (!text || !agentRef.current || sending) return;
+    if (!text || sending) return;
     setSending(true);
     try {
-      await agentRef.current.chat(text);
+      await fetch('/api/d-id/create-stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ script: text }),
+      });
       setMessage('');
     } catch (e) {
-      console.error('Chat error:', e);
+      console.error('Send message error:', e);
     } finally {
       setSending(false);
     }
   };
 
-  if (!agentId?.trim()) {
+  if (!presenterId?.trim()) {
     return (
       <div
-        className="fixed bottom-20 right-6 z-40 w-16 h-16 rounded-full flex items-center justify-center text-white text-xs text-center p-2 border-2 border-amber-500/50"
+        className="fixed bottom-20 right-6 z-40 w-16 h-16 rounded-full shadow-xl flex items-center justify-center border-2 border-amber-500/50"
         style={{ background: 'linear-gradient(135deg, #C85A36, #BDA55D)' }}
-        title="Set NEXT_PUBLIC_DID_AGENT_ID in .env.local"
+        title="Set NEXT_PUBLIC_DID_PRESENTER_ID in .env.local"
       >
-        D-ID
+        <span className="text-2xl" aria-hidden>🍸</span>
       </div>
     );
   }
 
   return (
     <>
-      {/* Collapsed: bottom-right circle */}
       {!expanded && (
         <motion.button
           onClick={handleOpen}
@@ -138,7 +171,6 @@ export default function AvatarWidget() {
         </motion.button>
       )}
 
-      {/* Expanded: bar environment overlay */}
       <AnimatePresence>
         {expanded && (
           <motion.div
@@ -163,7 +195,7 @@ export default function AvatarWidget() {
                 {status === 'loading' && (
                   <div className="text-center text-white/80 px-6">
                     <p>Connecting to bartender…</p>
-                    <p className="text-sm mt-2 text-white/60">First connection takes 3–5 seconds while WebRTC negotiates.</p>
+                    <p className="text-sm mt-2 text-white/60">First connection takes 3–5 seconds.</p>
                   </div>
                 )}
                 {status === 'error' && (

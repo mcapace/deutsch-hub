@@ -181,7 +181,7 @@ const CocktailCard = ({ cocktail, index, onSelect }: { cocktail: Cocktail; index
       onClick={onSelect}
       className="group cursor-pointer"
     >
-      <div className="bg-white border border-[#E8E4DE] p-8 h-full transition-all duration-300 hover:border-[#BDA55D]/50 hover:shadow-lg">
+      <div className="bg-white border border-[#E8E4DE] p-8 h-full elevated-card rounded-sm">
         {/* Top Row - Brand & Category */}
         <div className="flex items-center justify-between mb-6">
           <span

@@ -1,5 +1,18 @@
 import type { Metadata } from 'next';
+import { Playfair_Display, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-serif',
+});
+
+const sourceSans = Source_Sans_3({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+});
 
 export const metadata: Metadata = {
   title: 'Deutsch Spirits Hub | Bib & Tucker + Redemption',
@@ -44,14 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body
-        className="antialiased"
-        style={{
-          fontFamily: "Georgia, 'Times New Roman', Times, serif",
-          backgroundColor: '#FAFAF8',
-          color: '#1A1410',
-        }}
-      >
+      <body className={`${playfair.variable} ${sourceSans.variable} antialiased`}>
         {children}
       </body>
     </html>

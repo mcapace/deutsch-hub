@@ -84,7 +84,7 @@ const CollectionFeatureCard = ({
       className="group"
     >
       <Link href={feature.link || '#'} className="block h-full">
-        <div className="bg-white border border-[#E5E2DC] p-6 h-full hover:border-[#BDA55D]/50 hover:shadow-lg transition-all duration-300">
+        <div className="bg-white border border-[#E5E2DC] p-6 h-full elevated-card rounded-sm">
           <h3 className="font-serif text-xl mb-2 text-[#1A1410] group-hover:text-[#C85A36] transition-colors">
             {feature.title}
           </h3>
@@ -224,7 +224,7 @@ export default function CollectionHubSection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center"
         >
-          <div className="border border-[#E5E2DC] bg-white p-10 max-w-2xl mx-auto">
+          <div className="border border-[#E5E2DC] bg-white p-10 max-w-2xl mx-auto elevated-card rounded-sm">
             <h3 className="font-serif text-2xl md:text-3xl text-[#1A1410] mb-3">
               Make Every Moment Unforgettable
             </h3>

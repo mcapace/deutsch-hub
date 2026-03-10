@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  /* Typography */
+  /* Typography - fallbacks; body gets Next.js font variables */
   --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-sans: 'Source Sans 3', system-ui, -apple-system, sans-serif;
 
   /* Brand Colors - Bib & Tucker */
   --bt-rust: #C85A36;
@@ -23,8 +23,16 @@
   --color-text-light: #8B8685;
   --color-border: #E5E2DC;
 
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(26, 20, 16, 0.04);
+  --shadow-card: 0 4px 20px rgba(26, 20, 16, 0.06), 0 1px 3px rgba(26, 20, 16, 0.04);
+  --shadow-elevated: 0 12px 40px rgba(26, 20, 16, 0.08), 0 4px 12px rgba(26, 20, 16, 0.04);
+  --shadow-glow-rust: 0 8px 32px rgba(200, 90, 54, 0.15);
+  --shadow-glow-gold: 0 8px 32px rgba(189, 165, 93, 0.12);
+
   /* Animation */
   --ease-elegant: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-smooth: 0.35s;
 }
 
 @theme inline {
@@ -47,9 +55,20 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle grain overlay for depth (optional - applied to main content areas) */
+.grain-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 0;
 }
 
 /* Typography */
@@ -99,6 +118,18 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* Elevated card - use for product cards, feature cards */
+.elevated-card {
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--duration-smooth) var(--ease-elegant),
+    transform var(--duration-smooth) var(--ease-elegant),
+    border-color var(--duration-smooth);
+}
+.elevated-card:hover {
+  box-shadow: var(--shadow-elevated);
+  border-color: rgba(189, 165, 93, 0.4);
 }
 
 @media (min-width: 1024px) {

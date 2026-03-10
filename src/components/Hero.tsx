@@ -7,8 +7,10 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center"
-      style={{ background: '#FDFBF7' }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden grain-overlay"
+      style={{
+        background: 'radial-gradient(ellipse 80% 70% at 50% 40%, rgba(253,251,247,1) 0%, rgba(248,246,241,0.98) 50%, rgba(245,243,238,0.95) 100%)',
+      }}
     >
       {/* Content Container - Focused */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-24 text-center">
@@ -38,11 +40,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-[#1A1410] leading-[1.1] mb-6"
+          className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-[#1A1410] leading-[1.05] tracking-tight mb-6"
         >
           The Art of
           <br />
-          <span className="italic text-[#C85A36]">American Whiskey</span>
+          <span className="italic text-[#C85A36] tracking-normal">American Whiskey</span>
         </motion.h1>
 
         {/* Centered Divider */}
@@ -114,14 +116,18 @@ export default function Hero() {
         >
           <a
             href="#bib-tucker"
-            className="px-8 py-4 text-sm tracking-[0.15em] uppercase font-medium transition-all duration-300 hover:opacity-90"
-            style={{ backgroundColor: '#C85A36', color: '#FFFFFF' }}
+            className="px-8 py-4 text-sm tracking-[0.15em] uppercase font-medium transition-all duration-300 hover:opacity-90 rounded-sm"
+            style={{
+              backgroundColor: '#C85A36',
+              color: '#FFFFFF',
+              boxShadow: 'var(--shadow-glow-rust)',
+            }}
           >
             Explore the Collection
           </a>
           <a
             href="#cocktails"
-            className="px-8 py-4 border text-sm tracking-[0.15em] uppercase font-medium transition-all duration-300"
+            className="px-8 py-4 border text-sm tracking-[0.15em] uppercase font-medium transition-all duration-300 rounded-sm hover:shadow-[var(--shadow-card)]"
             style={{ borderColor: '#2D2926', color: '#2D2926' }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = '#C85A36';
