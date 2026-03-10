@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const D_ID_API = 'https://api.d-id.com';
-const D_ID_API_KEY = process.env.D_ID_API_KEY;
+const D_ID_API_KEY = process.env.D_ID_API_KEY || process.env.DID_API_KEY;
 const DID_PRESENTER_ID = process.env.NEXT_PUBLIC_DID_PRESENTER_ID;
 const ELEVENLABS_VOICE_ID = process.env.ELEVENLABS_VOICE_ID || 'pNInz6obpgDQGcFmaJgB';
 
@@ -9,16 +9,34 @@ const AUTH = D_ID_API_KEY
   ? `Basic ${Buffer.from(D_ID_API_KEY).toString('base64')}`
   : '';
 
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+} as const;
+
+function jsonResponse(data: unknown, status = 200, init?: ResponseInit) {
+  return NextResponse.json(data, {
+    status,
+    ...init,
+    headers: { ...CORS_HEADERS, ...init?.headers },
+  });
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 200, headers: CORS_HEADERS });
+}
+
 export async function POST(req: NextRequest) {
   if (!AUTH) {
-    return NextResponse.json({ error: 'D_ID_API_KEY is not configured' }, { status: 500 });
+    return jsonResponse({ error: 'D_ID_API_KEY is not configured' }, 500);
   }
 
   let body: Record<string, unknown>;
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+    return jsonResponse({ error: 'Invalid JSON body' }, 400);
   }
 
   const { action, sessionId, streamId, offer, candidate, text } = body;
@@ -26,7 +44,7 @@ export async function POST(req: NextRequest) {
   try {
     if (action === 'create') {
       if (!DID_PRESENTER_ID?.trim()) {
-        return NextResponse.json({ error: 'NEXT_PUBLIC_DID_PRESENTER_ID is not set' }, { status: 400 });
+        return jsonResponse({ error: 'NEXT_PUBLIC_DID_PRESENTER_ID is not set' }, 400);
       }
       const res = await fetch(`${D_ID_API}/talks/streams`, {
         method: 'POST',
@@ -41,12 +59,12 @@ export async function POST(req: NextRequest) {
       const data = (await res.json()) as Record<string, unknown>;
       if (!res.ok) {
         console.error('D-ID create error:', data);
-        return NextResponse.json(
+        return jsonResponse(
           { error: 'D-ID create failed', details: data },
-          { status: res.status }
+          res.status
         );
       }
-      return NextResponse.json({
+      return jsonResponse({
         streamId: data.id ?? data.stream_id,
         sessionId: data.session_id,
         offer: data.offer ?? data.jsep,
@@ -56,7 +74,7 @@ export async function POST(req: NextRequest) {
 
     if (action === 'sdp') {
       if (!streamId || !offer) {
-        return NextResponse.json({ error: 'streamId and offer required' }, { status: 400 });
+        return jsonResponse({ error: 'streamId and offer required' }, 400);
       }
       const res = await fetch(`${D_ID_API}/talks/streams/${streamId}/sdp`, {
         method: 'POST',
@@ -66,14 +84,14 @@ export async function POST(req: NextRequest) {
       const data = await res.json();
       if (!res.ok) {
         console.error('D-ID sdp error:', data);
-        return NextResponse.json({ error: 'D-ID sdp failed', details: data }, { status: res.status });
+        return jsonResponse({ error: 'D-ID sdp failed', details: data }, res.status);
       }
-      return NextResponse.json(data);
+      return jsonResponse(data);
     }
 
     if (action === 'ice') {
       if (!streamId || !candidate) {
-        return NextResponse.json({ error: 'streamId and candidate required' }, { status: 400 });
+        return jsonResponse({ error: 'streamId and candidate required' }, 400);
       }
       const res = await fetch(`${D_ID_API}/talks/streams/${streamId}/ice`, {
         method: 'POST',
@@ -81,13 +99,13 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify({ candidate, session_id: sessionId }),
       });
       const data = await res.json();
-      if (!res.ok) return NextResponse.json({ error: 'D-ID ice failed', details: data }, { status: res.status });
-      return NextResponse.json(data);
+      if (!res.ok) return jsonResponse({ error: 'D-ID ice failed', details: data }, res.status);
+      return jsonResponse(data);
     }
 
     if (action === 'talk') {
       if (!streamId || !sessionId || typeof text !== 'string') {
-        return NextResponse.json({ error: 'streamId, sessionId and text required' }, { status: 400 });
+        return jsonResponse({ error: 'streamId, sessionId and text required' }, 400);
       }
       const res = await fetch(`${D_ID_API}/talks/streams/${streamId}`, {
         method: 'POST',
@@ -109,26 +127,26 @@ export async function POST(req: NextRequest) {
       const data = await res.json();
       if (!res.ok) {
         console.error('D-ID talk error:', data);
-        return NextResponse.json({ error: 'D-ID talk failed', details: data }, { status: res.status });
+        return jsonResponse({ error: 'D-ID talk failed', details: data }, res.status);
       }
-      return NextResponse.json(data);
+      return jsonResponse(data);
     }
 
     if (action === 'destroy') {
       if (!streamId || !sessionId) {
-        return NextResponse.json({ error: 'streamId and sessionId required' }, { status: 400 });
+        return jsonResponse({ error: 'streamId and sessionId required' }, 400);
       }
       const res = await fetch(`${D_ID_API}/talks/streams/${streamId}`, {
         method: 'DELETE',
         headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
         body: JSON.stringify({ session_id: sessionId }),
       });
-      return NextResponse.json({ ok: res.ok });
+      return jsonResponse({ ok: res.ok });
     }
 
-    return NextResponse.json({ error: 'Unknown action' }, { status: 400 });
+    return jsonResponse({ error: 'Unknown action' }, 400);
   } catch (err) {
     console.error('D-ID API error:', err);
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return jsonResponse({ error: String(err) }, 500);
   }
 }

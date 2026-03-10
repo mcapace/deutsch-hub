@@ -84,14 +84,14 @@ const CollectionFeatureCard = ({
       className="group"
     >
       <Link href={feature.link || '#'} className="block h-full">
-        <div className="bg-white border p-6 h-full elevated-card rounded-sm" style={{ borderColor: 'var(--color-border)' }}>
-          <h3 className="font-serif text-xl mb-2 transition-colors group-hover:[color:var(--bt-rust)]" style={{ color: 'var(--color-text)' }}>
+        <div className="bg-[#F7F2E8] border border-[#D8CEBC] p-6 h-full elevated-card rounded-sm hover:bg-[#EDE5D3]">
+          <h3 className="font-serif cocktail-name text-xl mb-2 transition-colors group-hover:text-[var(--copper)]" style={{ color: 'var(--ink)' }}>
             {feature.title}
           </h3>
-          <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--color-text-muted)' }}>
+          <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--fog)' }}>
             {feature.description}
           </p>
-          <div className="flex items-center gap-2 text-sm font-medium" style={{ color: brandColor }}>
+          <div className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--copper)' }}>
             <span>Learn more</span>
             <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -112,9 +112,9 @@ export default function CollectionHubSection() {
       ref={ref}
       id="collection"
       className="relative py-20 md:py-28"
-      style={{ background: 'var(--bt-warm-white)' }}
+      style={{ background: 'var(--warm)' }}
     >
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'var(--color-border)' }} />
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'var(--rule)' }} />
 
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <motion.div
@@ -123,13 +123,13 @@ export default function CollectionHubSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="inline-block text-xs tracking-[0.25em] uppercase mb-3 font-medium" style={{ color: 'var(--bt-rust)' }}>
+          <span className="inline-block text-xs tracking-[0.25em] uppercase mb-3 font-medium" style={{ color: 'var(--copper)' }}>
             Year-Round Collection
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-3" style={{ color: 'var(--color-text)' }}>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-3" style={{ color: 'var(--ink)' }}>
             Celebrate Every Moment
           </h2>
-          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-text-muted)' }}>
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--fog)' }}>
             Discover how Bib & Tucker and Redemption elevate any occasion—from quiet evenings to big gatherings.
           </p>
         </motion.div>
@@ -224,25 +224,25 @@ export default function CollectionHubSection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center"
         >
-          <div className="border bg-white p-10 max-w-2xl mx-auto elevated-card rounded-sm" style={{ borderColor: 'var(--color-border)' }}>
-            <h3 className="font-serif text-2xl md:text-3xl mb-3" style={{ color: 'var(--color-text)' }}>
-              Make Every Moment Unforgettable
-            </h3>
-            <p className="mb-8 max-w-lg mx-auto" style={{ color: 'var(--color-text-muted)' }}>
+        <div className="border bg-white p-10 max-w-2xl mx-auto elevated-card rounded-sm border-[#D8CEBC]">
+          <h3 className="font-serif text-2xl md:text-3xl mb-3" style={{ color: 'var(--ink)' }}>
+            Make Every Moment Unforgettable
+          </h3>
+          <p className="mb-8 max-w-lg mx-auto" style={{ color: 'var(--fog)' }}>
               Whether hosting a gathering or finding the perfect gift, our collections offer something special for every whiskey lover—all year long.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="#cocktails"
                 className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-opacity hover:opacity-90 text-white"
-                style={{ backgroundColor: 'var(--bt-rust)' }}
+                style={{ backgroundColor: 'var(--copper)' }}
               >
                 View Cocktails
               </Link>
               <Link
                 href="#pairings"
-                className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-all border-2"
-                style={{ borderColor: 'var(--color-text)', color: 'var(--color-text)' }}
+                className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-all border-2 border-[#D8CEBC]"
+                style={{ color: 'var(--ink)' }}
               >
                 Food Pairings
               </Link>

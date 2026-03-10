@@ -40,19 +40,6 @@ export default function BrandSection({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const themeColors = {
-    bib: {
-      primary: 'var(--bt-rust)',
-      accent: 'var(--bt-gold)',
-    },
-    redemption: {
-      primary: 'var(--redemption-orange)',
-      accent: 'var(--bt-gold)',
-    },
-  };
-
-  const colors = themeColors[theme];
-
   const shopLinks = {
     bib: 'https://store.whiskyadvocate.com/products/bib-tucker-gold-roast-small-batch-bourbon-whiskey',
     redemption: 'https://store.whiskyadvocate.com/products/redemption-rye-whiskey',
@@ -63,10 +50,10 @@ export default function BrandSection({
       id={id}
       ref={ref}
       className="relative py-24 md:py-32"
-      style={{ background: 'var(--bt-warm-white)' }}
+      style={{ background: id === 'redemption' ? 'var(--white)' : 'var(--warm)' }}
     >
-      {/* Top border */}
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'var(--color-border)' }} />
+      {/* Top border - 1px rule */}
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'var(--rule)' }} />
 
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Section Header - Centered with Logo */}
@@ -77,8 +64,8 @@ export default function BrandSection({
           className="text-center mb-16"
         >
           <span
-            className="inline-block text-xs tracking-[0.25em] uppercase mb-4 font-medium"
-            style={{ color: colors.primary }}
+            className="inline-block text-[8px] tracking-[0.28em] uppercase mb-4 font-medium"
+            style={{ color: 'var(--copper)' }}
           >
             {theme === 'bib' ? 'Tennessee Bourbon' : 'American Rye'}
           </span>
@@ -92,7 +79,7 @@ export default function BrandSection({
               unoptimized={true}
             />
           </div>
-          <p className="text-lg italic" style={{ color: 'var(--color-text-muted)' }}>{tagline}</p>
+          <p className="text-lg italic" style={{ color: 'var(--fog)' }}>{tagline}</p>
         </motion.div>
 
         {/* Main Content Grid */}
@@ -134,11 +121,11 @@ export default function BrandSection({
             <div className="mb-10">
               <h3
                 className="text-xs tracking-[0.25em] uppercase mb-4 font-medium"
-                style={{ color: colors.primary }}
+                style={{ color: 'var(--copper)' }}
               >
                 The Story
               </h3>
-              <p className="text-base md:text-lg leading-relaxed" style={{ color: 'var(--color-text)' }}>
+              <p className="text-base md:text-lg leading-relaxed" style={{ color: 'var(--ink)' }}>
                 {description}
               </p>
             </div>
@@ -147,11 +134,11 @@ export default function BrandSection({
             <div>
               <h3
                 className="text-xs tracking-[0.25em] uppercase mb-4 font-medium"
-                style={{ color: colors.primary }}
+                style={{ color: 'var(--copper)' }}
               >
                 Heritage
               </h3>
-              <p className="text-base md:text-lg leading-relaxed" style={{ color: 'var(--color-text)' }}>
+              <p className="text-base md:text-lg leading-relaxed" style={{ color: 'var(--ink)' }}>
                 {heritage}
               </p>
             </div>
@@ -165,13 +152,13 @@ export default function BrandSection({
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mb-10"
         >
-          <h3 className="font-serif text-2xl md:text-3xl mb-3" style={{ color: 'var(--color-text)' }}>
+          <h3 className="font-serif text-2xl md:text-3xl mb-3" style={{ color: 'var(--ink)' }}>
             The Collection
           </h3>
           <div className="flex items-center justify-center gap-3">
-            <span className="h-px w-10" style={{ background: 'var(--bt-gold)' }} />
-            <span className="w-1.5 h-1.5 rotate-45" style={{ background: 'var(--bt-gold)' }} />
-            <span className="h-px w-10" style={{ background: 'var(--bt-gold)' }} />
+            <span className="h-px w-10" style={{ background: 'var(--rule)' }} />
+            <span className="w-1.5 h-1.5 rotate-45" style={{ background: 'var(--mist)' }} />
+            <span className="h-px w-10" style={{ background: 'var(--rule)' }} />
           </div>
         </motion.div>
 
@@ -189,14 +176,13 @@ export default function BrandSection({
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                className="relative bg-white p-6 md:p-8 elevated-card rounded-sm border"
-                style={{ borderColor: 'var(--color-border)' }}
+            className="relative bg-[#F7F2E8] p-6 md:p-8 elevated-card rounded-sm border border-[#D8CEBC] hover:bg-[#EDE5D3]"
               >
                 {/* Featured Badge */}
                 {product.featured && (
                   <span
                     className="absolute -top-3 left-6 px-3 py-1 text-[10px] tracking-[0.15em] uppercase text-white font-medium"
-                    style={{ background: colors.primary }}
+                    style={{ background: 'var(--copper)' }}
                   >
                     Featured
                   </span>
@@ -204,39 +190,36 @@ export default function BrandSection({
 
                 {/* Product Header */}
                 <div className="flex items-start justify-between gap-4 mb-4">
-                  <h4 className="font-serif text-xl md:text-2xl" style={{ color: 'var(--color-text)' }}>
+                  <h4 className="font-serif product-name text-xl md:text-2xl" style={{ color: 'var(--ink)' }}>
                     {product.name}
                   </h4>
                   <span
                     className="flex-shrink-0 text-xs font-semibold px-3 py-1"
                     style={{
-                      background: `color-mix(in srgb, ${colors.primary} 15%, transparent)`,
-                      color: colors.primary,
+                      background: 'color-mix(in srgb, var(--copper) 15%, transparent)',
+                      color: 'var(--copper)',
                     }}
                   >
                     {product.proof}
                   </span>
                 </div>
 
-                {/* Description - Darker text for readability */}
-                <p className="leading-relaxed mb-6 text-sm md:text-base" style={{ color: 'var(--color-text)' }}>
+                {/* Description */}
+                <p className="leading-relaxed mb-6 text-sm md:text-base" style={{ color: 'var(--ink)' }}>
                   {product.description}
                 </p>
 
-                {/* Tasting Notes - Better contrast */}
+                {/* Tasting Notes - border rule, white bg, fog text */}
                 <div className="mb-6">
-                  <span className="text-[10px] tracking-[0.2em] uppercase font-medium block mb-3" style={{ color: 'var(--color-text-light)' }}>
+                  <span className="text-[10px] tracking-[0.2em] uppercase font-medium block mb-3" style={{ color: 'var(--fog)' }}>
                     Tasting Notes
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {product.notes.map((note) => (
                       <span
                         key={note}
-                        className="text-xs px-3 py-1.5 font-medium"
-                        style={{
-                          background: 'var(--color-bg-alt)',
-                          color: 'var(--color-text)',
-                        }}
+                        className="text-xs px-3 py-1.5 font-medium border border-[#D8CEBC] bg-white"
+                        style={{ color: 'var(--fog)' }}
                       >
                         {note}
                       </span>
@@ -244,18 +227,18 @@ export default function BrandSection({
                   </div>
                 </div>
 
-                {/* Shop Link */}
+                {/* Shop Link - copper with arrow after */}
                 {product.shopUrl && (
                   <a
                     href={product.shopUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.1em] transition-colors hover:opacity-80"
-                    style={{ color: colors.primary }}
+                    style={{ color: 'var(--copper)' }}
                   >
                     Shop This Bottle
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </a>
                 )}
@@ -268,10 +251,9 @@ export default function BrandSection({
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-12 pt-10 border-t"
-          style={{ borderColor: 'var(--color-border)' }}
+          className="text-center mt-12 pt-10 border-t border-[#D8CEBC]"
         >
-          <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
+          <p className="text-sm mb-4" style={{ color: 'var(--fog)' }}>
             Ready to experience {brandName}?
           </p>
           <a
@@ -279,7 +261,7 @@ export default function BrandSection({
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-opacity hover:opacity-90 text-white"
-            style={{ backgroundColor: colors.primary }}
+            style={{ backgroundColor: 'var(--copper)' }}
           >
             Shop Now
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -1,17 +1,20 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, Source_Sans_3 } from 'next/font/google';
+import { Playfair_Display, Jost } from 'next/font/google';
 import './globals.css';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-serif',
+  weight: ['400', '500', '700'],
+  style: ['normal', 'italic'],
 });
 
-const sourceSans = Source_Sans_3({
+const jost = Jost({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
+  weight: ['300', '400', '500'],
 });
 
 export const metadata: Metadata = {
@@ -57,7 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${playfair.variable} ${sourceSans.variable} antialiased`}>
+      <body className={`${playfair.variable} ${jost.variable} antialiased`}>
         {children}
       </body>
     </html>

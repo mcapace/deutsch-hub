@@ -26,12 +26,12 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Sponsored Content Disclaimer Bar */}
+      {/* Ribbon / Sponsored Content - dark */}
       <div
         className="fixed top-0 left-0 right-0 z-50 py-2 text-center"
-        style={{ backgroundColor: 'var(--bt-black)' }}
+        style={{ backgroundColor: '#1E1408' }}
       >
-        <p className="text-[10px] md:text-xs tracking-[0.15em] uppercase" style={{ color: 'var(--bt-gold)' }}>
+        <p className="text-[10px] md:text-xs tracking-[0.15em] uppercase" style={{ color: 'rgba(255,255,255,0.55)' }}>
           Sponsored Content from Deutsch Family Wine & Spirits
         </p>
       </div>
@@ -45,16 +45,14 @@ export default function Navigation() {
         }`}
         style={{
           top: '32px',
-          background: isScrolled
-            ? 'rgba(253, 251, 247, 0.95)'
-            : 'transparent',
-          backdropFilter: isScrolled ? 'blur(20px)' : 'none',
-          borderBottom: isScrolled ? '1px solid var(--color-border)' : 'none',
+          background: 'rgba(253,250,245,0.97)',
+          backdropFilter: 'blur(20px)',
+          borderBottom: '1px solid #D8CEBC',
         }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Logo */}
+            {/* Logo - dark, no invert */}
             <Link href="#hero" className="flex-shrink-0 group">
               <Image
                 src="/images/logos/WA_BLUE-removebg-preview.png"
@@ -73,13 +71,22 @@ export default function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="px-5 py-2 text-[13px] tracking-[0.05em] transition-colors duration-300 hover:[color:var(--bt-rust)]"
-                  style={{ color: 'var(--color-text-muted)' }}
+                  className="px-5 py-2 text-[13px] tracking-[0.05em] transition-colors duration-300 hover:text-[var(--copper)]"
+                  style={{ color: 'var(--fog)' }}
                 >
                   {item.name}
                 </Link>
               ))}
             </nav>
+
+            {/* CTA Button - copper */}
+            <a
+              href="#cocktails"
+              className="hidden lg:inline-flex px-5 py-2.5 text-sm font-medium tracking-wide rounded-sm transition-colors hover:opacity-90"
+              style={{ backgroundColor: '#A0622A', color: '#fff' }}
+            >
+              Cocktails
+            </a>
 
             {/* Mobile Menu Button */}
             <button
@@ -95,13 +102,13 @@ export default function Navigation() {
                   }}
                   transition={{ duration: 0.3 }}
                   className="w-6 h-[1.5px] origin-center"
-                  style={{ backgroundColor: 'var(--color-text)' }}
+                  style={{ backgroundColor: 'var(--ink)' }}
                 />
                 <motion.span
                   animate={{ opacity: isMobileMenuOpen ? 0 : 1 }}
                   transition={{ duration: 0.3 }}
                   className="w-6 h-[1.5px]"
-                  style={{ backgroundColor: 'var(--color-text)' }}
+                  style={{ backgroundColor: 'var(--ink)' }}
                 />
                 <motion.span
                   animate={{
@@ -110,7 +117,7 @@ export default function Navigation() {
                   }}
                   transition={{ duration: 0.3 }}
                   className="w-6 h-[1.5px] origin-center"
-                  style={{ backgroundColor: 'var(--color-text)' }}
+                  style={{ backgroundColor: 'var(--ink)' }}
                 />
               </div>
             </button>
@@ -135,7 +142,7 @@ export default function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="absolute inset-0 backdrop-blur-sm"
-              style={{ backgroundColor: 'rgba(15, 12, 10, 0.2)' }}
+              style={{ backgroundColor: 'rgba(30, 20, 8, 0.2)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
@@ -146,7 +153,7 @@ export default function Navigation() {
               exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="absolute right-0 top-0 bottom-0 w-full max-w-sm shadow-2xl"
-              style={{ background: 'var(--bt-warm-white)', boxShadow: 'var(--shadow-elevated)' }}
+              style={{ background: 'var(--white)', boxShadow: 'var(--shadow-elevated)' }}
             >
               <div className="flex flex-col h-full pt-24 px-8 pb-12">
                 {/* Nav Links */}
@@ -162,7 +169,7 @@ export default function Navigation() {
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="block py-4 text-2xl font-serif transition-colors border-b hover:[color:var(--bt-rust)]"
-                        style={{ color: 'var(--color-text)', borderColor: 'var(--color-border)' }}
+                        style={{ color: 'var(--ink)', borderColor: 'var(--rule)' }}
                       >
                         {item.name}
                       </Link>
@@ -176,9 +183,9 @@ export default function Navigation() {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
                   className="pt-8 border-t"
-                  style={{ borderColor: 'var(--color-border)' }}
+              style={{ borderColor: 'var(--rule)' }}
                 >
-                  <p className="text-xs tracking-[0.2em] uppercase" style={{ color: 'var(--color-text-light)' }}>
+                  <p className="text-xs tracking-[0.2em] uppercase" style={{ color: 'var(--fog)' }}>
                     Deutsch Family Spirits
                   </p>
                 </motion.div>

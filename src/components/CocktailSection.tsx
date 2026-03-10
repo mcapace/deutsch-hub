@@ -158,14 +158,8 @@ const cocktails: Cocktail[] = [
 ];
 
 const brandColors = {
-  bib: {
-    primary: 'var(--bt-rust)',
-    secondary: 'var(--bt-gold)',
-  },
-  redemption: {
-    primary: 'var(--redemption-orange)',
-    secondary: 'var(--bt-gold)',
-  },
+  bib: { primary: 'var(--copper)', secondary: 'var(--amber)' },
+  redemption: { primary: 'var(--copper)', secondary: 'var(--amber)' },
 };
 
 // Elegant Cocktail Card - Text-focused, no images
@@ -181,50 +175,50 @@ const CocktailCard = ({ cocktail, index, onSelect }: { cocktail: Cocktail; index
       onClick={onSelect}
       className="group cursor-pointer"
     >
-      <div className="bg-white border p-8 h-full elevated-card rounded-sm" style={{ borderColor: 'var(--color-border)' }}>
-        {/* Top Row - Brand & Category */}
+      <div className="bg-[#F7F2E8] border border-[#D8CEBC] p-8 h-full elevated-card rounded-sm hover:bg-[#EDE5D3]">
+        {/* Top Row - Spirit label copper */}
         <div className="flex items-center justify-between mb-6">
           <span
             className="text-[10px] font-semibold uppercase tracking-[0.2em]"
-            style={{ color: colors.primary }}
+            style={{ color: 'var(--copper)' }}
           >
             {cocktail.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'}
           </span>
           {cocktail.featured && (
-            <span className="text-[9px] uppercase tracking-[0.15em] px-2 py-1 border" style={{ borderColor: colors.primary, color: colors.primary }}>
+            <span className="text-[9px] uppercase tracking-[0.15em] px-2 py-1 border border-[#D8CEBC]" style={{ color: 'var(--copper)' }}>
               Featured
             </span>
           )}
         </div>
 
-        {/* Name */}
-        <h3 className="font-serif text-2xl mb-2 transition-colors group-hover:[color:var(--bt-rust)]" style={{ color: 'var(--color-text)' }}>
+        {/* Name - Playfair Display */}
+        <h3 className="font-serif cocktail-name text-2xl mb-2 transition-colors group-hover:text-[var(--copper)]" style={{ color: 'var(--ink)' }}>
           {cocktail.name}
         </h3>
 
         {/* Tagline */}
-        <p className="text-sm mb-6 leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+        <p className="text-sm mb-6 leading-relaxed" style={{ color: 'var(--fog)' }}>
           {cocktail.tagline}
         </p>
 
         {/* Spirit */}
-        <div className="border-t pt-5 mb-5" style={{ borderColor: 'var(--color-border)' }}>
-          <p className="text-[10px] uppercase tracking-[0.2em] mb-1" style={{ color: 'var(--color-text-light)' }}>Base Spirit</p>
-          <p className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>{cocktail.spirit}</p>
+        <div className="border-t border-[#D8CEBC] pt-5 mb-5">
+          <p className="text-[10px] uppercase tracking-[0.2em] mb-1" style={{ color: 'var(--fog)' }}>Base Spirit</p>
+          <p className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{cocktail.spirit}</p>
         </div>
 
         {/* Key Info Row */}
-        <div className="flex items-center justify-between text-xs" style={{ color: 'var(--color-text-muted)' }}>
+        <div className="flex items-center justify-between text-xs" style={{ color: 'var(--fog)' }}>
           <span>{cocktail.glassware}</span>
-          <span className="w-1 h-1 rounded-full" style={{ background: 'var(--bt-gold)' }} />
+          <span className="w-1 h-1 rounded-full" style={{ background: 'var(--amber)' }} />
           <span>{cocktail.occasion}</span>
         </div>
 
-        {/* View Recipe Link */}
-        <div className="mt-6 pt-5 border-t" style={{ borderColor: 'var(--color-border)' }}>
+        {/* View Recipe Link - copper, arrow after */}
+        <div className="mt-6 pt-5 border-t border-[#D8CEBC]">
           <span
             className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] transition-colors"
-            style={{ color: colors.primary }}
+            style={{ color: 'var(--copper)' }}
           >
             View Recipe
             <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -247,7 +241,7 @@ const RecipeModal = ({ cocktail, onClose }: { cocktail: Cocktail; onClose: () =>
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4"
-      style={{ backgroundColor: 'rgba(15, 12, 10, 0.85)' }}
+      style={{ backgroundColor: 'rgba(30, 20, 8, 0.85)' }}
       onClick={onClose}
     >
       <motion.div
@@ -256,15 +250,15 @@ const RecipeModal = ({ cocktail, onClose }: { cocktail: Cocktail; onClose: () =>
         exit={{ opacity: 0, y: 30, scale: 0.98 }}
         transition={{ duration: 0.3 }}
         className="max-w-2xl w-full overflow-hidden"
-        style={{ background: 'var(--bt-warm-white)', boxShadow: 'var(--shadow-elevated)' }}
+        style={{ background: 'var(--white)', boxShadow: 'var(--shadow-elevated)' }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="relative px-10 pt-10 pb-8 border-b" style={{ borderColor: 'var(--color-border)' }}>
+        <div className="relative px-10 pt-10 pb-8 border-b border-[#D8CEBC]">
           <button
             onClick={onClose}
             className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center transition-colors hover:opacity-80"
-            style={{ color: 'var(--color-text-muted)' }}
+            style={{ color: 'var(--fog)' }}
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
@@ -273,12 +267,12 @@ const RecipeModal = ({ cocktail, onClose }: { cocktail: Cocktail; onClose: () =>
 
           <span
             className="text-[10px] font-semibold uppercase tracking-[0.2em] mb-3 block"
-            style={{ color: colors.primary }}
+            style={{ color: 'var(--copper)' }}
           >
             {cocktail.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'} — {cocktail.spirit}
           </span>
-          <h2 className="font-serif text-4xl mb-2" style={{ color: 'var(--color-text)' }}>{cocktail.name}</h2>
-          <p style={{ color: 'var(--color-text-muted)' }}>{cocktail.tagline}</p>
+          <h2 className="font-serif text-4xl mb-2" style={{ color: 'var(--ink)' }}>{cocktail.name}</h2>
+          <p style={{ color: 'var(--fog)' }}>{cocktail.tagline}</p>
         </div>
 
         {/* Content */}
@@ -287,12 +281,12 @@ const RecipeModal = ({ cocktail, onClose }: { cocktail: Cocktail; onClose: () =>
           <div className="grid md:grid-cols-2 gap-10">
             {/* Ingredients */}
             <div>
-              <h3 className="text-[11px] uppercase tracking-[0.2em] mb-4 font-semibold" style={{ color: 'var(--color-text-light)' }}>Ingredients</h3>
+              <h3 className="text-[11px] uppercase tracking-[0.2em] mb-4 font-semibold" style={{ color: 'var(--fog)' }}>Ingredients</h3>
               <ul className="space-y-3">
                 {cocktail.ingredients.map((ingredient, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: colors.primary }} />
-                    <span style={{ color: 'var(--color-text)' }}>{ingredient}</span>
+                    <span style={{ color: 'var(--ink)' }}>{ingredient}</span>
                   </li>
                 ))}
               </ul>
@@ -300,37 +294,37 @@ const RecipeModal = ({ cocktail, onClose }: { cocktail: Cocktail; onClose: () =>
 
             {/* Details */}
             <div>
-              <h3 className="text-[11px] uppercase tracking-[0.2em] mb-4 font-semibold" style={{ color: 'var(--color-text-light)' }}>Details</h3>
+              <h3 className="text-[11px] uppercase tracking-[0.2em] mb-4 font-semibold" style={{ color: 'var(--fog)' }}>Details</h3>
               <div className="space-y-4">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.15em] mb-1" style={{ color: 'var(--color-text-light)' }}>Glassware</p>
-                  <p className="font-medium" style={{ color: 'var(--color-text)' }}>{cocktail.glassware}</p>
+                  <p className="text-[10px] uppercase tracking-[0.15em] mb-1" style={{ color: 'var(--fog)' }}>Glassware</p>
+                  <p className="font-medium" style={{ color: 'var(--ink)' }}>{cocktail.glassware}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.15em] mb-1" style={{ color: 'var(--color-text-light)' }}>Garnish</p>
-                  <p className="font-medium" style={{ color: 'var(--color-text)' }}>{cocktail.garnish}</p>
+                  <p className="text-[10px] uppercase tracking-[0.15em] mb-1" style={{ color: 'var(--fog)' }}>Garnish</p>
+                  <p className="font-medium" style={{ color: 'var(--ink)' }}>{cocktail.garnish}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.15em] mb-1" style={{ color: 'var(--color-text-light)' }}>Occasion</p>
-                  <p className="font-medium" style={{ color: 'var(--color-text)' }}>{cocktail.occasion}</p>
+                  <p className="text-[10px] uppercase tracking-[0.15em] mb-1" style={{ color: 'var(--fog)' }}>Occasion</p>
+                  <p className="font-medium" style={{ color: 'var(--ink)' }}>{cocktail.occasion}</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Instructions */}
-          <div className="mt-10 pt-8 border-t" style={{ borderColor: 'var(--color-border)' }}>
-            <h3 className="text-[11px] uppercase tracking-[0.2em] mb-6 font-semibold" style={{ color: 'var(--color-text-light)' }}>Method</h3>
+          <div className="mt-10 pt-8 border-t border-[#D8CEBC]">
+            <h3 className="text-[11px] uppercase tracking-[0.2em] mb-6 font-semibold" style={{ color: 'var(--fog)' }}>Method</h3>
             <ol className="space-y-4">
               {cocktail.instructions.map((step, i) => (
                 <li key={i} className="flex gap-4">
                   <span
                     className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 text-white"
-                    style={{ backgroundColor: colors.primary }}
+                    style={{ backgroundColor: 'var(--copper)' }}
                   >
                     {i + 1}
                   </span>
-                  <span className="leading-relaxed pt-0.5" style={{ color: 'var(--color-text)' }}>{step}</span>
+                  <span className="leading-relaxed pt-0.5" style={{ color: 'var(--ink)' }}>{step}</span>
                 </li>
               ))}
             </ol>
@@ -357,7 +351,7 @@ export default function CocktailSection() {
       id="cocktails"
       ref={ref}
       className="relative py-24 md:py-32"
-      style={{ backgroundColor: 'var(--color-bg-alt)' }}
+      style={{ backgroundColor: 'var(--white)' }}
     >
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header */}
@@ -367,13 +361,13 @@ export default function CocktailSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-[11px] uppercase tracking-[0.3em] font-medium mb-4 block" style={{ color: 'var(--bt-gold)' }}>
+          <span className="text-[11px] uppercase tracking-[0.3em] font-medium mb-4 block" style={{ color: 'var(--copper)' }}>
             Crafted Recipes
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl mb-4" style={{ color: 'var(--color-text)' }}>
+          <h2 className="font-serif text-4xl md:text-5xl mb-4" style={{ color: 'var(--ink)' }}>
             Signature Cocktails
           </h2>
-          <p className="text-lg font-light max-w-xl mx-auto" style={{ color: 'var(--color-text-muted)' }}>
+          <p className="text-lg font-light max-w-xl mx-auto" style={{ color: 'var(--fog)' }}>
             Expertly crafted recipes that showcase the distinct character of each spirit.
           </p>
         </motion.div>
@@ -385,7 +379,7 @@ export default function CocktailSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="flex justify-center mb-14"
         >
-          <div className="inline-flex border bg-white" style={{ borderColor: 'var(--color-border)' }}>
+          <div className="inline-flex border border-[#D8CEBC] bg-white">
             {[
               { id: 'all', label: 'All Recipes' },
               { id: 'bib', label: 'Bib & Tucker' },
@@ -398,10 +392,10 @@ export default function CocktailSection() {
                 style={
                   activeFilter === filter.id
                     ? {
-                        backgroundColor: filter.id === 'bib' ? 'var(--bt-rust)' : filter.id === 'redemption' ? 'var(--redemption-orange)' : 'var(--bt-black)',
+                        backgroundColor: 'var(--ink)',
                         color: '#FFFFFF'
                       }
-                    : { color: 'var(--color-text-muted)' }
+                    : { color: 'var(--fog)' }
                 }
               >
                 {filter.label}
@@ -429,10 +423,9 @@ export default function CocktailSection() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-12 pt-12 border-t"
-          style={{ borderColor: 'var(--color-border)' }}
+          className="text-center mt-12 pt-12 border-t border-[#D8CEBC]"
         >
-          <p className="text-sm" style={{ color: 'var(--color-text-light)' }}>
+          <p className="text-sm" style={{ color: 'var(--fog)' }}>
             Showing {filteredCocktails.length} of {cocktails.length} recipes
           </p>
         </motion.div>

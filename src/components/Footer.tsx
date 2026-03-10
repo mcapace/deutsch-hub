@@ -27,10 +27,10 @@ export default function Footer() {
     <footer
       ref={ref}
       className="relative text-white overflow-hidden"
-      style={{ backgroundColor: 'var(--bt-black)' }}
+      style={{ backgroundColor: '#1E1408' }}
     >
       {/* Top accent line */}
-      <div className="h-[1px] bg-gradient-to-r from-transparent via-[var(--bt-gold)]/40 to-transparent" />
+      <div className="h-[1px] bg-gradient-to-r from-transparent via-[var(--amber)]/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-24">
         {/* Main Footer Content */}
@@ -47,17 +47,17 @@ export default function Footer() {
               alt="Whisky Advocate"
               width={180}
               height={54}
-              className="h-10 w-auto object-contain brightness-0 invert opacity-80 mb-6"
+              className="h-10 w-auto object-contain opacity-40 mb-6"
               unoptimized={true}
             />
-            <p className="text-[15px] leading-relaxed max-w-sm mb-8" style={{ color: 'rgba(255,255,255,0.5)' }}>
+            <p className="text-[15px] leading-relaxed max-w-sm mb-8 font-serif italic" style={{ color: 'rgba(255,255,255,0.3)' }}>
               Discover the art of American whiskey through the curated collection
               of Bib & Tucker and Redemption, presented by Whisky Advocate.
             </p>
             <div className="flex items-center gap-6">
-              <span className="text-2xl font-serif" style={{ color: 'var(--bt-rust)' }}>Bib & Tucker</span>
+              <span className="text-2xl font-serif" style={{ color: 'var(--amber)' }}>Bib & Tucker</span>
               <span className="w-[1px] h-6" style={{ background: 'rgba(255,255,255,0.2)' }} />
-              <span className="text-2xl font-serif" style={{ color: 'var(--redemption-orange)' }}>Redemption</span>
+              <span className="text-2xl font-serif" style={{ color: 'var(--amber)' }}>Redemption</span>
             </div>
           </motion.div>
 
@@ -71,7 +71,7 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="md:col-span-3"
           >
-            <h4 className="text-[11px] tracking-[0.3em] uppercase mb-6" style={{ color: 'var(--bt-gold)' }}>
+            <h4 className="text-[11px] tracking-[0.3em] uppercase mb-6" style={{ color: 'var(--amber)' }}>
               Explore
             </h4>
             <ul className="space-y-4">
@@ -79,8 +79,8 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-[15px] transition-colors duration-300 hover:text-white"
-                    style={{ color: 'rgba(255,255,255,0.5)' }}
+                    className="text-[15px] transition-colors duration-300 hover:text-[rgba(255,255,255,0.75)]"
+                    style={{ color: 'rgba(255,255,255,0.35)' }}
                   >
                     {link.name}
                   </Link>
@@ -96,7 +96,7 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="md:col-span-3"
           >
-            <h4 className="text-[11px] tracking-[0.3em] uppercase mb-6" style={{ color: 'var(--bt-gold)' }}>
+            <h4 className="text-[11px] tracking-[0.3em] uppercase mb-6" style={{ color: 'var(--amber)' }}>
               Resources
             </h4>
             <ul className="space-y-4">
@@ -106,8 +106,8 @@ export default function Footer() {
                     href={link.href}
                     target={link.external ? '_blank' : undefined}
                     rel={link.external ? 'noopener noreferrer' : undefined}
-                    className="text-[15px] transition-colors duration-300 hover:text-white"
-                    style={{ color: 'rgba(255,255,255,0.5)' }}
+                    className="text-[15px] transition-colors duration-300 hover:text-[rgba(255,255,255,0.75)]"
+                    style={{ color: 'rgba(255,255,255,0.35)' }}
                   >
                     {link.name}
                   </a>
@@ -129,7 +129,7 @@ export default function Footer() {
             <div className="flex-shrink-0">
               <span
                 className="inline-flex items-center justify-center w-14 h-14 border font-serif text-xl"
-                style={{ borderColor: 'var(--bt-gold)', color: 'var(--bt-gold)' }}
+                style={{ borderColor: 'var(--amber)', color: 'var(--amber)' }}
               >
                 21+
               </span>
@@ -158,7 +158,7 @@ export default function Footer() {
             </p>
             <p className="text-[13px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
               Sponsored content in partnership with{' '}
-              <span style={{ color: 'var(--bt-gold)' }}>Deutsch Family Wine & Spirits</span>
+              <span style={{ color: 'var(--amber)' }}>Deutsch Family Wine & Spirits</span>
             </p>
           </div>
         </motion.div>
@@ -167,7 +167,7 @@ export default function Footer() {
       {/* Bottom accent */}
       <div
         className="h-1"
-        style={{ background: 'linear-gradient(to right, var(--bt-rust), var(--bt-gold), var(--redemption-orange))' }}
+        style={{ background: 'linear-gradient(to right, var(--copper), var(--amber))' }}
       />
     </footer>
   );

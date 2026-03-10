@@ -117,7 +117,7 @@ export default function AvatarWidget() {
   }, [status, connect]);
 
   useEffect(() => {
-    const t = setTimeout(() => initConnection(), 800);
+    const t = setTimeout(() => initConnection(), 1000);
     return () => clearTimeout(t);
   }, []);
 
@@ -180,10 +180,9 @@ export default function AvatarWidget() {
             exit={{ opacity: 0, y: 6 }}
             className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium tracking-widest uppercase"
             style={{
-              background: 'rgba(26,20,16,0.92)',
-              border: '1px solid rgba(189,165,93,0.5)',
-              color: '#BDA55D',
-              backdropFilter: 'blur(8px)',
+              background: '#F7F2E8',
+              border: '1px solid #D8CEBC',
+              color: 'var(--ink)',
             }}
           >
             {status === 'connecting' ? 'Connecting…' : status === 'error' ? 'Tap to retry' : 'The Bar Keep'}
@@ -202,9 +201,9 @@ export default function AvatarWidget() {
         onClick={handleBubbleClick}
         className="relative overflow-hidden cursor-pointer select-none"
         style={{
-          background: '#120A02',
-          border: '2px solid rgba(189,165,93,0.4)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.6)',
+          background: '#FDFAF5',
+          border: '2px solid rgba(216,206,188,0.6)',
+          boxShadow: '0 4px 24px rgba(30,20,8,0.12)',
         }}
       >
         {/* Video — always mounted so WebRTC can attach; visibility toggled */}
@@ -229,7 +228,7 @@ export default function AvatarWidget() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="absolute inset-0 flex items-center justify-center"
-              style={{ background: 'linear-gradient(160deg, #2C1A0A, #120A02)' }}
+              style={{ background: '#A0622A' }}
             >
               <span className="text-3xl">🥃</span>
               {status === 'connecting' && (
@@ -297,7 +296,7 @@ export default function AvatarWidget() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="absolute bottom-0 left-0 right-0 p-4 flex gap-2"
-              style={{ background: 'linear-gradient(transparent, rgba(18,10,2,0.96))' }}
+              style={{ background: '#FDFAF5', borderTop: '1px solid #D8CEBC' }}
               onClick={(e) => e.stopPropagation()}
             >
               <input
@@ -306,14 +305,14 @@ export default function AvatarWidget() {
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                 placeholder="Type a message…"
-                className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm"
+                className="flex-1 px-4 py-3 rounded-xl text-sm bg-[#F7F2E8] border border-[#D8CEBC] text-[#1E1408] placeholder-[#9A8E7C] focus:outline-none focus:border-[#A0622A]"
                 disabled={sending}
               />
               <button
                 onClick={handleSendMessage}
                 disabled={!message.trim() || sending}
-                className="px-5 py-3 rounded-xl font-medium text-sm disabled:opacity-50"
-                style={{ background: 'linear-gradient(135deg, #C85A36, #BDA55D)', color: '#fff' }}
+                className="px-5 py-3 rounded-xl font-medium text-sm disabled:opacity-50 text-white"
+                style={{ background: '#A0622A' }}
               >
                 {sending ? '…' : 'Send'}
               </button>
@@ -329,10 +328,10 @@ export default function AvatarWidget() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="absolute bottom-14 left-0 right-0 px-4 py-2"
-              style={{ background: 'linear-gradient(transparent, rgba(18,10,2,0.7))' }}
+              style={{ background: 'linear-gradient(transparent, rgba(253,250,245,0.9))' }}
             >
-              <div className="font-serif text-sm font-bold text-amber-200">The Bar Keep</div>
-              <div className="text-[10px] tracking-widest uppercase text-amber-700/90">Bib & Tucker · Redemption</div>
+              <div className="font-serif text-sm font-normal text-[#1E1408]">The Bar Keep</div>
+              <div className="text-[10px] tracking-widest uppercase text-[#9A8E7C]">Bib & Tucker · Redemption</div>
             </motion.div>
           )}
         </AnimatePresence>

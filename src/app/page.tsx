@@ -106,7 +106,7 @@ const redemptionData = {
 
 export default function Home() {
   return (
-    <main className="relative bg-[#FDFBF7]">
+    <main className="relative bg-[#FDFAF5]">
       <Navigation />
       <Hero />
       <ArticlesSection />

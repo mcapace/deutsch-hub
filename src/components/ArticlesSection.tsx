@@ -157,7 +157,7 @@ export default function ArticlesSection() {
       id="articles"
       ref={ref}
         className="relative py-20 md:py-32"
-        style={{ background: 'var(--color-bg)' }}
+        style={{ background: 'var(--white)' }}
     >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Section Header - More prominent */}
@@ -167,10 +167,10 @@ export default function ArticlesSection() {
             transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6" style={{ color: 'var(--color-text)' }}>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-normal mb-6" style={{ color: 'var(--ink)' }}>
             Featured Stories
           </h2>
-            <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto" style={{ color: 'var(--color-text-muted)' }}>
+            <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto" style={{ color: 'var(--fog)' }}>
               Discover the heritage, craftsmanship, and stories behind American whiskey
           </p>
         </motion.div>
@@ -183,37 +183,36 @@ export default function ArticlesSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-xl overflow-hidden transition-all duration-300 cursor-pointer group elevated-card border border-transparent hover:border-[var(--color-border)]"
-                style={{ boxShadow: 'var(--shadow-card)' }}
+                className="bg-white rounded-xl overflow-hidden transition-all duration-300 cursor-pointer group elevated-card border border-[#D8CEBC] hover:bg-[#F7F2E8]"
                 onClick={() => setSelectedArticle(article)}
               >
                 {/* Article Header - Larger padding */}
                 <div className="p-10 md:p-12">
                   <div className="flex items-center gap-3 mb-4">
                     <span
-                      className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full"
+                      className="text-[8px] font-semibold uppercase tracking-[0.28em] px-3 py-1 rounded-full"
                       style={{
-                        background: article.brand === 'bib' ? 'color-mix(in srgb, var(--bt-rust) 15%, transparent)' : 'color-mix(in srgb, var(--redemption-orange) 15%, transparent)',
-                        color: article.brand === 'bib' ? 'var(--bt-rust)' : 'var(--redemption-orange)',
+                        background: article.brand === 'bib' ? 'color-mix(in srgb, var(--copper) 15%, transparent)' : 'color-mix(in srgb, var(--copper) 15%, transparent)',
+                        color: 'var(--copper)',
                       }}
                     >
                       {article.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'}
                     </span>
-                    <span className="text-xs" style={{ color: 'var(--color-border)' }}>•</span>
-                    <span className="text-xs" style={{ color: 'var(--color-text-light)' }}>
+                    <span className="text-xs" style={{ color: 'var(--rule)' }}>•</span>
+                    <span className="text-xs" style={{ color: 'var(--fog)' }}>
                       {article.readTime}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl md:text-3xl font-serif font-bold mb-4 leading-tight group-hover:opacity-80 transition-opacity" style={{ color: 'var(--color-text)' }}>
+                  <h3 className="text-2xl md:text-3xl font-serif font-normal mb-4 leading-tight group-hover:opacity-80 transition-opacity" style={{ color: 'var(--ink)' }}>
                     {article.title}
                   </h3>
 
-                  <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--color-text-muted)' }}>
+                  <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--fog)' }}>
                     {article.excerpt}
                   </p>
 
-                  <div className="flex items-center gap-2 text-sm font-medium" style={{ color: article.brand === 'bib' ? 'var(--bt-rust)' : 'var(--redemption-orange)' }}>
+                  <div className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--copper)' }}>
                     <span>Read Full Story</span>
                     <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -257,19 +256,19 @@ function ArticleModal({ article, onClose }: { article: Article; onClose: () => v
       >
         <div className="max-w-4xl w-full bg-white rounded-lg overflow-hidden" style={{ boxShadow: 'var(--shadow-elevated)' }}>
           {/* Header */}
-          <div className="p-8 border-b" style={{ borderColor: 'var(--color-border)' }}>
+          <div className="p-8 border-b border-[#D8CEBC]">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <span
                   className="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full"
                   style={{
-                    background: article.brand === 'bib' ? 'color-mix(in srgb, var(--bt-rust) 15%, transparent)' : 'color-mix(in srgb, var(--redemption-orange) 15%, transparent)',
-                    color: article.brand === 'bib' ? 'var(--bt-rust)' : 'var(--redemption-orange)',
+                    background: article.brand === 'bib' ? 'color-mix(in srgb, var(--copper) 15%, transparent)' : 'color-mix(in srgb, var(--copper) 15%, transparent)',
+                    color: 'var(--copper)',
                   }}
                 >
                   {article.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'}
                 </span>
-                <span className="text-xs" style={{ color: 'var(--color-text-light)' }}>
+                <span className="text-xs" style={{ color: 'var(--fog)' }}>
                   {article.readTime}
                 </span>
               </div>
@@ -283,20 +282,20 @@ function ArticleModal({ article, onClose }: { article: Article; onClose: () => v
                 </svg>
               </button>
             </div>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold leading-tight" style={{ color: 'var(--color-text)' }}>
+            <h2 className="text-3xl md:text-4xl font-serif font-normal leading-tight" style={{ color: 'var(--ink)' }}>
               {article.title}
             </h2>
           </div>
 
           {/* Content */}
           <div className="p-8 md:p-12 max-h-[70vh] overflow-y-auto">
-            <div className="prose prose-lg max-w-none" style={{ color: 'var(--color-text)' }}>
+            <div className="prose prose-lg max-w-none" style={{ color: 'var(--ink)' }}>
               {paragraphs.map((paragraph, index) => {
                 const isHeading = paragraph.startsWith('**') && paragraph.endsWith('**');
                 if (isHeading) {
                   const headingText = paragraph.replace(/\*\*/g, '');
                   return (
-                    <h3 key={index} className="text-2xl font-serif font-bold mt-8 mb-4" style={{ color: 'var(--color-text)' }}>
+                    <h3 key={index} className="text-2xl font-serif font-normal mt-8 mb-4" style={{ color: 'var(--ink)' }}>
                       {headingText}
                     </h3>
                   );
