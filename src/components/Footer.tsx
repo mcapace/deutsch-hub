@@ -26,10 +26,11 @@ export default function Footer() {
   return (
     <footer
       ref={ref}
-      className="relative bg-[#1A1410] text-white overflow-hidden"
+      className="relative text-white overflow-hidden"
+      style={{ backgroundColor: 'var(--bt-black)' }}
     >
       {/* Top accent line */}
-      <div className="h-[1px] bg-gradient-to-r from-transparent via-[#BDA55D]/40 to-transparent" />
+      <div className="h-[1px] bg-gradient-to-r from-transparent via-[var(--bt-gold)]/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-24">
         {/* Main Footer Content */}
@@ -49,14 +50,14 @@ export default function Footer() {
               className="h-10 w-auto object-contain brightness-0 invert opacity-80 mb-6"
               unoptimized={true}
             />
-            <p className="text-[15px] leading-relaxed text-white/50 max-w-sm mb-8">
+            <p className="text-[15px] leading-relaxed max-w-sm mb-8" style={{ color: 'rgba(255,255,255,0.5)' }}>
               Discover the art of American whiskey through the curated collection
               of Bib & Tucker and Redemption, presented by Whisky Advocate.
             </p>
             <div className="flex items-center gap-6">
-              <span className="text-2xl font-serif text-[#C85A36]">Bib & Tucker</span>
-              <span className="w-[1px] h-6 bg-white/20" />
-              <span className="text-2xl font-serif text-[#D4872B]">Redemption</span>
+              <span className="text-2xl font-serif" style={{ color: 'var(--bt-rust)' }}>Bib & Tucker</span>
+              <span className="w-[1px] h-6" style={{ background: 'rgba(255,255,255,0.2)' }} />
+              <span className="text-2xl font-serif" style={{ color: 'var(--redemption-orange)' }}>Redemption</span>
             </div>
           </motion.div>
 
@@ -70,7 +71,7 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="md:col-span-3"
           >
-            <h4 className="text-[11px] tracking-[0.3em] uppercase text-[#BDA55D] mb-6">
+            <h4 className="text-[11px] tracking-[0.3em] uppercase mb-6" style={{ color: 'var(--bt-gold)' }}>
               Explore
             </h4>
             <ul className="space-y-4">
@@ -78,7 +79,8 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-[15px] text-white/50 hover:text-white transition-colors duration-300"
+                    className="text-[15px] transition-colors duration-300 hover:text-white"
+                    style={{ color: 'rgba(255,255,255,0.5)' }}
                   >
                     {link.name}
                   </Link>
@@ -94,7 +96,7 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="md:col-span-3"
           >
-            <h4 className="text-[11px] tracking-[0.3em] uppercase text-[#BDA55D] mb-6">
+            <h4 className="text-[11px] tracking-[0.3em] uppercase mb-6" style={{ color: 'var(--bt-gold)' }}>
               Resources
             </h4>
             <ul className="space-y-4">
@@ -104,7 +106,8 @@ export default function Footer() {
                     href={link.href}
                     target={link.external ? '_blank' : undefined}
                     rel={link.external ? 'noopener noreferrer' : undefined}
-                    className="text-[15px] text-white/50 hover:text-white transition-colors duration-300"
+                    className="text-[15px] transition-colors duration-300 hover:text-white"
+                    style={{ color: 'rgba(255,255,255,0.5)' }}
                   >
                     {link.name}
                   </a>
@@ -119,17 +122,21 @@ export default function Footer() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="border border-white/10 rounded-sm p-6 md:p-8 mb-16"
+          className="border rounded-sm p-6 md:p-8 mb-16"
+          style={{ borderColor: 'rgba(255,255,255,0.1)' }}
         >
           <div className="flex flex-col md:flex-row md:items-center gap-6">
             <div className="flex-shrink-0">
-              <span className="inline-flex items-center justify-center w-14 h-14 border border-[#BDA55D]/40 text-[#BDA55D] font-serif text-xl">
+              <span
+                className="inline-flex items-center justify-center w-14 h-14 border font-serif text-xl"
+                style={{ borderColor: 'var(--bt-gold)', color: 'var(--bt-gold)' }}
+              >
                 21+
               </span>
             </div>
             <div>
               <h5 className="text-white font-medium mb-1">Please Drink Responsibly</h5>
-              <p className="text-sm text-white/40 leading-relaxed">
+              <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
                 This website is intended for adults of legal drinking age. Enjoy our content
                 and products responsibly. Do not share with anyone under the legal drinking age.
               </p>
@@ -142,22 +149,26 @@ export default function Footer() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="pt-8 border-t border-white/10"
+          className="pt-8 border-t"
+          style={{ borderColor: 'rgba(255,255,255,0.1)' }}
         >
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <p className="text-[13px] text-white/30">
+            <p className="text-[13px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
               &copy; {currentYear} Whisky Advocate. All rights reserved.
             </p>
-            <p className="text-[13px] text-white/30">
+            <p className="text-[13px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
               Sponsored content in partnership with{' '}
-              <span className="text-[#BDA55D]/70">Deutsch Family Wine & Spirits</span>
+              <span style={{ color: 'var(--bt-gold)' }}>Deutsch Family Wine & Spirits</span>
             </p>
           </div>
         </motion.div>
       </div>
 
       {/* Bottom accent */}
-      <div className="h-1 bg-gradient-to-r from-[#C85A36] via-[#BDA55D] to-[#D4872B]" />
+      <div
+        className="h-1"
+        style={{ background: 'linear-gradient(to right, var(--bt-rust), var(--bt-gold), var(--redemption-orange))' }}
+      />
     </footer>
   );
 }

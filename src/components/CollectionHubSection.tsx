@@ -71,10 +71,10 @@ const CollectionFeatureCard = ({
 }) => {
   const brandColor =
     feature.brand === 'bib'
-      ? '#C85A36'
+      ? 'var(--bt-rust)'
       : feature.brand === 'redemption'
-        ? '#D4872B'
-        : '#C85A36';
+        ? 'var(--redemption-orange)'
+        : 'var(--bt-rust)';
 
   return (
     <motion.div
@@ -84,11 +84,11 @@ const CollectionFeatureCard = ({
       className="group"
     >
       <Link href={feature.link || '#'} className="block h-full">
-        <div className="bg-white border border-[#E5E2DC] p-6 h-full elevated-card rounded-sm">
-          <h3 className="font-serif text-xl mb-2 text-[#1A1410] group-hover:text-[#C85A36] transition-colors">
+        <div className="bg-white border p-6 h-full elevated-card rounded-sm" style={{ borderColor: 'var(--color-border)' }}>
+          <h3 className="font-serif text-xl mb-2 transition-colors group-hover:[color:var(--bt-rust)]" style={{ color: 'var(--color-text)' }}>
             {feature.title}
           </h3>
-          <p className="text-sm text-[#5C5552] leading-relaxed mb-4">
+          <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--color-text-muted)' }}>
             {feature.description}
           </p>
           <div className="flex items-center gap-2 text-sm font-medium" style={{ color: brandColor }}>
@@ -112,9 +112,9 @@ export default function CollectionHubSection() {
       ref={ref}
       id="collection"
       className="relative py-20 md:py-28"
-      style={{ background: '#FDFBF7' }}
+      style={{ background: 'var(--bt-warm-white)' }}
     >
-      <div className="absolute top-0 left-0 right-0 h-px bg-[#E5E2DC]" />
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'var(--color-border)' }} />
 
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <motion.div
@@ -123,13 +123,13 @@ export default function CollectionHubSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="inline-block text-xs tracking-[0.25em] uppercase mb-3 font-medium text-[#C85A36]">
+          <span className="inline-block text-xs tracking-[0.25em] uppercase mb-3 font-medium" style={{ color: 'var(--bt-rust)' }}>
             Year-Round Collection
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-[#1A1410] mb-3">
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-3" style={{ color: 'var(--color-text)' }}>
             Celebrate Every Moment
           </h2>
-          <p className="text-lg text-[#5C5552] max-w-2xl mx-auto">
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-text-muted)' }}>
             Discover how Bib & Tucker and Redemption elevate any occasion—from quiet evenings to big gatherings.
           </p>
         </motion.div>
@@ -148,7 +148,7 @@ export default function CollectionHubSection() {
           >
             <div
               className="relative overflow-hidden h-full"
-              style={{ background: 'linear-gradient(135deg, #C85A36, #BDA55D)', minHeight: '280px' }}
+              style={{ background: 'linear-gradient(135deg, var(--bt-rust), var(--bt-gold))', minHeight: '280px' }}
             >
               <div className="p-8 md:p-10 text-white flex flex-col h-full">
                 <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">Tennessee Bourbon</span>
@@ -186,7 +186,7 @@ export default function CollectionHubSection() {
           >
             <div
               className="relative overflow-hidden h-full"
-              style={{ background: 'linear-gradient(135deg, #D4872B, #BDA55D)', minHeight: '280px' }}
+              style={{ background: 'linear-gradient(135deg, var(--redemption-orange), var(--bt-gold))', minHeight: '280px' }}
             >
               <div className="p-8 md:p-10 text-white flex flex-col h-full">
                 <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">American Rye</span>
@@ -224,25 +224,25 @@ export default function CollectionHubSection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center"
         >
-          <div className="border border-[#E5E2DC] bg-white p-10 max-w-2xl mx-auto elevated-card rounded-sm">
-            <h3 className="font-serif text-2xl md:text-3xl text-[#1A1410] mb-3">
+          <div className="border bg-white p-10 max-w-2xl mx-auto elevated-card rounded-sm" style={{ borderColor: 'var(--color-border)' }}>
+            <h3 className="font-serif text-2xl md:text-3xl mb-3" style={{ color: 'var(--color-text)' }}>
               Make Every Moment Unforgettable
             </h3>
-            <p className="text-[#5C5552] mb-8 max-w-lg mx-auto">
+            <p className="mb-8 max-w-lg mx-auto" style={{ color: 'var(--color-text-muted)' }}>
               Whether hosting a gathering or finding the perfect gift, our collections offer something special for every whiskey lover—all year long.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="#cocktails"
-                className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-opacity hover:opacity-90"
-                style={{ backgroundColor: '#C85A36', color: '#FFFFFF' }}
+                className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-opacity hover:opacity-90 text-white"
+                style={{ backgroundColor: 'var(--bt-rust)' }}
               >
                 View Cocktails
               </Link>
               <Link
                 href="#pairings"
-                className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-all"
-                style={{ border: '2px solid #1A1410', color: '#1A1410' }}
+                className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-all border-2"
+                style={{ borderColor: 'var(--color-text)', color: 'var(--color-text)' }}
               >
                 Food Pairings
               </Link>

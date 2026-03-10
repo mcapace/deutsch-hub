@@ -9,17 +9,17 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden grain-overlay"
       style={{
-        background: 'radial-gradient(ellipse 80% 70% at 50% 40%, rgba(253,251,247,1) 0%, rgba(248,246,241,0.98) 50%, rgba(245,243,238,0.95) 100%)',
+        background: 'radial-gradient(ellipse 85% 75% at 50% 45%, var(--bt-warm-white) 0%, var(--color-bg) 45%, var(--color-bg-alt) 100%)',
       }}
     >
       {/* Content Container - Focused */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-24 text-center">
+        <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-28 md:py-32 text-center">
         {/* Whisky Advocate Logo */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-16"
+          className="mb-20"
         >
           <Image
             src="/images/logos/WA_BLUE-removebg-preview.png"
@@ -30,7 +30,7 @@ export default function Hero() {
             priority
             unoptimized={true}
           />
-          <p className="text-xs tracking-[0.25em] uppercase text-[#78716C]">
+          <p className="text-[11px] tracking-[0.3em] uppercase font-medium" style={{ color: 'var(--color-text-muted)' }}>
             Presents
           </p>
         </motion.div>
@@ -40,11 +40,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-[#1A1410] leading-[1.05] tracking-tight mb-6"
+          className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-[1.05] tracking-tight mb-8"
+          style={{ color: 'var(--color-text)' }}
         >
           The Art of
           <br />
-          <span className="italic text-[#C85A36] tracking-normal">American Whiskey</span>
+          <span className="italic tracking-normal" style={{ color: 'var(--bt-rust)' }}>American Whiskey</span>
         </motion.h1>
 
         {/* Centered Divider */}
@@ -52,11 +53,11 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex items-center justify-center gap-3 mb-8"
+          className="flex items-center justify-center gap-4 mb-10"
         >
-          <span className="h-px w-12 bg-[#BDA55D]" />
-          <span className="w-2 h-2 rotate-45 border border-[#BDA55D]" />
-          <span className="h-px w-12 bg-[#BDA55D]" />
+          <span className="h-px w-14" style={{ background: 'var(--bt-gold)' }} />
+          <span className="w-2 h-2 rotate-45 border" style={{ borderColor: 'var(--bt-gold)' }} />
+          <span className="h-px w-14" style={{ background: 'var(--bt-gold)' }} />
         </motion.div>
 
         {/* Subheadline */}
@@ -64,7 +65,8 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-lg md:text-xl text-[#4A4543] leading-relaxed max-w-3xl mx-auto mb-12 md:whitespace-nowrap"
+          className="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto mb-14 md:whitespace-nowrap"
+          style={{ color: 'var(--color-text-muted)' }}
         >
           Discover the heritage and craftsmanship of Bib & Tucker and Redemption.
         </motion.p>
@@ -74,7 +76,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex items-center justify-center gap-16 mb-12"
+          className="flex items-center justify-center gap-20 mb-14"
         >
           <a href="#bib-tucker" className="group text-center flex flex-col items-center">
             <Image
@@ -82,15 +84,15 @@ export default function Hero() {
               alt="Bib & Tucker"
               width={220}
               height={80}
-              className="h-20 md:h-24 w-auto object-contain mb-2 group-hover:scale-105 transition-transform duration-300"
+              className="h-20 md:h-24 w-auto object-contain mb-2 group-hover:scale-[1.04] transition-transform duration-500"
               unoptimized={true}
             />
-            <span className="text-[10px] tracking-[0.2em] uppercase text-[#78716C]">
+            <span className="text-[10px] tracking-[0.25em] uppercase font-medium" style={{ color: 'var(--color-text-light)' }}>
               Tennessee Bourbon
             </span>
           </a>
 
-          <span className="w-px h-20 bg-[#D4D1C8]" />
+          <span className="w-px h-20" style={{ background: 'var(--color-border)' }} />
 
           <a href="#redemption" className="group text-center flex flex-col items-center">
             <Image
@@ -98,10 +100,10 @@ export default function Hero() {
               alt="Redemption"
               width={220}
               height={80}
-              className="h-20 md:h-24 w-auto object-contain mb-2 group-hover:scale-105 transition-transform duration-300"
+              className="h-20 md:h-24 w-auto object-contain mb-2 group-hover:scale-[1.04] transition-transform duration-500"
               unoptimized={true}
             />
-            <span className="text-[10px] tracking-[0.2em] uppercase text-[#78716C]">
+            <span className="text-[10px] tracking-[0.25em] uppercase font-medium" style={{ color: 'var(--color-text-light)' }}>
               American Rye
             </span>
           </a>
@@ -112,13 +114,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="flex items-center justify-center gap-4"
+          className="flex items-center justify-center gap-5"
         >
           <a
             href="#bib-tucker"
-            className="px-8 py-4 text-sm tracking-[0.15em] uppercase font-medium transition-all duration-300 hover:opacity-90 rounded-sm"
+            className="px-10 py-4 text-sm tracking-[0.2em] uppercase font-medium transition-all duration-300 hover:opacity-90 rounded-sm"
             style={{
-              backgroundColor: '#C85A36',
+              backgroundColor: 'var(--bt-rust)',
               color: '#FFFFFF',
               boxShadow: 'var(--shadow-glow-rust)',
             }}
@@ -127,15 +129,15 @@ export default function Hero() {
           </a>
           <a
             href="#cocktails"
-            className="px-8 py-4 border text-sm tracking-[0.15em] uppercase font-medium transition-all duration-300 rounded-sm hover:shadow-[var(--shadow-card)]"
-            style={{ borderColor: '#2D2926', color: '#2D2926' }}
+            className="px-10 py-4 border text-sm tracking-[0.2em] uppercase font-medium transition-all duration-300 rounded-sm hover:shadow-[var(--shadow-card)]"
+            style={{ borderColor: 'var(--color-text)', color: 'var(--color-text)' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#C85A36';
-              e.currentTarget.style.color = '#C85A36';
+              e.currentTarget.style.borderColor = 'var(--bt-rust)';
+              e.currentTarget.style.color = 'var(--bt-rust)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '#2D2926';
-              e.currentTarget.style.color = '#2D2926';
+              e.currentTarget.style.borderColor = 'var(--color-text)';
+              e.currentTarget.style.color = 'var(--color-text)';
             }}
           >
             Cocktails
@@ -148,13 +150,13 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center"
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <svg className="w-6 h-6 text-[#BDA55D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6" style={{ color: 'var(--bt-gold)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </motion.div>

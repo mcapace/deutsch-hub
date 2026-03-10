@@ -136,14 +136,16 @@ const PairingCard = ({
       transition={{ delay: index * 0.05, duration: 0.5 }}
       className="group"
     >
-      <div className="bg-white border border-[#E5E2DC] p-5 h-full hover:border-[#BDA55D]/50 hover:shadow-md transition-all duration-300">
+      <div className="bg-white border p-5 h-full transition-all duration-300 rounded-sm elevated-card hover:border-[var(--bt-gold)]/50"
+        style={{ borderColor: 'var(--color-border)' }}
+      >
         {/* Food name */}
-        <h4 className="font-serif text-lg mb-2 text-[#1A1410] group-hover:text-[#C85A36] transition-colors">
+        <h4 className="font-serif text-lg mb-2 transition-colors group-hover:[color:var(--bt-rust)]" style={{ color: 'var(--color-text)' }}>
           {pairing.food}
         </h4>
 
         {/* Description */}
-        <p className="text-sm text-[#5C5552] leading-relaxed">
+        <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           {pairing.description}
         </p>
 
@@ -179,11 +181,12 @@ const WhiskeyAccordion = ({
   return (
     <div className="mb-4">
       {/* Accordion header */}
-      <motion.button
+        <motion.button
         onClick={onToggle}
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
-        className="w-full glass-card rounded-xl p-5 flex items-center justify-between"
+        className="w-full rounded-xl p-5 flex items-center justify-between border transition-all duration-300 hover:shadow-[var(--shadow-card)]"
+        style={{ borderColor: 'var(--color-border)', background: 'var(--bt-warm-white)', boxShadow: 'var(--shadow-sm)' }}
       >
         <div className="flex items-center gap-4">
           <div
@@ -191,10 +194,10 @@ const WhiskeyAccordion = ({
             style={{ background: `linear-gradient(135deg, ${brandColors.primary}, ${brandColors.secondary})` }}
           />
           <div className="text-left">
-            <h4 className="font-bold text-lg" style={{ color: '#1A1410' }}>
+            <h4 className="font-bold text-lg" style={{ color: 'var(--color-text)' }}>
               {whiskey.name}
             </h4>
-            <span className="text-sm" style={{ color: '#8B8B8B' }}>
+            <span className="text-sm" style={{ color: 'var(--color-text-light)' }}>
               {whiskey.proof} • {whiskey.pairings.length} pairings
             </span>
           </div>
@@ -258,15 +261,15 @@ export default function FoodPairingsSection() {
       id="pairings"
       ref={ref}
       className="relative py-24 md:py-32 overflow-hidden"
-      style={{ background: '#FAFAF8' }}
+      style={{ background: 'var(--color-bg-alt)' }}
     >
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           animate={{
             background: activeBrand === 'bib'
-              ? 'radial-gradient(ellipse 80% 60% at 20% 80%, rgba(200, 90, 54, 0.08), transparent 60%)'
-              : 'radial-gradient(ellipse 80% 60% at 80% 80%, rgba(253, 148, 25, 0.08), transparent 60%)',
+              ? 'radial-gradient(ellipse 80% 60% at 20% 80%, rgba(168, 74, 40, 0.08), transparent 60%)'
+              : 'radial-gradient(ellipse 80% 60% at 80% 80%, rgba(199, 122, 36, 0.08), transparent 60%)',
           }}
           transition={{ duration: 0.8 }}
           className="absolute inset-0"
@@ -285,12 +288,13 @@ export default function FoodPairingsSection() {
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="decorative-line mx-auto mb-6"
+            className="h-px w-24 mx-auto mb-6"
+            style={{ background: 'var(--bt-gold)' }}
           />
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4" style={{ color: '#1A1410' }}>
-            Perfect <span className="text-gradient">Pairings</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-serif" style={{ color: 'var(--color-text)' }}>
+            Perfect <span className="italic" style={{ color: 'var(--bt-rust)' }}>Pairings</span>
           </h2>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto" style={{ color: '#6B6B6B' }}>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto" style={{ color: 'var(--color-text-muted)' }}>
             Elevate your tasting experience with expertly curated food pairings for each expression.
           </p>
         </motion.div>
@@ -313,12 +317,12 @@ export default function FoodPairingsSection() {
                 background:
                   activeBrand === brand.brandId
                     ? `linear-gradient(135deg, ${brandColors[brand.brandId].primary}, ${brandColors[brand.brandId].secondary})`
-                    : 'rgba(255, 255, 255, 0.8)',
-                color: activeBrand === brand.brandId ? '#FFFFFF' : '#6B6B6B',
+                    : 'var(--bt-warm-white)',
+                color: activeBrand === brand.brandId ? '#FFFFFF' : 'var(--color-text-muted)',
                 boxShadow:
                   activeBrand === brand.brandId
-                    ? `0 8px 30px ${brandColors[brand.brandId].primary}40`
-                    : 'none',
+                    ? 'var(--shadow-glow-rust)'
+                    : 'var(--shadow-sm)',
               }}
             >
               {brand.brand}
@@ -363,11 +367,11 @@ export default function FoodPairingsSection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-12 max-w-2xl mx-auto"
         >
-          <div className="border border-[#E5E2DC] bg-white p-8 text-center">
-            <span className="text-xs tracking-[0.25em] uppercase text-[#BDA55D] font-medium block mb-3">
+          <div className="border bg-white p-8 text-center rounded-sm elevated-card" style={{ borderColor: 'var(--color-border)' }}>
+            <span className="text-xs tracking-[0.25em] uppercase font-medium block mb-3" style={{ color: 'var(--bt-gold)' }}>
               Pro Tip
             </span>
-            <p className="text-[#3A3735] leading-relaxed">
+            <p className="leading-relaxed" style={{ color: 'var(--color-text)' }}>
               Let your whiskey sit for a few minutes after pouring to open up the flavors.
               Take small sips between bites to cleanse your palate and enhance both the food and whiskey experience.
             </p>

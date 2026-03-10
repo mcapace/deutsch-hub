@@ -42,12 +42,12 @@ export default function BrandSection({
 
   const themeColors = {
     bib: {
-      primary: '#C85A36',
-      accent: '#BDA55D',
+      primary: 'var(--bt-rust)',
+      accent: 'var(--bt-gold)',
     },
     redemption: {
-      primary: '#D4872B',
-      accent: '#BDA55D',
+      primary: 'var(--redemption-orange)',
+      accent: 'var(--bt-gold)',
     },
   };
 
@@ -63,10 +63,10 @@ export default function BrandSection({
       id={id}
       ref={ref}
       className="relative py-24 md:py-32"
-      style={{ background: '#FDFBF7' }}
+      style={{ background: 'var(--bt-warm-white)' }}
     >
       {/* Top border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-[#E5E2DC]" />
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'var(--color-border)' }} />
 
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Section Header - Centered with Logo */}
@@ -92,7 +92,7 @@ export default function BrandSection({
               unoptimized={true}
             />
           </div>
-          <p className="text-lg text-[#5C5552] italic">{tagline}</p>
+          <p className="text-lg italic" style={{ color: 'var(--color-text-muted)' }}>{tagline}</p>
         </motion.div>
 
         {/* Main Content Grid */}
@@ -117,8 +117,8 @@ export default function BrandSection({
                 />
               </div>
             ) : (
-              <div className="aspect-[3/4] bg-[#F0EDE8] flex items-center justify-center">
-                <p className="text-[#8B8685]">Product Image</p>
+              <div className="aspect-[3/4] flex items-center justify-center" style={{ background: 'var(--color-bg-alt)' }}>
+                <p style={{ color: 'var(--color-text-light)' }}>Product Image</p>
               </div>
             )}
           </motion.div>
@@ -138,7 +138,7 @@ export default function BrandSection({
               >
                 The Story
               </h3>
-              <p className="text-base md:text-lg leading-relaxed text-[#3A3735]">
+              <p className="text-base md:text-lg leading-relaxed" style={{ color: 'var(--color-text)' }}>
                 {description}
               </p>
             </div>
@@ -151,7 +151,7 @@ export default function BrandSection({
               >
                 Heritage
               </h3>
-              <p className="text-base md:text-lg leading-relaxed text-[#3A3735]">
+              <p className="text-base md:text-lg leading-relaxed" style={{ color: 'var(--color-text)' }}>
                 {heritage}
               </p>
             </div>
@@ -165,13 +165,13 @@ export default function BrandSection({
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mb-10"
         >
-          <h3 className="font-serif text-2xl md:text-3xl text-[#1A1410] mb-3">
+          <h3 className="font-serif text-2xl md:text-3xl mb-3" style={{ color: 'var(--color-text)' }}>
             The Collection
           </h3>
           <div className="flex items-center justify-center gap-3">
-            <span className="h-px w-10 bg-[#BDA55D]" />
-            <span className="w-1.5 h-1.5 rotate-45 bg-[#BDA55D]" />
-            <span className="h-px w-10 bg-[#BDA55D]" />
+            <span className="h-px w-10" style={{ background: 'var(--bt-gold)' }} />
+            <span className="w-1.5 h-1.5 rotate-45" style={{ background: 'var(--bt-gold)' }} />
+            <span className="h-px w-10" style={{ background: 'var(--bt-gold)' }} />
           </div>
         </motion.div>
 
@@ -189,7 +189,8 @@ export default function BrandSection({
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                className="relative bg-white border border-[#E5E2DC] p-6 md:p-8 elevated-card rounded-sm"
+                className="relative bg-white p-6 md:p-8 elevated-card rounded-sm border"
+                style={{ borderColor: 'var(--color-border)' }}
               >
                 {/* Featured Badge */}
                 {product.featured && (
@@ -203,13 +204,13 @@ export default function BrandSection({
 
                 {/* Product Header */}
                 <div className="flex items-start justify-between gap-4 mb-4">
-                  <h4 className="font-serif text-xl md:text-2xl text-[#1A1410]">
+                  <h4 className="font-serif text-xl md:text-2xl" style={{ color: 'var(--color-text)' }}>
                     {product.name}
                   </h4>
                   <span
                     className="flex-shrink-0 text-xs font-semibold px-3 py-1"
                     style={{
-                      background: `${colors.primary}15`,
+                      background: `color-mix(in srgb, ${colors.primary} 15%, transparent)`,
                       color: colors.primary,
                     }}
                   >
@@ -218,13 +219,13 @@ export default function BrandSection({
                 </div>
 
                 {/* Description - Darker text for readability */}
-                <p className="text-[#3A3735] leading-relaxed mb-6 text-sm md:text-base">
+                <p className="leading-relaxed mb-6 text-sm md:text-base" style={{ color: 'var(--color-text)' }}>
                   {product.description}
                 </p>
 
                 {/* Tasting Notes - Better contrast */}
                 <div className="mb-6">
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-[#78716C] font-medium block mb-3">
+                  <span className="text-[10px] tracking-[0.2em] uppercase font-medium block mb-3" style={{ color: 'var(--color-text-light)' }}>
                     Tasting Notes
                   </span>
                   <div className="flex flex-wrap gap-2">
@@ -233,8 +234,8 @@ export default function BrandSection({
                         key={note}
                         className="text-xs px-3 py-1.5 font-medium"
                         style={{
-                          background: '#F5F3F0',
-                          color: '#3A3735',
+                          background: 'var(--color-bg-alt)',
+                          color: 'var(--color-text)',
                         }}
                       >
                         {note}
@@ -267,17 +268,18 @@ export default function BrandSection({
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-12 pt-10 border-t border-[#E5E2DC]"
+          className="text-center mt-12 pt-10 border-t"
+          style={{ borderColor: 'var(--color-border)' }}
         >
-          <p className="text-sm text-[#5C5552] mb-4">
+          <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
             Ready to experience {brandName}?
           </p>
           <a
             href={shopLinks[theme]}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-opacity hover:opacity-90"
-            style={{ backgroundColor: colors.primary, color: '#FFFFFF' }}
+            className="inline-flex items-center gap-2 px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-opacity hover:opacity-90 text-white"
+            style={{ backgroundColor: colors.primary }}
           >
             Shop Now
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

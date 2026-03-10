@@ -29,9 +29,9 @@ export default function Navigation() {
       {/* Sponsored Content Disclaimer Bar */}
       <div
         className="fixed top-0 left-0 right-0 z-50 py-2 text-center"
-        style={{ backgroundColor: '#1A1410' }}
+        style={{ backgroundColor: 'var(--bt-black)' }}
       >
-        <p className="text-[10px] md:text-xs tracking-[0.15em] uppercase" style={{ color: '#BDA55D' }}>
+        <p className="text-[10px] md:text-xs tracking-[0.15em] uppercase" style={{ color: 'var(--bt-gold)' }}>
           Sponsored Content from Deutsch Family Wine & Spirits
         </p>
       </div>
@@ -49,7 +49,7 @@ export default function Navigation() {
             ? 'rgba(253, 251, 247, 0.95)'
             : 'transparent',
           backdropFilter: isScrolled ? 'blur(20px)' : 'none',
-          borderBottom: isScrolled ? '1px solid rgba(45, 41, 38, 0.08)' : 'none',
+          borderBottom: isScrolled ? '1px solid var(--color-border)' : 'none',
         }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -73,7 +73,8 @@ export default function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="px-5 py-2 text-[13px] tracking-[0.05em] text-[#5C5552] hover:text-[#C85A36] transition-colors duration-300"
+                  className="px-5 py-2 text-[13px] tracking-[0.05em] transition-colors duration-300 hover:[color:var(--bt-rust)]"
+                  style={{ color: 'var(--color-text-muted)' }}
                 >
                   {item.name}
                 </Link>
@@ -93,12 +94,14 @@ export default function Navigation() {
                     y: isMobileMenuOpen ? 6 : 0,
                   }}
                   transition={{ duration: 0.3 }}
-                  className="w-6 h-[1.5px] bg-[#2D2926] origin-center"
+                  className="w-6 h-[1.5px] origin-center"
+                  style={{ backgroundColor: 'var(--color-text)' }}
                 />
                 <motion.span
                   animate={{ opacity: isMobileMenuOpen ? 0 : 1 }}
                   transition={{ duration: 0.3 }}
-                  className="w-6 h-[1.5px] bg-[#2D2926]"
+                  className="w-6 h-[1.5px]"
+                  style={{ backgroundColor: 'var(--color-text)' }}
                 />
                 <motion.span
                   animate={{
@@ -106,7 +109,8 @@ export default function Navigation() {
                     y: isMobileMenuOpen ? -6 : 0,
                   }}
                   transition={{ duration: 0.3 }}
-                  className="w-6 h-[1.5px] bg-[#2D2926] origin-center"
+                  className="w-6 h-[1.5px] origin-center"
+                  style={{ backgroundColor: 'var(--color-text)' }}
                 />
               </div>
             </button>
@@ -130,7 +134,8 @@ export default function Navigation() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-[#1A1410]/20 backdrop-blur-sm"
+              className="absolute inset-0 backdrop-blur-sm"
+              style={{ backgroundColor: 'rgba(15, 12, 10, 0.2)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
@@ -140,7 +145,8 @@ export default function Navigation() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-[#FDFBF7] shadow-2xl"
+              className="absolute right-0 top-0 bottom-0 w-full max-w-sm shadow-2xl"
+              style={{ background: 'var(--bt-warm-white)', boxShadow: 'var(--shadow-elevated)' }}
             >
               <div className="flex flex-col h-full pt-24 px-8 pb-12">
                 {/* Nav Links */}
@@ -152,10 +158,11 @@ export default function Navigation() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.1 + index * 0.05 }}
                     >
-                      <Link
+                        <Link
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="block py-4 text-2xl font-serif text-[#1A1410] hover:text-[#C85A36] transition-colors border-b border-[#E5E2DC]"
+                        className="block py-4 text-2xl font-serif transition-colors border-b hover:[color:var(--bt-rust)]"
+                        style={{ color: 'var(--color-text)', borderColor: 'var(--color-border)' }}
                       >
                         {item.name}
                       </Link>
@@ -168,9 +175,10 @@ export default function Navigation() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="pt-8 border-t border-[#E5E2DC]"
+                  className="pt-8 border-t"
+                  style={{ borderColor: 'var(--color-border)' }}
                 >
-                  <p className="text-xs tracking-[0.2em] uppercase text-[#8B8685]">
+                  <p className="text-xs tracking-[0.2em] uppercase" style={{ color: 'var(--color-text-light)' }}>
                     Deutsch Family Spirits
                   </p>
                 </motion.div>
