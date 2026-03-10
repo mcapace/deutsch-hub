@@ -6,6 +6,15 @@ Built with [Next.js](https://nextjs.org) and deployed on [Vercel](https://vercel
 
 ## Getting Started
 
+### Run locally
+
+1. **Terminal** — `Ctrl+` ` (backtick) or View → Terminal.
+2. **Install** — `npm install`
+3. **API keys** — In `.env.local` set `ANTHROPIC_API_KEY` and `ELEVENLABS_API_KEY`. D-ID key and agent ID are already there if configured.
+4. **Run** — `npm run dev`
+
+The **bartender bubble** is bottom right. Click to expand; first connection takes 3–5 seconds. Type a message and he'll speak the response.
+
 First, run the development server:
 
 ```bash

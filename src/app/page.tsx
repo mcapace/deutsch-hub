@@ -5,6 +5,7 @@ import CollectionHubSection from '@/components/CollectionHubSection';
 import CocktailSection from '@/components/CocktailSection';
 import FoodPairingsSection from '@/components/FoodPairingsSection';
 import CocktailQuiz from '@/components/CocktailQuiz';
+import AvatarWidgetLoader from '@/components/AvatarWidgetLoader';
 import ArticlesSection from '@/components/ArticlesSection';
 import Footer from '@/components/Footer';
 
@@ -116,6 +117,7 @@ export default function Home() {
       <FoodPairingsSection />
       <Footer />
       <CocktailQuiz />
+      <AvatarWidgetLoader />
     </main>
   );
 }
