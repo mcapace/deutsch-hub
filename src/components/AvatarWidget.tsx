@@ -140,9 +140,17 @@ export default function AvatarWidget() {
     const text = message.trim();
     if (!text || sending) return;
     setSending(true);
+    setMessage('');
     try {
-      await speak(text);
-      setMessage('');
+      // All API keys stay server-side: chat → /api/chat (Anthropic), then speak → /api/d-id (D-ID).
+      const chatRes = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text }),
+      });
+      const chatData = chatRes.ok ? (await chatRes.json()) as { text?: string } : null;
+      const toSpeak = chatData?.text?.trim() || text;
+      await speak(toSpeak);
     } catch (e) {
       console.error('Send error:', e);
     } finally {

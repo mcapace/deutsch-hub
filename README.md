@@ -4,16 +4,29 @@ A premium landing page showcasing Bib & Tucker and Redemption whiskeys, presente
 
 Built with [Next.js](https://nextjs.org) and deployed on [Vercel](https://vercel.com).
 
+## Avatar & API keys (no keys in the browser)
+
+This is a **Next.js app**, not static HTML. The avatar chat widget does **not** call Anthropic or D-ID from the browser. All calls go through your own backend:
+
+- **`/api/d-id`** — D-ID streaming (create/sdp/ice/talk/destroy). Uses `D_ID_API_KEY` and `NEXT_PUBLIC_DID_PRESENTER_ID` only on the server (presenter ID is public by design).
+- **`/api/chat`** — Proxies to Anthropic so the Bar Keep can reply with AI. Uses `ANTHROPIC_API_KEY` only on the server.
+
+On Vercel, API routes run as serverless functions. Set env vars in the Vercel project (Settings → Environment Variables). No API key is ever sent to the client.
+
 ## Getting Started
 
 ### Run locally
 
 1. **Terminal** — `Ctrl+` ` (backtick) or View → Terminal.
 2. **Install** — `npm install`
-3. **API keys** — In `.env.local` set `ANTHROPIC_API_KEY` and `ELEVENLABS_API_KEY`. D-ID key and agent ID are already there if configured.
+3. **API keys** — In `.env.local` (or Vercel env) set:
+   - `D_ID_API_KEY` — D-ID API key (from [D-ID Studio](https://studio.d-id.com/account-settings)).
+   - `NEXT_PUBLIC_DID_PRESENTER_ID` — D-ID presenter/stream ID (public, can be in client).
+   - `ANTHROPIC_API_KEY` — For Bar Keep AI replies via `/api/chat`.
+   - `ELEVENLABS_VOICE_ID` — Optional; used by D-ID for TTS in the avatar.
 4. **Run** — `npm run dev`
 
-The **bartender bubble** is bottom right. Click to expand; first connection takes 3–5 seconds. Type a message and he'll speak the response.
+The **Bar Keep** bubble is bottom right. Click to expand; first connection takes a few seconds. Type a message and he’ll reply with AI (via `/api/chat`) and speak the response (via D-ID). All keys stay server-side.
 
 First, run the development server:
 
