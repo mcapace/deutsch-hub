@@ -12,6 +12,7 @@
   --rule: #D8CEBC;
   --mist: #C4B89E;
   --fog: #9A8E7C;
+  --muted: #5C534D;   /* readable body/secondary text */
   --walnut: #5C4A32;
   --copper: #A0622A;
   --amber: #C4873E;
@@ -21,8 +22,8 @@
   --color-bg: var(--white);
   --color-bg-alt: var(--warm);
   --color-text: var(--ink);
-  --color-text-muted: var(--fog);
-  --color-text-light: var(--fog);
+  --color-text-muted: var(--muted);
+  --color-text-light: var(--muted);
   --color-border: var(--rule);
 
   /* Elevation */

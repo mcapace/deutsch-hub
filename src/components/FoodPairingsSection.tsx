@@ -144,7 +144,7 @@ const PairingCard = ({
         </h4>
 
         {/* Description */}
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--fog)' }}>
+        <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
           {pairing.description}
         </p>
 
@@ -293,7 +293,7 @@ export default function FoodPairingsSection() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal mb-4 font-serif" style={{ color: 'var(--ink)' }}>
             Perfect <span className="italic" style={{ color: 'var(--copper)' }}>Pairings</span>
           </h2>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto" style={{ color: 'var(--fog)' }}>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto" style={{ color: 'var(--muted)' }}>
             Elevate your tasting experience with expertly curated food pairings for each expression.
           </p>
         </motion.div>

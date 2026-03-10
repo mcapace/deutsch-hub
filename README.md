@@ -8,7 +8,7 @@ Built with [Next.js](https://nextjs.org) and deployed on [Vercel](https://vercel
 
 This is a **Next.js app**, not static HTML. The avatar chat widget does **not** call Anthropic or D-ID from the browser. All calls go through your own backend:
 
-- **`/api/d-id`** — D-ID streaming (create/sdp/ice/talk/destroy). Uses `D_ID_API_KEY` (or `DID_API_KEY`) and `NEXT_PUBLIC_DID_PRESENTER_ID` only on the server (presenter ID is public by design).
+- **`/api/d-id`** — D-ID streaming (create/sdp/ice/talk/destroy). Uses `D_ID_API_KEY` and `source_url` (image URL). Optional: `NEXT_PUBLIC_DID_SOURCE_URL` for your avatar image; else a default presenter image is used.
 - **`/api/chat`** — Proxies to Anthropic so the Bar Keep can reply with AI. Uses `ANTHROPIC_API_KEY` only on the server.
 
 **D-ID diagnostic:** Visit **http://localhost:3000/api/d-id-test** after `npm run dev`. The JSON response shows whether the D-ID key and presenter ID work (e.g. 401 = regenerate key, 402/403 = plan/credits).
@@ -23,7 +23,7 @@ On Vercel, API routes run as serverless functions. Set env vars in the Vercel pr
 2. **Install** — `npm install`
 3. **API keys** — In `.env.local` (or Vercel env) set:
    - `D_ID_API_KEY` or `DID_API_KEY` — D-ID API key (from [D-ID Studio](https://studio.d-id.com/account-settings)).
-   - `NEXT_PUBLIC_DID_PRESENTER_ID` — D-ID presenter/stream ID (public, can be in client).
+   - `NEXT_PUBLIC_DID_SOURCE_URL` — (optional) HTTPS URL to your presenter/avatar image. If unset, a default D-ID presenter image is used. From D-ID Studio you can copy your presenter’s image URL.
    - `ANTHROPIC_API_KEY` — For Bar Keep AI replies via `/api/chat`.
    - `ELEVENLABS_VOICE_ID` — Optional; used by D-ID for TTS in the avatar.
 4. **Run** — `npm run dev`

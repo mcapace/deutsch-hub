@@ -197,7 +197,7 @@ const CocktailCard = ({ cocktail, index, onSelect }: { cocktail: Cocktail; index
         </h3>
 
         {/* Tagline */}
-        <p className="text-sm mb-6 leading-relaxed" style={{ color: 'var(--fog)' }}>
+        <p className="text-sm mb-6 leading-relaxed" style={{ color: 'var(--muted)' }}>
           {cocktail.tagline}
         </p>
 
@@ -367,7 +367,7 @@ export default function CocktailSection() {
           <h2 className="font-serif text-4xl md:text-5xl mb-4" style={{ color: 'var(--ink)' }}>
             Signature Cocktails
           </h2>
-          <p className="text-lg font-light max-w-xl mx-auto" style={{ color: 'var(--fog)' }}>
+          <p className="text-lg font-light max-w-xl mx-auto" style={{ color: 'var(--muted)' }}>
             Expertly crafted recipes that showcase the distinct character of each spirit.
           </p>
         </motion.div>

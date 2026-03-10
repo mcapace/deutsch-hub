@@ -79,7 +79,7 @@ export default function BrandSection({
               unoptimized={true}
             />
           </div>
-          <p className="text-lg italic" style={{ color: 'var(--fog)' }}>{tagline}</p>
+          <p className="text-lg italic" style={{ color: 'var(--muted)' }}>{tagline}</p>
         </motion.div>
 
         {/* Main Content Grid */}
@@ -205,7 +205,7 @@ export default function BrandSection({
                 </div>
 
                 {/* Description */}
-                <p className="leading-relaxed mb-6 text-sm md:text-base" style={{ color: 'var(--ink)' }}>
+                <p className="leading-relaxed mb-6 text-sm md:text-base" style={{ color: 'var(--muted)' }}>
                   {product.description}
                 </p>
 
@@ -253,7 +253,7 @@ export default function BrandSection({
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-center mt-12 pt-10 border-t border-[#D8CEBC]"
         >
-          <p className="text-sm mb-4" style={{ color: 'var(--fog)' }}>
+          <p className="text-sm mb-4" style={{ color: 'var(--muted)' }}>
             Ready to experience {brandName}?
           </p>
           <a

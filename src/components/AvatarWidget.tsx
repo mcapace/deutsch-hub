@@ -4,6 +4,8 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const presenterId = process.env.NEXT_PUBLIC_DID_PRESENTER_ID;
+const sourceUrl = process.env.NEXT_PUBLIC_DID_SOURCE_URL;
+const hasDidConfig = (presenterId?.trim() || sourceUrl?.trim()) ?? false;
 
 function useDIDStream() {
   const pcRef = useRef<RTCPeerConnection | null>(null);
@@ -15,8 +17,20 @@ function useDIDStream() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action, ...payload }),
     });
-    if (!res.ok) throw new Error(`D-ID ${action} failed: ${await res.text()}`);
-    return res.json();
+    const text = await res.text();
+    if (!res.ok) {
+      let msg = text;
+      try {
+        const j = JSON.parse(text) as { error?: string; details?: { description?: string } };
+        msg = j.error ?? j.details?.description ?? text;
+      } catch {
+        /* use text as-is */
+      }
+      const err = new Error(`D-ID ${action} failed: ${msg}`);
+      (err as Error & { status?: number }).status = res.status;
+      throw err;
+    }
+    return JSON.parse(text) as Promise<Record<string, unknown>>;
   }, []);
 
   const connect = useCallback(
@@ -90,6 +104,7 @@ function useDIDStream() {
 
 export default function AvatarWidget() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const initStartedRef = useRef(false);
   const { connect, speak, disconnect } = useDIDStream();
   const [expanded, setExpanded] = useState(false);
   const [status, setStatus] = useState<'idle' | 'connecting' | 'connected' | 'error'>('idle');
@@ -99,27 +114,28 @@ export default function AvatarWidget() {
   const hasVideo = status === 'connected';
 
   const initConnection = useCallback(async () => {
-    if (status !== 'idle' || !presenterId?.trim()) {
-      if (!presenterId?.trim()) setStatus('error');
-      return;
-    }
-    if (!videoRef.current) return;
+    if (initStartedRef.current) return;
+    const el = videoRef.current;
+    if (!el) return;
+    initStartedRef.current = true;
     setStatus('connecting');
     setErrorMessage(null);
     try {
-      await connect(videoRef.current);
+      await connect(el);
       setStatus('connected');
     } catch (err) {
+      initStartedRef.current = false;
       console.error('D-ID connect failed:', err);
       setStatus('error');
-      setErrorMessage(err instanceof Error ? err.message : String(err));
+      const msg = err instanceof Error ? err.message : String(err);
+      setErrorMessage(msg);
     }
-  }, [status, connect]);
+  }, [connect]);
 
   useEffect(() => {
-    const t = setTimeout(() => initConnection(), 1000);
+    const t = setTimeout(() => initConnection(), 1200);
     return () => clearTimeout(t);
-  }, []);
+  }, [initConnection]);
 
   useEffect(() => {
     return () => {
@@ -129,8 +145,9 @@ export default function AvatarWidget() {
 
   const handleBubbleClick = () => {
     if (status === 'error') {
+      initStartedRef.current = false;
       setStatus('idle');
-      setTimeout(() => initConnection(), 100);
+      setTimeout(() => initConnection(), 200);
     } else {
       setExpanded(!expanded);
     }
@@ -158,12 +175,12 @@ export default function AvatarWidget() {
     }
   };
 
-  if (!presenterId?.trim()) {
+  if (!hasDidConfig) {
     return (
       <div
         className="fixed bottom-6 right-6 z-50 w-[72px] h-[72px] rounded-full flex items-center justify-center border-2 border-amber-500/50"
         style={{ background: 'linear-gradient(135deg, #C85A36, #BDA55D)' }}
-        title="Set NEXT_PUBLIC_DID_PRESENTER_ID in .env.local"
+        title="Set NEXT_PUBLIC_DID_PRESENTER_ID or NEXT_PUBLIC_DID_SOURCE_URL in .env.local"
       >
         <span className="text-2xl">🍸</span>
       </div>
@@ -278,8 +295,12 @@ export default function AvatarWidget() {
               style={{ background: '#120A02' }}
             >
               <p className="text-sm text-amber-200/90 text-center">{errorMessage}</p>
+              <p className="text-xs text-amber-200/50 text-center max-w-[260px]">
+                {errorMessage?.includes('401') && 'Check D_ID_API_KEY at studio.d-id.com. '}
+                {(errorMessage?.includes('402') || errorMessage?.includes('403')) && 'Trial may be expired; upgrade at studio.d-id.com.'}
+              </p>
               <button
-                onClick={(e) => { e.stopPropagation(); setStatus('idle'); setTimeout(() => initConnection(), 100); }}
+                onClick={(e) => { e.stopPropagation(); initStartedRef.current = false; setStatus('idle'); setTimeout(() => initConnection(), 200); }}
                 className="px-4 py-2 rounded-lg text-sm font-medium bg-white/10 hover:bg-white/20 text-amber-100"
               >
                 Retry

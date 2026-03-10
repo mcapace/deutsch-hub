@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const D_ID_API = 'https://api.d-id.com';
 const D_ID_API_KEY = process.env.D_ID_API_KEY || process.env.DID_API_KEY;
 const DID_PRESENTER_ID = process.env.NEXT_PUBLIC_DID_PRESENTER_ID;
+const DID_SOURCE_URL = process.env.NEXT_PUBLIC_DID_SOURCE_URL;
 const ELEVENLABS_VOICE_ID = process.env.ELEVENLABS_VOICE_ID || 'pNInz6obpgDQGcFmaJgB';
 
 const AUTH = D_ID_API_KEY
@@ -43,32 +44,46 @@ export async function POST(req: NextRequest) {
 
   try {
     if (action === 'create') {
-      if (!DID_PRESENTER_ID?.trim()) {
-        return jsonResponse({ error: 'NEXT_PUBLIC_DID_PRESENTER_ID is not set' }, 400);
-      }
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL?.trim();
+      const hostedImageUrl = baseUrl
+        ? `${baseUrl.replace(/\/$/, '')}/images/logos/photorealistic-portrait-of-a-male-barten_fHBB7tJfRkef7rPOHifBEQ_Z2KC48JUQWGzMVd82y338w_sd.jpeg`
+        : null;
+      const sourceUrl = DID_SOURCE_URL?.trim() || (DID_PRESENTER_ID?.trim()?.startsWith('http') ? DID_PRESENTER_ID : null);
+      const fallbackUrl = 'https://create-images-results.d-id.com/DefaultPresenters/Noelle_f/image.png';
+      const imageUrl = sourceUrl || hostedImageUrl || fallbackUrl;
       const res = await fetch(`${D_ID_API}/talks/streams`, {
         method: 'POST',
         headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          presenter_id: DID_PRESENTER_ID,
-          driver_url: 'bank://lively/driver-06',
+          source_url: imageUrl,
+          driver_url: 'bank://lively',
           output_resolution: 512,
           stream_warmup: true,
         }),
       });
       const data = (await res.json()) as Record<string, unknown>;
       if (!res.ok) {
-        console.error('D-ID create error:', data);
+        console.error('D-ID create error:', res.status, data);
+        const msg = (data && typeof data === 'object' && 'description' in data && data.description)
+          ? String(data.description)
+          : (data && typeof data === 'object' && 'error' in data ? String(data.error) : 'D-ID create failed');
         return jsonResponse(
-          { error: 'D-ID create failed', details: data },
+          { error: `${msg} (${res.status})`, details: data },
           res.status
         );
       }
+      const rawOffer = data.offer ?? data.jsep ?? data.offer_jsep;
+      const offerPayload =
+        typeof rawOffer === 'string'
+          ? { type: 'offer' as const, sdp: rawOffer }
+          : rawOffer && typeof rawOffer === 'object' && 'sdp' in (rawOffer as object)
+            ? { type: ((rawOffer as { type?: string }).type ?? 'offer'), sdp: (rawOffer as { sdp: string }).sdp }
+            : rawOffer;
       return jsonResponse({
         streamId: data.id ?? data.stream_id,
         sessionId: data.session_id,
-        offer: data.offer ?? data.jsep,
-        iceServers: data.ice_servers ?? [],
+        offer: offerPayload,
+        iceServers: data.ice_servers ?? data.iceServers ?? [],
       });
     }
 

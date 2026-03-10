@@ -88,7 +88,7 @@ const CollectionFeatureCard = ({
           <h3 className="font-serif cocktail-name text-xl mb-2 transition-colors group-hover:text-[var(--copper)]" style={{ color: 'var(--ink)' }}>
             {feature.title}
           </h3>
-          <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--fog)' }}>
+          <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>
             {feature.description}
           </p>
           <div className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--copper)' }}>
@@ -129,7 +129,7 @@ export default function CollectionHubSection() {
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-3" style={{ color: 'var(--ink)' }}>
             Celebrate Every Moment
           </h2>
-          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--fog)' }}>
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--muted)' }}>
             Discover how Bib & Tucker and Redemption elevate any occasion—from quiet evenings to big gatherings.
           </p>
         </motion.div>
@@ -228,7 +228,7 @@ export default function CollectionHubSection() {
           <h3 className="font-serif text-2xl md:text-3xl mb-3" style={{ color: 'var(--ink)' }}>
             Make Every Moment Unforgettable
           </h3>
-          <p className="mb-8 max-w-lg mx-auto" style={{ color: 'var(--fog)' }}>
+          <p className="mb-8 max-w-lg mx-auto" style={{ color: 'var(--muted)' }}>
               Whether hosting a gathering or finding the perfect gift, our collections offer something special for every whiskey lover—all year long.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

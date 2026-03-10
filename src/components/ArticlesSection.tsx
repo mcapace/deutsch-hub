@@ -170,7 +170,7 @@ export default function ArticlesSection() {
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-normal mb-6" style={{ color: 'var(--ink)' }}>
             Featured Stories
           </h2>
-            <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto" style={{ color: 'var(--fog)' }}>
+            <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto" style={{ color: 'var(--muted)' }}>
               Discover the heritage, craftsmanship, and stories behind American whiskey
           </p>
         </motion.div>
@@ -208,7 +208,7 @@ export default function ArticlesSection() {
                     {article.title}
                   </h3>
 
-                  <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--fog)' }}>
+                  <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--muted)' }}>
                     {article.excerpt}
                   </p>
 

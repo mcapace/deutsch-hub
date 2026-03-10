@@ -2,23 +2,18 @@ import { NextResponse } from 'next/server';
 
 /**
  * Diagnostic endpoint: GET /api/d-id-test
- * Tests D-ID API connectivity (key + presenter ID). Visit in browser or curl.
+ * Tests D-ID API connectivity. Uses source_url (same as main create). Visit in browser or curl.
  * Remove or restrict in production.
  */
 const D_ID_API = 'https://api.d-id.com';
 const API_KEY = process.env.D_ID_API_KEY || process.env.DID_API_KEY;
-const PRESENTER_ID = process.env.NEXT_PUBLIC_DID_PRESENTER_ID;
+const SOURCE_URL = process.env.NEXT_PUBLIC_DID_SOURCE_URL?.trim();
+const defaultSourceUrl = 'https://create-images-results.d-id.com/DefaultPresenters/Noelle_f/image.png';
 
 export async function GET() {
   if (!API_KEY?.trim()) {
     return NextResponse.json(
       { error: 'D_ID_API_KEY or DID_API_KEY is not set in .env.local' },
-      { status: 500 }
-    );
-  }
-  if (!PRESENTER_ID?.trim()) {
-    return NextResponse.json(
-      { error: 'NEXT_PUBLIC_DID_PRESENTER_ID is not set in .env.local' },
       { status: 500 }
     );
   }
@@ -29,10 +24,7 @@ export async function GET() {
       method: 'POST',
       headers: { Authorization: auth, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        presenter_id: PRESENTER_ID,
-        driver_url: 'bank://lively/driver-06',
-        output_resolution: 512,
-        stream_warmup: true,
+        source_url: SOURCE_URL || defaultSourceUrl,
       }),
     });
     const data = await res.json();
