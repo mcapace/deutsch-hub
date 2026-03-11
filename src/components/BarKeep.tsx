@@ -22,6 +22,7 @@ export default function BarKeep() {
     },
   ]);
   const [isAvatarActive, setIsAvatarActive] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   const initSession = useCallback(async () => {
     if (initAttempted.current) return;
@@ -63,25 +64,14 @@ export default function BarKeep() {
       // 3. CRITICAL: attach stream to video element when track arrives
       pc.ontrack = (event) => {
         console.log('Got track:', event.track.kind, event.streams);
-        if (event.track.kind === 'audio') {
-          return;
-        }
-        if (event.track.kind === 'video' && event.streams?.[0]) {
-          const video = videoRef.current;
-          if (video) {
-            video.srcObject = event.streams[0];
-            video.muted = true;
-            console.log('srcObject set:', video.srcObject);
-            const tryPlay = () => {
-              video
-                .play()
-                .then(() => console.log('Playing!'))
-                .catch((e) => {
-                  console.log('Play failed, retrying...', e.message);
-                  setTimeout(tryPlay, 500);
-                });
-            };
-            setTimeout(tryPlay, 100);
+        if (event.streams?.[0] && videoRef.current) {
+          if (!videoRef.current.srcObject) {
+            videoRef.current.srcObject = event.streams[0];
+            videoRef.current.muted = true;
+            console.log('srcObject set:', videoRef.current.srcObject);
+            setTimeout(() => {
+              videoRef.current?.play().catch((e) => console.log('Play:', e));
+            }, 100);
             setIsAvatarActive(true);
           }
         }
@@ -219,6 +209,12 @@ export default function BarKeep() {
         const talkData = await talkRes.json();
         console.log('D-ID talk response:', talkData);
         setIsAvatarActive(true);
+        if (talkData.status === 'started') {
+          setTimeout(() => {
+            setIsMuted(false);
+            if (videoRef.current) videoRef.current.muted = false;
+          }, 2000);
+        }
       } else {
         console.log('No session ID — avatar will not speak');
       }
@@ -253,13 +249,39 @@ export default function BarKeep() {
           boxShadow: '0 4px 24px rgba(30,20,8,0.12)',
         }}
       >
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          muted
-          style={{ width: '100%', height: '200px', background: '#000', display: 'block' }}
-        />
+        <div style={{ position: 'relative' }}>
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            muted={isMuted}
+            style={{ width: '100%', height: '200px', background: '#1a0a00', display: 'block', borderRadius: '8px 8px 0 0' }}
+          />
+          {isAvatarActive && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsMuted(false);
+                if (videoRef.current) videoRef.current.muted = false;
+              }}
+              style={{
+                position: 'absolute',
+                bottom: 8,
+                right: 8,
+                background: 'rgba(0,0,0,0.6)',
+                color: 'white',
+                border: 'none',
+                borderRadius: 4,
+                padding: '4px 8px',
+                fontSize: 11,
+                cursor: 'pointer',
+              }}
+            >
+              {isMuted ? '🔇 Tap to hear' : '🔊 Audio on'}
+            </button>
+          )}
+        </div>
 
         {!expanded && (
           <div className="absolute inset-0 flex items-center justify-center bg-copper rounded-[36px]">
