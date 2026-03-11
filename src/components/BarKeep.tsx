@@ -2,113 +2,14 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 
-type CreateSession = {
-  streamId: string;
-  sessionId: string;
-  offer: RTCSessionDescriptionInit;
-  iceServers?: RTCIceServer[];
-};
-
-function useDIDStream() {
-  const pcRef = useRef<RTCPeerConnection | null>(null);
-  const sessionRef = useRef<{ streamId: string; sessionId: string } | null>(null);
-
-  const call = useCallback(async (action: string, payload: Record<string, unknown>) => {
-    const res = await fetch('/api/d-id', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action, ...payload }),
-    });
-    const text = await res.text();
-    if (!res.ok) {
-      let msg = text;
-      try {
-        const j = JSON.parse(text) as { error?: string; details?: { description?: string } };
-        msg = j.error ?? j.details?.description ?? text;
-      } catch {
-        /* use text as-is */
-      }
-      const err = new Error(`D-ID ${action} failed: ${msg}`);
-      (err as Error & { status?: number }).status = res.status;
-      throw err;
-    }
-    return JSON.parse(text) as Promise<Record<string, unknown>>;
-  }, []);
-
-  const connect = useCallback(
-    async (videoEl: HTMLVideoElement) => {
-      const session = (await call('create', {})) as CreateSession;
-      sessionRef.current = { streamId: session.streamId, sessionId: session.sessionId };
-
-      const peer = new RTCPeerConnection({
-        iceServers: session.iceServers?.length ? session.iceServers : [{ urls: 'stun:stun.l.google.com:19302' }],
-      });
-      pcRef.current = peer;
-
-      peer.ontrack = (e) => {
-        if (e.streams?.[0]) {
-          videoEl.srcObject = e.streams[0];
-          videoEl.play().catch(() => {});
-        } else {
-          const stream = new MediaStream();
-          stream.addTrack(e.track);
-          videoEl.srcObject = stream;
-          videoEl.play().catch(() => {});
-        }
-      };
-
-      peer.onicecandidate = (event) => {
-        if (event.candidate && sessionRef.current) {
-          call('ice', {
-            streamId: sessionRef.current.streamId,
-            sessionId: sessionRef.current.sessionId,
-            candidate: event.candidate,
-          }).catch(console.error);
-        }
-      };
-
-      await peer.setRemoteDescription(new RTCSessionDescription(session.offer));
-      const answer = await peer.createAnswer();
-      await peer.setLocalDescription(answer);
-
-      await call('sdp', {
-        streamId: session.streamId,
-        sessionId: session.sessionId,
-        offer: answer,
-      });
-    },
-    [call]
-  );
-
-  const speak = useCallback(
-    async (text: string) => {
-      if (!sessionRef.current) return;
-      await call('talk', {
-        streamId: sessionRef.current.streamId,
-        sessionId: sessionRef.current.sessionId,
-        text,
-      });
-    },
-    [call]
-  );
-
-  const disconnect = useCallback(async () => {
-    if (sessionRef.current) {
-      await call('destroy', sessionRef.current).catch(console.error);
-      sessionRef.current = null;
-    }
-    pcRef.current?.close();
-    pcRef.current = null;
-  }, [call]);
-
-  return { connect, speak, disconnect };
-}
-
 export default function BarKeep() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const initStartedRef = useRef(false);
+  const peerConnection = useRef<RTCPeerConnection | null>(null);
+  const streamIdRef = useRef<string | null>(null);
+  const sessionIdRef = useRef<string | null>(null);
   const initAttempted = useRef(false);
-  const { connect, speak, disconnect } = useDIDStream();
+
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
   const [status, setStatus] = useState<'idle' | 'connecting' | 'connected' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -120,18 +21,122 @@ export default function BarKeep() {
       text: "Pull up a stool. I know these bottles inside out — Gold Roast's coffee magic, the Double Char's sugar maple smoke, Redemption's rye revival. What can I pour you?",
     },
   ]);
-  const [isSpeaking, setIsSpeaking] = useState(false);
   const [isAvatarActive, setIsAvatarActive] = useState(false);
-  const hasVideo = status === 'connected';
 
-  // When video ends or pauses, hide the video panel
+  const initSession = useCallback(async () => {
+    if (initAttempted.current) return;
+    initAttempted.current = true;
+
+    setStatus('connecting');
+    setErrorMessage(null);
+
+    try {
+      // 1. Create D-ID stream session
+      const createRes = await fetch('/api/d-id', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'create' }),
+      });
+
+      if (!createRes.ok) {
+        const errData = await createRes.json().catch(() => ({}));
+        throw new Error((errData as { error?: string }).error || `Create failed: ${createRes.status}`);
+      }
+
+      const data = await createRes.json();
+      const id = data.streamId ?? data.id;
+      const session_id = data.sessionId ?? data.session_id;
+      const offer = data.offer;
+      const ice_servers = data.iceServers ?? data.ice_servers ?? [];
+
+      const sessionIdToUse = session_id || id;
+      streamIdRef.current = id;
+      sessionIdRef.current = sessionIdToUse;
+      setSessionId(sessionIdToUse);
+
+      // 2. Create RTCPeerConnection with D-ID's ICE servers
+      const pc = new RTCPeerConnection({
+        iceServers: Array.isArray(ice_servers) && ice_servers.length > 0 ? ice_servers : [{ urls: 'stun:stun.l.google.com:19302' }],
+      });
+      peerConnection.current = pc;
+
+      // 3. CRITICAL: attach stream to video element when track arrives
+      pc.ontrack = (event) => {
+        console.log('Track received!');
+        console.log('Got track:', event.track.kind, event.streams);
+        if (event.streams && event.streams[0]) {
+          if (videoRef.current) {
+            videoRef.current.srcObject = event.streams[0];
+            videoRef.current.play().catch((e) => console.log('Play error:', e));
+            setIsAvatarActive(true);
+          }
+        }
+      };
+
+      // 4. Handle ICE candidates
+      pc.onicecandidate = async (event) => {
+        if (event.candidate && streamIdRef.current && sessionIdRef.current) {
+          try {
+            await fetch('/api/d-id', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                action: 'ice',
+                streamId: streamIdRef.current,
+                sessionId: sessionIdRef.current,
+                candidate: event.candidate,
+              }),
+            });
+          } catch (e) {
+            console.error('ICE send error:', e);
+          }
+        }
+      };
+
+      // 5. Set remote description from D-ID offer
+      await pc.setRemoteDescription(new RTCSessionDescription(offer));
+
+      // 6. Create and set local answer
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+
+      // 7. Send answer back to D-ID
+      const sdpRes = await fetch('/api/d-id', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'sdp',
+          streamId: streamIdRef.current,
+          sessionId: sessionIdToUse,
+          offer: answer,
+        }),
+      });
+      if (!sdpRes.ok) {
+        const errData = await sdpRes.json().catch(() => ({}));
+        throw new Error((errData as { error?: string }).error || 'SDP failed');
+      }
+
+      setStatus('connected');
+      console.log('D-ID WebRTC session established:', sessionIdToUse);
+    } catch (err) {
+      console.error('D-ID init failed:', err);
+      initAttempted.current = false;
+      setStatus('error');
+      setErrorMessage(err instanceof Error ? err.message : String(err));
+    }
+  }, []);
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      if (videoRef.current) initSession();
+    }, 1500);
+    return () => clearTimeout(t);
+  }, [initSession]);
+
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
-    const onEnd = () => {
-      setIsSpeaking(false);
-      setIsAvatarActive(false);
-    };
+    const onEnd = () => setIsAvatarActive(false);
     el.addEventListener('ended', onEnd);
     el.addEventListener('pause', onEnd);
     return () => {
@@ -140,48 +145,21 @@ export default function BarKeep() {
     };
   }, []);
 
-  const initConnection = useCallback(async () => {
-    if (initAttempted.current) return;
-    initAttempted.current = true;
-    if (initStartedRef.current) return;
-    const el = videoRef.current;
-    if (!el) return;
-    initStartedRef.current = true;
-    setStatus('connecting');
-    setErrorMessage(null);
-    try {
-      await connect(el);
-      setStatus('connected');
-    } catch (err) {
-      initStartedRef.current = false;
-      console.error('D-ID connect failed:', err);
-      setStatus('error');
-      const msg = err instanceof Error ? err.message : String(err);
-      setErrorMessage(msg);
-    }
-  }, [connect]);
-
-  useEffect(() => {
-    // Ensure video element is in DOM before connecting (next tick + short delay)
-    const t = setTimeout(() => {
-      if (videoRef.current) initConnection();
-    }, 1500);
-    return () => clearTimeout(t);
-  }, [initConnection]);
-
   useEffect(() => {
     return () => {
-      disconnect();
+      peerConnection.current?.close();
+      peerConnection.current = null;
+      streamIdRef.current = null;
+      sessionIdRef.current = null;
     };
-  }, [disconnect]);
+  }, []);
 
   const handleBubbleClick = () => {
     if (status === 'error') {
       initAttempted.current = false;
-      initStartedRef.current = false;
       setStatus('idle');
       setErrorMessage(null);
-      setTimeout(() => initConnection(), 200);
+      setTimeout(() => initSession(), 200);
     } else {
       setExpanded(!expanded);
     }
@@ -193,8 +171,10 @@ export default function BarKeep() {
     setSending(true);
     setMessage('');
     setMessages((prev) => [...prev, { role: 'user', text }]);
+
     try {
-      const chatRes = await fetch('/api/chat', {
+      // Get Claude reply
+      const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -204,22 +184,31 @@ export default function BarKeep() {
           ],
         }),
       });
-      const chatData = chatRes.ok ? ((await chatRes.json()) as { reply?: string }) : null;
-      const replyText = chatData?.reply?.trim() || 'Sorry, I couldn’t get a reply. Try again.';
-      if (!chatRes.ok) {
-        setMessages((prev) => [...prev, { role: 'assistant', text: replyText }]);
-      } else {
-        setMessages((prev) => [...prev, { role: 'assistant', text: replyText }]);
-        if (status === 'connected') {
-          setIsSpeaking(true);
-          setIsAvatarActive(true);
-          try {
-            await speak(replyText);
-          } catch (e) {
-            console.error('D-ID speak error:', e);
-            setIsSpeaking(false);
-            setIsAvatarActive(false);
-          }
+      const chatData = await res.json();
+      const reply = (chatData.reply ?? chatData.text ?? '').trim() || 'Sorry, I couldn’t get a reply. Try again.';
+
+      // Add reply to chat
+      setMessages((prev) => [...prev, { role: 'assistant', text: reply }]);
+
+      // Send to D-ID ONLY if session is active
+      const sid = streamIdRef.current;
+      const sessId = sessionIdRef.current;
+      const pc = peerConnection.current;
+      if (sessId && sid && pc?.connectionState === 'connected') {
+        setIsAvatarActive(true);
+        try {
+          await fetch('/api/d-id', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'talk',
+              streamId: sid,
+              sessionId: sessId,
+              text: reply,
+            }),
+          });
+        } catch (e) {
+          console.error('D-ID talk error:', e);
         }
       }
     } catch (e) {
@@ -257,8 +246,8 @@ export default function BarKeep() {
           ref={videoRef}
           autoPlay
           playsInline
-          className={isAvatarActive && expanded ? 'block w-full aspect-video object-cover flex-shrink-0' : 'hidden'}
-          style={{ objectPosition: 'center 10%' }}
+          muted={false}
+          className={isAvatarActive ? 'w-full aspect-video object-cover flex-shrink-0' : 'w-full aspect-video object-cover opacity-0 h-0 flex-shrink-0'}
         />
 
         {!expanded && (
@@ -294,10 +283,9 @@ export default function BarKeep() {
               onClick={(e) => {
                 e.stopPropagation();
                 initAttempted.current = false;
-                initStartedRef.current = false;
                 setStatus('idle');
                 setErrorMessage(null);
-                setTimeout(() => initConnection(), 200);
+                setTimeout(() => initSession(), 200);
               }}
               className="px-4 py-2 rounded-lg text-sm font-medium bg-white/10 hover:bg-white/20 text-amber-100"
             >
@@ -347,12 +335,12 @@ export default function BarKeep() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleSendMessage();
-                  }
-                }}
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleSendMessage();
+                    }
+                  }}
                   placeholder="Type a message…"
                   className="flex-1 px-4 py-3 rounded-lg text-sm bg-warm border border-rule text-ink placeholder-muted focus:outline-none focus:border-copper"
                   disabled={sending}
