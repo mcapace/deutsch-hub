@@ -180,53 +180,50 @@ export default function BarKeep() {
   };
 
   const handleSendMessage = async () => {
-    const text = message.trim();
-    if (!text || sending) return;
-    setSending(true);
+    const userText = message.trim();
+    if (!userText || sending) return;
+
+    const newMessages = [...messages.map((m) => ({ role: m.role, content: m.text })), { role: 'user' as const, content: userText }];
+    setMessages((prev) => [...prev, { role: 'user', text: userText }]);
     setMessage('');
-    setMessages((prev) => [...prev, { role: 'user', text }]);
+    setSending(true);
 
     try {
-      // Get Claude reply
-      const res = await fetch('/api/chat', {
+      // 1. Get Claude reply
+      const chatRes = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: [
-            ...messages.map((m) => ({ role: m.role, content: m.text })),
-            { role: 'user' as const, content: text },
-          ],
-        }),
+        body: JSON.stringify({ messages: newMessages }),
       });
-      const chatData = await res.json();
+      const chatData = await chatRes.json();
       const reply = (chatData.reply ?? chatData.text ?? '').trim() || 'Sorry, I couldn’t get a reply. Try again.';
 
-      // Add reply to chat
+      // 2. Add reply to chat
       setMessages((prev) => [...prev, { role: 'assistant', text: reply }]);
 
-      // Send to D-ID ONLY if session is active
+      // 3. Trigger D-ID avatar to speak
+      const sessId = sessionIdRef.current ?? sessionId;
       const sid = streamIdRef.current;
-      const sessId = sessionIdRef.current;
-      const pc = peerConnection.current;
-      if (sessId && sid && pc?.connectionState === 'connected') {
+      if (sessId && sid) {
+        console.log('Triggering D-ID talk, session:', sessId);
+        const talkRes = await fetch('/api/d-id', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'talk',
+            streamId: sid,
+            sessionId: sessId,
+            text: reply,
+          }),
+        });
+        const talkData = await talkRes.json();
+        console.log('D-ID talk response:', talkData);
         setIsAvatarActive(true);
-        try {
-          await fetch('/api/d-id', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              action: 'talk',
-              streamId: sid,
-              sessionId: sessId,
-              text: reply,
-            }),
-          });
-        } catch (e) {
-          console.error('D-ID talk error:', e);
-        }
+      } else {
+        console.log('No session ID — avatar will not speak');
       }
-    } catch (e) {
-      console.error('Send error:', e);
+    } catch (err) {
+      console.error('Send error:', err);
       setMessages((prev) => [...prev, { role: 'assistant', text: 'Sorry, something went wrong.' }]);
     } finally {
       setSending(false);
