@@ -121,13 +121,17 @@ export default function BarKeep() {
     },
   ]);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isAvatarActive, setIsAvatarActive] = useState(false);
   const hasVideo = status === 'connected';
 
   // When video ends or pauses, hide the video panel
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
-    const onEnd = () => setIsSpeaking(false);
+    const onEnd = () => {
+      setIsSpeaking(false);
+      setIsAvatarActive(false);
+    };
     el.addEventListener('ended', onEnd);
     el.addEventListener('pause', onEnd);
     return () => {
@@ -208,11 +212,13 @@ export default function BarKeep() {
         setMessages((prev) => [...prev, { role: 'assistant', text: replyText }]);
         if (status === 'connected') {
           setIsSpeaking(true);
+          setIsAvatarActive(true);
           try {
             await speak(replyText);
           } catch (e) {
             console.error('D-ID speak error:', e);
             setIsSpeaking(false);
+            setIsAvatarActive(false);
           }
         }
       }
@@ -242,7 +248,7 @@ export default function BarKeep() {
           width: expanded ? 360 : 72,
           height: expanded ? 420 : 72,
           borderRadius: expanded ? 16 : 36,
-          background: 'var(--white)',
+          background: '#FDFAF5',
           border: '2px solid var(--rule)',
           boxShadow: '0 4px 24px rgba(30,20,8,0.12)',
         }}
@@ -251,7 +257,7 @@ export default function BarKeep() {
           ref={videoRef}
           autoPlay
           playsInline
-          className={isSpeaking && expanded ? 'block w-full aspect-video object-cover bg-ink flex-shrink-0' : 'hidden'}
+          className={isAvatarActive && expanded ? 'block w-full aspect-video object-cover flex-shrink-0' : 'hidden'}
           style={{ objectPosition: 'center 10%' }}
         />
 
@@ -307,27 +313,33 @@ export default function BarKeep() {
               onClick={(e) => e.stopPropagation()}
               onKeyDown={(e) => e.stopPropagation()}
             >
-              <div className="flex-shrink-0 p-4 bg-warm border-b border-rule">
-                <div className="font-display text-sm text-ink">The Bar Keep</div>
-                <div className="text-[10px] tracking-widest uppercase text-muted">Bib & Tucker · Redemption</div>
+              <div className="flex-shrink-0 p-4 border-b border-rule" style={{ background: '#F7F2E8' }}>
+                <div className="font-display text-sm" style={{ color: '#1E1408' }}>The Bar Keep</div>
+                <div className="text-[10px] tracking-widest uppercase" style={{ color: '#5C534D' }}>Bib & Tucker · Redemption</div>
               </div>
-              <div className="flex-1 min-h-0 overflow-y-auto p-4 space-y-3 bg-white">
+              <div className="flex-1 min-h-0 overflow-y-auto p-4 space-y-3" style={{ background: '#FDFAF5' }}>
                 {messages.length === 0 && (
-                  <div className="bg-warm border-l-2 border-copper p-3 rounded text-sm text-ink">
+                  <div className="rounded text-sm" style={{ background: '#F7F2E8', color: '#1E1408', borderLeft: '3px solid #A0622A', padding: '12px 16px' }}>
                     What can I pour you? Ask about Bib & Tucker, Redemption, or a cocktail.
                   </div>
                 )}
                 {messages.map((m, i) => (
                   <div
                     key={i}
-                    className={`p-3 rounded text-sm ${m.role === 'user' ? 'bg-copper text-white ml-8' : 'bg-warm border-l-2 border-copper text-ink'}`}
+                    className="rounded text-sm"
+                    style={
+                      m.role === 'user'
+                        ? { background: '#A0622A', color: 'white', padding: '12px 16px', marginLeft: '2rem' }
+                        : { background: '#F7F2E8', color: '#1E1408', borderLeft: '3px solid #A0622A', padding: '12px 16px' }
+                    }
                   >
                     {m.text}
                   </div>
                 ))}
               </div>
               <div
-                className="flex-shrink-0 p-4 flex gap-2 bg-white border-t border-rule rounded-b-2xl"
+                className="flex-shrink-0 p-4 flex gap-2 border-t border-rule"
+                style={{ background: '#FDFAF5' }}
                 onClick={(e) => e.stopPropagation()}
               >
                 <input

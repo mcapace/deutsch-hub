@@ -44,14 +44,12 @@ export async function POST(req: NextRequest) {
 
   try {
     if (action === 'create') {
-      const source_url =
-        'https://deutsch.whiskyadvocate.com/images/logos/photorealistic-portrait-of-a-male-barten_fHBB7tJfRkef7rPOHifBEQ_Z2KC48JUQWGzMVd82y338w_sd.jpeg';
       const res = await fetch(`${D_ID_API}/talks/streams`, {
         method: 'POST',
         headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          source_url,
-          driver_url: 'bank://lively',
+          presenter_id: 'or_Xf7fwkyikE6WQ',
+          driver_id: 'uM00QurB2mu',
           output_resolution: 512,
           stream_warmup: true,
         }),
