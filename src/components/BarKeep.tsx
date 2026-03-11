@@ -114,7 +114,12 @@ export default function BarKeep() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
-  const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; text: string }>>([]);
+  const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; text: string }>>([
+    {
+      role: 'assistant',
+      text: "Pull up a stool. I know these bottles inside out — Gold Roast's coffee magic, the Double Char's sugar maple smoke, Redemption's rye revival. What can I pour you?",
+    },
+  ]);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const hasVideo = status === 'connected';
 
@@ -297,7 +302,11 @@ export default function BarKeep() {
 
         {expanded && status === 'connected' && (
           <>
-            <div className="flex flex-col flex-1 min-h-0 border-b border-rule rounded-t-2xl">
+            <div
+              className="flex flex-col flex-1 min-h-0 border-b border-rule rounded-t-2xl"
+              onClick={(e) => e.stopPropagation()}
+              onKeyDown={(e) => e.stopPropagation()}
+            >
               <div className="flex-shrink-0 p-4 bg-warm border-b border-rule">
                 <div className="font-display text-sm text-ink">The Bar Keep</div>
                 <div className="text-[10px] tracking-widest uppercase text-muted">Bib & Tucker · Redemption</div>
@@ -325,14 +334,23 @@ export default function BarKeep() {
                   type="text"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                  onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleSendMessage();
+                  }
+                }}
                   placeholder="Type a message…"
                   className="flex-1 px-4 py-3 rounded-lg text-sm bg-warm border border-rule text-ink placeholder-muted focus:outline-none focus:border-copper"
                   disabled={sending}
                 />
                 <button
                   type="button"
-                  onClick={handleSendMessage}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSendMessage();
+                  }}
                   disabled={!message.trim() || sending}
                   className="px-5 py-3 rounded-lg font-medium text-sm disabled:opacity-50 bg-copper text-white"
                 >

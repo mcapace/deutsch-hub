@@ -44,11 +44,8 @@ export async function POST(req: NextRequest) {
 
   try {
     if (action === 'create') {
-      const base = (process.env.NEXT_PUBLIC_BASE_URL || '').replace(/\/$/, '');
       const source_url =
-        process.env.NEXT_PUBLIC_DID_SOURCE_URL?.trim() ||
-        (base ? `${base}/images/logos/photorealistic-portrait-of-a-male-barten_fHBB7tJfRkef7rPOHifBEQ_Z2KC48JUQWGzMVd82y338w_sd.jpeg` : '') ||
-        'https://create-images-results.d-id.com/DefaultPresenters/Noelle_f/image.png';
+        'https://deutsch.whiskyadvocate.com/images/logos/photorealistic-portrait-of-a-male-barten_fHBB7tJfRkef7rPOHifBEQ_Z2KC48JUQWGzMVd82y338w_sd.jpeg';
       const res = await fetch(`${D_ID_API}/talks/streams`, {
         method: 'POST',
         headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
