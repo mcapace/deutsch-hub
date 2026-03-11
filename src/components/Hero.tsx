@@ -1,163 +1,76 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden grain-overlay"
-      style={{
-        background: 'radial-gradient(ellipse 85% 75% at 50% 45%, #FDFAF5 0%, #F7F2E8 45%, #EDE5D3 100%)',
-      }}
-    >
-      {/* Content Container */}
-        <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-28 md:py-32 text-center">
-        {/* Whisky Advocate Logo */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <Image
-            src="/images/logos/WA_BLUE-removebg-preview.png"
-            alt="Whisky Advocate"
-            width={200}
-            height={60}
-            className="h-12 w-auto object-contain mx-auto mb-3"
-            priority
-            unoptimized={true}
-          />
-          <p className="text-[11px] tracking-[0.3em] uppercase font-medium" style={{ color: 'var(--fog)' }}>
-            Presents
-          </p>
-        </motion.div>
-
-        {/* Main Headline - Playfair Display, italic portion copper */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-[1.05] tracking-tight mb-8"
-          style={{ color: '#1E1408' }}
-        >
-          The Art of
+    <section className="grid grid-cols-1 lg:grid-cols-2 min-h-screen pt-[68px]">
+      <div className="bg-white flex flex-col justify-center px-8 lg:px-16 py-16 order-2 lg:order-1" data-reveal>
+        <div className="h-px w-12 mb-6" style={{ background: 'var(--rule)' }} />
+        <p className="text-fog text-[9px] tracking-[0.28em] uppercase mb-4">Whisky Advocate Presents</p>
+        <h1 className="font-display text-[clamp(2.5rem,6vw,5.375rem)] leading-tight mb-6 text-ink">
+          <span className="italic text-copper">The Art of</span>
           <br />
-          <em className="italic tracking-normal" style={{ color: '#A0622A' }}>American Whiskey</em>
-        </motion.h1>
-
-        {/* Centered Divider */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex items-center justify-center gap-4 mb-10"
-        >
-          <span className="h-px w-14" style={{ background: 'var(--rule)' }} />
-          <span className="w-2 h-2 rotate-45 border" style={{ borderColor: 'var(--amber)' }} />
-          <span className="h-px w-14" style={{ background: 'var(--rule)' }} />
-        </motion.div>
-
-        {/* Subheadline - fog */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto mb-14 md:whitespace-nowrap"
-          style={{ color: 'var(--muted)' }}
-        >
-          Discover the heritage and craftsmanship of Bib & Tucker and Redemption.
-        </motion.p>
-
-        {/* Brand Logos */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex items-center justify-center gap-20 mb-14"
-        >
-          <a href="#bib-tucker" className="group text-center flex flex-col items-center">
-            <Image
-              src="/BAT_3D_Copper_Logo.png"
-              alt="Bib & Tucker"
-              width={220}
-              height={80}
-              className="h-20 md:h-24 w-auto object-contain mb-2 group-hover:scale-[1.04] transition-transform duration-500"
-              unoptimized={true}
-            />
-            <span className="text-[10px] tracking-[0.25em] uppercase font-medium" style={{ color: 'var(--fog)' }}>
-              Tennessee Bourbon
-            </span>
-          </a>
-
-          <span className="w-px h-20" style={{ background: 'var(--rule)' }} />
-
-          <a href="#redemption" className="group text-center flex flex-col items-center">
-            <Image
-              src="/Redemption logo /Redemption_Whiskey_Logo.png"
-              alt="Redemption"
-              width={220}
-              height={80}
-              className="h-20 md:h-24 w-auto object-contain mb-2 group-hover:scale-[1.04] transition-transform duration-500"
-              unoptimized={true}
-            />
-            <span className="text-[10px] tracking-[0.25em] uppercase font-medium" style={{ color: 'var(--fog)' }}>
-              American Rye
-            </span>
-          </a>
-        </motion.div>
-
-        {/* CTA Buttons - primary ink/white hover copper, secondary walnut no bg */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="flex items-center justify-center gap-5"
-        >
-          <a
-            href="#bib-tucker"
-            className="px-10 py-4 text-sm tracking-[0.2em] uppercase font-medium transition-all duration-300 hover:bg-[#A0622A] rounded-sm"
-            style={{
-              backgroundColor: '#1E1408',
-              color: '#FFFFFF',
-            }}
+          American
+          <br />
+          Whiskey
+        </h1>
+        <div className="w-12 h-px my-6" style={{ background: 'var(--rule)' }} />
+        <p className="text-fog text-lg max-w-md mb-10">
+          Discover Bib & Tucker and Redemption — Tennessee bourbon and American rye, crafted for the moment.
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href="#collection"
+            className="bg-ink text-white px-8 py-3 text-[9px] tracking-[0.24em] uppercase hover:bg-copper transition-colors inline-block"
           >
-            Explore the Collection
-          </a>
-          <a
+            Explore Collection
+          </Link>
+          <Link
             href="#cocktails"
-            className="px-10 py-4 text-sm tracking-[0.2em] uppercase font-medium transition-all duration-300 rounded-sm"
-            style={{ color: 'var(--walnut)' }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = 'var(--copper)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'var(--walnut)';
-            }}
+            className="text-walnut text-[9px] tracking-[0.22em] uppercase after:content-['→'] after:ml-1 hover:text-copper transition-colors inline-block"
           >
-            Cocktails
-          </a>
-        </motion.div>
+            Cocktail Recipes
+          </Link>
+        </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center"
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
-          <svg className="w-6 h-6" style={{ color: 'var(--amber)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </motion.div>
-      </motion.div>
+      <div className="bg-warm relative flex items-end justify-center px-8 py-16 lg:py-24 order-1 lg:order-2 min-h-[50vh] lg:min-h-0" data-reveal>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_60%,rgba(196,135,62,0.08),transparent)] pointer-events-none" />
+        <div className="relative flex items-end justify-center gap-4 lg:gap-8">
+          <div className="w-32 lg:w-44 drop-shadow-2xl" style={{ transform: 'rotate(-2.5deg)' }}>
+            <Image
+              src="/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png"
+              alt="Bib & Tucker Classic Six"
+              width={176}
+              height={400}
+              className="w-full h-auto object-contain object-bottom"
+              unoptimized
+            />
+          </div>
+          <div className="w-32 lg:w-44 drop-shadow-2xl" style={{ transform: 'rotate(2deg)' }}>
+            <Image
+              src="/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png"
+              alt="Redemption Bourbon"
+              width={176}
+              height={400}
+              className="w-full h-auto object-contain object-bottom"
+              unoptimized
+            />
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 grid grid-cols-2 border-t border-rule py-4 px-6" style={{ background: 'rgba(247,242,232,0.95)' }}>
+          <div className="text-center">
+            <p className="font-display text-ink text-sm">Bib & Tucker</p>
+            <p className="text-fog text-[9px] tracking-[0.2em] uppercase">Tennessee Bourbon</p>
+          </div>
+          <div className="text-center border-l border-rule">
+            <p className="font-display text-ink text-sm">Redemption</p>
+            <p className="text-fog text-[9px] tracking-[0.2em] uppercase">American Rye</p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
