@@ -2,10 +2,6 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 
-const presenterId = process.env.NEXT_PUBLIC_DID_PRESENTER_ID;
-const sourceUrl = process.env.NEXT_PUBLIC_DID_SOURCE_URL;
-const hasDidConfig = Boolean(presenterId?.trim() || sourceUrl?.trim());
-
 type CreateSession = {
   streamId: string;
   sessionId: string;
@@ -190,25 +186,6 @@ export default function BarKeep() {
       setSending(false);
     }
   };
-
-  if (!hasDidConfig) {
-    return (
-      <div
-        className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2"
-        title="D-ID not configured"
-      >
-        <div
-          className="w-[72px] h-[72px] rounded-full flex items-center justify-center bg-copper border-2 border-amber/50 cursor-default"
-          style={{ boxShadow: '0 4px 20px rgba(30,20,8,0.15)' }}
-        >
-          <span className="text-2xl" aria-hidden>🍸</span>
-        </div>
-        <div className="px-3 py-2 rounded-lg text-[10px] text-left max-w-[200px] bg-warm border border-rule text-muted">
-          Set <strong>NEXT_PUBLIC_DID_PRESENTER_ID</strong> or <strong>NEXT_PUBLIC_DID_SOURCE_URL</strong> in Vercel env (and .env.local) to enable the avatar.
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">

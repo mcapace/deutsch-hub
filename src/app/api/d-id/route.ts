@@ -44,18 +44,16 @@ export async function POST(req: NextRequest) {
 
   try {
     if (action === 'create') {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL?.trim();
-      const hostedImageUrl = baseUrl
-        ? `${baseUrl.replace(/\/$/, '')}/images/logos/photorealistic-portrait-of-a-male-barten_fHBB7tJfRkef7rPOHifBEQ_Z2KC48JUQWGzMVd82y338w_sd.jpeg`
-        : null;
-      const sourceUrl = DID_SOURCE_URL?.trim() || (DID_PRESENTER_ID?.trim()?.startsWith('http') ? DID_PRESENTER_ID : null);
-      const fallbackUrl = 'https://create-images-results.d-id.com/DefaultPresenters/Noelle_f/image.png';
-      const imageUrl = sourceUrl || hostedImageUrl || fallbackUrl;
+      const base = (process.env.NEXT_PUBLIC_BASE_URL || '').replace(/\/$/, '');
+      const source_url =
+        process.env.NEXT_PUBLIC_DID_SOURCE_URL?.trim() ||
+        (base ? `${base}/images/logos/photorealistic-portrait-of-a-male-barten_fHBB7tJfRkef7rPOHifBEQ_Z2KC48JUQWGzMVd82y338w_sd.jpeg` : '') ||
+        'https://create-images-results.d-id.com/DefaultPresenters/Noelle_f/image.png';
       const res = await fetch(`${D_ID_API}/talks/streams`, {
         method: 'POST',
         headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          source_url: imageUrl,
+          source_url,
           driver_url: 'bank://lively',
           output_resolution: 512,
           stream_warmup: true,
