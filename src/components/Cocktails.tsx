@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface Cocktail {
   id: string;
@@ -29,7 +30,11 @@ function CocktailCard({ cocktail, onSelect }: { cocktail: Cocktail; onSelect: ()
     <div
       role="button"
       tabIndex={0}
-      onClick={onSelect}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onSelect();
+      }}
       onKeyDown={(e) => e.key === 'Enter' && onSelect()}
       className="bg-warm border border-rule p-8 h-full hover:bg-cream transition-colors cursor-pointer group"
       data-reveal
@@ -62,16 +67,26 @@ function CocktailCard({ cocktail, onSelect }: { cocktail: Cocktail; onSelect: ()
 
 function RecipeModal({ cocktail, onClose }: { cocktail: Cocktail; onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-ink/90 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="max-w-2xl w-full bg-white border border-rule overflow-hidden max-h-[90vh] overflow-y-auto relative" onClick={(e) => e.stopPropagation()}>
-        <div className="p-8 lg:p-10 border-b border-rule">
+    <div
+      className="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center p-4"
+      style={{ backgroundColor: 'rgba(0,0,0,0.75)' }}
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="recipe-modal-title"
+    >
+      <div
+        className="relative z-[101] max-w-2xl w-full bg-white border border-rule overflow-hidden max-h-[90vh] overflow-y-auto shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="p-8 lg:p-10 border-b border-rule relative">
           <button type="button" onClick={onClose} className="absolute top-6 right-6 text-muted hover:text-ink p-2" aria-label="Close">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
           <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-copper block mb-3">
             {cocktail.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'} — {cocktail.spirit}
           </span>
-          <h2 className="font-display text-4xl text-ink mb-2">{cocktail.name}</h2>
+          <h2 id="recipe-modal-title" className="font-display text-4xl text-ink mb-2">{cocktail.name}</h2>
           <p className="text-muted">{cocktail.tagline}</p>
         </div>
         <div className="p-8 lg:p-10">
@@ -116,6 +131,9 @@ function RecipeModal({ cocktail, onClose }: { cocktail: Cocktail; onClose: () =>
 export default function Cocktails() {
   const [filter, setFilter] = useState<'all' | 'bib' | 'redemption'>('all');
   const [selected, setSelected] = useState<Cocktail | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const filtered = cocktails.filter((c) => filter === 'all' || c.brand === filter);
 
@@ -166,7 +184,11 @@ export default function Cocktails() {
         </p>
       </div>
 
-      {selected && <RecipeModal cocktail={selected} onClose={() => setSelected(null)} />}
+      {mounted && selected &&
+        createPortal(
+          <RecipeModal cocktail={selected} onClose={() => setSelected(null)} />,
+          document.body
+        )}
     </section>
   );
 }
