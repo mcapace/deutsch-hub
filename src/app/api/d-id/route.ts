@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const D_ID_API = 'https://api.d-id.com';
-const D_ID_API_KEY = process.env.D_ID_API_KEY || process.env.DID_API_KEY;
+const D_ID_API_KEY = process.env.D_ID_API_KEY;
 const DID_PRESENTER_ID = process.env.NEXT_PUBLIC_DID_PRESENTER_ID;
 const DID_SOURCE_URL = process.env.NEXT_PUBLIC_DID_SOURCE_URL;
 const ELEVENLABS_VOICE_ID = process.env.ELEVENLABS_VOICE_ID || 'pNInz6obpgDQGcFmaJgB';

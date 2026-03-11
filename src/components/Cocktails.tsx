@@ -143,8 +143,11 @@ export default function Cocktails() {
                 type="button"
                 onClick={() => setFilter(f.id as 'all' | 'bib' | 'redemption')}
                 className={`px-8 py-3 text-xs uppercase tracking-[0.15em] font-medium transition-colors ${
-                  filter === f.id ? 'bg-ink text-white' : 'text-muted hover:text-ink'
+                  filter === f.id
+                    ? 'bg-ink text-white [color:white]'
+                    : 'text-muted hover:text-ink'
                 }`}
+                style={filter === f.id ? { color: '#ffffff' } : undefined}
               >
                 {f.label}
               </button>

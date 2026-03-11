@@ -26,14 +26,14 @@ export default function Footer() {
         <div className="grid md:grid-cols-12 gap-12 md:gap-8 mb-12">
           <div className="md:col-span-5" data-reveal>
             <Image
-              src="/images/logos/WA_BLUE-removebg-preview.png"
+              src="/images/logos/WA_WHITE-removebg-preview.png"
               alt="Whisky Advocate"
               width={180}
               height={54}
-              className="h-10 w-auto object-contain opacity-40 mb-6"
+              className="h-10 w-auto object-contain opacity-90 mb-6"
               unoptimized
             />
-            <p className="font-display italic text-[15px] leading-relaxed max-w-sm mb-8 text-white/30">
+            <p className="font-display italic text-[15px] leading-relaxed max-w-sm mb-8 text-white/80">
               Discover the art of American whiskey through the curated collection of Bib & Tucker and Redemption, presented by Whisky Advocate.
             </p>
             <div className="flex items-center gap-6">
@@ -48,7 +48,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {exploreLinks.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-[15px] text-white/35 hover:text-white/75 transition-colors">
+                  <Link href={link.href} className="text-[15px] text-white/75 hover:text-white transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -61,11 +61,11 @@ export default function Footer() {
               {resourceLinks.map((link) => (
                 <li key={link.name}>
                   {link.external ? (
-                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-[15px] text-white/35 hover:text-white/75 transition-colors">
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-[15px] text-white/75 hover:text-white transition-colors">
                       {link.name}
                     </a>
                   ) : (
-                    <Link href={link.href} className="text-[15px] text-white/35 hover:text-white/75 transition-colors">
+                    <Link href={link.href} className="text-[15px] text-white/75 hover:text-white transition-colors">
                       {link.name}
                     </Link>
                   )}
@@ -82,7 +82,7 @@ export default function Footer() {
             </div>
             <div>
               <h5 className="text-white font-medium mb-1">Please Drink Responsibly</h5>
-              <p className="text-sm leading-relaxed text-white/40">
+              <p className="text-sm leading-relaxed text-white/80">
                 This website is intended for adults of legal drinking age. Enjoy our content and products responsibly. Do not share with anyone under the legal drinking age.
               </p>
             </div>
@@ -90,8 +90,8 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4" data-reveal>
-          <p className="text-[13px] text-white/30">&copy; {year} Whisky Advocate. All rights reserved.</p>
-          <p className="text-[13px] text-white/30">
+          <p className="text-[13px] text-white/80">&copy; {year} Whisky Advocate. All rights reserved.</p>
+          <p className="text-[13px] text-white/80">
             Sponsored content in partnership with <span className="text-amber">Deutsch Family Wine & Spirits</span>
           </p>
         </div>

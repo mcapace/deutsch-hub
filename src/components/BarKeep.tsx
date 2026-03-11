@@ -107,6 +107,7 @@ function useDIDStream() {
 export default function BarKeep() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const initStartedRef = useRef(false);
+  const initAttempted = useRef(false);
   const { connect, speak, disconnect } = useDIDStream();
   const [expanded, setExpanded] = useState(false);
   const [status, setStatus] = useState<'idle' | 'connecting' | 'connected' | 'error'>('idle');
@@ -117,6 +118,8 @@ export default function BarKeep() {
   const hasVideo = status === 'connected';
 
   const initConnection = useCallback(async () => {
+    if (initAttempted.current) return;
+    initAttempted.current = true;
     if (initStartedRef.current) return;
     const el = videoRef.current;
     if (!el) return;
@@ -151,6 +154,7 @@ export default function BarKeep() {
 
   const handleBubbleClick = () => {
     if (status === 'error') {
+      initAttempted.current = false;
       initStartedRef.current = false;
       setStatus('idle');
       setErrorMessage(null);
@@ -255,6 +259,7 @@ export default function BarKeep() {
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
+                initAttempted.current = false;
                 initStartedRef.current = false;
                 setStatus('idle');
                 setErrorMessage(null);
