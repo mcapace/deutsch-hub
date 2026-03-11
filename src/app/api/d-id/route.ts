@@ -48,10 +48,11 @@ export async function POST(req: NextRequest) {
         method: 'POST',
         headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          presenter_id: 'or_Xf7fwkyikE6WQ',
-          driver_id: 'uM00QurB2mu',
+          source_url: 'https://deutsch.whiskyadvocate.com/images/logos/photorealistic-portrait-of-a-male-barten_fHBB7tJfRkef7rPOHifBEQ_Z2KC48JUQWGzMVd82y338w_sd.jpeg',
+          driver_url: 'bank://lively',
           output_resolution: 512,
           stream_warmup: true,
+          config: { stitch: true },
         }),
       });
       const data = (await res.json()) as Record<string, unknown>;
