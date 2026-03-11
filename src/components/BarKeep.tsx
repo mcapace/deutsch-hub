@@ -189,12 +189,14 @@ export default function BarKeep() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          message: text,
-          history: messages.map((m) => ({ role: m.role, content: m.text })),
+          messages: [
+            ...messages.map((m) => ({ role: m.role, content: m.text })),
+            { role: 'user' as const, content: text },
+          ],
         }),
       });
-      const chatData = chatRes.ok ? ((await chatRes.json()) as { text?: string }) : null;
-      const replyText = chatData?.text?.trim() || 'Sorry, I couldn’t get a reply. Try again.';
+      const chatData = chatRes.ok ? ((await chatRes.json()) as { reply?: string }) : null;
+      const replyText = chatData?.reply?.trim() || 'Sorry, I couldn’t get a reply. Try again.';
       if (!chatRes.ok) {
         setMessages((prev) => [...prev, { role: 'assistant', text: replyText }]);
       } else {

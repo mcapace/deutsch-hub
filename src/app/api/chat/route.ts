@@ -1,73 +1,66 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server'
 
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
+const SYSTEM = `You are The Bar Keep — a warm, knowledgeable mixologist 
+for Bib & Tucker and Redemption Whiskey on Whisky Advocate.
+
+BIB & TUCKER: Small batch Tennessee bourbon.
+- Gold Roast: coffee-refined with Muletown Coffee, bold roasted notes, 
+  milk chocolate, brown spice. First coffee-refined bourbon.
+- Classic Six: 6-year flagship, sugar maple charcoal filtered, 
+  oak/caramel/vanilla, chestnut finish.
+- Double Char: double-charred with sugar maple smoke, 
+  white smoke/dulce de leche/cinnamon.
+- Tennessee Ten: decade-aged, not chill-filtered, 
+  refined oak/vanilla/leather/dark chocolate.
+
+REDEMPTION: Pre-Prohibition rye revival.
+- Redemption Rye: 95% rye, toasted oak/allspice/anise/black pepper.
+- High Rye Bourbon: 36% rye, vanilla/red berries/fennel/spiced oak.
+- Wheated Bourbon: Double Gold, candied ginger/lavender/hazelnut/fresh pear.
+- Redemption Bourbon: 21% rye, caramel/baking spice/anise/toffee.
+
+Shop: store.whiskyadvocate.com
+
+TONE: Warm, unhurried, storytelling not specs. Ask questions back. 
+Give real cocktail recipes when asked. 3 paragraphs max. Never salesy.`
 
 export async function POST(req: NextRequest) {
-  if (!ANTHROPIC_API_KEY?.trim()) {
-    return NextResponse.json(
-      { error: 'ANTHROPIC_API_KEY is not configured. Add it in Vercel env (or .env.local).' },
-      { status: 500 }
-    );
-  }
-
-  let body: { message?: string; history?: Array<{ role: string; content: string }> };
   try {
-    body = await req.json();
-  } catch {
-    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
-  }
+    if (!process.env.ANTHROPIC_API_KEY?.trim()) {
+      return NextResponse.json(
+        { reply: 'Chat is not configured.' },
+        { status: 500 }
+      )
+    }
+    const { messages } = await req.json()
 
-  const message = typeof body.message === 'string' ? body.message.trim() : '';
-  if (!message) {
-    return NextResponse.json({ error: 'message is required' }, { status: 400 });
-  }
-
-  const systemPrompt = `You are "The Bar Keep," a friendly whiskey expert for Bib & Tucker (Tennessee bourbon) and Redemption (American rye). Keep replies concise and conversational—they will be read aloud via text-to-speech. Suggest pours, pairings, or recipes when relevant.`;
-
-  const messages: Array<{ role: 'user' | 'assistant'; content: string }> = [
-    ...(Array.isArray(body.history) ? body.history : []),
-    { role: 'user', content: message },
-  ].filter(
-    (m): m is { role: 'user' | 'assistant'; content: string } =>
-      m && typeof (m as { role?: string }).role === 'string' && typeof (m as { content?: string }).content === 'string'
-  );
-
-  try {
-    const res = await fetch(ANTHROPIC_API_URL, {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
+        'x-api-key': process.env.ANTHROPIC_API_KEY!,
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-3-5-sonnet-20241022',
-        max_tokens: 300,
-        system: systemPrompt,
-        messages,
-      }),
-    });
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 600,
+        system: SYSTEM,
+        messages: messages.slice(-8)
+      })
+    })
 
-    const data = (await res.json()) as {
-      content?: Array<{ type: string; text?: string }>;
-      error?: { message?: string };
-    };
-
-    if (!res.ok) {
-      console.error('Anthropic API error:', data);
-      return NextResponse.json(
-        { error: data?.error?.message || 'Anthropic request failed', details: data },
-        { status: res.status }
-      );
+    const data = await response.json()
+    
+    if (data.error) {
+      console.error('Anthropic error:', data.error)
+      return NextResponse.json({ reply: 'Something went wrong.' }, { status: 500 })
     }
 
-    const text =
-      data.content?.find((c) => c.type === 'text')?.text?.trim() ||
-      'I’m not sure what to say to that. Ask me about Bib & Tucker or Redemption.';
-    return NextResponse.json({ text });
+    const reply = data.content?.[0]?.text || 'Something went wrong.'
+    return NextResponse.json({ reply })
+
   } catch (err) {
-    console.error('Chat API error:', err);
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    console.error('Chat route error:', err)
+    return NextResponse.json({ reply: 'Something went wrong.' }, { status: 500 })
   }
 }
