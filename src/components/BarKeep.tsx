@@ -1,18 +1,9 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 
 export default function BarKeep() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const peerConnection = useRef<RTCPeerConnection | null>(null);
-  const streamIdRef = useRef<string | null>(null);
-  const sessionIdRef = useRef<string | null>(null);
-  const initAttempted = useRef(false);
-
-  const [sessionId, setSessionId] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'connecting' | 'connected' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
   const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; text: string }>>([
@@ -21,165 +12,74 @@ export default function BarKeep() {
       text: "Pull up a stool. I know these bottles inside out — Gold Roast's coffee magic, the Double Char's sugar maple smoke, Redemption's rye revival. What can I pour you?",
     },
   ]);
-  const [isAvatarActive, setIsAvatarActive] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [isAvatarLoading, setIsAvatarLoading] = useState(false);
 
-  const initSession = useCallback(async () => {
-    if (initAttempted.current) return;
-    initAttempted.current = true;
-
-    setStatus('connecting');
-    setErrorMessage(null);
-
+  async function speakWithAvatar(text: string) {
+    setIsAvatarLoading(true);
     try {
-      // 1. Create D-ID stream session
       const createRes = await fetch('/api/d-id', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'create' }),
+        body: JSON.stringify({ action: 'talk', text }),
       });
-
-      if (!createRes.ok) {
-        const errData = await createRes.json().catch(() => ({}));
-        throw new Error((errData as { error?: string }).error || `Create failed: ${createRes.status}`);
+      const createData = await createRes.json();
+      const { id, status, result_url } = createData;
+      console.log('Talk created:', id, status);
+      if (!createRes.ok || !id) {
+        setIsAvatarLoading(false);
+        return;
       }
 
-      const data = await createRes.json();
-      const id = data.streamId ?? data.id;
-      const session_id = data.sessionId ?? data.session_id;
-      const offer = data.offer;
-      const ice_servers = data.iceServers ?? data.ice_servers ?? [];
-
-      const sessionIdToUse = session_id || id;
-      streamIdRef.current = id;
-      sessionIdRef.current = sessionIdToUse;
-      setSessionId(sessionIdToUse);
-
-      // 2. Create RTCPeerConnection with D-ID's ICE servers
-      const pc = new RTCPeerConnection({
-        iceServers: Array.isArray(ice_servers) && ice_servers.length > 0 ? ice_servers : [{ urls: 'stun:stun.l.google.com:19302' }],
-      });
-      peerConnection.current = pc;
-
-      // 3. CRITICAL: attach stream to video element when track arrives
-      pc.ontrack = (event) => {
-        console.log('Got track:', event.track.kind, event.streams);
-        if (event.streams?.[0] && videoRef.current) {
-          if (!videoRef.current.srcObject) {
-            videoRef.current.srcObject = event.streams[0];
-            videoRef.current.muted = true;
-            console.log('srcObject set:', videoRef.current.srcObject);
-            setTimeout(() => {
-              videoRef.current?.play().catch((e) => console.log('Play:', e));
-            }, 100);
-            setIsAvatarActive(true);
-          }
-        }
-      };
-
-      // 4. Handle ICE candidates
-      pc.onicecandidate = async (event) => {
-        if (event.candidate && streamIdRef.current && sessionIdRef.current) {
-          try {
-            await fetch('/api/d-id', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                action: 'ice',
-                streamId: streamIdRef.current,
-                sessionId: sessionIdRef.current,
-                candidate: event.candidate,
-              }),
-            });
-          } catch (e) {
-            console.error('ICE send error:', e);
-          }
-        }
-      };
-
-      // 5. Set remote description from D-ID offer
-      await pc.setRemoteDescription(new RTCSessionDescription(offer));
-
-      // 6. Create and set local answer
-      const answer = await pc.createAnswer();
-      await pc.setLocalDescription(answer);
-
-      // 7. Send answer back to D-ID
-      const sdpRes = await fetch('/api/d-id', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'sdp',
-          streamId: streamIdRef.current,
-          sessionId: sessionIdToUse,
-          offer: answer,
-        }),
-      });
-      if (!sdpRes.ok) {
-        const errData = await sdpRes.json().catch(() => ({}));
-        throw new Error((errData as { error?: string }).error || 'SDP failed');
+      if (result_url) {
+        setVideoUrl(result_url);
+        setIsAvatarLoading(false);
+        return;
       }
 
-      setStatus('connected');
-      console.log('D-ID WebRTC session established:', sessionIdToUse);
+      for (let i = 0; i < 30; i++) {
+        await new Promise((r) => setTimeout(r, 1000));
+        const pollRes = await fetch('/api/d-id', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'get', talk_id: id }),
+        });
+        const pollData = await pollRes.json();
+        console.log('Poll:', pollData.status, pollData.result_url);
+        if (pollData.status === 'done' && pollData.result_url) {
+          setVideoUrl(pollData.result_url);
+          setIsAvatarLoading(false);
+          return;
+        }
+        if (pollData.status === 'error') {
+          console.error('D-ID error:', pollData);
+          setIsAvatarLoading(false);
+          return;
+        }
+      }
     } catch (err) {
-      console.error('D-ID init failed:', err);
-      initAttempted.current = false;
-      setStatus('error');
-      setErrorMessage(err instanceof Error ? err.message : String(err));
+      console.error('Avatar error:', err);
     }
-  }, []);
-
-  useEffect(() => {
-    const t = setTimeout(() => {
-      if (videoRef.current) initSession();
-    }, 1500);
-    return () => clearTimeout(t);
-  }, [initSession]);
-
-  useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
-    const onEnd = () => setIsAvatarActive(false);
-    el.addEventListener('ended', onEnd);
-    el.addEventListener('pause', onEnd);
-    return () => {
-      el.removeEventListener('ended', onEnd);
-      el.removeEventListener('pause', onEnd);
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      peerConnection.current?.close();
-      peerConnection.current = null;
-      streamIdRef.current = null;
-      sessionIdRef.current = null;
-    };
-  }, []);
+    setIsAvatarLoading(false);
+  }
 
   const handleBubbleClick = () => {
-    if (status === 'error') {
-      initAttempted.current = false;
-      setStatus('idle');
-      setErrorMessage(null);
-      setTimeout(() => initSession(), 200);
-    } else {
-      setExpanded(!expanded);
-    }
+    setExpanded(!expanded);
   };
 
   const handleSendMessage = async () => {
     const userText = message.trim();
     if (!userText || sending) return;
 
-    const newMessages = [...messages.map((m) => ({ role: m.role, content: m.text })), { role: 'user' as const, content: userText }];
+    const newMessages = [
+      ...messages.map((m) => ({ role: m.role, content: m.text })),
+      { role: 'user' as const, content: userText },
+    ];
     setMessages((prev) => [...prev, { role: 'user', text: userText }]);
     setMessage('');
     setSending(true);
 
     try {
-      // 1. Get Claude reply
       const chatRes = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -188,36 +88,9 @@ export default function BarKeep() {
       const chatData = await chatRes.json();
       const reply = (chatData.reply ?? chatData.text ?? '').trim() || 'Sorry, I couldn’t get a reply. Try again.';
 
-      // 2. Add reply to chat
       setMessages((prev) => [...prev, { role: 'assistant', text: reply }]);
 
-      // 3. Trigger D-ID avatar to speak
-      const sessId = sessionIdRef.current ?? sessionId;
-      const sid = streamIdRef.current;
-      if (sessId && sid) {
-        console.log('Triggering D-ID talk, session:', sessId);
-        const talkRes = await fetch('/api/d-id', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'talk',
-            streamId: sid,
-            sessionId: sessId,
-            text: reply,
-          }),
-        });
-        const talkData = await talkRes.json();
-        console.log('D-ID talk response:', talkData);
-        setIsAvatarActive(true);
-        if (talkData.status === 'started') {
-          setTimeout(() => {
-            setIsMuted(false);
-            if (videoRef.current) videoRef.current.muted = false;
-          }, 2000);
-        }
-      } else {
-        console.log('No session ID — avatar will not speak');
-      }
+      speakWithAvatar(reply);
     } catch (err) {
       console.error('Send error:', err);
       setMessages((prev) => [...prev, { role: 'assistant', text: 'Sorry, something went wrong.' }]);
@@ -230,7 +103,7 @@ export default function BarKeep() {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
       {expanded && (
         <div className="px-3 py-1.5 rounded-full text-xs font-medium tracking-widest uppercase bg-warm border border-rule text-ink">
-          {status === 'connecting' ? 'Connecting…' : status === 'error' ? 'Tap to retry' : 'The Bar Keep'}
+          The Bar Keep
         </div>
       )}
 
@@ -249,86 +122,41 @@ export default function BarKeep() {
           boxShadow: '0 4px 24px rgba(30,20,8,0.12)',
         }}
       >
-        <div style={{ position: 'relative' }}>
-          <video
-            ref={videoRef}
-            autoPlay
-            playsInline
-            muted={isMuted}
-            style={{ width: '100%', height: '200px', background: '#1a0a00', display: 'block', borderRadius: '8px 8px 0 0' }}
-          />
-          {isAvatarActive && (
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsMuted(false);
-                if (videoRef.current) videoRef.current.muted = false;
-              }}
-              style={{
-                position: 'absolute',
-                bottom: 8,
-                right: 8,
-                background: 'rgba(0,0,0,0.6)',
-                color: 'white',
-                border: 'none',
-                borderRadius: 4,
-                padding: '4px 8px',
-                fontSize: 11,
-                cursor: 'pointer',
-              }}
-            >
-              {isMuted ? '🔇 Tap to hear' : '🔊 Audio on'}
-            </button>
-          )}
-        </div>
-
         {!expanded && (
           <div className="absolute inset-0 flex items-center justify-center bg-copper rounded-[36px]">
             <span className="text-3xl" aria-hidden>🥃</span>
-            {status === 'connecting' && (
-              <div className="absolute inset-0 flex items-center justify-center rounded-[36px] bg-copper/90">
-                <div className="w-10 h-10 rounded-full border-2 border-white/30 border-t-amber animate-spin" />
-              </div>
-            )}
-            {status === 'error' && (
-              <span className="absolute bottom-1 left-0 right-0 text-center text-xs text-amber-200">tap to retry</span>
-            )}
           </div>
         )}
 
-        {expanded && status === 'connecting' && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink rounded-2xl">
-            <div className="w-10 h-10 rounded-full border-2 border-amber/30 border-t-amber animate-spin" />
-            <span className="text-xs tracking-widest uppercase text-amber-200">Connecting…</span>
-          </div>
-        )}
-
-        {expanded && status === 'error' && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 bg-ink rounded-2xl">
-            <p className="text-sm text-amber-200/90 text-center">{errorMessage}</p>
-            <p className="text-xs text-amber-200/50 text-center max-w-[260px]">
-              {errorMessage?.includes('401') && 'Check D_ID_API_KEY at studio.d-id.com. '}
-              {(errorMessage?.includes('402') || errorMessage?.includes('403')) && 'Trial may be expired; upgrade at studio.d-id.com.'}
-            </p>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                initAttempted.current = false;
-                setStatus('idle');
-                setErrorMessage(null);
-                setTimeout(() => initSession(), 200);
-              }}
-              className="px-4 py-2 rounded-lg text-sm font-medium bg-white/10 hover:bg-white/20 text-amber-100"
-            >
-              Retry
-            </button>
-          </div>
-        )}
-
-        {expanded && status === 'connected' && (
+        {expanded && (
           <>
+            <div style={{ background: '#0d0500', borderRadius: '8px 8px 0 0', overflow: 'hidden' }}>
+              {videoUrl ? (
+                <video
+                  key={videoUrl}
+                  src={videoUrl}
+                  autoPlay
+                  playsInline
+                  controls={false}
+                  style={{ width: '100%', display: 'block' }}
+                  onEnded={() => setVideoUrl(null)}
+                />
+              ) : isAvatarLoading ? (
+                <div
+                  style={{
+                    height: '180px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'rgba(196,135,62,0.7)',
+                    fontSize: 13,
+                  }}
+                >
+                  The Bar Keep is thinking...
+                </div>
+              ) : null}
+            </div>
+
             <div
               className="flex flex-col flex-1 min-h-0 border-b border-rule rounded-t-2xl"
               onClick={(e) => e.stopPropagation()}
