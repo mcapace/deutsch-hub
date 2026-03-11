@@ -66,11 +66,13 @@ export default function BarKeep() {
         if (event.track.kind === 'video' && event.streams?.[0]) {
           if (videoRef.current) {
             videoRef.current.srcObject = event.streams[0];
+            videoRef.current.muted = true;
+            videoRef.current.autoplay = true;
             setIsAvatarActive(true);
-            // Wait for stream to be ready before playing
-            videoRef.current.onloadedmetadata = () => {
+            console.log('srcObject set:', videoRef.current.srcObject);
+            setTimeout(() => {
               videoRef.current?.play().catch((e) => console.log('Play error:', e));
-            };
+            }, 300);
           }
         }
       };
@@ -248,8 +250,10 @@ export default function BarKeep() {
           ref={videoRef}
           autoPlay
           playsInline
-          muted={false}
-          className={isAvatarActive ? 'w-full aspect-video object-cover flex-shrink-0' : 'w-full aspect-video object-cover opacity-0 h-0 flex-shrink-0'}
+          muted
+          className={isAvatarActive
+            ? 'w-full aspect-video object-cover rounded-t-lg flex-shrink-0'
+            : 'w-full aspect-video object-cover rounded-t-lg opacity-0 h-0 overflow-hidden flex-shrink-0'}
         />
 
         {!expanded && (
