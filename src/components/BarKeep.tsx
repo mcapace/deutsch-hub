@@ -115,7 +115,21 @@ export default function BarKeep() {
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
   const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; text: string }>>([]);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const hasVideo = status === 'connected';
+
+  // When video ends or pauses, hide the video panel
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const onEnd = () => setIsSpeaking(false);
+    el.addEventListener('ended', onEnd);
+    el.addEventListener('pause', onEnd);
+    return () => {
+      el.removeEventListener('ended', onEnd);
+      el.removeEventListener('pause', onEnd);
+    };
+  }, []);
 
   const initConnection = useCallback(async () => {
     if (initAttempted.current) return;
@@ -180,9 +194,21 @@ export default function BarKeep() {
         }),
       });
       const chatData = chatRes.ok ? ((await chatRes.json()) as { text?: string }) : null;
-      const toSpeak = chatData?.text?.trim() || text;
-      setMessages((prev) => [...prev, { role: 'assistant', text: toSpeak }]);
-      await speak(toSpeak);
+      const replyText = chatData?.text?.trim() || 'Sorry, I couldn’t get a reply. Try again.';
+      if (!chatRes.ok) {
+        setMessages((prev) => [...prev, { role: 'assistant', text: replyText }]);
+      } else {
+        setMessages((prev) => [...prev, { role: 'assistant', text: replyText }]);
+        if (status === 'connected') {
+          setIsSpeaking(true);
+          try {
+            await speak(replyText);
+          } catch (e) {
+            console.error('D-ID speak error:', e);
+            setIsSpeaking(false);
+          }
+        }
+      }
     } catch (e) {
       console.error('Send error:', e);
       setMessages((prev) => [...prev, { role: 'assistant', text: 'Sorry, something went wrong.' }]);
@@ -204,7 +230,7 @@ export default function BarKeep() {
         tabIndex={0}
         onClick={handleBubbleClick}
         onKeyDown={(e) => e.key === 'Enter' && handleBubbleClick()}
-        className="relative overflow-hidden cursor-pointer select-none rounded-[36px] transition-all duration-300 ease-out"
+        className={`relative overflow-hidden cursor-pointer select-none transition-all duration-300 ease-out ${expanded ? 'flex flex-col' : ''}`}
         style={{
           width: expanded ? 360 : 72,
           height: expanded ? 420 : 72,
@@ -218,13 +244,8 @@ export default function BarKeep() {
           ref={videoRef}
           autoPlay
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{
-            objectPosition: 'center 10%',
-            opacity: hasVideo && expanded ? 1 : 0,
-            pointerEvents: hasVideo && expanded ? 'auto' : 'none',
-            transition: 'opacity 0.4s ease',
-          }}
+          className={isSpeaking && expanded ? 'block w-full aspect-video object-cover bg-ink flex-shrink-0' : 'hidden'}
+          style={{ objectPosition: 'center 10%' }}
         />
 
         {!expanded && (
@@ -274,46 +295,48 @@ export default function BarKeep() {
 
         {expanded && status === 'connected' && (
           <>
-            <div className="absolute top-0 left-0 right-0 p-4 bg-warm border-b border-rule rounded-t-2xl">
-              <div className="font-display text-sm text-ink">The Bar Keep</div>
-              <div className="text-[10px] tracking-widest uppercase text-muted">Bib & Tucker · Redemption</div>
-            </div>
-            <div className="absolute top-[72px] left-0 right-0 bottom-[72px] overflow-y-auto p-4 space-y-3 bg-white">
-              {messages.length === 0 && (
-                <div className="bg-warm border-l-2 border-copper p-3 rounded text-sm text-ink">
-                  What can I pour you? Ask about Bib & Tucker, Redemption, or a cocktail.
-                </div>
-              )}
-              {messages.map((m, i) => (
-                <div
-                  key={i}
-                  className={`p-3 rounded text-sm ${m.role === 'user' ? 'bg-copper text-white ml-8' : 'bg-warm border-l-2 border-copper text-ink'}`}
-                >
-                  {m.text}
-                </div>
-              ))}
-            </div>
-            <div
-              className="absolute bottom-0 left-0 right-0 p-4 flex gap-2 bg-white border-t border-rule rounded-b-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <input
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                placeholder="Type a message…"
-                className="flex-1 px-4 py-3 rounded-lg text-sm bg-warm border border-rule text-ink placeholder-muted focus:outline-none focus:border-copper"
-                disabled={sending}
-              />
-              <button
-                type="button"
-                onClick={handleSendMessage}
-                disabled={!message.trim() || sending}
-                className="px-5 py-3 rounded-lg font-medium text-sm disabled:opacity-50 bg-copper text-white"
+            <div className="flex flex-col flex-1 min-h-0 border-b border-rule rounded-t-2xl">
+              <div className="flex-shrink-0 p-4 bg-warm border-b border-rule">
+                <div className="font-display text-sm text-ink">The Bar Keep</div>
+                <div className="text-[10px] tracking-widest uppercase text-muted">Bib & Tucker · Redemption</div>
+              </div>
+              <div className="flex-1 min-h-0 overflow-y-auto p-4 space-y-3 bg-white">
+                {messages.length === 0 && (
+                  <div className="bg-warm border-l-2 border-copper p-3 rounded text-sm text-ink">
+                    What can I pour you? Ask about Bib & Tucker, Redemption, or a cocktail.
+                  </div>
+                )}
+                {messages.map((m, i) => (
+                  <div
+                    key={i}
+                    className={`p-3 rounded text-sm ${m.role === 'user' ? 'bg-copper text-white ml-8' : 'bg-warm border-l-2 border-copper text-ink'}`}
+                  >
+                    {m.text}
+                  </div>
+                ))}
+              </div>
+              <div
+                className="flex-shrink-0 p-4 flex gap-2 bg-white border-t border-rule rounded-b-2xl"
+                onClick={(e) => e.stopPropagation()}
               >
-                {sending ? '…' : 'Send'}
-              </button>
+                <input
+                  type="text"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                  placeholder="Type a message…"
+                  className="flex-1 px-4 py-3 rounded-lg text-sm bg-warm border border-rule text-ink placeholder-muted focus:outline-none focus:border-copper"
+                  disabled={sending}
+                />
+                <button
+                  type="button"
+                  onClick={handleSendMessage}
+                  disabled={!message.trim() || sending}
+                  className="px-5 py-3 rounded-lg font-medium text-sm disabled:opacity-50 bg-copper text-white"
+                >
+                  {sending ? '…' : 'Send'}
+                </button>
+              </div>
             </div>
           </>
         )}
