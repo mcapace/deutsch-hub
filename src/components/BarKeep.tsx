@@ -62,13 +62,15 @@ export default function BarKeep() {
 
       // 3. CRITICAL: attach stream to video element when track arrives
       pc.ontrack = (event) => {
-        console.log('Track received!');
         console.log('Got track:', event.track.kind, event.streams);
-        if (event.streams && event.streams[0]) {
+        if (event.track.kind === 'video' && event.streams?.[0]) {
           if (videoRef.current) {
             videoRef.current.srcObject = event.streams[0];
-            videoRef.current.play().catch((e) => console.log('Play error:', e));
             setIsAvatarActive(true);
+            // Wait for stream to be ready before playing
+            videoRef.current.onloadedmetadata = () => {
+              videoRef.current?.play().catch((e) => console.log('Play error:', e));
+            };
           }
         }
       };
