@@ -63,16 +63,26 @@ export default function BarKeep() {
       // 3. CRITICAL: attach stream to video element when track arrives
       pc.ontrack = (event) => {
         console.log('Got track:', event.track.kind, event.streams);
+        if (event.track.kind === 'audio') {
+          return;
+        }
         if (event.track.kind === 'video' && event.streams?.[0]) {
-          if (videoRef.current) {
-            videoRef.current.srcObject = event.streams[0];
-            videoRef.current.muted = true;
-            videoRef.current.autoplay = true;
+          const video = videoRef.current;
+          if (video) {
+            video.srcObject = event.streams[0];
+            video.muted = true;
+            console.log('srcObject set:', video.srcObject);
+            const tryPlay = () => {
+              video
+                .play()
+                .then(() => console.log('Playing!'))
+                .catch((e) => {
+                  console.log('Play failed, retrying...', e.message);
+                  setTimeout(tryPlay, 500);
+                });
+            };
+            setTimeout(tryPlay, 100);
             setIsAvatarActive(true);
-            console.log('srcObject set:', videoRef.current.srcObject);
-            setTimeout(() => {
-              videoRef.current?.play().catch((e) => console.log('Play error:', e));
-            }, 300);
           }
         }
       };
@@ -251,9 +261,7 @@ export default function BarKeep() {
           autoPlay
           playsInline
           muted
-          className={isAvatarActive
-            ? 'w-full aspect-video object-cover rounded-t-lg flex-shrink-0'
-            : 'w-full aspect-video object-cover rounded-t-lg opacity-0 h-0 overflow-hidden flex-shrink-0'}
+          style={{ width: '100%', height: '200px', background: '#000', display: 'block' }}
         />
 
         {!expanded && (
