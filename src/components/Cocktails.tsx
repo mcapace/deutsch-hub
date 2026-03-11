@@ -43,12 +43,12 @@ function CocktailCard({ cocktail, onSelect }: { cocktail: Cocktail; onSelect: ()
         )}
       </div>
       <h3 className="font-display text-2xl text-ink mb-2 group-hover:text-copper transition-colors">{cocktail.name}</h3>
-      <p className="text-fog text-sm mb-6">{cocktail.tagline}</p>
+      <p className="text-muted text-sm mb-6">{cocktail.tagline}</p>
       <div className="border-t border-rule pt-5 mb-5">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-fog mb-1">Base Spirit</p>
+        <p className="text-[10px] uppercase tracking-[0.2em] text-muted mb-1">Base Spirit</p>
         <p className="text-sm font-medium text-ink">{cocktail.spirit}</p>
       </div>
-      <div className="flex items-center justify-between text-xs text-fog">
+      <div className="flex items-center justify-between text-xs text-muted">
         <span>{cocktail.glassware}</span>
         <span className="w-1 h-1 rounded-full bg-amber" />
         <span>{cocktail.occasion}</span>
@@ -65,19 +65,19 @@ function RecipeModal({ cocktail, onClose }: { cocktail: Cocktail; onClose: () =>
     <div className="fixed inset-0 z-50 overflow-y-auto bg-ink/90 flex items-center justify-center p-4" onClick={onClose}>
       <div className="max-w-2xl w-full bg-white border border-rule overflow-hidden max-h-[90vh] overflow-y-auto relative" onClick={(e) => e.stopPropagation()}>
         <div className="p-8 lg:p-10 border-b border-rule">
-          <button type="button" onClick={onClose} className="absolute top-6 right-6 text-fog hover:text-ink p-2" aria-label="Close">
+          <button type="button" onClick={onClose} className="absolute top-6 right-6 text-muted hover:text-ink p-2" aria-label="Close">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
           <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-copper block mb-3">
             {cocktail.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'} — {cocktail.spirit}
           </span>
           <h2 className="font-display text-4xl text-ink mb-2">{cocktail.name}</h2>
-          <p className="text-fog">{cocktail.tagline}</p>
+          <p className="text-muted">{cocktail.tagline}</p>
         </div>
         <div className="p-8 lg:p-10">
           <div className="grid md:grid-cols-2 gap-10 mb-10">
             <div>
-              <h3 className="text-[11px] uppercase tracking-[0.2em] text-fog mb-4 font-semibold">Ingredients</h3>
+              <h3 className="text-[11px] uppercase tracking-[0.2em] text-muted mb-4 font-semibold">Ingredients</h3>
               <ul className="space-y-3">
                 {cocktail.ingredients.map((ing, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -88,16 +88,16 @@ function RecipeModal({ cocktail, onClose }: { cocktail: Cocktail; onClose: () =>
               </ul>
             </div>
             <div>
-              <h3 className="text-[11px] uppercase tracking-[0.2em] text-fog mb-4 font-semibold">Details</h3>
+              <h3 className="text-[11px] uppercase tracking-[0.2em] text-muted mb-4 font-semibold">Details</h3>
               <div className="space-y-4">
-                <div><p className="text-[10px] uppercase tracking-[0.15em] text-fog mb-1">Glassware</p><p className="font-medium text-ink">{cocktail.glassware}</p></div>
-                <div><p className="text-[10px] uppercase tracking-[0.15em] text-fog mb-1">Garnish</p><p className="font-medium text-ink">{cocktail.garnish}</p></div>
-                <div><p className="text-[10px] uppercase tracking-[0.15em] text-fog mb-1">Occasion</p><p className="font-medium text-ink">{cocktail.occasion}</p></div>
+                <div><p className="text-[10px] uppercase tracking-[0.15em] text-muted mb-1">Glassware</p><p className="font-medium text-ink">{cocktail.glassware}</p></div>
+                <div><p className="text-[10px] uppercase tracking-[0.15em] text-muted mb-1">Garnish</p><p className="font-medium text-ink">{cocktail.garnish}</p></div>
+                <div><p className="text-[10px] uppercase tracking-[0.15em] text-muted mb-1">Occasion</p><p className="font-medium text-ink">{cocktail.occasion}</p></div>
               </div>
             </div>
           </div>
           <div className="pt-8 border-t border-rule">
-            <h3 className="text-[11px] uppercase tracking-[0.2em] text-fog mb-6 font-semibold">Method</h3>
+            <h3 className="text-[11px] uppercase tracking-[0.2em] text-muted mb-6 font-semibold">Method</h3>
             <ol className="space-y-4">
               {cocktail.instructions.map((step, i) => (
                 <li key={i} className="flex gap-4">
@@ -126,7 +126,7 @@ export default function Cocktails() {
           <span className="font-display text-mist text-sm block mb-2">04</span>
           <span className="text-[9px] tracking-[0.3em] uppercase text-copper block mb-3">Crafted Recipes</span>
           <h2 className="font-display text-4xl lg:text-5xl text-ink mb-4">Signature <span className="italic text-copper">Cocktails</span></h2>
-          <p className="text-fog max-w-xl mx-auto">
+          <p className="text-muted max-w-xl mx-auto">
             Expertly crafted recipes that showcase the distinct character of each spirit.
           </p>
         </header>
@@ -143,7 +143,7 @@ export default function Cocktails() {
                 type="button"
                 onClick={() => setFilter(f.id as 'all' | 'bib' | 'redemption')}
                 className={`px-8 py-3 text-xs uppercase tracking-[0.15em] font-medium transition-colors ${
-                  filter === f.id ? 'bg-ink text-white' : 'text-fog hover:text-ink'
+                  filter === f.id ? 'bg-ink text-white' : 'text-muted hover:text-ink'
                 }`}
               >
                 {f.label}
@@ -158,7 +158,7 @@ export default function Cocktails() {
           ))}
         </div>
 
-        <p className="text-center text-fog text-sm mt-12 pt-12 border-t border-rule" data-reveal>
+        <p className="text-center text-muted text-sm mt-12 pt-12 border-t border-rule" data-reveal>
           Showing {filtered.length} of {cocktails.length} recipes
         </p>
       </div>

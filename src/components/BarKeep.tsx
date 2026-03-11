@@ -134,12 +134,16 @@ export default function BarKeep() {
       initStartedRef.current = false;
       console.error('D-ID connect failed:', err);
       setStatus('error');
-      setErrorMessage(err instanceof Error ? err.message : String(err));
+      const msg = err instanceof Error ? err.message : String(err);
+      setErrorMessage(msg);
     }
   }, [connect]);
 
   useEffect(() => {
-    const t = setTimeout(() => initConnection(), 1200);
+    // Ensure video element is in DOM before connecting (next tick + short delay)
+    const t = setTimeout(() => {
+      if (videoRef.current) initConnection();
+    }, 1500);
     return () => clearTimeout(t);
   }, [initConnection]);
 
@@ -190,10 +194,18 @@ export default function BarKeep() {
   if (!hasDidConfig) {
     return (
       <div
-        className="fixed bottom-6 right-6 z-50 w-[72px] h-[72px] rounded-full flex items-center justify-center bg-copper border-2 border-amber/50"
-        title="Set NEXT_PUBLIC_DID_PRESENTER_ID or NEXT_PUBLIC_DID_SOURCE_URL in .env.local"
+        className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2"
+        title="D-ID not configured"
       >
-        <span className="text-2xl" aria-hidden>🍸</span>
+        <div
+          className="w-[72px] h-[72px] rounded-full flex items-center justify-center bg-copper border-2 border-amber/50 cursor-default"
+          style={{ boxShadow: '0 4px 20px rgba(30,20,8,0.15)' }}
+        >
+          <span className="text-2xl" aria-hidden>🍸</span>
+        </div>
+        <div className="px-3 py-2 rounded-lg text-[10px] text-left max-w-[200px] bg-warm border border-rule text-muted">
+          Set <strong>NEXT_PUBLIC_DID_PRESENTER_ID</strong> or <strong>NEXT_PUBLIC_DID_SOURCE_URL</strong> in Vercel env (and .env.local) to enable the avatar.
+        </div>
       </div>
     );
   }
@@ -282,7 +294,7 @@ export default function BarKeep() {
           <>
             <div className="absolute top-0 left-0 right-0 p-4 bg-warm border-b border-rule rounded-t-2xl">
               <div className="font-display text-sm text-ink">The Bar Keep</div>
-              <div className="text-[10px] tracking-widest uppercase text-fog">Bib & Tucker · Redemption</div>
+              <div className="text-[10px] tracking-widest uppercase text-muted">Bib & Tucker · Redemption</div>
             </div>
             <div className="absolute top-[72px] left-0 right-0 bottom-[72px] overflow-y-auto p-4 space-y-3 bg-white">
               {messages.length === 0 && (
@@ -309,7 +321,7 @@ export default function BarKeep() {
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                 placeholder="Type a message…"
-                className="flex-1 px-4 py-3 rounded-lg text-sm bg-warm border border-rule text-ink placeholder-fog focus:outline-none focus:border-copper"
+                className="flex-1 px-4 py-3 rounded-lg text-sm bg-warm border border-rule text-ink placeholder-muted focus:outline-none focus:border-copper"
                 disabled={sending}
               />
               <button

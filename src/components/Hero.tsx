@@ -8,7 +8,7 @@ export default function Hero() {
     <section className="grid grid-cols-1 lg:grid-cols-2 min-h-screen pt-[68px]">
       <div className="bg-white flex flex-col justify-center px-8 lg:px-16 py-16 order-2 lg:order-1" data-reveal>
         <div className="h-px w-12 mb-6" style={{ background: 'var(--rule)' }} />
-        <p className="text-fog text-[9px] tracking-[0.28em] uppercase mb-4">Whisky Advocate Presents</p>
+        <p className="text-muted text-[9px] tracking-[0.28em] uppercase mb-4">Whisky Advocate Presents</p>
         <h1 className="font-display text-[clamp(2.5rem,6vw,5.375rem)] leading-tight mb-6 text-ink">
           <span className="italic text-copper">The Art of</span>
           <br />
@@ -17,7 +17,7 @@ export default function Hero() {
           Whiskey
         </h1>
         <div className="w-12 h-px my-6" style={{ background: 'var(--rule)' }} />
-        <p className="text-fog text-lg max-w-md mb-10">
+        <p className="text-muted text-lg max-w-md mb-10">
           Discover Bib & Tucker and Redemption — Tennessee bourbon and American rye, crafted for the moment.
         </p>
         <div className="flex flex-wrap gap-4">
@@ -63,11 +63,11 @@ export default function Hero() {
         <div className="absolute bottom-0 left-0 right-0 grid grid-cols-2 border-t border-rule py-4 px-6" style={{ background: 'rgba(247,242,232,0.95)' }}>
           <div className="text-center">
             <p className="font-display text-ink text-sm">Bib & Tucker</p>
-            <p className="text-fog text-[9px] tracking-[0.2em] uppercase">Tennessee Bourbon</p>
+            <p className="text-muted text-[9px] tracking-[0.2em] uppercase">Tennessee Bourbon</p>
           </div>
           <div className="text-center border-l border-rule">
             <p className="font-display text-ink text-sm">Redemption</p>
-            <p className="text-fog text-[9px] tracking-[0.2em] uppercase">American Rye</p>
+            <p className="text-muted text-[9px] tracking-[0.2em] uppercase">American Rye</p>
           </div>
         </div>
       </div>

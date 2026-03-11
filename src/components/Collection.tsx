@@ -17,7 +17,7 @@ export default function Collection() {
           <span className="font-display text-mist text-sm block mb-2">02</span>
           <span className="text-[9px] tracking-[0.25em] uppercase text-copper block mb-3">Year-Round Collection</span>
           <h2 className="font-display text-4xl lg:text-5xl text-ink mb-4">Celebrate Every <span className="italic text-copper">Moment</span></h2>
-          <p className="text-fog max-w-2xl mx-auto">
+          <p className="text-muted max-w-2xl mx-auto">
             Discover how Bib & Tucker and Redemption elevate any occasion—from quiet evenings to big gatherings.
           </p>
         </header>
@@ -27,7 +27,7 @@ export default function Collection() {
             <Link key={feature.id} href={feature.link || '#'} className="group block" data-reveal>
               <div className="bg-warm border border-rule p-6 h-full hover:bg-cream transition-colors">
                 <h3 className="font-display text-xl text-ink mb-2 group-hover:text-copper transition-colors">{feature.title}</h3>
-                <p className="text-fog text-sm leading-relaxed mb-4">{feature.description}</p>
+                <p className="text-muted text-sm leading-relaxed mb-4">{feature.description}</p>
                 <span className="text-copper text-sm font-medium after:content-['→'] after:ml-1">Learn more</span>
               </div>
             </Link>
@@ -69,7 +69,7 @@ export default function Collection() {
 
         <div className="border border-rule bg-white p-10 max-w-2xl mx-auto text-center" data-reveal>
           <h3 className="font-display text-2xl lg:text-3xl text-ink mb-3">Make Every Moment Unforgettable</h3>
-          <p className="text-fog mb-8 max-w-lg mx-auto">
+          <p className="text-muted mb-8 max-w-lg mx-auto">
             Whether hosting a gathering or finding the perfect gift, our collections offer something special for every whiskey lover—all year long.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

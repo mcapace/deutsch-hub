@@ -21,15 +21,15 @@ export default function Nav() {
               unoptimized
             />
           </Link>
-          <span className="text-fog text-[9px] tracking-[0.22em] uppercase hidden sm:inline">|</span>
-          <span className="text-fog text-[9px] tracking-[0.22em] uppercase hidden sm:inline">Deutsch Family Wine & Spirits</span>
+          <span className="text-muted text-[9px] tracking-[0.22em] uppercase hidden sm:inline">|</span>
+          <span className="text-muted text-[9px] tracking-[0.22em] uppercase hidden sm:inline">Deutsch Family Wine & Spirits</span>
         </div>
 
         <div className="hidden md:flex items-center gap-8">
-          <Link href="#brands" className="text-fog hover:text-copper text-[10px] tracking-[0.18em] uppercase transition-colors">Brands</Link>
-          <Link href="#collection" className="text-fog hover:text-copper text-[10px] tracking-[0.18em] uppercase transition-colors">Collection</Link>
-          <Link href="#cocktails" className="text-fog hover:text-copper text-[10px] tracking-[0.18em] uppercase transition-colors">Cocktails</Link>
-          <Link href="#pairings" className="text-fog hover:text-copper text-[10px] tracking-[0.18em] uppercase transition-colors">Pairings</Link>
+          <Link href="#brands" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase transition-colors">Brands</Link>
+          <Link href="#collection" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase transition-colors">Collection</Link>
+          <Link href="#cocktails" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase transition-colors">Cocktails</Link>
+          <Link href="#pairings" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase transition-colors">Pairings</Link>
         </div>
 
         <div className="flex items-center gap-4">
@@ -57,10 +57,10 @@ export default function Nav() {
       {mobileOpen && (
         <div className="fixed inset-0 z-40 md:hidden pt-[68px] bg-white">
           <div className="flex flex-col p-6 gap-4">
-            <Link href="#brands" className="text-fog hover:text-copper text-[10px] tracking-[0.18em] uppercase" onClick={() => setMobileOpen(false)}>Brands</Link>
-            <Link href="#collection" className="text-fog hover:text-copper text-[10px] tracking-[0.18em] uppercase" onClick={() => setMobileOpen(false)}>Collection</Link>
-            <Link href="#cocktails" className="text-fog hover:text-copper text-[10px] tracking-[0.18em] uppercase" onClick={() => setMobileOpen(false)}>Cocktails</Link>
-            <Link href="#pairings" className="text-fog hover:text-copper text-[10px] tracking-[0.18em] uppercase" onClick={() => setMobileOpen(false)}>Pairings</Link>
+            <Link href="#brands" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase" onClick={() => setMobileOpen(false)}>Brands</Link>
+            <Link href="#collection" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase" onClick={() => setMobileOpen(false)}>Collection</Link>
+            <Link href="#cocktails" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase" onClick={() => setMobileOpen(false)}>Cocktails</Link>
+            <Link href="#pairings" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase" onClick={() => setMobileOpen(false)}>Pairings</Link>
             <a href="https://store.whiskyadvocate.com" target="_blank" rel="noopener noreferrer" className="bg-ink text-white px-6 py-3 text-[9px] tracking-[0.24em] uppercase w-fit">Shop Now</a>
           </div>
         </div>

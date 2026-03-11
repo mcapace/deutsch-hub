@@ -10,7 +10,7 @@ export default function Brands() {
         <header className="mb-16" data-reveal>
           <span className="font-display text-mist text-sm block mb-2">01</span>
           <h2 className="font-display text-4xl lg:text-5xl text-ink mb-4">The Brands</h2>
-          <p className="text-fog max-w-xl">Two houses. One standard: exceptional American whiskey.</p>
+          <p className="text-muted max-w-xl">Two houses. One standard: exceptional American whiskey.</p>
         </header>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
@@ -21,7 +21,7 @@ export default function Brands() {
               <h3 className="font-display text-2xl lg:text-3xl text-ink mb-4">
                 Where Bold <span className="italic text-copper">Meets Refined</span>
               </h3>
-              <p className="text-fog leading-relaxed mb-6">
+              <p className="text-muted leading-relaxed mb-6">
                 Small batch Tennessee bourbon. Six years in American white oak, filtered through sugar maple charcoal — the Lincoln County Process that defines the house style.
               </p>
               <Link href="#collection" className="text-walnut text-[9px] tracking-[0.22em] uppercase after:content-['→'] after:ml-1 hover:text-copper transition-colors">
@@ -47,7 +47,7 @@ export default function Brands() {
               <h3 className="font-display text-2xl lg:text-3xl text-ink mb-4">
                 America&apos;s Original <span className="italic text-copper">Spirit</span>
               </h3>
-              <p className="text-fog leading-relaxed mb-6">
+              <p className="text-muted leading-relaxed mb-6">
                 Pre-Prohibition rye revival. From 95% rye mash to high-rye bourbon, Redemption brings back the character that made American whiskey legendary.
               </p>
               <Link href="#collection" className="text-walnut text-[9px] tracking-[0.22em] uppercase after:content-['→'] after:ml-1 hover:text-copper transition-colors">

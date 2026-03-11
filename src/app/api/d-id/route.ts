@@ -72,18 +72,24 @@ export async function POST(req: NextRequest) {
           res.status
         );
       }
+      const streamId = (data.id ?? data.stream_id) as string;
+      const sessionId = data.session_id as string;
       const rawOffer = data.offer ?? data.jsep ?? data.offer_jsep;
-      const offerPayload =
-        typeof rawOffer === 'string'
-          ? { type: 'offer' as const, sdp: rawOffer }
-          : rawOffer && typeof rawOffer === 'object' && 'sdp' in (rawOffer as object)
-            ? { type: ((rawOffer as { type?: string }).type ?? 'offer'), sdp: (rawOffer as { sdp: string }).sdp }
-            : rawOffer;
+      let offerPayload: { type: string; sdp: string };
+      if (typeof rawOffer === 'string') {
+        offerPayload = { type: 'offer', sdp: rawOffer };
+      } else if (rawOffer && typeof rawOffer === 'object' && rawOffer !== null && 'sdp' in rawOffer) {
+        const o = rawOffer as { type?: string; sdp?: string };
+        offerPayload = { type: (o.type ?? 'offer') as string, sdp: String(o.sdp ?? '') };
+      } else {
+        return jsonResponse({ error: 'D-ID create: missing offer in response', details: data }, 502);
+      }
+      const iceServers = (data.ice_servers ?? data.iceServers ?? []) as Array<{ urls: string | string[]; username?: string; credential?: string }>;
       return jsonResponse({
-        streamId: data.id ?? data.stream_id,
-        sessionId: data.session_id,
+        streamId,
+        sessionId,
         offer: offerPayload,
-        iceServers: data.ice_servers ?? data.iceServers ?? [],
+        iceServers: Array.isArray(iceServers) ? iceServers : [],
       });
     }
 

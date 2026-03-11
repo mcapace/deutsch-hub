@@ -14,7 +14,7 @@ export default function Stats() {
           {stats.map((stat, i) => (
             <div key={i}>
               <p className="font-display text-copper text-5xl lg:text-6xl mb-2">{stat.value}</p>
-              <p className="text-fog text-[9px] tracking-[0.24em] uppercase">{stat.label}</p>
+              <p className="text-muted text-[9px] tracking-[0.24em] uppercase">{stat.label}</p>
             </div>
           ))}
         </div>

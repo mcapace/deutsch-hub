@@ -135,6 +135,8 @@ h1, h2, h3, h4, h5, h6,
 .bg-ink { background-color: var(--ink); }
 .text-fog { color: var(--fog); }
 .text-mist { color: var(--mist); }
+/* Muted = darker, readable body/labels (use instead of fog for body text) */
+.text-muted { color: var(--muted); }
 .text-walnut { color: var(--walnut); }
 .text-copper { color: var(--copper); }
 .text-amber { color: var(--amber); }

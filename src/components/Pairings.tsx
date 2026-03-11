@@ -59,7 +59,7 @@ export default function Pairings() {
         <header className="text-center mb-12" data-reveal>
           <span className="font-display text-mist text-sm block mb-2">05</span>
           <h2 className="font-display text-4xl lg:text-5xl text-ink mb-4">Perfect <span className="italic text-copper">Pairings</span></h2>
-          <p className="text-fog max-w-2xl mx-auto">
+          <p className="text-muted max-w-2xl mx-auto">
             Elevate your tasting experience with expertly curated food pairings for each expression.
           </p>
         </header>
@@ -70,7 +70,7 @@ export default function Pairings() {
               key={b.brandId}
               type="button"
               onClick={() => setActiveBrand(b.brandId)}
-              className={`px-8 py-3 font-medium transition-colors ${activeBrand === b.brandId ? 'bg-copper text-white' : 'bg-white border border-rule text-fog hover:text-ink'}`}
+              className={`px-8 py-3 font-medium transition-colors ${activeBrand === b.brandId ? 'bg-copper text-white' : 'bg-white border border-rule text-muted hover:text-ink'}`}
             >
               {b.brand}
             </button>
@@ -93,7 +93,7 @@ export default function Pairings() {
                     <span className="w-3 h-3 rounded-full bg-copper" />
                     <div>
                       <h4 className="font-display text-lg text-ink">{whiskey.name}</h4>
-                      <span className="text-sm text-fog">{whiskey.proof} · {whiskey.pairings.length} pairings</span>
+                      <span className="text-sm text-muted">{whiskey.proof} · {whiskey.pairings.length} pairings</span>
                     </div>
                   </div>
                   <svg className={`w-6 h-6 text-copper transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -105,7 +105,7 @@ export default function Pairings() {
                     {whiskey.pairings.map((p) => (
                       <div key={p.food} className="bg-warm border border-rule p-5 hover:bg-cream transition-colors">
                         <h4 className="font-display text-lg text-ink mb-2">{p.food}</h4>
-                        <p className="text-fog text-sm leading-relaxed">{p.description}</p>
+                        <p className="text-muted text-sm leading-relaxed">{p.description}</p>
                       </div>
                     ))}
                   </div>
