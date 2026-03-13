@@ -25,16 +25,7 @@ export async function POST(req: NextRequest) {
         script: {
           type: 'text',
           input: text,
-          provider: {
-            type: 'elevenlabs',
-            voice_id: 'TxGEqnHWrfWFTfGW9XjX',
-            voice_config: {
-              stability: 0.5,
-              similarity_boost: 0.75,
-              style: 0.3,
-              use_speaker_boost: true,
-            },
-          },
+          provider: { type: 'microsoft', voice_id: 'en-US-GuyNeural' },
         },
         config: { fluent: true, pad_audio: 0.5 },
       }),
