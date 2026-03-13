@@ -100,7 +100,12 @@ export default function BarKeep() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+      {!expanded && (
+        <div className="px-3 py-1.5 rounded-full text-[10px] font-medium tracking-widest uppercase text-ink/90 bg-warm/95 border border-rule shadow-sm">
+          Tap to chat with the Bar Keep
+        </div>
+      )}
       {expanded && (
         <div className="px-3 py-1.5 rounded-full text-xs font-medium tracking-widest uppercase bg-warm border border-rule text-ink">
           The Bar Keep
@@ -162,9 +167,17 @@ export default function BarKeep() {
               onClick={(e) => e.stopPropagation()}
               onKeyDown={(e) => e.stopPropagation()}
             >
-              <div className="flex-shrink-0 p-4 border-b border-rule" style={{ background: '#F7F2E8' }}>
+              <div className="flex-shrink-0 p-4 pr-12 border-b border-rule relative" style={{ background: '#F7F2E8' }}>
                 <div className="font-display text-sm" style={{ color: '#1E1408' }}>The Bar Keep</div>
                 <div className="text-[10px] tracking-widest uppercase" style={{ color: '#5C534D' }}>Bib & Tucker · Redemption</div>
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); setExpanded(false); }}
+                  className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full text-ink/70 hover:bg-rule/30 hover:text-ink transition-colors"
+                  aria-label="Close"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                </button>
               </div>
               <div className="flex-1 min-h-0 overflow-y-auto p-4 space-y-3" style={{ background: '#FDFAF5' }}>
                 {messages.length === 0 && (
