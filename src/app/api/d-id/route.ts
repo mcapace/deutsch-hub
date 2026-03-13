@@ -1,17 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const DID_API = 'https://api.d-id.com';
-const AUTH = process.env.D_ID_API_KEY
-  ? `Basic ${Buffer.from(process.env.D_ID_API_KEY!).toString('base64')}`
-  : '';
+// Hardcoded while env var issue is resolved
+const DID_KEY = 'mcapace@mshanken.com:4eN2NCYKEGDV0CnKtt1OY';
+const AUTH = `Basic ${Buffer.from(DID_KEY).toString('base64')}`;
 const SOURCE_URL =
   'https://deutsch.whiskyadvocate.com/images/logos/photorealistic-portrait-of-a-male-barten_fHBB7tJfRkef7rPOHifBEQ_Z2KC48JUQWGzMVd82y338w_sd.jpeg';
 
 export async function POST(req: NextRequest) {
-  if (!AUTH) {
-    return NextResponse.json({ error: 'D_ID_API_KEY is not configured' }, { status: 500 });
-  }
-
   let body: { action?: string; talk_id?: string; text?: string };
   try {
     body = await req.json();
@@ -30,21 +26,14 @@ export async function POST(req: NextRequest) {
         script: {
           type: 'text',
           input: text,
-          provider: {
-            type: 'microsoft',
-            voice_id: 'en-US-GuyNeural',
-          },
+          provider: { type: 'microsoft', voice_id: 'en-US-GuyNeural' },
         },
         config: { fluent: true, pad_audio: 0.5 },
       }),
     });
     const data = await res.json();
-    console.log('D-ID full response:', JSON.stringify(data));
-    if (!res.ok) {
-      console.error('D-ID talk error:', res.status, data);
-      return NextResponse.json(data, { status: res.status });
-    }
-    return NextResponse.json(data);
+    console.log('D-ID response:', res.status, JSON.stringify(data));
+    return NextResponse.json(data, { status: res.ok ? 200 : res.status });
   }
 
   if (action === 'get') {
