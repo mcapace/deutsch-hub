@@ -39,7 +39,7 @@ export default function Hero() {
       <div className="bg-warm relative flex items-end justify-center px-4 sm:px-8 py-12 sm:py-16 lg:py-24 order-1 lg:order-2 min-h-[50vh] lg:min-h-0 overflow-hidden" data-reveal>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_60%,rgba(196,135,62,0.08),transparent)] pointer-events-none" />
         <div className="relative flex items-end justify-center gap-2 sm:gap-4 lg:gap-8 w-full max-w-full">
-          <div className="w-52 lg:w-72 h-64 lg:h-96 flex items-end drop-shadow-2xl" style={{ transform: 'rotate(-2.5deg)' }}>
+          <div className="w-72 sm:w-80 lg:w-[24rem] xl:w-[28rem] 2xl:w-[30rem] h-96 sm:h-[28rem] lg:h-[32rem] xl:h-[36rem] 2xl:h-[40rem] flex items-end drop-shadow-2xl" style={{ transform: 'rotate(-2.5deg)' }}>
             <Image
               src="/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png"
               alt="Bib & Tucker Classic Six"
@@ -49,7 +49,7 @@ export default function Hero() {
               unoptimized
             />
           </div>
-          <div className="w-52 lg:w-72 h-64 lg:h-96 flex items-end drop-shadow-2xl" style={{ transform: 'rotate(2deg)' }}>
+          <div className="w-72 sm:w-80 lg:w-[24rem] xl:w-[28rem] 2xl:w-[30rem] h-96 sm:h-[28rem] lg:h-[32rem] xl:h-[36rem] 2xl:h-[40rem] flex items-end drop-shadow-2xl" style={{ transform: 'rotate(2deg)' }}>
             <Image
               src="/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png"
               alt="Redemption Bourbon"

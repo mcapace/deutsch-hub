@@ -37,7 +37,6 @@ function CocktailCard({ cocktail, onSelect }: { cocktail: Cocktail; onSelect: ()
       }}
       onKeyDown={(e) => e.key === 'Enter' && onSelect()}
       className="bg-warm border border-rule p-8 h-full hover:bg-cream transition-colors cursor-pointer group"
-      data-reveal
     >
       <div className="flex items-center justify-between mb-6">
         <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-copper">
@@ -140,7 +139,7 @@ export default function Cocktails() {
   return (
     <section className="bg-warm py-20 lg:py-28" id="cocktails">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <header className="text-center mb-12" data-reveal>
+        <header className="text-center mb-12">
           <span className="font-display text-mist text-sm block mb-2">04</span>
           <span className="text-[9px] tracking-[0.3em] uppercase text-copper block mb-3">Crafted Recipes</span>
           <h2 className="font-display text-4xl lg:text-5xl text-ink mb-4">Signature <span className="italic text-copper">Cocktails</span></h2>
@@ -149,7 +148,7 @@ export default function Cocktails() {
           </p>
         </header>
 
-        <div className="flex justify-center mb-14" data-reveal>
+        <div className="flex justify-center mb-14">
           <div className="inline-flex border border-rule bg-white">
             {[
               { id: 'all', label: 'All Recipes' },
@@ -173,13 +172,17 @@ export default function Cocktails() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((cocktail) => (
-            <CocktailCard key={cocktail.id} cocktail={cocktail} onSelect={() => setSelected(cocktail)} />
-          ))}
+        <div key={filter} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[280px]">
+          {filtered.length === 0 ? (
+            <p className="col-span-full text-center text-muted py-8">No recipes in this category.</p>
+          ) : (
+            filtered.map((cocktail) => (
+              <CocktailCard key={cocktail.id} cocktail={cocktail} onSelect={() => setSelected(cocktail)} />
+            ))
+          )}
         </div>
 
-        <p className="text-center text-muted text-sm mt-12 pt-12 border-t border-rule" data-reveal>
+        <p className="text-center text-muted text-sm mt-12 pt-12 border-t border-rule">
           Showing {filtered.length} of {cocktails.length} recipes
         </p>
       </div>

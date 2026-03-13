@@ -36,10 +36,28 @@ export default function Footer() {
             <p className="font-display italic text-[15px] leading-relaxed max-w-sm mb-8 text-white/80">
               Discover the art of American whiskey through the curated collection of Bib & Tucker and Redemption, presented by Whisky Advocate.
             </p>
-            <div className="flex items-center gap-6">
-              <span className="font-display text-2xl text-amber">Bib & Tucker</span>
-              <span className="w-px h-6 bg-white/20" />
-              <span className="font-display text-2xl text-amber">Redemption</span>
+            <div className="flex items-center gap-6 flex-wrap">
+              <Link href="#brands" className="opacity-90 hover:opacity-100 transition-opacity">
+                <Image
+                  src="/BAT_3D_Copper_Logo.png"
+                  alt="Bib & Tucker"
+                  width={160}
+                  height={64}
+                  className="h-10 w-auto object-contain"
+                  unoptimized
+                />
+              </Link>
+              <span className="w-px h-8 bg-white/20 flex-shrink-0" aria-hidden />
+              <Link href="#brands" className="opacity-90 hover:opacity-100 transition-opacity">
+                <Image
+                  src="/Redemption logo /Redemption_Whiskey_Logo.png"
+                  alt="Redemption"
+                  width={160}
+                  height={64}
+                  className="h-10 w-auto object-contain"
+                  unoptimized
+                />
+              </Link>
             </div>
           </div>
           <div className="hidden md:block md:col-span-1" />
