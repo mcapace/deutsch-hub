@@ -22,7 +22,7 @@ export default function Footer() {
   return (
     <footer className="bg-ink text-white overflow-hidden">
       <div className="h-px bg-amber/40" />
-      <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
         <div className="grid md:grid-cols-12 gap-12 md:gap-8 mb-12">
           <div className="md:col-span-5" data-reveal>
             <Image

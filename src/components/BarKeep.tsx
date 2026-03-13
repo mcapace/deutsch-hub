@@ -100,10 +100,14 @@ export default function BarKeep() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+    <div
+      className="fixed z-50 flex flex-col items-end gap-2 right-4 bottom-4 sm:right-6 sm:bottom-6"
+      style={{ paddingRight: 'max(1rem, env(safe-area-inset-right))', paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
+    >
       {!expanded && (
-        <div className="px-3 py-1.5 rounded-full text-[10px] font-medium tracking-widest uppercase text-ink/90 bg-warm/95 border border-rule shadow-sm">
-          Tap to chat with the Bar Keep
+        <div className="px-3 py-2 rounded-full text-[10px] font-medium tracking-widest uppercase text-ink/90 bg-warm/95 border border-rule shadow-sm max-w-[calc(100vw-5rem)] sm:max-w-none">
+          <span className="sm:hidden">Chat with the Bar Keep</span>
+          <span className="hidden sm:inline">Tap to chat with the Bar Keep</span>
         </div>
       )}
       {expanded && (
@@ -119,8 +123,8 @@ export default function BarKeep() {
         onKeyDown={(e) => e.key === 'Enter' && handleBubbleClick()}
         className={`relative overflow-hidden cursor-pointer select-none transition-all duration-300 ease-out ${expanded ? 'flex flex-col' : ''}`}
         style={{
-          width: expanded ? 360 : 72,
-          height: expanded ? 420 : 72,
+          width: expanded ? 'min(360px, calc(100vw - 2rem))' : 72,
+          height: expanded ? 'min(420px, 85vh)' : 72,
           borderRadius: expanded ? 16 : 36,
           background: '#FDFAF5',
           border: '2px solid var(--rule)',
@@ -173,10 +177,10 @@ export default function BarKeep() {
                 <button
                   type="button"
                   onClick={(e) => { e.stopPropagation(); setExpanded(false); }}
-                  className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full text-ink/70 hover:bg-rule/30 hover:text-ink transition-colors"
+                  className="absolute top-2 right-2 min-w-[44px] min-h-[44px] w-11 h-11 flex items-center justify-center rounded-full text-ink/70 hover:bg-rule/30 hover:text-ink active:bg-rule/40 transition-colors touch-manipulation"
                   aria-label="Close"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
                 </button>
               </div>
               <div className="flex-1 min-h-0 overflow-y-auto p-4 space-y-3" style={{ background: '#FDFAF5' }}>
@@ -216,7 +220,7 @@ export default function BarKeep() {
                     }
                   }}
                   placeholder="Type a message…"
-                  className="flex-1 px-4 py-3 rounded-lg text-sm bg-warm border border-rule text-ink placeholder-muted focus:outline-none focus:border-copper"
+                  className="flex-1 min-h-[44px] px-4 py-3 rounded-lg text-base sm:text-sm bg-warm border border-rule text-ink placeholder-muted focus:outline-none focus:border-copper"
                   disabled={sending}
                 />
                 <button
@@ -226,7 +230,7 @@ export default function BarKeep() {
                     handleSendMessage();
                   }}
                   disabled={!message.trim() || sending}
-                  className="px-5 py-3 rounded-lg font-medium text-sm disabled:opacity-50 bg-copper text-white"
+                  className="min-h-[44px] min-w-[44px] px-5 py-3 rounded-lg font-medium text-sm disabled:opacity-50 bg-copper text-white touch-manipulation"
                 >
                   {sending ? '…' : 'Send'}
                 </button>

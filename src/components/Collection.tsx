@@ -12,7 +12,7 @@ const collectionFeatures = [
 export default function Collection() {
   return (
     <section className="bg-warm border-t border-rule py-20 lg:py-28" id="collection">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <header className="text-center mb-14" data-reveal>
           <span className="font-display text-mist text-sm block mb-2">02</span>
           <span className="text-[9px] tracking-[0.25em] uppercase text-copper block mb-3">Year-Round Collection</span>

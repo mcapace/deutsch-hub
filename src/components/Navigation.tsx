@@ -50,7 +50,7 @@ export default function Navigation() {
           borderBottom: '1px solid #D8CEBC',
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo - dark, no invert */}
             <Link href="#hero" className="flex-shrink-0 group">
@@ -88,10 +88,10 @@ export default function Navigation() {
               Cocktails
             </a>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - 44px min for touch */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden relative w-10 h-10 flex items-center justify-center"
+              className="lg:hidden relative min-w-[44px] min-h-[44px] w-11 h-11 flex items-center justify-center touch-manipulation"
               aria-label="Toggle menu"
             >
               <div className="flex flex-col gap-1.5">

@@ -139,7 +139,7 @@ export default function Cocktails() {
 
   return (
     <section className="bg-warm py-20 lg:py-28" id="cocktails">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <header className="text-center mb-12" data-reveal>
           <span className="font-display text-mist text-sm block mb-2">04</span>
           <span className="text-[9px] tracking-[0.3em] uppercase text-copper block mb-3">Crafted Recipes</span>

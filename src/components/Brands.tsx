@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function Brands() {
   return (
     <section className="bg-white py-20 lg:py-28" id="brands">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <header className="mb-16" data-reveal>
           <span className="font-display text-mist text-sm block mb-2">01</span>
           <h2 className="font-display text-4xl lg:text-5xl text-ink mb-4">The Brands</h2>

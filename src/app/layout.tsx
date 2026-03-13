@@ -53,6 +53,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#1E1408',
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -60,7 +67,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${playfair.variable} ${jost.variable} antialiased`}>
+      <body className={`${playfair.variable} ${jost.variable} antialiased min-h-screen overflow-x-hidden`}>
         {children}
       </body>
     </html>

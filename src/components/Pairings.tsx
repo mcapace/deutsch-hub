@@ -55,7 +55,7 @@ export default function Pairings() {
 
   return (
     <section className="bg-white py-20 lg:py-28" id="pairings">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <header className="text-center mb-12" data-reveal>
           <span className="font-display text-mist text-sm block mb-2">05</span>
           <h2 className="font-display text-4xl lg:text-5xl text-ink mb-4">Perfect <span className="italic text-copper">Pairings</span></h2>
