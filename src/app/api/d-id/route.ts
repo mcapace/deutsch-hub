@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const DID_API = 'https://api.d-id.com';
 const AUTH = process.env.D_ID_API_KEY
-  ? `Basic ${Buffer.from(process.env.D_ID_API_KEY).toString('base64')}`
+  ? `Basic ${Buffer.from(process.env.D_ID_API_KEY!).toString('base64')}`
   : '';
 const SOURCE_URL =
   'https://deutsch.whiskyadvocate.com/images/logos/photorealistic-portrait-of-a-male-barten_fHBB7tJfRkef7rPOHifBEQ_Z2KC48JUQWGzMVd82y338w_sd.jpeg';
@@ -39,11 +39,11 @@ export async function POST(req: NextRequest) {
       }),
     });
     const data = await res.json();
+    console.log('D-ID full response:', JSON.stringify(data));
     if (!res.ok) {
       console.error('D-ID talk error:', res.status, data);
       return NextResponse.json(data, { status: res.status });
     }
-    console.log('D-ID talk created:', JSON.stringify(data));
     return NextResponse.json(data);
   }
 

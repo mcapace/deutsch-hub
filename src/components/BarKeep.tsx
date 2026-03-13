@@ -25,7 +25,7 @@ export default function BarKeep() {
       });
       const createData = await createRes.json();
       const { id, status, result_url } = createData;
-      console.log('Talk created:', id, status);
+      console.log('Talk response:', { id, status, result_url });
       if (!createRes.ok || !id) {
         setIsAvatarLoading(false);
         return;
