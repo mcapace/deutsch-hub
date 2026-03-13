@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function BarKeep() {
   const [expanded, setExpanded] = useState(false);
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
+  const [isOverFooter, setIsOverFooter] = useState(false);
   const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; text: string }>>([
     {
       role: 'assistant',
@@ -67,6 +68,21 @@ export default function BarKeep() {
     setExpanded(!expanded);
   };
 
+  useEffect(() => {
+    const footer = document.getElementById('site-footer');
+    if (!footer) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsOverFooter(entry.isIntersecting);
+        });
+      },
+      { threshold: 0, rootMargin: '0px 0px 0px 0px' }
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
   const handleSendMessage = async () => {
     const userText = message.trim();
     if (!userText || sending) return;
@@ -105,13 +121,21 @@ export default function BarKeep() {
       style={{ paddingRight: 'max(1rem, env(safe-area-inset-right))', paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
     >
       {!expanded && (
-        <div className="px-3 py-2 rounded-full text-[10px] font-medium tracking-widest uppercase text-ink/90 bg-warm/95 border border-rule shadow-sm max-w-[calc(100vw-5rem)] sm:max-w-none">
+        <div
+          className={`px-3 py-2 rounded-full text-[10px] font-medium tracking-widest uppercase shadow-sm max-w-[calc(100vw-5rem)] sm:max-w-none transition-colors duration-300 ${
+            isOverFooter ? 'text-white bg-white/10 border border-white/20' : 'text-ink/90 bg-warm/95 border border-rule'
+          }`}
+        >
           <span className="sm:hidden">Chat with the Bar Keep</span>
           <span className="hidden sm:inline">Tap to chat with the Bar Keep</span>
         </div>
       )}
       {expanded && (
-        <div className="px-3 py-1.5 rounded-full text-xs font-medium tracking-widest uppercase bg-warm border border-rule text-ink">
+        <div
+          className={`px-3 py-1.5 rounded-full text-xs font-medium tracking-widest uppercase border transition-colors duration-300 ${
+            isOverFooter ? 'text-white bg-white/10 border-white/20' : 'bg-warm border-rule text-ink'
+          }`}
+        >
           The Bar Keep
         </div>
       )}

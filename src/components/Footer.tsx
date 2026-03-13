@@ -20,7 +20,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-ink text-white overflow-hidden">
+    <footer id="site-footer" className="bg-ink text-white overflow-hidden">
       <div className="h-px bg-amber/40" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
         <div className="grid md:grid-cols-12 gap-12 md:gap-8 mb-12">
@@ -37,7 +37,7 @@ export default function Footer() {
               Discover the art of American whiskey through the curated collection of Bib & Tucker and Redemption, presented by Whisky Advocate.
             </p>
             <div className="flex items-center gap-6 flex-wrap">
-              <Link href="#brands" className="opacity-90 hover:opacity-100 transition-opacity">
+              <Link href="#brands" className="opacity-90 hover:opacity-100 transition-opacity [&_img]:[filter:brightness(0)_invert(1)]">
                 <Image
                   src="/BAT_3D_Copper_Logo.png"
                   alt="Bib & Tucker"
@@ -48,7 +48,7 @@ export default function Footer() {
                 />
               </Link>
               <span className="w-px h-8 bg-white/20 flex-shrink-0" aria-hidden />
-              <Link href="#brands" className="opacity-90 hover:opacity-100 transition-opacity">
+              <Link href="#brands" className="opacity-90 hover:opacity-100 transition-opacity [&_img]:[filter:brightness(0)_invert(1)]">
                 <Image
                   src="/Redemption logo /Redemption_Whiskey_Logo.png"
                   alt="Redemption"
