@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const DID_API = 'https://api.d-id.com';
-// Hardcoded while env var issue is resolved
-const DID_KEY = 'mcapace@mshanken.com:tII8rAIX4V8uKz7g5_EAT';
-const AUTH = `Basic ${Buffer.from(DID_KEY).toString('base64')}`;
+// Key is already base64-encoded by D-ID — use directly, no Buffer.from()
+const AUTH = 'Basic bWNhcGFjZUBtc2hhbmtlbi5jb20:HC0ECVNq3_2OHFuX_iw4i';
 const SOURCE_URL =
   'https://deutsch.whiskyadvocate.com/images/logos/photorealistic-portrait-of-a-male-barten_fHBB7tJfRkef7rPOHifBEQ_Z2KC48JUQWGzMVd82y338w_sd.jpeg';
 
