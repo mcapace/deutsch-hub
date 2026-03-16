@@ -198,7 +198,7 @@ export default function BarKeep() {
 
         {expanded && (
           <>
-            <div style={{ background: '#0d0500', borderRadius: '8px 8px 0 0', overflow: 'hidden', minHeight: '140px', flexShrink: 0 }}>
+            <div style={{ background: '#0d0500', borderRadius: '8px 8px 0 0', overflow: 'hidden', minHeight: '200px', flexShrink: 0 }}>
               {videoUrl ? (
                 <video
                   key={videoUrl}
@@ -212,7 +212,7 @@ export default function BarKeep() {
               ) : isAvatarLoading ? (
                 <div
                   style={{
-                    height: '140px',
+                    height: '200px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -225,7 +225,7 @@ export default function BarKeep() {
               ) : avatarError ? (
                 <div
                   style={{
-                    height: '140px',
+                    height: '200px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
