@@ -44,8 +44,8 @@ export default function BarKeep() {
         return;
       }
 
-      for (let i = 0; i < 30; i++) {
-        await new Promise((r) => setTimeout(r, 1000));
+      for (let i = 0; i < 60; i++) {
+        await new Promise((r) => setTimeout(r, 500));
         const pollRes = await fetch('/api/d-id', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

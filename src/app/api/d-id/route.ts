@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   if (action === 'talk') {
     // Voice: set ELEVENLABS_VOICE_ID in Vercel / .env.local to the ID from https://elevenlabs.io/voice-lab
     const elevenLabsVoiceId =
-      process.env.ELEVENLABS_VOICE_ID || '4HvexEZMAmq2M66Ae0nD';
+      process.env.ELEVENLABS_VOICE_ID || 'uKlo6AMuCQF1Ee2FEe7F';
     const elevenLabsKey = process.env.ELEVENLABS_API_KEY;
     const useOwnElevenLabs = !!elevenLabsKey;
     const stability = process.env.ELEVENLABS_STABILITY != null ? Number(process.env.ELEVENLABS_STABILITY) : 0.5;
@@ -28,8 +28,10 @@ export async function POST(req: NextRequest) {
     // Path 1: Generate speech with ElevenLabs, upload to D-ID, then create talk (no D-ID ElevenLabs integration).
     if (useOwnElevenLabs) {
       try {
+        // Use turbo model for lower latency (avatar appears sooner); override with ELEVENLABS_MODEL_ID if needed
+        const modelId = process.env.ELEVENLABS_MODEL_ID || 'eleven_turbo_v2_5';
         const ttsRes = await fetch(
-          `https://api.elevenlabs.io/v1/text-to-speech/${elevenLabsVoiceId}`,
+          `https://api.elevenlabs.io/v1/text-to-speech/${elevenLabsVoiceId}?optimize_streaming_latency=2`,
           {
             method: 'POST',
             headers: {
@@ -38,7 +40,7 @@ export async function POST(req: NextRequest) {
             },
             body: JSON.stringify({
               text,
-              model_id: process.env.ELEVENLABS_MODEL_ID || 'eleven_multilingual_v2',
+              model_id: modelId,
               voice_settings: { stability, similarity_boost: similarityBoost },
             }),
           }
