@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
       process.env.ELEVENLABS_VOICE_ID || '4HvexEZMAmq2M66Ae0nD';
     const useElevenLabs =
       !!process.env.ELEVENLABS_API_KEY || !!process.env.USE_ELEVENLABS_VOICE;
+    // With your own ElevenLabs key, D-ID doc uses only type, input, voice_id (no voice_config).
     const script = useElevenLabs
       ? {
           type: 'text' as const,
@@ -29,12 +30,6 @@ export async function POST(req: NextRequest) {
           provider: {
             type: 'elevenlabs' as const,
             voice_id: elevenLabsVoiceId,
-            ...(process.env.ELEVENLABS_API_KEY && {
-              voice_config: {
-                stability: 0.5,
-                similarity_boost: 0.75,
-              },
-            }),
           },
         }
       : {
@@ -63,7 +58,7 @@ export async function POST(req: NextRequest) {
       }),
     });
     let data = await res.json();
-    console.log('D-ID response:', res.status, JSON.stringify(data));
+    console.log('D-ID response:', res.status, data?.description ?? data?.error ?? JSON.stringify(data));
 
     // If ElevenLabs failed (e.g. 400/402), fall back to Microsoft so the avatar always plays
     if (!res.ok && useElevenLabs) {
