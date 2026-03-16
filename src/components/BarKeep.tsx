@@ -7,6 +7,7 @@ export default function BarKeep() {
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
   const [isOverFooter, setIsOverFooter] = useState(false);
+  const [isOverHero, setIsOverHero] = useState(true);
   const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; text: string }>>([
     {
       role: 'assistant',
@@ -83,6 +84,25 @@ export default function BarKeep() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+    const checkOverHero = () => {
+      const rect = hero.getBoundingClientRect();
+      const x = typeof window !== 'undefined' ? window.innerWidth - 140 : 0;
+      const y = typeof window !== 'undefined' ? window.innerHeight - 100 : 0;
+      const over = rect.left <= x && rect.right >= x && rect.top <= y && rect.bottom >= y;
+      setIsOverHero(over);
+    };
+    checkOverHero();
+    window.addEventListener('scroll', checkOverHero, { passive: true });
+    window.addEventListener('resize', checkOverHero);
+    return () => {
+      window.removeEventListener('scroll', checkOverHero);
+      window.removeEventListener('resize', checkOverHero);
+    };
+  }, []);
+
   const handleSendMessage = async () => {
     const userText = message.trim();
     if (!userText || sending) return;
@@ -123,7 +143,9 @@ export default function BarKeep() {
       {!expanded && (
         <div
           className={`px-3 py-2 rounded-full text-[10px] font-medium tracking-widest uppercase shadow-sm max-w-[calc(100vw-5rem)] sm:max-w-none transition-colors duration-300 ${
-            isOverFooter ? 'text-white bg-white/10 border border-white/20' : 'text-ink/90 bg-warm/95 border border-rule'
+            isOverHero || isOverFooter
+              ? 'text-white bg-white/10 border border-white/20'
+              : 'text-ink/90 bg-warm/95 border border-rule'
           }`}
         >
           <span className="sm:hidden">Chat with the Bar Keep</span>
@@ -133,7 +155,9 @@ export default function BarKeep() {
       {expanded && (
         <div
           className={`px-3 py-1.5 rounded-full text-xs font-medium tracking-widest uppercase border transition-colors duration-300 ${
-            isOverFooter ? 'text-white bg-white/10 border-white/20' : 'bg-warm border-rule text-ink'
+            isOverHero || isOverFooter
+              ? 'text-white bg-white/10 border-white/20'
+              : 'bg-warm border-rule text-ink'
           }`}
         >
           The Bar Keep
