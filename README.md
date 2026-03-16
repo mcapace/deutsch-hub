@@ -30,15 +30,14 @@ On Vercel, API routes run as serverless functions. Set env vars in the Vercel pr
 
 ### Bar Keep voice (more natural)
 
-The avatar uses **Microsoft TTS** by default (`en-US-GuyNeural`). For a more natural “barkeep” sound you can use:
+When **`ELEVENLABS_API_KEY`** is set, the app generates speech with **ElevenLabs** and sends that audio to D-ID (so you hear your chosen voice). To use a **different voice**:
 
-| Option | What you need | How |
-|--------|----------------|-----|
-| **D-ID premium ElevenLabs** | Paid D-ID plan | Set `USE_ELEVENLABS_VOICE=true`. Optional: `ELEVENLABS_VOICE_ID` to a voice from D-ID’s [GET /tts/voices?provider=elevenlabs](https://docs.d-id.com/reference/voices) (e.g. `21m00Tcm4TlvDq8ikWAM` for Rachel). |
-| **Your own ElevenLabs** | [ElevenLabs](https://elevenlabs.io) account + API key | Set `USE_ELEVENLABS_VOICE=true`, `ELEVENLABS_API_KEY=<your key>`, and `ELEVENLABS_VOICE_ID=<voice id from Voice Lab>`. You can use premade or cloned voices. |
-| **Other Microsoft voices** | None | In `src/app/api/d-id/route.ts` change `voice_id` (e.g. `en-US-ChristopherNeural`, `en-US-JennyNeural`) and keep `USE_ELEVENLABS_VOICE` unset. |
+1. Open **[ElevenLabs Voice Lab](https://elevenlabs.io/voice-lab)** and sign in.
+2. Pick the voice you want (premade or your cloned voice). Open it and copy its **Voice ID** (in the URL or the voice settings).
+3. In **Vercel** → your project → **Settings** → **Environment Variables**, set **`ELEVENLABS_VOICE_ID`** to that ID (for Production and Preview). Redeploy so the new value is used.
+4. Optional: **`ELEVENLABS_STABILITY`** (0–1, default 0.5) and **`ELEVENLABS_SIMILARITY_BOOST`** (0–1, default 0.75) tune how stable/similar the voice sounds. **`ELEVENLABS_MODEL_ID`** can be set to e.g. `eleven_turbo_v2` for lower latency.
 
-Programs you can use for custom/cloned voices: **ElevenLabs** (Voice Lab + API), **Play.ht**, **Resemble AI**. For this app, only ElevenLabs is wired in via D-ID (with your key in `ELEVENLABS_API_KEY`).
+If `ELEVENLABS_API_KEY` is not set, the avatar falls back to **Microsoft TTS** (`en-US-GuyNeural`).
 
 The **Bar Keep** bubble is bottom right. Click to expand; first connection takes a few seconds. Type a message and he’ll reply with AI (via `/api/chat`) and speak the response (via D-ID). All keys stay server-side.
 

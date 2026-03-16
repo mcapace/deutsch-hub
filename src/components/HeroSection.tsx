@@ -163,8 +163,8 @@ const styles: Record<string, React.CSSProperties> = {
     filter: 'brightness(0.85) contrast(1.05)',
   },
   bottleRight: {
-    width: '185px',
-    height: '380px',
+    width: '200px',
+    height: '400px',
     objectFit: 'contain',
     objectPosition: 'bottom center',
     filter: 'brightness(0.80) contrast(1.08)',

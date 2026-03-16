@@ -17,10 +17,13 @@ export async function POST(req: NextRequest) {
   const { action, talk_id, text } = body;
 
   if (action === 'talk') {
+    // Voice: set ELEVENLABS_VOICE_ID in Vercel / .env.local to the ID from https://elevenlabs.io/voice-lab
     const elevenLabsVoiceId =
       process.env.ELEVENLABS_VOICE_ID || '4HvexEZMAmq2M66Ae0nD';
     const elevenLabsKey = process.env.ELEVENLABS_API_KEY;
     const useOwnElevenLabs = !!elevenLabsKey;
+    const stability = process.env.ELEVENLABS_STABILITY != null ? Number(process.env.ELEVENLABS_STABILITY) : 0.5;
+    const similarityBoost = process.env.ELEVENLABS_SIMILARITY_BOOST != null ? Number(process.env.ELEVENLABS_SIMILARITY_BOOST) : 0.75;
 
     // Path 1: Generate speech with ElevenLabs, upload to D-ID, then create talk (no D-ID ElevenLabs integration).
     if (useOwnElevenLabs) {
@@ -35,7 +38,8 @@ export async function POST(req: NextRequest) {
             },
             body: JSON.stringify({
               text,
-              model_id: 'eleven_multilingual_v2',
+              model_id: process.env.ELEVENLABS_MODEL_ID || 'eleven_multilingual_v2',
+              voice_settings: { stability, similarity_boost: similarityBoost },
             }),
           }
         );

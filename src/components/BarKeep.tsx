@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function BarKeep() {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
@@ -89,6 +90,10 @@ export default function BarKeep() {
     observer.observe(footer);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   useEffect(() => {
     const hero = document.getElementById('hero');
@@ -178,7 +183,7 @@ export default function BarKeep() {
         className={`relative overflow-hidden cursor-pointer select-none transition-all duration-300 ease-out ${expanded ? 'flex flex-col' : ''}`}
         style={{
           width: expanded ? 'min(360px, calc(100vw - 2rem))' : 72,
-          height: expanded ? 'min(420px, 85vh)' : 72,
+          height: expanded ? 'min(520px, 90vh)' : 72,
           borderRadius: expanded ? 16 : 36,
           background: '#FDFAF5',
           border: '2px solid var(--rule)',
@@ -193,7 +198,7 @@ export default function BarKeep() {
 
         {expanded && (
           <>
-            <div style={{ background: '#0d0500', borderRadius: '8px 8px 0 0', overflow: 'hidden', minHeight: '180px' }}>
+            <div style={{ background: '#0d0500', borderRadius: '8px 8px 0 0', overflow: 'hidden', minHeight: '140px', flexShrink: 0 }}>
               {videoUrl ? (
                 <video
                   key={videoUrl}
@@ -207,7 +212,7 @@ export default function BarKeep() {
               ) : isAvatarLoading ? (
                 <div
                   style={{
-                    height: '180px',
+                    height: '140px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -220,7 +225,7 @@ export default function BarKeep() {
               ) : avatarError ? (
                 <div
                   style={{
-                    height: '180px',
+                    height: '140px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -271,10 +276,11 @@ export default function BarKeep() {
                     {m.text}
                   </div>
                 ))}
+                <div ref={messagesEndRef} />
               </div>
               <div
                 className="flex-shrink-0 p-4 flex gap-2 border-t border-rule"
-                style={{ background: '#FDFAF5' }}
+                style={{ background: '#FDFAF5', paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
                 onClick={(e) => e.stopPropagation()}
               >
                 <input
