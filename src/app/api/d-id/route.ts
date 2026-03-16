@@ -17,13 +17,74 @@ export async function POST(req: NextRequest) {
   const { action, talk_id, text } = body;
 
   if (action === 'talk') {
-    // Use ElevenLabs when API key is set (or USE_ELEVENLABS_VOICE=true for D-ID premium voices).
     const elevenLabsVoiceId =
       process.env.ELEVENLABS_VOICE_ID || '4HvexEZMAmq2M66Ae0nD';
-    const useElevenLabs =
-      !!process.env.ELEVENLABS_API_KEY || !!process.env.USE_ELEVENLABS_VOICE;
-    // With your own ElevenLabs key, D-ID doc uses only type, input, voice_id (no voice_config).
-    const script = useElevenLabs
+    const elevenLabsKey = process.env.ELEVENLABS_API_KEY;
+    const useOwnElevenLabs = !!elevenLabsKey;
+
+    // Path 1: Generate speech with ElevenLabs, upload to D-ID, then create talk (no D-ID ElevenLabs integration).
+    if (useOwnElevenLabs) {
+      try {
+        const ttsRes = await fetch(
+          `https://api.elevenlabs.io/v1/text-to-speech/${elevenLabsVoiceId}`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'xi-api-key': elevenLabsKey,
+            },
+            body: JSON.stringify({
+              text,
+              model_id: 'eleven_multilingual_v2',
+            }),
+          }
+        );
+        if (!ttsRes.ok) {
+          const err = await ttsRes.text();
+          console.log('ElevenLabs TTS failed:', ttsRes.status, err);
+          throw new Error('ElevenLabs TTS failed');
+        }
+        const audioBytes = await ttsRes.arrayBuffer();
+
+        const form = new FormData();
+        form.append(
+          'audio',
+          new Blob([audioBytes], { type: 'audio/mpeg' }),
+          'audio.mp3'
+        );
+        const uploadRes = await fetch(`${DID_API}/audios`, {
+          method: 'POST',
+          headers: { Authorization: AUTH },
+          body: form,
+        });
+        if (!uploadRes.ok) {
+          const uploadErr = await uploadRes.json().catch(() => ({}));
+          console.log('D-ID audio upload failed:', uploadRes.status, uploadErr);
+          throw new Error('D-ID upload failed');
+        }
+        const { url: audioUrl } = (await uploadRes.json()) as { url: string };
+
+        const talkRes = await fetch(`${DID_API}/talks`, {
+          method: 'POST',
+          headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            source_url: SOURCE_URL,
+            script: { type: 'audio' as const, audio_url: audioUrl },
+            config: { fluent: true, pad_audio: 0.5 },
+          }),
+        });
+        const talkData = await talkRes.json();
+        console.log('D-ID talk (ElevenLabs audio):', talkRes.status, talkData?.id ?? talkData?.description);
+        if (!talkRes.ok) throw new Error('D-ID talk failed');
+        return NextResponse.json(talkData, { status: 200 });
+      } catch (e) {
+        console.log('ElevenLabs path failed, falling back to Microsoft:', e);
+      }
+    }
+
+    // Path 2: D-ID native TTS (Microsoft or D-ID premium ElevenLabs).
+    const useDIDElevenLabs = !!process.env.USE_ELEVENLABS_VOICE && !useOwnElevenLabs;
+    const script = useDIDElevenLabs
       ? {
           type: 'text' as const,
           input: text,
@@ -38,48 +99,34 @@ export async function POST(req: NextRequest) {
           provider: { type: 'microsoft' as const, voice_id: 'en-US-GuyNeural' },
         };
 
-    const headers: Record<string, string> = {
-      Authorization: AUTH,
-      'Content-Type': 'application/json',
-    };
-    if (process.env.ELEVENLABS_API_KEY) {
-      headers['x-api-key-external'] = JSON.stringify({
-        elevenlabs: process.env.ELEVENLABS_API_KEY,
-      });
-    }
-
-    let res = await fetch(`${DID_API}/talks`, {
+    const res = await fetch(`${DID_API}/talks`, {
       method: 'POST',
-      headers,
+      headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         source_url: SOURCE_URL,
         script,
         config: { fluent: true, pad_audio: 0.5 },
       }),
     });
-    let data = await res.json();
-    console.log('D-ID response:', res.status, data?.description ?? data?.error ?? JSON.stringify(data));
+    const data = await res.json();
+    console.log('D-ID response:', res.status, data?.description ?? data?.error ?? data?.id);
 
-    // If ElevenLabs failed (e.g. 400/402), fall back to Microsoft so the avatar always plays
-    if (!res.ok && useElevenLabs) {
-      console.log('D-ID ElevenLabs failed, falling back to Microsoft TTS');
-      const microsoftScript = {
-        type: 'text' as const,
-        input: text,
-        provider: { type: 'microsoft' as const, voice_id: 'en-US-GuyNeural' },
-      };
+    if (!res.ok && useDIDElevenLabs) {
       const fallbackRes = await fetch(`${DID_API}/talks`, {
         method: 'POST',
         headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
         body: JSON.stringify({
           source_url: SOURCE_URL,
-          script: microsoftScript,
+          script: {
+            type: 'text' as const,
+            input: text,
+            provider: { type: 'microsoft' as const, voice_id: 'en-US-GuyNeural' },
+          },
           config: { fluent: true, pad_audio: 0.5 },
         }),
       });
-      data = await fallbackRes.json();
-      console.log('D-ID fallback response:', fallbackRes.status, JSON.stringify(data));
-      return NextResponse.json(data, { status: fallbackRes.ok ? 200 : fallbackRes.status });
+      const fallbackData = await fallbackRes.json();
+      return NextResponse.json(fallbackData, { status: fallbackRes.ok ? 200 : fallbackRes.status });
     }
 
     return NextResponse.json(data, { status: res.ok ? 200 : res.status });
