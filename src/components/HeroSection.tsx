@@ -357,8 +357,7 @@ export default function HeroSection() {
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
         >
           <motion.div
-            style={{ transformStyle: 'preserve-3d', transformOrigin: 'bottom center' }}
-            animate={{ rotateY, rotateX }}
+            style={{ transformStyle: 'preserve-3d', transformOrigin: 'bottom center', rotateY, rotateX }}
           >
             <img
               src="/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png"
@@ -368,8 +367,7 @@ export default function HeroSection() {
             />
           </motion.div>
           <motion.div
-            style={{ transformStyle: 'preserve-3d', transformOrigin: 'bottom center' }}
-            animate={{ rotateY, rotateX }}
+            style={{ transformStyle: 'preserve-3d', transformOrigin: 'bottom center', rotateY, rotateX }}
           >
             <img
               src="/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png"
