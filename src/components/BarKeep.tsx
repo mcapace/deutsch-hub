@@ -16,9 +16,11 @@ export default function BarKeep() {
   ]);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [isAvatarLoading, setIsAvatarLoading] = useState(false);
+  const [avatarError, setAvatarError] = useState<string | null>(null);
 
   async function speakWithAvatar(text: string) {
     setIsAvatarLoading(true);
+    setAvatarError(null);
     try {
       const createRes = await fetch('/api/d-id', {
         method: 'POST',
@@ -29,12 +31,14 @@ export default function BarKeep() {
       const { id, status, result_url } = createData;
       console.log('Talk response:', { id, status, result_url });
       if (!createRes.ok || !id) {
+        setAvatarError(createData?.description || createData?.error || 'Video unavailable');
         setIsAvatarLoading(false);
         return;
       }
 
       if (result_url) {
         setVideoUrl(result_url);
+        setAvatarError(null);
         setIsAvatarLoading(false);
         return;
       }
@@ -50,11 +54,13 @@ export default function BarKeep() {
         console.log('Poll:', pollData.status, pollData.result_url);
         if (pollData.status === 'done' && pollData.result_url) {
           setVideoUrl(pollData.result_url);
+          setAvatarError(null);
           setIsAvatarLoading(false);
           return;
         }
         if (pollData.status === 'error') {
           console.error('D-ID error:', pollData);
+          setAvatarError('Video failed');
           setIsAvatarLoading(false);
           return;
         }
@@ -187,7 +193,7 @@ export default function BarKeep() {
 
         {expanded && (
           <>
-            <div style={{ background: '#0d0500', borderRadius: '8px 8px 0 0', overflow: 'hidden' }}>
+            <div style={{ background: '#0d0500', borderRadius: '8px 8px 0 0', overflow: 'hidden', minHeight: '180px' }}>
               {videoUrl ? (
                 <video
                   key={videoUrl}
@@ -210,6 +216,21 @@ export default function BarKeep() {
                   }}
                 >
                   The Bar Keep is thinking...
+                </div>
+              ) : avatarError ? (
+                <div
+                  style={{
+                    height: '180px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'rgba(196,135,62,0.8)',
+                    fontSize: 13,
+                    padding: 16,
+                    textAlign: 'center',
+                  }}
+                >
+                  {avatarError}
                 </div>
               ) : null}
             </div>

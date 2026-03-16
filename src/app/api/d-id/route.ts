@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const res = await fetch(`${DID_API}/talks`, {
+    let res = await fetch(`${DID_API}/talks`, {
       method: 'POST',
       headers,
       body: JSON.stringify({
@@ -62,8 +62,31 @@ export async function POST(req: NextRequest) {
         config: { fluent: true, pad_audio: 0.5 },
       }),
     });
-    const data = await res.json();
+    let data = await res.json();
     console.log('D-ID response:', res.status, JSON.stringify(data));
+
+    // If ElevenLabs failed (e.g. 400/402), fall back to Microsoft so the avatar always plays
+    if (!res.ok && useElevenLabs) {
+      console.log('D-ID ElevenLabs failed, falling back to Microsoft TTS');
+      const microsoftScript = {
+        type: 'text' as const,
+        input: text,
+        provider: { type: 'microsoft' as const, voice_id: 'en-US-GuyNeural' },
+      };
+      const fallbackRes = await fetch(`${DID_API}/talks`, {
+        method: 'POST',
+        headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source_url: SOURCE_URL,
+          script: microsoftScript,
+          config: { fluent: true, pad_audio: 0.5 },
+        }),
+      });
+      data = await fallbackRes.json();
+      console.log('D-ID fallback response:', fallbackRes.status, JSON.stringify(data));
+      return NextResponse.json(data, { status: fallbackRes.ok ? 200 : fallbackRes.status });
+    }
+
     return NextResponse.json(data, { status: res.ok ? 200 : res.status });
   }
 
