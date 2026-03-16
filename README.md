@@ -28,6 +28,18 @@ On Vercel, API routes run as serverless functions. Set env vars in the Vercel pr
    - `ELEVENLABS_VOICE_ID` — Optional; used by D-ID for TTS in the avatar.
 4. **Run** — `npm run dev`
 
+### Bar Keep voice (more natural)
+
+The avatar uses **Microsoft TTS** by default (`en-US-GuyNeural`). For a more natural “barkeep” sound you can use:
+
+| Option | What you need | How |
+|--------|----------------|-----|
+| **D-ID premium ElevenLabs** | Paid D-ID plan | Set `USE_ELEVENLABS_VOICE=true`. Optional: `ELEVENLABS_VOICE_ID` to a voice from D-ID’s [GET /tts/voices?provider=elevenlabs](https://docs.d-id.com/reference/voices) (e.g. `21m00Tcm4TlvDq8ikWAM` for Rachel). |
+| **Your own ElevenLabs** | [ElevenLabs](https://elevenlabs.io) account + API key | Set `USE_ELEVENLABS_VOICE=true`, `ELEVENLABS_API_KEY=<your key>`, and `ELEVENLABS_VOICE_ID=<voice id from Voice Lab>`. You can use premade or cloned voices. |
+| **Other Microsoft voices** | None | In `src/app/api/d-id/route.ts` change `voice_id` (e.g. `en-US-ChristopherNeural`, `en-US-JennyNeural`) and keep `USE_ELEVENLABS_VOICE` unset. |
+
+Programs you can use for custom/cloned voices: **ElevenLabs** (Voice Lab + API), **Play.ht**, **Resemble AI**. For this app, only ElevenLabs is wired in via D-ID (with your key in `ELEVENLABS_API_KEY`).
+
 The **Bar Keep** bubble is bottom right. Click to expand; first connection takes a few seconds. Type a message and he’ll reply with AI (via `/api/chat`) and speak the response (via D-ID). All keys stay server-side.
 
 First, run the development server:

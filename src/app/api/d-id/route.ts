@@ -17,16 +17,48 @@ export async function POST(req: NextRequest) {
   const { action, talk_id, text } = body;
 
   if (action === 'talk') {
+    // Prefer ElevenLabs for more natural voice (paid D-ID plan or your own API key).
+    // Set ELEVENLABS_VOICE_ID in env to override; default is your Bar Keep voice.
+    const elevenLabsVoiceId =
+      process.env.ELEVENLABS_VOICE_ID || '4HvexEZMAmq2M66Ae0nD';
+    const useElevenLabs = !!process.env.USE_ELEVENLABS_VOICE;
+    const script = useElevenLabs
+      ? {
+          type: 'text' as const,
+          input: text,
+          provider: {
+            type: 'elevenlabs' as const,
+            voice_id: elevenLabsVoiceId,
+            ...(process.env.ELEVENLABS_API_KEY && {
+              voice_config: {
+                stability: 0.5,
+                similarity_boost: 0.75,
+              },
+            }),
+          },
+        }
+      : {
+          type: 'text' as const,
+          input: text,
+          provider: { type: 'microsoft' as const, voice_id: 'en-US-GuyNeural' },
+        };
+
+    const headers: Record<string, string> = {
+      Authorization: AUTH,
+      'Content-Type': 'application/json',
+    };
+    if (process.env.ELEVENLABS_API_KEY) {
+      headers['x-api-key-external'] = JSON.stringify({
+        elevenlabs: process.env.ELEVENLABS_API_KEY,
+      });
+    }
+
     const res = await fetch(`${DID_API}/talks`, {
       method: 'POST',
-      headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         source_url: SOURCE_URL,
-        script: {
-          type: 'text',
-          input: text,
-          provider: { type: 'microsoft', voice_id: 'en-US-GuyNeural' },
-        },
+        script,
         config: { fluent: true, pad_audio: 0.5 },
       }),
     });
