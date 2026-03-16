@@ -305,16 +305,31 @@ export default function HeroSection() {
         <p style={styles.eyebrow} className="hero-eyebrow">
           Whisky Advocate &nbsp;×&nbsp; Deutsch Family Wine &amp; Spirits
         </p>
-        <motion.h1
-          style={styles.heroTitle}
-          className="hero-title-el"
-          initial={{ opacity: 0, y: 20, rotateX: -8 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          The Art of<br />
-          <em style={styles.heroTitleEm}>American Whiskey</em>
-        </motion.h1>
+        <h1 style={styles.heroTitle}>
+          <motion.span
+            style={{ display: 'block' }}
+            initial={{ opacity: 0, x: -80, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
+            The Art of
+          </motion.span>
+          <motion.em
+            style={styles.heroTitleEm}
+            initial={{ opacity: 0, scale: 0.5, y: 60, rotateX: -25 }}
+            animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+            transition={{
+              duration: 1,
+              delay: 0.75,
+              type: 'spring',
+              stiffness: 120,
+              damping: 14,
+              mass: 0.8,
+            }}
+          >
+            American Whiskey
+          </motion.em>
+        </h1>
         <div style={styles.heroDivider} className="hero-divider-el" />
         <p style={styles.heroSub} className="hero-sub-el">
           Bib &amp; Tucker &nbsp;·&nbsp; Gold Roast &nbsp;·&nbsp; Redemption
