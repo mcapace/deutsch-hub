@@ -17,11 +17,11 @@ export async function POST(req: NextRequest) {
   const { action, talk_id, text } = body;
 
   if (action === 'talk') {
-    // Prefer ElevenLabs for more natural voice (paid D-ID plan or your own API key).
-    // Set ELEVENLABS_VOICE_ID in env to override; default is your Bar Keep voice.
+    // Use ElevenLabs when API key is set (or USE_ELEVENLABS_VOICE=true for D-ID premium voices).
     const elevenLabsVoiceId =
       process.env.ELEVENLABS_VOICE_ID || '4HvexEZMAmq2M66Ae0nD';
-    const useElevenLabs = !!process.env.USE_ELEVENLABS_VOICE;
+    const useElevenLabs =
+      !!process.env.ELEVENLABS_API_KEY || !!process.env.USE_ELEVENLABS_VOICE;
     const script = useElevenLabs
       ? {
           type: 'text' as const,
