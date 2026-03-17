@@ -1,0 +1,139 @@
+export interface Article {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  brand: 'bib' | 'redemption';
+  readTime: string;
+}
+
+export const storiesArticles: Article[] = [
+  {
+    id: 'coffee-bourbon',
+    title: 'Coffee, Bourbon, and the Rituals That Connect Us',
+    excerpt: 'At the turn of the twentieth century, two rituals bookended the American day. Fresh-roasted coffee warmed early mornings—fuel for the work ahead. Smooth bourbon brought people together at day\'s end.',
+    brand: 'bib',
+    readTime: '8 min read',
+    content: `At the turn of the twentieth century, two rituals bookended the American day. Fresh-roasted coffee warmed early mornings—fuel for the work ahead. Smooth bourbon brought people together at day's end—a reward for the work behind. Cities were growing. Skyscrapers were going up. Railroad tracks were going down. New inventions were changing how people gathered and celebrated. And through it all, these two rituals held steady.
+
+It was an era where all bourbon was small batch. Great accomplishments were celebrated with toasts—from East Coast tycoons closing deals to West Coast cowboys finishing cattle drives.
+
+Bib & Tucker, a Tennessee distillery that draws its name and aesthetic from this period, has spent years crafting bourbons that honor tradition. Gold Roast Bourbon bridges morning coffee and evening bourbon—rituals.
+
+**Gold Roast: An Experiment in Connection**
+
+The idea behind Gold Roast Bourbon started with partnership. Bib & Tucker approached a local Tennessee roaster with an unusual request: develop a custom blend of premium Arabica beans specifically designed to complement bourbon. Not coffee-flavored whiskey. Something that required patience and precision.
+
+Those beans are steeped directly in Bib & Tucker's cask strength six-year whiskey, allowing them to slowly release their oils and aromatics into the spirit. Then comes the careful work of blending—calibrating the final batch so that coffee enhances rather than overwhelms.
+
+Bottled at 92 proof, inviting aromas of freshly brewed coffee and rich molasses rise, complemented by subtle notes of sweet corn and spice. On the palate, smooth layers of vanilla and young oak blend with milk chocolate. The finish is medium-long, highlighted by lingering oak and vanilla, accented by just a hint of dark roast coffee and brown spice.
+
+The distillery's goal is simple: Gold Roast Bourbon is here to reenergize real connection. Whether enjoyed neat, on the rocks, or in an elevated Old Fashioned, it's designed for the moments when slowing down matters.
+
+**The Craft Behind the Bottle**
+
+Understanding Gold Roast means understanding the foundation it's built on. Bib & Tucker ages all its bourbon in the rolling hills of Tennessee, where climate does much of the heavy lifting. Heat and humidity in summer, cold in winter—these shifts put barrels through constant expansion and contraction, creating more contact between spirit and wood. Over a minimum of six years, this develops into bourbon with depth that doesn't sacrifice smoothness.
+
+The barrels themselves receive careful attention. Bib & Tucker uses new American white oak, selected and thoroughly dried to reduce the tannins that can make younger bourbons harsh. Before filling, the bourbon is filtered through sugar maple charcoal—the Lincoln County Process that distinguishes Tennessee whiskey from its Kentucky cousins.
+
+Toasting and charring the barrels brings out the wood's natural sugars, which caramelize and concentrate, adding rich color and flavor as the whiskey ages. Too little time in the barrel creates aggression—a bite where there should be a smolder. Too much time lets tannins dominate, losing the complexity that good bourbon is known for.
+
+The mash bill combines corn, rye, and barley—each grain with a job to do. Corn adds caramel and vanilla. Rye brings spice and boldness. Barley rounds everything out, adding refinement and smoothness. Today, each barrel laid down for aging is sourced from corn grown within 90 miles of the distillery.
+
+**The Portfolio: Expressions of the Same Philosophy**
+
+Gold Roast is the newest member of a portfolio built on a consistent principle: bold and refined can coexist.
+
+The Classic Six, Bib & Tucker's flagship expression, established the house style. Aged a minimum of six years, it leads with vanilla and sweet hay on the nose, accented by sandalwood and mace. The palate is smooth and balanced, with a hint of pecan pie sweetness. The finish—what the distillery calls their "signature chestnut finish"—is complex and long-lasting.
+
+Double Char explores what fire can add to bourbon. Inspired by the turn of the century, when food was cooked on open flame, this expression is aged twice: first for six years in new white American oak, then for a minimum of five months in a second heavily charred and smoked new barrel. That second barrel is smoked with sugar maple, paying homage to the Lincoln County Process.
+
+The result is a bourbon with a touch of smoke on the nose—toasted oak and dulce de leche, cinnamon and clove. On the palate, vanilla and sugar maple are surrounded by what the distillery describes as "white smoke," with hints of sweet corn and toasted cinnamon. The finish is medium to long, with oak, white smoke, and vanilla.
+
+The Tennessee Ten takes a different path: patience. Aged for a full decade and deliberately not chill-filtered, it offers greater depth of flavor than standard practice allows. The nose reveals vanilla layered with sweet roasted corn, toasted oak, and pipe tobacco. The palate has a velvety entry with balanced sweetness, evolving into a warm, slightly dry mid-palate touched with cocoa. The finish enrobes the senses with spicy cedar and kettle corn.
+
+**Celebrating Tradition Year-Round**
+
+Special occasions are full of rituals—some meaningful, some simple. The morning coffee before a busy day. The evening drink after the guests have gone. The moments between chaos and connection.
+
+Bib & Tucker's portfolio offers something for each of those moments. Gold Roast for when morning and evening feel like they should meet in the middle. The Classic Six for celebrations that deserve something smooth and sophisticated. Double Char for quiet evenings by the fire. The Tennessee Ten for the moments worth remembering.
+
+All of them built on the same philosophy the distillery has held since the beginning: bold and refined come together. Crafted to share. Aged to perfection.`,
+  },
+  {
+    id: 'rye-revival',
+    title: 'America\'s Original Spirit: How Rye Whiskey Lost a Century—and Found Its Way Back',
+    excerpt: 'Before there was bourbon, there was rye. The story of rye whiskey begins with America\'s story. Now, for the first time in a century, rye is back at the forefront.',
+    brand: 'redemption',
+    readTime: '10 min read',
+    content: `Before there was bourbon, there was rye.
+
+The story of rye whiskey begins with America's story. When colonists arrived in the New World with a taste for distilled spirits, they found hardy rye grain abundant across the colonies. By the late 1600s, small rye distilleries were appearing throughout the Eastern seaboard. The whiskey they produced was full-bodied and bold—a spirit that matched the character of the rough-hewn pioneers who were busy founding a nation.
+
+In rye whiskey, early Americans found something that felt like them: strong, resilient, and absent of false notes. As the colonies grew, so did the love for this uniquely American spirit.
+
+Then came 1773, when the Sons of Liberty threw a tea party in Boston Harbor and changed history. As Americans rejected all things British—including rum and gin—bold American rye whiskey filled the void. Distilleries sprang up across colonial America. From the early 1800s through the Roaring Twenties, no other spirit came close in popularity. Through the Industrial Revolution, the Civil War, and World War I, generation after generation made rye their drink of choice.
+
+And then, almost overnight, it nearly disappeared.
+
+**The Lost Century**
+
+Prohibition didn't just interrupt the production of rye whiskey—it broke the chain of tradition. A love for rye that had been woven into the fabric of American life for over a century was undone by the Eighteenth Amendment.
+
+By the time Prohibition ended in 1933, the landscape had shifted. Bourbon's biggest advantage was corn subsidies that made it cheaper to produce. Kentucky, with its abundant corn crops, ramped up production quickly. Old World spirits like Scotch, vodka, and gin flooded into America. Before rye had a chance to reopen its distilleries, new love affairs had begun with whatever was most readily available.
+
+Crowded out by these forces, rye fell into a state of perpetual decline. Where it had once been an American rite of passage, new generations grew up without ever knowing it existed. For nearly a hundred years, America's original whiskey remained in the shadows.
+
+**The Revival**
+
+Now, for the first time in a century, rye is back at the forefront of the American whiskey conversation—coveted by aficionados and bartenders alike. Ask any bartender worth their shaker, and they'll tell you nothing can replace it. The bold, spicy character that made it America's favorite spirit before Prohibition is exactly what a new generation is discovering.
+
+Redemption Whiskey has positioned itself at the center of this revival. Their approach is straightforward: recreate the classic American whiskey that ruled glasses before Prohibition, using recipes inspired by pre-Prohibition traditions that bring forth truly distinctive "rye-forward" notes.
+
+The name itself carries meaning. This isn't just whiskey—it's a second chance for a spirit that nearly vanished from American culture. A comeback story of perseverance, resilience, and the enduring nature of integrity.
+
+**The Master Blender: Whiskey with Soul**
+
+Behind Redemption's portfolio is Alan Kennedy, the brand's Master Blender. Originally from Nashville, Tennessee, and now based in Lexington, Kentucky, Kennedy brings a path to whiskey-making that's anything but conventional.
+
+His journey began in culinary school, where he trained as a classical pastry chef and became a certified sommelier. That foundation—understanding how flavors build and balance—shapes his approach to blending. When Kennedy moved to Kentucky, he trained under revered distillers and blenders, learning everything from hand-picking grains to filling and rolling barrels to the meticulous art of blending.
+
+What sets Kennedy apart is his philosophy. He discovered it wasn't just the science of whiskey-making that intrigued him, but the sensorial artistry. He began focusing on creating whiskeys that had what he calls "soul"—relying on his senses, the feeling one gets on a hot summer day, the memory a certain scent evokes. Kennedy blends from the heart, creating whiskeys that recall a memory or feeling and sharing them with the world.
+
+His goal: ensuring that every sip delivers the highest quality and maximum flavor, while bringing new releases that take inspiration from the past while reimagining rye for today.
+
+**The Bourbon: Rye-Forward by Design**
+
+Redemption's bourbon embodies this philosophy. At 88 proof with a rye content of 21%, it's distinguished by its subtle rye-forward flavor—a light but distinct hint of spice that sets it apart from sweeter, corn-heavy bourbons.
+
+The mash bill tells the story: 75% corn, 21% rye, 4% malted barley. That rye percentage gives the bourbon its character. On the nose, caramel arrives with just a touch of spice and hints of over-ripe banana. The palate reveals toffee, kola nut, and baking spice, with nuanced anise and black pepper. The finish is smooth, with a sweet and spicy balance between corn and cracked pepper.
+
+It's a bourbon designed to be easy drinking but never boring—equally at home on the rocks or mixed into a classic cocktail.
+
+**High Rye Bourbon: When "High" Means Something**
+
+For those who want even more rye character without leaving bourbon behind, Redemption's High Rye Bourbon pushes the boundaries. At 36% rye content—significantly higher than comparable bourbons—it delivers a unique combination of flavors: subtly sweet but punctuated by rich notes of rye spice.
+
+The nose offers light vanilla, red berry fruitiness, and a slight hint of oak. The palate is spicy, woody, and minty, with fennel-like notes of light licorice and black pepper from the rye. The finish is long and smooth, with a nice spice that lingers.
+
+This is bold bourbon for those who know what they're looking for.
+
+**The Rye: 95% and Uncompromising**
+
+Redemption's signature rye represents the purest expression of the brand's mission. With a rye content of 95%—well past the 51% required for the category—it recreates the classic American whiskey that ruled glasses before Prohibition.
+
+The nose is big and spicy: toasted oak, vegetal notes, allspice and anise. The palate reveals beautiful rye spice with light floral and citrus notes alongside dark spices and black pepper. The finish offers a slight mint character that makes it ideal for sipping or mixing in a classic cocktail.
+
+This isn't a compromise or a nod to history—it's a full commitment to what American rye was meant to be.
+
+**What It Means for Every Occasion**
+
+From New Year's toasts to quiet evenings, Redemption fits the moment. Fresh starts, celebrations, or simply the turn of a page—there's something fitting about a spirit that embodies second chances and revival.
+
+Redemption isn't just a name on a label. It's a reminder that what was lost can be found again. That traditions worth keeping don't disappear forever—they wait for someone to bring them back. That a spirit strong enough to help found a nation is strong enough to survive a century in the shadows and emerge again.
+
+Whether it's the rye-kissed bourbon with its smooth balance of sweet and spice, the High Rye for those who want bolder character, or the 95% rye that brings pre-Prohibition America into the modern glass—each expression offers something worth raising, any time of year.
+
+This is the Rye Revival.`,
+  },
+];

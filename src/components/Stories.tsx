@@ -1,34 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-
-interface Article {
-  id: string;
-  title: string;
-  excerpt: string;
-  brand: 'bib' | 'redemption';
-  readTime: string;
-}
-
-const articles: Article[] = [
-  {
-    id: 'coffee-bourbon',
-    title: 'Coffee, Bourbon, and the Rituals That Connect Us',
-    excerpt: 'At the turn of the twentieth century, two rituals bookended the American day. Fresh-roasted coffee warmed early mornings—fuel for the work ahead. Smooth bourbon brought people together at day\'s end.',
-    brand: 'bib',
-    readTime: '8 min read',
-  },
-  {
-    id: 'rye-revival',
-    title: 'America\'s Original Spirit: How Rye Whiskey Lost a Century—and Found Its Way Back',
-    excerpt: 'Before there was bourbon, there was rye. The story of rye whiskey begins with America\'s story. Now, for the first time in a century, rye is back at the forefront.',
-    brand: 'redemption',
-    readTime: '10 min read',
-  },
-];
+import { storiesArticles } from '@/data/articles';
 
 export default function Stories() {
-  const [selected, setSelected] = useState<Article | null>(null);
+  const [selected, setSelected] = useState<typeof storiesArticles[0] | null>(null);
 
   return (
     <section className="bg-white py-20 lg:py-28" id="stories">
@@ -42,7 +18,7 @@ export default function Stories() {
         </header>
 
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
-          {articles.map((article) => (
+          {storiesArticles.map((article) => (
             <article
               key={article.id}
               data-reveal
@@ -86,9 +62,24 @@ export default function Stories() {
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
-            <h2 className="font-display text-3xl text-ink mb-4">{selected.title}</h2>
-            <p className="text-muted leading-relaxed">{selected.excerpt}</p>
-            <p className="text-muted text-sm mt-4">Full story content can be loaded from a CMS or static copy.</p>
+            <h2 className="font-display text-3xl text-ink mb-6">{selected.title}</h2>
+            <div className="prose prose-lg max-w-none text-muted">
+              {selected.content.split('\n\n').filter((p) => p.trim()).map((paragraph, index) => {
+                const isHeading = paragraph.startsWith('**') && paragraph.endsWith('**');
+                if (isHeading) {
+                  return (
+                    <h3 key={index} className="font-display text-xl text-ink mt-8 mb-3 first:mt-0">
+                      {paragraph.replace(/\*\*/g, '')}
+                    </h3>
+                  );
+                }
+                return (
+                  <p key={index} className="leading-relaxed mb-4">
+                    {paragraph}
+                  </p>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
