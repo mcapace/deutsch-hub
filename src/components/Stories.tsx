@@ -17,10 +17,16 @@ function getArticleIdFromSearch(): string | null {
   return params.get('story');
 }
 
+function getArticleIdFromUrl(): string | null {
+  return getArticleIdFromHash() || getArticleIdFromSearch();
+}
+
 function getArticleFromUrl(): (typeof storiesArticles)[0] | null {
-  const id = getArticleIdFromHash() || getArticleIdFromSearch();
+  const id = getArticleIdFromUrl();
   return id ? (storiesArticles.find((a) => a.id === id) ?? null) : null;
 }
+
+const STORAGE_KEY = 'deutsch-open-story';
 
 export default function Stories() {
   const [selected, setSelected] = useState<typeof storiesArticles[0] | null>(null);
@@ -28,27 +34,42 @@ export default function Stories() {
   // Sync modal to URL (hash #story-{id} or query ?story={id})
   const syncFromUrl = () => {
     const article = getArticleFromUrl();
-    setSelected(article);
+    setSelected(article ?? null);
     if (article) {
       document.getElementById('stories')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
-  // Run as soon as component is mounted (before paint) so direct links open the modal immediately
   useLayoutEffect(() => {
-    syncFromUrl();
+    let openedFromStorage = false;
+    try {
+      const storedId = typeof window !== 'undefined' ? sessionStorage.getItem(STORAGE_KEY) : null;
+      if (storedId) {
+        sessionStorage.removeItem(STORAGE_KEY);
+        const article = storiesArticles.find((a) => a.id === storedId) ?? null;
+        if (article) {
+          setSelected(article);
+          openedFromStorage = true;
+          document.getElementById('stories')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          window.history.replaceState(null, '', window.location.pathname + window.location.search + '#' + HASH_PREFIX + article.id);
+        }
+      }
+    } catch (_) {}
+    if (!openedFromStorage) syncFromUrl();
     window.addEventListener('hashchange', syncFromUrl);
     window.addEventListener('popstate', syncFromUrl);
+    window.addEventListener('load', syncFromUrl);
     return () => {
       window.removeEventListener('hashchange', syncFromUrl);
       window.removeEventListener('popstate', syncFromUrl);
+      window.removeEventListener('load', syncFromUrl);
     };
   }, []);
 
-  // Fallback: run again after a short delay in case URL wasn't ready on first load (redirects, SPA nav)
+  // Multiple fallbacks: URL can be set late (redirects, SPA) or hash stripped then restored
   useEffect(() => {
-    const t = window.setTimeout(syncFromUrl, 200);
-    return () => window.clearTimeout(t);
+    const timers = [100, 350, 700, 1200].map((ms) => window.setTimeout(syncFromUrl, ms));
+    return () => timers.forEach((t) => window.clearTimeout(t));
   }, []);
 
   const openStory = (article: typeof storiesArticles[0]) => {

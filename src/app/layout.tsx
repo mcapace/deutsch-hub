@@ -68,6 +68,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${playfair.variable} ${jost.variable} antialiased min-h-screen overflow-x-hidden`}>
+        {/* Capture story from URL before React (survives redirects); Stories component reads this on mount */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var h=window.location.hash,s=window.location.search;var id=(h.indexOf('story-')===1?h.slice(7):null)||(s?new URLSearchParams(s).get('story'):null);if(id)sessionStorage.setItem('deutsch-open-story',id);}catch(e){}})();`,
+          }}
+        />
         {children}
       </body>
     </html>
