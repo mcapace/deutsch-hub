@@ -159,8 +159,8 @@ export default function BarKeep() {
               : 'text-ink/90 bg-warm/95 border border-rule'
           }`}
         >
-          <span className="sm:hidden">Chat with the Bar Keep</span>
-          <span className="hidden sm:inline">Tap to chat with the Bar Keep</span>
+          <span className="sm:hidden">Chat with The Bartender</span>
+          <span className="hidden sm:inline">Tap to chat with The Bartender</span>
         </div>
       )}
       {expanded && (
@@ -171,7 +171,7 @@ export default function BarKeep() {
               : 'bg-warm border-rule text-ink'
           }`}
         >
-          The Bar Keep
+          The Bartender
         </div>
       )}
 
@@ -220,7 +220,7 @@ export default function BarKeep() {
                     fontSize: 13,
                   }}
                 >
-                  The Bar Keep is thinking...
+                  The Bartender is thinking…
                 </div>
               ) : avatarError ? (
                 <div
@@ -246,7 +246,7 @@ export default function BarKeep() {
               onKeyDown={(e) => e.stopPropagation()}
             >
               <div className="flex-shrink-0 p-4 pr-12 border-b border-rule relative" style={{ background: '#F7F2E8' }}>
-                <div className="font-display text-sm" style={{ color: '#1E1408' }}>The Bar Keep</div>
+                <div className="font-display text-sm" style={{ color: '#1E1408' }}>The Bartender</div>
                 <div className="text-[10px] tracking-widest uppercase" style={{ color: '#5C534D' }}>Bib & Tucker · Redemption</div>
                 <button
                   type="button"

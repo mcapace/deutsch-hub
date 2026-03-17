@@ -9,7 +9,7 @@ Built with [Next.js](https://nextjs.org) and deployed on [Vercel](https://vercel
 This is a **Next.js app**, not static HTML. The avatar chat widget does **not** call Anthropic or D-ID from the browser. All calls go through your own backend:
 
 - **`/api/d-id`** — D-ID streaming (create/sdp/ice/talk/destroy). Uses `D_ID_API_KEY` and `source_url` (image URL). Optional: `NEXT_PUBLIC_DID_SOURCE_URL` for your avatar image; else a default presenter image is used.
-- **`/api/chat`** — Proxies to Anthropic so the Bar Keep can reply with AI. Uses `ANTHROPIC_API_KEY` only on the server.
+- **`/api/chat`** — Proxies to Anthropic so The Bartender can reply with AI. Uses `ANTHROPIC_API_KEY` only on the server.
 
 **D-ID diagnostic:** Visit **http://localhost:3000/api/d-id-test** after `npm run dev`. The JSON response shows whether the D-ID key and presenter ID work (e.g. 401 = regenerate key, 402/403 = plan/credits).
 
@@ -24,11 +24,11 @@ On Vercel, API routes run as serverless functions. Set env vars in the Vercel pr
 3. **API keys** — In `.env.local` (or Vercel env) set:
    - `D_ID_API_KEY` or `DID_API_KEY` — D-ID API key (from [D-ID Studio](https://studio.d-id.com/account-settings)).
    - `NEXT_PUBLIC_DID_SOURCE_URL` — (optional) HTTPS URL to your presenter/avatar image. If unset, a default D-ID presenter image is used. From D-ID Studio you can copy your presenter’s image URL.
-   - `ANTHROPIC_API_KEY` — For Bar Keep AI replies via `/api/chat`.
+   - `ANTHROPIC_API_KEY` — For The Bartender AI replies via `/api/chat`.
    - `ELEVENLABS_VOICE_ID` — Optional; used by D-ID for TTS in the avatar.
 4. **Run** — `npm run dev`
 
-### Bar Keep voice (more natural)
+### The Bartender voice (more natural)
 
 When **`ELEVENLABS_API_KEY`** is set, the app generates speech with **ElevenLabs** and sends that audio to D-ID (so you hear your chosen voice). To use a **different voice**:
 
@@ -39,7 +39,7 @@ When **`ELEVENLABS_API_KEY`** is set, the app generates speech with **ElevenLabs
 
 If `ELEVENLABS_API_KEY` is not set, the avatar falls back to **Microsoft TTS** (`en-US-GuyNeural`).
 
-The **Bar Keep** bubble is bottom right. Click to expand; first connection takes a few seconds. Type a message and he’ll reply with AI (via `/api/chat`) and speak the response (via D-ID). All keys stay server-side.
+The **Bartender** bubble is bottom right. Click to expand; first connection takes a few seconds. Type a message and he’ll reply with AI (via `/api/chat`) and speak the response (via D-ID). All keys stay server-side.
 
 First, run the development server:
 

@@ -1,4 +1,4 @@
-# Bar Keep API quick test (run with dev server: npm run dev)
+# Bartender API quick test (run with dev server: npm run dev)
 
 ## Chat API
 Uses `message` + `history` (not `messages`):

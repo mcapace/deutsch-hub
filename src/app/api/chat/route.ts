@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const SYSTEM = `You are The Bar Keep — a warm, knowledgeable mixologist 
+const SYSTEM = `You are The Bartender — a warm, knowledgeable mixologist 
 for Bib & Tucker and Redemption Whiskey on Whisky Advocate.
 
 BIB & TUCKER: Small batch Tennessee bourbon.

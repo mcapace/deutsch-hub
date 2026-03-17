@@ -209,7 +209,7 @@ export default function AvatarWidget() {
               color: 'var(--ink)',
             }}
           >
-            {status === 'connecting' ? 'Connecting…' : status === 'error' ? 'Tap to retry' : 'The Bar Keep'}
+            {status === 'connecting' ? 'Connecting…' : status === 'error' ? 'Tap to retry' : 'The Bartender'}
           </motion.div>
         )}
       </AnimatePresence>
@@ -358,7 +358,7 @@ export default function AvatarWidget() {
               className="absolute bottom-14 left-0 right-0 px-4 py-2"
               style={{ background: 'linear-gradient(transparent, rgba(253,250,245,0.9))' }}
             >
-              <div className="font-serif text-sm font-normal text-[#1E1408]">The Bar Keep</div>
+              <div className="font-serif text-sm font-normal text-[#1E1408]">The Bartender</div>
               <div className="text-[10px] tracking-widest uppercase text-[#9A8E7C]">Bib & Tucker · Redemption</div>
             </motion.div>
           )}
