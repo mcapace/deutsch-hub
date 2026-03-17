@@ -1,10 +1,74 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { storiesArticles } from '@/data/articles';
+
+const HASH_PREFIX = 'story-';
+
+function getArticleIdFromHash(): string | null {
+  if (typeof window === 'undefined') return null;
+  const hash = window.location.hash.slice(1);
+  return hash.startsWith(HASH_PREFIX) ? hash.slice(HASH_PREFIX.length) : null;
+}
+
+function getArticleIdFromSearch(): string | null {
+  if (typeof window === 'undefined') return null;
+  const params = new URLSearchParams(window.location.search);
+  return params.get('story');
+}
+
+function getArticleFromUrl(): (typeof storiesArticles)[0] | null {
+  const id = getArticleIdFromHash() || getArticleIdFromSearch();
+  return id ? (storiesArticles.find((a) => a.id === id) ?? null) : null;
+}
 
 export default function Stories() {
   const [selected, setSelected] = useState<typeof storiesArticles[0] | null>(null);
+
+  // Sync modal to URL (hash #story-{id} or query ?story={id})
+  const syncFromUrl = () => {
+    const article = getArticleFromUrl();
+    setSelected(article);
+    if (article) {
+      document.getElementById('stories')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  // Run as soon as component is mounted (before paint) so direct links open the modal immediately
+  useLayoutEffect(() => {
+    syncFromUrl();
+    window.addEventListener('hashchange', syncFromUrl);
+    window.addEventListener('popstate', syncFromUrl);
+    return () => {
+      window.removeEventListener('hashchange', syncFromUrl);
+      window.removeEventListener('popstate', syncFromUrl);
+    };
+  }, []);
+
+  // Fallback: run again after a short delay in case URL wasn't ready on first load (redirects, SPA nav)
+  useEffect(() => {
+    const t = window.setTimeout(syncFromUrl, 200);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  const openStory = (article: typeof storiesArticles[0]) => {
+    setSelected(article);
+    const base = window.location.pathname + window.location.search;
+    const hash = `#${HASH_PREFIX}${article.id}`;
+    window.history.replaceState(null, '', base + hash);
+  };
+
+  const closeStory = () => {
+    setSelected(null);
+    const hasStoryHash = window.location.hash.startsWith('#' + HASH_PREFIX);
+    const hasStoryQuery = new URLSearchParams(window.location.search).has('story');
+    if (hasStoryHash || hasStoryQuery) {
+      const params = new URLSearchParams(window.location.search);
+      params.delete('story');
+      const q = params.toString();
+      window.history.replaceState(null, '', window.location.pathname + (q ? '?' + q : '') + '#stories');
+    }
+  };
 
   return (
     <section className="bg-white py-20 lg:py-28" id="stories">
@@ -24,8 +88,8 @@ export default function Stories() {
               data-reveal
               role="button"
               tabIndex={0}
-              onClick={() => setSelected(article)}
-              onKeyDown={(e) => e.key === 'Enter' && setSelected(article)}
+              onClick={() => openStory(article)}
+              onKeyDown={(e) => e.key === 'Enter' && openStory(article)}
               className="bg-white border border-rule p-8 lg:p-10 hover:bg-warm transition-colors cursor-pointer group"
             >
               <div className="flex items-center gap-3 mb-4">
@@ -47,7 +111,7 @@ export default function Stories() {
       {selected && (
         <div
           className="fixed inset-0 z-50 overflow-y-auto bg-ink/90 flex items-center justify-center p-4"
-          onClick={() => setSelected(null)}
+          onClick={closeStory}
         >
           <div
             className="max-w-2xl w-full bg-white border border-rule p-8 max-h-[85vh] overflow-y-auto"
@@ -58,7 +122,7 @@ export default function Stories() {
                 <span className="text-[9px] uppercase tracking-wider text-copper">{selected.brand === 'bib' ? 'Bib & Tucker' : 'Redemption'}</span>
                 <span className="text-muted text-xs">{selected.readTime}</span>
               </div>
-              <button type="button" onClick={() => setSelected(null)} className="text-muted hover:text-ink p-2" aria-label="Close">
+              <button type="button" onClick={closeStory} className="text-muted hover:text-ink p-2" aria-label="Close">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
