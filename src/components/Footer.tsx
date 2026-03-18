@@ -2,12 +2,19 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { STORE_BIB_TUCKER, STORE_REDEMPTION, STORE_HOME } from '@/lib/store-links';
 
 const exploreLinks = [
   { name: 'Bib & Tucker', href: '#brands' },
   { name: 'Redemption', href: '#brands' },
   { name: 'Cocktail Recipes', href: '#cocktails' },
   { name: 'Food Pairings', href: '#pairings' },
+];
+
+const shopLinks = [
+  { name: 'Shop Bib & Tucker', href: STORE_BIB_TUCKER, external: true },
+  { name: 'Shop Redemption', href: STORE_REDEMPTION, external: true },
+  { name: 'Whisky Advocate Store', href: STORE_HOME, external: true },
 ];
 
 const resourceLinks = [
@@ -74,6 +81,16 @@ export default function Footer() {
             </ul>
           </div>
           <div className="md:col-span-3" data-reveal>
+            <h4 className="text-[11px] tracking-[0.3em] uppercase text-amber mb-6">Shop</h4>
+            <ul className="space-y-4 mb-10">
+              {shopLinks.map((link) => (
+                <li key={link.name}>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-[15px] text-white/75 hover:text-white transition-colors">
+                    {link.name} ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
             <h4 className="text-[11px] tracking-[0.3em] uppercase text-amber mb-6">Resources</h4>
             <ul className="space-y-4">
               {resourceLinks.map((link) => (

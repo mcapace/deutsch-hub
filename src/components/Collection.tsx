@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { STORE_BIB_TUCKER, STORE_REDEMPTION, STORE_HOME } from '@/lib/store-links';
 
 const collectionFeatures = [
   { id: 'gift-guide', title: 'Gift Guide', description: 'Perfect whiskey selections for every person on your list', brand: 'both', link: '#cocktails' },
@@ -41,12 +42,12 @@ export default function Collection() {
             <p className="text-sm lg:text-base text-white mb-6 flex-grow">
               From Gold Roast after-dinner sipping to Double Char by the fire — award-winning bourbons for every moment.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3">
               <Link href="#brands" className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-amber-100 transition-colors">
-                Explore Collection →
+                Explore →
               </Link>
-              <a href="https://store.whiskyadvocate.com/products/bib-tucker-gold-roast-small-batch-bourbon-whiskey" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 bg-white/20 hover:bg-white/30 transition-colors text-white">
-                Shop Now ↗
+              <a href={STORE_BIB_TUCKER} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2.5 bg-white text-ink hover:bg-amber-50 transition-colors">
+                Shop Bib &amp; Tucker ↗
               </a>
             </div>
           </div>
@@ -56,12 +57,12 @@ export default function Collection() {
             <p className="text-sm lg:text-base text-white mb-6 flex-grow">
               High-rye character with rich warmth. Perfect for Manhattans and all your favorite classics.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3">
               <Link href="#brands" className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-amber-100 transition-colors">
-                Explore Collection →
+                Explore →
               </Link>
-              <a href="https://store.whiskyadvocate.com/products/redemption-rye-whiskey" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 bg-white/20 hover:bg-white/30 transition-colors text-white">
-                Shop Now ↗
+              <a href={STORE_REDEMPTION} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2.5 bg-white text-ink hover:bg-amber-50 transition-colors">
+                Shop Redemption ↗
               </a>
             </div>
           </div>
@@ -72,13 +73,22 @@ export default function Collection() {
           <p className="text-muted mb-8 max-w-lg mx-auto">
             Whether hosting a gathering or finding the perfect gift, our collections offer something special for every whiskey lover—all year long.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="#cocktails" className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium bg-copper text-white hover:opacity-90 transition-opacity">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+            <a href={STORE_BIB_TUCKER} target="_blank" rel="noopener noreferrer" className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium bg-copper text-white hover:opacity-90 transition-opacity text-center">
+              Shop Bib &amp; Tucker
+            </a>
+            <a href={STORE_REDEMPTION} target="_blank" rel="noopener noreferrer" className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium bg-ink text-white hover:bg-copper transition-colors text-center">
+              Shop Redemption
+            </a>
+            <Link href="#cocktails" className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium border-2 border-rule text-ink hover:bg-warm transition-colors text-center">
               View Cocktails
             </Link>
-            <Link href="#pairings" className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium border-2 border-rule text-ink hover:bg-warm transition-colors">
+            <Link href="#pairings" className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium border-2 border-rule text-ink hover:bg-warm transition-colors text-center">
               Food Pairings
             </Link>
+            <a href={STORE_HOME} target="_blank" rel="noopener noreferrer" className="px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium text-muted hover:text-copper transition-colors text-center">
+              Full store ↗
+            </a>
           </div>
         </div>
       </div>

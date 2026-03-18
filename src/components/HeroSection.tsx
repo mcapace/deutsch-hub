@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
+import { STORE_BIB_TUCKER, STORE_REDEMPTION } from '@/lib/store-links';
 
 const styles: Record<string, React.CSSProperties> = {
   heroWrap: {
@@ -355,6 +356,43 @@ export default function HeroSection() {
           >
             Cocktail Recipes
           </motion.a>
+        </div>
+        <div
+          className="hero-shop-row-el"
+          style={{
+            display: 'flex',
+            gap: '14px',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            marginTop: '1.25rem',
+          }}
+        >
+          <a
+            href={STORE_BIB_TUCKER}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              ...styles.btnOutline,
+              padding: '10px 20px',
+              fontSize: '9px',
+              letterSpacing: '0.22em',
+            }}
+          >
+            Shop Bib &amp; Tucker ↗
+          </a>
+          <a
+            href={STORE_REDEMPTION}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              ...styles.btnOutline,
+              padding: '10px 20px',
+              fontSize: '9px',
+              letterSpacing: '0.22em',
+            }}
+          >
+            Shop Redemption ↗
+          </a>
         </div>
       </div>
 

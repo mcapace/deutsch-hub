@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { STORE_BIB_TUCKER, STORE_REDEMPTION } from '@/lib/store-links';
 
 export default function Brands() {
   return (
@@ -24,9 +25,14 @@ export default function Brands() {
               <p className="text-muted leading-relaxed mb-6">
                 Small batch Tennessee bourbon. Six years in American white oak, filtered through sugar maple charcoal — the Lincoln County Process that defines the house style.
               </p>
-              <Link href="#collection" className="text-walnut text-[9px] tracking-[0.22em] uppercase after:content-['→'] after:ml-1 hover:text-copper transition-colors">
-                Explore Bib & Tucker
-              </Link>
+              <div className="flex flex-wrap items-center gap-4">
+                <Link href="#collection" className="text-walnut text-[9px] tracking-[0.22em] uppercase after:content-['→'] after:ml-1 hover:text-copper transition-colors">
+                  Explore Bib & Tucker
+                </Link>
+                <a href={STORE_BIB_TUCKER} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-4 py-2.5 bg-copper text-white text-[9px] tracking-[0.18em] uppercase hover:opacity-90 transition-opacity">
+                  Shop collection ↗
+                </a>
+              </div>
             </div>
             <div className="mt-10 flex justify-center">
               <Image
@@ -50,9 +56,14 @@ export default function Brands() {
               <p className="text-muted leading-relaxed mb-6">
                 Pre-Prohibition rye revival. From 95% rye mash to high-rye bourbon, Redemption brings back the character that made American whiskey legendary.
               </p>
-              <Link href="#collection" className="text-walnut text-[9px] tracking-[0.22em] uppercase after:content-['→'] after:ml-1 hover:text-copper transition-colors">
-                Explore Redemption
-              </Link>
+              <div className="flex flex-wrap items-center gap-4">
+                <Link href="#collection" className="text-walnut text-[9px] tracking-[0.22em] uppercase after:content-['→'] after:ml-1 hover:text-copper transition-colors">
+                  Explore Redemption
+                </Link>
+                <a href={STORE_REDEMPTION} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-4 py-2.5 bg-copper text-white text-[9px] tracking-[0.18em] uppercase hover:opacity-90 transition-opacity">
+                  Shop collection ↗
+                </a>
+              </div>
             </div>
             <div className="mt-10 flex justify-center">
               <Image

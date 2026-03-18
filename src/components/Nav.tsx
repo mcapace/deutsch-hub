@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { STORE_BIB_TUCKER, STORE_REDEMPTION, STORE_HOME } from '@/lib/store-links';
 
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -32,14 +33,30 @@ export default function Nav() {
           <Link href="#pairings" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase transition-colors">Pairings</Link>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
           <a
-            href="https://store.whiskyadvocate.com"
+            href={STORE_BIB_TUCKER}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-ink text-white px-6 py-2.5 text-[9px] tracking-[0.24em] uppercase hover:bg-copper transition-colors hidden sm:inline-block"
+            className="text-muted hover:text-copper text-[8px] tracking-[0.14em] uppercase transition-colors hidden lg:inline"
           >
-            Shop Now
+            Shop Bib &amp; Tucker
+          </a>
+          <a
+            href={STORE_REDEMPTION}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted hover:text-copper text-[8px] tracking-[0.14em] uppercase transition-colors hidden lg:inline"
+          >
+            Shop Redemption
+          </a>
+          <a
+            href={STORE_HOME}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-ink text-white px-4 sm:px-6 py-2.5 text-[8px] sm:text-[9px] tracking-[0.2em] sm:tracking-[0.24em] uppercase hover:bg-copper transition-colors"
+          >
+            Shop Store
           </a>
           <button
             type="button"
@@ -61,7 +78,9 @@ export default function Nav() {
             <Link href="#collection" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase" onClick={() => setMobileOpen(false)}>Collection</Link>
             <Link href="#cocktails" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase" onClick={() => setMobileOpen(false)}>Cocktails</Link>
             <Link href="#pairings" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase" onClick={() => setMobileOpen(false)}>Pairings</Link>
-            <a href="https://store.whiskyadvocate.com" target="_blank" rel="noopener noreferrer" className="bg-ink text-white px-6 py-3 text-[9px] tracking-[0.24em] uppercase w-fit">Shop Now</a>
+            <a href={STORE_BIB_TUCKER} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase border border-rule px-4 py-2 w-fit">Shop Bib &amp; Tucker ↗</a>
+            <a href={STORE_REDEMPTION} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-copper text-[10px] tracking-[0.18em] uppercase border border-rule px-4 py-2 w-fit">Shop Redemption ↗</a>
+            <a href={STORE_HOME} target="_blank" rel="noopener noreferrer" className="bg-ink text-white px-6 py-3 text-[9px] tracking-[0.24em] uppercase w-fit">Whisky Advocate Store</a>
           </div>
         </div>
       )}
