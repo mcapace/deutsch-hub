@@ -2,6 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 
+/** Set NEXT_PUBLIC_BARTENDER_AVATAR=true in .env / Vercel to show D-ID video again. */
+const showAvatar = process.env.NEXT_PUBLIC_BARTENDER_AVATAR === 'true';
+
 export default function BarKeep() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
@@ -137,7 +140,7 @@ export default function BarKeep() {
 
       setMessages((prev) => [...prev, { role: 'assistant', text: reply }]);
 
-      speakWithAvatar(reply);
+      if (showAvatar) speakWithAvatar(reply);
     } catch (err) {
       console.error('Send error:', err);
       setMessages((prev) => [...prev, { role: 'assistant', text: 'Sorry, something went wrong.' }]);
@@ -183,7 +186,7 @@ export default function BarKeep() {
         className={`relative overflow-hidden cursor-pointer select-none transition-all duration-300 ease-out ${expanded ? 'flex flex-col' : ''}`}
         style={{
           width: expanded ? 'min(360px, calc(100vw - 2rem))' : 72,
-          height: expanded ? 'min(520px, 90vh)' : 72,
+          height: expanded ? (showAvatar ? 'min(520px, 90vh)' : 'min(420px, 78vh)') : 72,
           borderRadius: expanded ? 16 : 36,
           background: '#FDFAF5',
           border: '2px solid var(--rule)',
@@ -191,57 +194,60 @@ export default function BarKeep() {
         }}
       >
         {!expanded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-copper rounded-[36px]">
-            <span className="text-3xl" aria-hidden>🥃</span>
+          <div className="absolute inset-0 flex items-center justify-center bg-copper rounded-[36px]" aria-hidden>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
           </div>
         )}
 
         {expanded && (
           <>
-            <div style={{ background: '#0d0500', borderRadius: '8px 8px 0 0', overflow: 'hidden', minHeight: '200px', flexShrink: 0 }}>
-              {videoUrl ? (
-                <video
-                  key={videoUrl}
-                  src={videoUrl}
-                  autoPlay
-                  playsInline
-                  controls={false}
-                  style={{ width: '100%', display: 'block' }}
-                  onEnded={() => setVideoUrl(null)}
-                />
-              ) : isAvatarLoading ? (
-                <div
-                  style={{
-                    height: '200px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'rgba(196,135,62,0.7)',
-                    fontSize: 13,
-                  }}
-                >
-                  The Bartender is thinking…
-                </div>
-              ) : avatarError ? (
-                <div
-                  style={{
-                    height: '200px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'rgba(196,135,62,0.8)',
-                    fontSize: 13,
-                    padding: 16,
-                    textAlign: 'center',
-                  }}
-                >
-                  {avatarError}
-                </div>
-              ) : null}
-            </div>
-
+            {showAvatar && (
+              <div style={{ background: '#0d0500', borderRadius: '8px 8px 0 0', overflow: 'hidden', minHeight: '200px', flexShrink: 0 }}>
+                {videoUrl ? (
+                  <video
+                    key={videoUrl}
+                    src={videoUrl}
+                    autoPlay
+                    playsInline
+                    controls={false}
+                    style={{ width: '100%', display: 'block' }}
+                    onEnded={() => setVideoUrl(null)}
+                  />
+                ) : isAvatarLoading ? (
+                  <div
+                    style={{
+                      height: '200px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'rgba(196,135,62,0.7)',
+                      fontSize: 13,
+                    }}
+                  >
+                    The Bartender is thinking…
+                  </div>
+                ) : avatarError ? (
+                  <div
+                    style={{
+                      height: '200px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'rgba(196,135,62,0.8)',
+                      fontSize: 13,
+                      padding: 16,
+                      textAlign: 'center',
+                    }}
+                  >
+                    {avatarError}
+                  </div>
+                ) : null}
+              </div>
+            )}
             <div
-              className="flex flex-col flex-1 min-h-0 border-b border-rule rounded-t-2xl"
+              className={`flex flex-col flex-1 min-h-0 border-b border-rule overflow-hidden ${showAvatar ? '' : 'rounded-t-2xl'}`}
               onClick={(e) => e.stopPropagation()}
               onKeyDown={(e) => e.stopPropagation()}
             >

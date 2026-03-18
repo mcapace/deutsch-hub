@@ -39,7 +39,7 @@ When **`ELEVENLABS_API_KEY`** is set, the app generates speech with **ElevenLabs
 
 If `ELEVENLABS_API_KEY` is not set, the avatar falls back to **Microsoft TTS** (`en-US-GuyNeural`).
 
-The **Bartender** bubble is bottom right. Click to expand; first connection takes a few seconds. Type a message and he’ll reply with AI (via `/api/chat`) and speak the response (via D-ID). All keys stay server-side.
+The **Bartender** chat is bottom right (chat bubble icon). By default **only text chat** is shown (no D-ID avatar video). To show the speaking avatar again, set **`NEXT_PUBLIC_BARTENDER_AVATAR=true`** in `.env.local` or Vercel and redeploy. Replies use `/api/chat` (Anthropic); avatar uses `/api/d-id` when enabled.
 
 First, run the development server:
 
