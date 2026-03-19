@@ -14,7 +14,7 @@ function renderTextWithLinks(text: string) {
     if (/^https?:\/\//i.test(part)) {
       const href = part.replace(/[.,;:!?)]+$/g, '');
       const after = part.slice(href.length);
-      return (
+  return (
         <Fragment key={i}>
           <a
             href={href}
@@ -150,6 +150,8 @@ export default function BarKeep() {
     };
   }, []);
 
+  const isOnDarkBackdrop = isOverHero || isOverFooter;
+
   const handleSendMessage = async () => {
     const userText = message.trim();
     if (!userText || sending) return;
@@ -194,7 +196,7 @@ export default function BarKeep() {
       {!expanded && (
         <div
           className={`px-3 py-2 rounded-full text-[10px] font-medium tracking-widest uppercase shadow-sm max-w-[calc(100vw-5rem)] sm:max-w-none transition-colors duration-300 ${
-            isOverHero || isOverFooter
+            isOnDarkBackdrop
               ? 'text-white bg-white/10 border border-white/20'
               : 'text-ink/90 bg-warm/95 border border-rule'
           }`}
@@ -206,7 +208,7 @@ export default function BarKeep() {
       {expanded && (
         <div
           className={`px-3 py-1.5 rounded-full text-xs font-medium tracking-widest uppercase border transition-colors duration-300 ${
-            isOverHero || isOverFooter
+            isOnDarkBackdrop
               ? 'text-white bg-white/10 border-white/20'
               : 'bg-warm border-rule text-ink'
           }`}
@@ -225,14 +227,36 @@ export default function BarKeep() {
           width: expanded ? 'min(360px, calc(100vw - 2rem))' : 72,
           height: expanded ? (showAvatar ? 'min(520px, 90vh)' : 'min(420px, 78vh)') : 72,
           borderRadius: expanded ? 16 : 36,
-          background: '#FDFAF5',
-          border: '2px solid var(--rule)',
-          boxShadow: '0 4px 24px rgba(30,20,8,0.12)',
+          background: expanded ? '#FDFAF5' : isOnDarkBackdrop ? 'rgba(247,242,232,0.98)' : '#1E1408',
+          border: expanded
+            ? '2px solid var(--rule)'
+            : isOnDarkBackdrop
+              ? '2px solid rgba(255,255,255,0.28)'
+              : '2px solid rgba(160,98,42,0.45)',
+          boxShadow: expanded
+            ? '0 4px 24px rgba(30,20,8,0.12)'
+            : isOnDarkBackdrop
+              ? '0 8px 28px rgba(0,0,0,0.35)'
+              : '0 8px 28px rgba(30,20,8,0.22)',
         }}
       >
         {!expanded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-copper rounded-[36px]" aria-hidden>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <div
+            className={`absolute inset-0 flex items-center justify-center rounded-[36px] transition-colors duration-300 ${
+              isOnDarkBackdrop ? 'bg-copper' : 'bg-ink'
+            }`}
+            aria-hidden
+          >
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={isOnDarkBackdrop ? 'white' : '#C4873E'}
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>
           </div>
