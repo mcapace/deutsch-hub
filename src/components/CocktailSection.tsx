@@ -16,6 +16,7 @@ interface Cocktail {
   occasion: string;
   category: 'seasonal' | 'winter' | 'nye' | 'classic';
   featured?: boolean;
+  legalNote?: string;
 }
 
 const cocktails: Cocktail[] = [
@@ -43,6 +44,51 @@ const cocktails: Cocktail[] = [
     occasion: 'After dinner',
   },
   {
+    id: 'gold-roast-old-fashioned',
+    name: 'Gold Roast Old Fashioned',
+    brand: 'bib',
+    spirit: 'Bib & Tucker Gold Roast Bourbon',
+    tagline: 'Classic structure, coffee-kissed bourbon',
+    category: 'classic',
+    featured: true,
+    ingredients: [
+      '2 oz Bib & Tucker Gold Roast Bourbon',
+      '0.5 oz Simple Syrup',
+      '2 dashes Angostura Bitters',
+    ],
+    instructions: [
+      'Stir all ingredients in a mixing glass filled with ice',
+      'Strain into a rocks glass over a large ice cube',
+      'Garnish with an expressed orange peel',
+    ],
+    garnish: 'Expressed orange peel',
+    glassware: 'Rocks glass',
+    occasion: 'Sipping neat or after dinner',
+  },
+  {
+    id: 'steam-engine',
+    name: 'Steam Engine',
+    brand: 'bib',
+    spirit: 'Bib & Tucker Double Char Bourbon',
+    tagline: 'Smoke, Benedictine, slow stir',
+    category: 'classic',
+    ingredients: [
+      '2 oz Bib & Tucker Double Char Bourbon',
+      '0.5 oz Benedictine',
+      '2 dashes bitters',
+    ],
+    instructions: [
+      'Stir all ingredients in a mixing glass filled with ice',
+      'Strain into a rocks glass over a large ice cube',
+      'Garnish with an expressed orange peel',
+    ],
+    garnish: 'Expressed orange peel',
+    glassware: 'Rocks glass',
+    occasion: 'Fireside or classic cocktail hour',
+    legalNote:
+      'Benedictine is a registered trademark of Bacardi & Co. Ltd. and is not affiliated with Bib & Tucker.',
+  },
+  {
     id: 'gold-roast-espresso-martini',
     name: 'Gold Roast Espresso Martini',
     brand: 'bib',
@@ -65,6 +111,28 @@ const cocktails: Cocktail[] = [
     garnish: '3 coffee beans',
     glassware: 'Coupe',
     occasion: 'Brunch or dessert',
+  },
+  {
+    id: 'gold-roast-espresso-cold-brew',
+    name: 'Gold Roast Espresso Martini (Cold Brew)',
+    brand: 'bib',
+    spirit: 'Bib & Tucker Gold Roast Bourbon',
+    tagline: 'Cold brew concentrate, coffee liqueur, shaken',
+    category: 'classic',
+    ingredients: [
+      '2 oz Bib & Tucker Gold Roast Bourbon',
+      '1 oz Cold Brew Concentrate',
+      '0.5 oz Coffee Liqueur',
+      '0.5 oz Simple Syrup',
+    ],
+    instructions: [
+      'Add all ingredients into a shaker tin half full of ice',
+      'Shake well and strain into glass',
+      'Garnish with coffee beans',
+    ],
+    garnish: 'Coffee beans',
+    glassware: 'Coupe or martini glass',
+    occasion: 'Brunch, dessert, or late night',
   },
   {
     id: 'campfire-old-fashioned',
@@ -329,6 +397,11 @@ const RecipeModal = ({ cocktail, onClose }: { cocktail: Cocktail; onClose: () =>
               ))}
             </ol>
           </div>
+          {cocktail.legalNote && (
+            <p className="mt-8 pt-6 border-t border-[#D8CEBC] text-xs leading-relaxed" style={{ color: 'var(--fog)' }}>
+              {cocktail.legalNote}
+            </p>
+          )}
         </div>
       </motion.div>
     </motion.div>

@@ -1,9 +1,40 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Fragment } from 'react';
+import { STORE_BIB_TUCKER, STORE_REDEMPTION, STORE_HOME } from '@/lib/store-links';
 
 /** Set NEXT_PUBLIC_BARTENDER_AVATAR=true in .env / Vercel to show D-ID video again. */
 const showAvatar = process.env.NEXT_PUBLIC_BARTENDER_AVATAR === 'true';
+
+const URL_REGEX = /(https?:\/\/[^\s<>"{}|\\^`[\]]+)/gi;
+
+function renderTextWithLinks(text: string) {
+  const parts = text.split(URL_REGEX);
+  return parts.map((part, i) => {
+    if (/^https?:\/\//i.test(part)) {
+      const href = part.replace(/[.,;:!?)]+$/g, '');
+      const after = part.slice(href.length);
+      return (
+        <Fragment key={i}>
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline text-copper font-medium break-all"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {href}
+          </a>
+          {after}
+        </Fragment>
+      );
+    }
+    return <Fragment key={i}>{part}</Fragment>;
+  });
+}
+
+const PURCHASE_INTENT =
+  /\b(buy|shop|purchase|bottle|where to get|where can i|order online|add to cart|retail|price|ship|deliver)\b/i;
 
 export default function BarKeep() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -21,6 +52,8 @@ export default function BarKeep() {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [isAvatarLoading, setIsAvatarLoading] = useState(false);
   const [avatarError, setAvatarError] = useState<string | null>(null);
+  /** Inline “where to buy” panel after shop-related assistant replies */
+  const [showShopPanel, setShowShopPanel] = useState(false);
 
   async function speakWithAvatar(text: string) {
     setIsAvatarLoading(true);
@@ -139,6 +172,10 @@ export default function BarKeep() {
       const reply = (chatData.reply ?? chatData.text ?? '').trim() || 'Sorry, I couldn’t get a reply. Try again.';
 
       setMessages((prev) => [...prev, { role: 'assistant', text: reply }]);
+
+      if (PURCHASE_INTENT.test(reply) || PURCHASE_INTENT.test(userText)) {
+        setShowShopPanel(true);
+      }
 
       if (showAvatar) speakWithAvatar(reply);
     } catch (err) {
@@ -279,10 +316,96 @@ export default function BarKeep() {
                         : { background: '#F7F2E8', color: '#1E1408', borderLeft: '3px solid #A0622A', padding: '12px 16px' }
                     }
                   >
-                    {m.text}
+                    <span className="whitespace-pre-wrap">{renderTextWithLinks(m.text)}</span>
                   </div>
                 ))}
+                {showShopPanel && (
+                  <div
+                    className="rounded-lg border-2 border-copper/40 overflow-hidden shadow-sm"
+                    style={{ background: '#F7F2E8' }}
+                    role="region"
+                    aria-label="Where to buy"
+                  >
+                    <div className="flex items-center justify-between gap-2 px-3 py-2 border-b border-rule bg-copper/10">
+                      <span className="text-[11px] font-semibold tracking-wide uppercase" style={{ color: '#1E1408' }}>
+                        Shop Whisky Advocate
+                      </span>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowShopPanel(false);
+                        }}
+                        className="text-[10px] uppercase tracking-wider text-ink/60 hover:text-ink min-h-[36px] px-2"
+                      >
+                        Hide
+                      </button>
+                    </div>
+                    <div className="p-3 flex flex-col gap-2">
+                      <a
+                        href={STORE_BIB_TUCKER}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center justify-center min-h-[44px] rounded-lg bg-copper text-white text-sm font-medium hover:opacity-95 active:opacity-90"
+                      >
+                        Bib & Tucker — shop collection
+                      </a>
+                      <a
+                        href={STORE_REDEMPTION}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center justify-center min-h-[44px] rounded-lg border-2 border-copper text-copper text-sm font-medium hover:bg-copper/5"
+                      >
+                        Redemption — shop collection
+                      </a>
+                      <a
+                        href={STORE_HOME}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-center text-xs text-ink/70 underline py-1"
+                      >
+                        Full store
+                      </a>
+                    </div>
+                  </div>
+                )}
                 <div ref={messagesEndRef} />
+              </div>
+              <div
+                className="flex-shrink-0 px-3 pt-2 pb-1 border-t border-rule/80"
+                style={{ background: '#FDFAF5' }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <p className="text-[9px] tracking-widest uppercase text-muted mb-1.5">Where to buy</p>
+                <div className="flex flex-wrap gap-1.5">
+                  <a
+                    href={STORE_BIB_TUCKER}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] px-2 py-1 rounded-full bg-copper/15 text-copper font-medium hover:bg-copper/25"
+                  >
+                    Bib & Tucker
+                  </a>
+                  <a
+                    href={STORE_REDEMPTION}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] px-2 py-1 rounded-full bg-copper/15 text-copper font-medium hover:bg-copper/25"
+                  >
+                    Redemption
+                  </a>
+                  <a
+                    href={STORE_HOME}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] px-2 py-1 rounded-full border border-rule text-ink/70 hover:bg-rule/20"
+                  >
+                    Store home
+                  </a>
+                </div>
               </div>
               <div
                 className="flex-shrink-0 p-4 flex gap-2 border-t border-rule"

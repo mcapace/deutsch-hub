@@ -15,11 +15,91 @@ interface Cocktail {
   glassware: string;
   occasion: string;
   featured?: boolean;
+  /** Optional trademark / disclaimer (e.g. third-party liqueur) */
+  legalNote?: string;
 }
 
 const cocktails: Cocktail[] = [
   { id: 'gold-roast-fashioned', name: 'Gold Roast Elevated', brand: 'bib', spirit: 'Bib & Tucker Gold Roast', tagline: 'Coffee lovers rejoice', featured: true, ingredients: ['2 oz Bib & Tucker Gold Roast', '0.25 oz Demerara Syrup', '2 dashes Angostura Bitters'], instructions: ['Add ingredients to a mixing glass with ice', 'Stir until well chilled', 'Strain over a large ice cube', 'Express orange peel over the drink'], garnish: 'Orange peel', glassware: 'Rocks glass', occasion: 'After dinner' },
-  { id: 'gold-roast-espresso', name: 'Gold Roast Espresso Martini', brand: 'bib', spirit: 'Bib & Tucker Gold Roast', tagline: 'Double coffee, double delight', featured: true, ingredients: ['1.5 oz Bib & Tucker Gold Roast', '1 oz Fresh Espresso', '0.5 oz Coffee Liqueur', '0.25 oz Simple Syrup'], instructions: ['Brew fresh espresso and let cool', 'Shake all ingredients vigorously with ice', 'Double strain into a chilled coupe', 'Garnish with coffee beans'], garnish: '3 coffee beans', glassware: 'Coupe', occasion: 'Brunch or dessert' },
+  {
+    id: 'gold-roast-old-fashioned',
+    name: 'Gold Roast Old Fashioned',
+    brand: 'bib',
+    spirit: 'Bib & Tucker Gold Roast Bourbon',
+    tagline: 'Classic structure, coffee-kissed bourbon',
+    featured: true,
+    ingredients: ['2 oz Bib & Tucker Gold Roast Bourbon', '0.5 oz Simple Syrup', '2 dashes Angostura Bitters'],
+    instructions: [
+      'Stir all ingredients in a mixing glass filled with ice',
+      'Strain into a rocks glass over a large ice cube',
+      'Garnish with an expressed orange peel',
+    ],
+    garnish: 'Expressed orange peel',
+    glassware: 'Rocks glass',
+    occasion: 'Sipping neat or after dinner',
+  },
+  {
+    id: 'steam-engine',
+    name: 'Steam Engine',
+    brand: 'bib',
+    spirit: 'Bib & Tucker Double Char Bourbon',
+    tagline: 'Smoke, Benedictine, slow stir',
+    ingredients: ['2 oz Bib & Tucker Double Char Bourbon', '0.5 oz Benedictine', '2 dashes bitters'],
+    instructions: [
+      'Stir all ingredients in a mixing glass filled with ice',
+      'Strain into a rocks glass over a large ice cube',
+      'Garnish with an expressed orange peel',
+    ],
+    garnish: 'Expressed orange peel',
+    glassware: 'Rocks glass',
+    occasion: 'Fireside or classic cocktail hour',
+    legalNote:
+      'Benedictine is a registered trademark of Bacardi & Co. Ltd. and is not affiliated with Bib & Tucker.',
+  },
+  {
+    id: 'gold-roast-espresso',
+    name: 'Gold Roast Espresso Martini',
+    brand: 'bib',
+    spirit: 'Bib & Tucker Gold Roast',
+    tagline: 'Double coffee, double delight',
+    featured: true,
+    ingredients: [
+      '1.5 oz Bib & Tucker Gold Roast',
+      '1 oz Fresh Espresso',
+      '0.5 oz Coffee Liqueur',
+      '0.25 oz Simple Syrup',
+    ],
+    instructions: [
+      'Brew fresh espresso and let cool',
+      'Shake all ingredients vigorously with ice',
+      'Double strain into a chilled coupe',
+      'Garnish with coffee beans',
+    ],
+    garnish: '3 coffee beans',
+    glassware: 'Coupe',
+    occasion: 'Brunch or dessert',
+  },
+  {
+    id: 'gold-roast-espresso-cold-brew',
+    name: 'Gold Roast Espresso Martini (Cold Brew)',
+    brand: 'bib',
+    spirit: 'Bib & Tucker Gold Roast Bourbon',
+    tagline: 'Cold brew concentrate, coffee liqueur, shaken',
+    ingredients: [
+      '2 oz Bib & Tucker Gold Roast Bourbon',
+      '1 oz Cold Brew Concentrate',
+      '0.5 oz Coffee Liqueur',
+      '0.5 oz Simple Syrup',
+    ],
+    instructions: [
+      'Add all ingredients into a shaker tin half full of ice',
+      'Shake well and strain into glass',
+      'Garnish with coffee beans',
+    ],
+    garnish: 'Coffee beans',
+    glassware: 'Coupe or martini glass',
+    occasion: 'Brunch, dessert, or late night',
+  },
   { id: 'campfire-of', name: 'Campfire Old Fashioned', brand: 'bib', spirit: 'Bib & Tucker Double Char', tagline: 'Smoky, rich, unforgettable', ingredients: ['2 oz Bib & Tucker Double Char', '0.25 oz Maple Syrup', '2 dashes Coffee Pecan Bitters', '2 dashes Black Walnut Bitters'], instructions: ['Add all ingredients to a mixing glass with ice', 'Stir until well chilled', 'Strain into a rocks glass over a large ice cube', 'Express orange peel and garnish'], garnish: 'Orange peel', glassware: 'Rocks glass', occasion: 'Fireside sipping' },
   { id: 'sazerac', name: 'Sazerac', brand: 'redemption', spirit: 'Redemption Rye', tagline: 'New Orleans classic', ingredients: ['2 oz Redemption Rye', '0.5 oz Simple Syrup', "3 dashes Peychaud's Bitters", 'Absinthe rinse'], instructions: ['Rinse a chilled rocks glass with absinthe', 'Stir rye, simple syrup, and bitters with ice', 'Strain into the absinthe-rinsed glass', 'Express lemon peel over the drink'], garnish: 'Lemon peel', glassware: 'Rocks glass', occasion: 'Classic cocktail hour' },
   { id: 'redemption-manhattan', name: 'Redemption Manhattan', brand: 'redemption', spirit: 'Redemption Rye', tagline: 'Rye-forward perfection', ingredients: ['2 oz Redemption Rye', '1 oz Sweet Vermouth', '2 dashes Angostura Bitters'], instructions: ['Stir all ingredients with ice until well chilled', 'Strain into a chilled coupe glass', 'Garnish with a brandied cherry'], garnish: 'Brandied cherry', glassware: 'Coupe', occasion: 'Evening sipping' },
@@ -121,6 +201,9 @@ function RecipeModal({ cocktail, onClose }: { cocktail: Cocktail; onClose: () =>
               ))}
             </ol>
           </div>
+          {cocktail.legalNote && (
+            <p className="mt-8 pt-6 border-t border-rule text-xs text-muted leading-relaxed">{cocktail.legalNote}</p>
+          )}
         </div>
       </div>
     </div>
