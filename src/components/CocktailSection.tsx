@@ -135,6 +135,23 @@ const cocktails: Cocktail[] = [
     occasion: 'Brunch, dessert, or late night',
   },
   {
+    id: 'gold-roast-highball',
+    name: 'The Gold Roast High Ball',
+    brand: 'bib',
+    spirit: 'Bib & Tucker Gold Roast Bourbon',
+    tagline: 'Bourbon, tonic, tall and easy',
+    category: 'classic',
+    ingredients: ['2 oz Bib & Tucker Gold Roast Bourbon', '4 oz Tonic'],
+    instructions: [
+      'Add all ingredients to a highball glass filled with ice',
+      'Stir gently to combine',
+      'Garnish with lemon peel',
+    ],
+    garnish: 'Lemon peel',
+    glassware: 'Highball glass',
+    occasion: 'Patio, afternoon, or any easy sip',
+  },
+  {
     id: 'campfire-old-fashioned',
     name: 'Campfire Old Fashioned',
     brand: 'bib',
