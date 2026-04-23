@@ -11,6 +11,10 @@ import {
   REDEMPTION_LOGO,
 } from '@/lib/brand-images';
 
+/** Identical bounds so Classic Six / Double Char / Gold Roast read at the same visual scale */
+const bibBottleFrameClass =
+  'flex h-[220px] sm:h-[236px] w-full max-w-[6.25rem] sm:max-w-[6.75rem] mx-auto items-end justify-center';
+
 export default function Brands() {
   return (
     <section className="bg-white py-20 lg:py-28" id="brands">
@@ -58,49 +62,49 @@ export default function Brands() {
             </div>
             {/* Expression row: shared baseline + cap height so columns align */}
             <div className="relative z-10 mt-10 grid grid-cols-3 gap-3 sm:gap-4 max-w-xl mx-auto w-full">
-              <div className="flex flex-col items-center text-center min-h-[220px] sm:min-h-[240px] justify-end">
-                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center [&_img]:max-w-full">
+              <div className="flex flex-col items-center text-center justify-end">
+                <div className={bibBottleFrameClass}>
                   <Image
                     src={BIB_TUCKER_CLASSIC_SIX_BOTTLE}
                     alt="Bib & Tucker Classic Six"
-                    width={140}
-                    height={300}
-                    className="block object-contain object-bottom w-auto h-auto max-h-[min(200px,28vw)] sm:max-h-[220px]"
+                    width={200}
+                    height={400}
+                    className="block h-full w-full max-h-full object-contain object-bottom"
                     unoptimized
                   />
                 </div>
-                <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-3 min-h-[2.25rem] flex items-end justify-center">
+                <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-3 min-h-[3.25rem] flex items-end justify-center text-center">
                   Classic Six
                 </p>
               </div>
-              <div className="flex flex-col items-center text-center min-h-[220px] sm:min-h-[240px] justify-end">
-                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center [&_img]:max-w-full">
+              <div className="flex flex-col items-center text-center justify-end">
+                <div className={bibBottleFrameClass}>
                   <Image
                     src={BIB_TUCKER_DOUBLE_CHAR_BOTTLE}
                     alt="Bib & Tucker Double Char bourbon bottle"
-                    width={140}
-                    height={300}
-                    className="block object-contain object-bottom w-auto h-auto max-h-[min(200px,28vw)] sm:max-h-[220px]"
+                    width={200}
+                    height={400}
+                    className="block h-full w-full max-h-full object-contain object-bottom"
                     unoptimized
                   />
                 </div>
-                <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-3 min-h-[2.25rem] flex items-end justify-center">
+                <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-3 min-h-[3.25rem] flex items-end justify-center text-center">
                   Double Char
                 </p>
               </div>
-              <div className="flex flex-col items-center text-center min-h-[220px] sm:min-h-[240px] justify-end">
-                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center [&_img]:max-w-full">
+              <div className="flex flex-col items-center text-center justify-end">
+                <div className={bibBottleFrameClass}>
                   <Image
                     src={BIB_TUCKER_GOLD_ROAST_BOTTLE}
                     alt="Bib & Tucker Gold Roast bourbon bottle"
-                    width={140}
-                    height={300}
-                    className="block object-contain object-bottom w-auto h-auto max-h-[min(200px,28vw)] sm:max-h-[220px]"
+                    width={200}
+                    height={400}
+                    className="block h-full w-full max-h-full object-contain object-bottom"
                     unoptimized
                   />
                 </div>
-                <div className="mt-3 min-h-[2.25rem] flex flex-col items-center justify-end gap-1 text-center">
-                  <p className="font-display text-lg text-copper leading-tight">Gold Roast</p>
+                <div className="mt-3 min-h-[3.25rem] flex flex-col items-center justify-end gap-0.5 text-center">
+                  <p className="text-[9px] tracking-[0.18em] uppercase text-copper">Gold Roast</p>
                   <p className="text-[10px] text-muted leading-snug max-w-[11rem]">
                     Small batch bourbon with a coffee-kissed finish
                   </p>
@@ -117,9 +121,6 @@ export default function Brands() {
               02
             </span>
             <div className="relative z-10 flex flex-col flex-1 min-h-0 items-stretch">
-              <p className="text-[9px] tracking-[0.28em] uppercase text-muted mb-4 max-w-md">
-                Born to Rise Above Ordinary Whiskey
-              </p>
               <div className="mb-6 self-start w-fit max-w-full shrink-0">
                 <Image
                   src={REDEMPTION_LOGO}
@@ -130,6 +131,9 @@ export default function Brands() {
                   unoptimized
                 />
               </div>
+              <h3 className="font-display text-2xl lg:text-3xl text-ink mb-4">
+                Born to Rise Above <span className="italic text-copper">Ordinary Whiskey</span>
+              </h3>
               <p className="text-muted leading-relaxed">
                 Redemption was created to unlock the potential of rye. Our ongoing journey to master its nuances has taught us to blend smooth whiskeys with extraordinary depth and character.
               </p>
