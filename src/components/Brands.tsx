@@ -12,15 +12,17 @@ import {
 } from '@/lib/brand-images';
 
 /**
- * Fixed slot + `fill` + object-contain. Classic Six source is much taller (2653px) than
- * Double Char / Gold Roast (1278px), so without a scale it dominates the row; ~0.59
- * matches their width-limited render height in this slot.
+ * Fixed slot + `fill` + object-contain.
+ * Classic Six art fills its canvas; Double Char / Gold Roast share 1000×1278 files where
+ * the opaque bottle only occupies ~48% of the width (heavy transparent padding). With
+ * plain contain, Classic Six reads ~2× taller. Scale Classic Six to match the *bottle*
+ * height the other two get (~48% of slot height vs full slot when height-limited).
  */
 const bibBottleSlotClass =
   'relative h-[284px] sm:h-[304px] w-[124px] sm:w-[142px] shrink-0 overflow-hidden';
 const bibBottleImageBaseClass = 'object-contain object-bottom';
-/** Bottom-origin scale keeps feet aligned in the shared slot */
-const bibBottleClassicSixImageClass = `${bibBottleImageBaseClass} scale-[0.59] origin-bottom`;
+/** ~146px bottle vs ~304px full-frame in this slot → 0.48 (see comment above) */
+const bibBottleClassicSixImageClass = `${bibBottleImageBaseClass} scale-[0.48] origin-bottom`;
 
 export default function Brands() {
   return (
