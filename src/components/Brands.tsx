@@ -11,9 +11,9 @@ import {
   REDEMPTION_LOGO,
 } from '@/lib/brand-images';
 
-/** Identical bounds so Classic Six / Double Char / Gold Roast read at the same visual scale */
-const bibBottleFrameClass =
-  'flex h-[220px] sm:h-[236px] w-full max-w-[6.25rem] sm:max-w-[6.75rem] mx-auto items-end justify-center';
+/** Fixed box + `fill` + object-contain so every SKU uses the same on-screen bounds */
+const bibBottleCellClass =
+  'relative mx-auto h-[236px] sm:h-[252px] w-[104px] sm:w-[118px] shrink-0';
 
 export default function Brands() {
   return (
@@ -51,7 +51,7 @@ export default function Brands() {
                 Our name, bottle, and small batch approach were inspired by the turn of the century in America. A time of unprecedented progress and adventure when all bourbon was small batch and the time was taken to break out the best and raise a glass. Inspired by that time, we create award-winning small batch bourbon following the Lincoln County Process. Bold and refined, Bib &amp; Tucker is the perfect companion on your life&apos;s grand adventure.
               </p>
               <div className="flex-1 min-h-4" aria-hidden />
-              <div className="flex flex-wrap items-center gap-4 pt-8">
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-8 text-center">
                 <Link href="#collection" className="text-walnut text-[9px] tracking-[0.22em] uppercase after:content-['→'] after:ml-1 hover:text-copper transition-colors">
                   Explore Bib & Tucker
                 </Link>
@@ -63,14 +63,14 @@ export default function Brands() {
             {/* Expression row: shared baseline + cap height so columns align */}
             <div className="relative z-10 mt-10 grid grid-cols-3 gap-3 sm:gap-4 max-w-xl mx-auto w-full">
               <div className="flex flex-col items-center text-center justify-end">
-                <div className={bibBottleFrameClass}>
+                <div className={bibBottleCellClass}>
                   <Image
                     src={BIB_TUCKER_CLASSIC_SIX_BOTTLE}
                     alt="Bib & Tucker Classic Six"
-                    width={200}
-                    height={400}
-                    className="block h-full w-full max-h-full object-contain object-bottom"
+                    fill
                     unoptimized
+                    className="object-contain object-bottom"
+                    sizes="118px"
                   />
                 </div>
                 <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-3 min-h-[3.25rem] flex items-end justify-center text-center">
@@ -78,14 +78,14 @@ export default function Brands() {
                 </p>
               </div>
               <div className="flex flex-col items-center text-center justify-end">
-                <div className={bibBottleFrameClass}>
+                <div className={bibBottleCellClass}>
                   <Image
                     src={BIB_TUCKER_DOUBLE_CHAR_BOTTLE}
                     alt="Bib & Tucker Double Char bourbon bottle"
-                    width={200}
-                    height={400}
-                    className="block h-full w-full max-h-full object-contain object-bottom"
+                    fill
                     unoptimized
+                    className="object-contain object-bottom"
+                    sizes="118px"
                   />
                 </div>
                 <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-3 min-h-[3.25rem] flex items-end justify-center text-center">
@@ -93,14 +93,14 @@ export default function Brands() {
                 </p>
               </div>
               <div className="flex flex-col items-center text-center justify-end">
-                <div className={bibBottleFrameClass}>
+                <div className={bibBottleCellClass}>
                   <Image
                     src={BIB_TUCKER_GOLD_ROAST_BOTTLE}
                     alt="Bib & Tucker Gold Roast bourbon bottle"
-                    width={200}
-                    height={400}
-                    className="block h-full w-full max-h-full object-contain object-bottom"
+                    fill
                     unoptimized
+                    className="object-contain object-bottom"
+                    sizes="118px"
                   />
                 </div>
                 <div className="mt-3 min-h-[3.25rem] flex flex-col items-center justify-end gap-0.5 text-center">
@@ -138,7 +138,7 @@ export default function Brands() {
                 Redemption was created to unlock the potential of rye. Our ongoing journey to master its nuances has taught us to blend smooth whiskeys with extraordinary depth and character.
               </p>
               <div className="flex-1 min-h-4" aria-hidden />
-              <div className="flex flex-wrap items-center gap-4 pt-8">
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-8 text-center">
                 <Link href="#collection" className="text-walnut text-[9px] tracking-[0.22em] uppercase after:content-['→'] after:ml-1 hover:text-copper transition-colors">
                   Explore Redemption
                 </Link>
