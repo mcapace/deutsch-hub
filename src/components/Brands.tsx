@@ -17,7 +17,7 @@ import {
  * matches their width-limited render height in this slot.
  */
 const bibBottleSlotClass =
-  'relative h-[236px] sm:h-[252px] w-[104px] sm:w-[118px] shrink-0 overflow-hidden';
+  'relative h-[284px] sm:h-[304px] w-[124px] sm:w-[142px] shrink-0 overflow-hidden';
 const bibBottleImageBaseClass = 'object-contain object-bottom';
 /** Bottom-origin scale keeps feet aligned in the shared slot */
 const bibBottleClassicSixImageClass = `${bibBottleImageBaseClass} scale-[0.59] origin-bottom`;
@@ -69,7 +69,7 @@ export default function Brands() {
             </div>
             {/* Two-row grid: bottles share one baseline; captions share column gutters */}
             <div className="relative z-10 mt-10 max-w-xl mx-auto w-full space-y-4">
-              <div className="grid grid-cols-3 gap-4 sm:gap-5 w-full items-end min-h-[248px] sm:min-h-[264px]">
+              <div className="grid grid-cols-3 gap-3 sm:gap-5 w-full items-end min-h-[296px] sm:min-h-[316px]">
                 <div className="flex justify-center">
                   <div className={bibBottleSlotClass}>
                     <Image
@@ -78,7 +78,7 @@ export default function Brands() {
                       fill
                       unoptimized
                       className={bibBottleClassicSixImageClass}
-                      sizes="118px"
+                      sizes="142px"
                     />
                   </div>
                 </div>
@@ -90,7 +90,7 @@ export default function Brands() {
                       fill
                       unoptimized
                       className={bibBottleImageBaseClass}
-                      sizes="118px"
+                      sizes="142px"
                     />
                   </div>
                 </div>
@@ -102,26 +102,21 @@ export default function Brands() {
                       fill
                       unoptimized
                       className={bibBottleImageBaseClass}
-                      sizes="118px"
+                      sizes="142px"
                     />
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-4 sm:gap-5 w-full">
-                <div className="flex flex-col items-center text-center px-0.5">
-                  <p className="text-[9px] tracking-[0.18em] uppercase text-muted">Classic Six</p>
-                  <div className="mt-1 min-h-[2.75rem] w-full max-w-[11rem]" aria-hidden="true" />
-                </div>
-                <div className="flex flex-col items-center text-center px-0.5">
-                  <p className="text-[9px] tracking-[0.18em] uppercase text-muted">Double Char</p>
-                  <div className="mt-1 min-h-[2.75rem] w-full max-w-[11rem]" aria-hidden="true" />
-                </div>
-                <div className="flex flex-col items-center text-center px-0.5">
-                  <p className="text-[9px] tracking-[0.18em] uppercase text-copper">Gold Roast</p>
-                  <p className="text-[10px] text-muted leading-snug max-w-[11rem] mt-1 min-h-[2.75rem]">
-                    Small batch bourbon with a coffee-kissed finish
-                  </p>
-                </div>
+              <div className="grid grid-cols-3 gap-3 sm:gap-5 w-full">
+                <p className="text-[9px] tracking-[0.18em] uppercase text-muted text-center px-0.5 pt-3">
+                  Classic Six
+                </p>
+                <p className="text-[9px] tracking-[0.18em] uppercase text-muted text-center px-0.5 pt-3">
+                  Double Char
+                </p>
+                <p className="text-[9px] tracking-[0.18em] uppercase text-copper text-center px-0.5 pt-3">
+                  Gold Roast
+                </p>
               </div>
             </div>
           </article>
