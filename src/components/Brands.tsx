@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { STORE_BIB_TUCKER, STORE_REDEMPTION } from '@/lib/store-links';
 import {
   BIB_TUCKER_CLASSIC_SIX_BOTTLE,
-  BIB_TUCKER_DOUBLE_CHAR_LOGO,
+  BIB_TUCKER_DOUBLE_CHAR_BOTTLE,
+  BIB_TUCKER_GOLD_ROAST_BOTTLE,
   REDEMPTION_CORE_TRIO_BOTTLES,
   REDEMPTION_LOGO,
 } from '@/lib/brand-images';
@@ -73,13 +74,13 @@ export default function Brands() {
                 </p>
               </div>
               <div className="flex flex-col items-center text-center min-h-[220px] sm:min-h-[240px] justify-end">
-                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center pb-1 [&_img]:max-w-full">
+                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center [&_img]:max-w-full">
                   <Image
-                    src={BIB_TUCKER_DOUBLE_CHAR_LOGO}
-                    alt="Bib & Tucker Double Char"
-                    width={160}
-                    height={160}
-                    className="block object-contain object-bottom w-auto h-auto max-h-[min(100px,20vw)] sm:max-h-[112px] max-w-[min(160px,40vw)]"
+                    src={BIB_TUCKER_DOUBLE_CHAR_BOTTLE}
+                    alt="Bib & Tucker Double Char bourbon bottle"
+                    width={140}
+                    height={300}
+                    className="block object-contain object-bottom w-auto h-auto max-h-[min(200px,28vw)] sm:max-h-[220px]"
                     unoptimized
                   />
                 </div>
@@ -88,14 +89,22 @@ export default function Brands() {
                 </p>
               </div>
               <div className="flex flex-col items-center text-center min-h-[220px] sm:min-h-[240px] justify-end">
-                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center px-1">
-                  <span className="font-display text-xl sm:text-2xl text-copper leading-tight text-center max-w-[9rem]">
-                    Gold Roast
-                  </span>
+                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center [&_img]:max-w-full">
+                  <Image
+                    src={BIB_TUCKER_GOLD_ROAST_BOTTLE}
+                    alt="Bib & Tucker Gold Roast bourbon bottle"
+                    width={140}
+                    height={300}
+                    className="block object-contain object-bottom w-auto h-auto max-h-[min(200px,28vw)] sm:max-h-[220px]"
+                    unoptimized
+                  />
                 </div>
-                <p className="text-[10px] text-muted mt-3 leading-snug max-w-[10rem] mx-auto min-h-[2.25rem] flex items-end justify-center">
-                  Small batch bourbon with a coffee-kissed finish
-                </p>
+                <div className="mt-3 min-h-[2.25rem] flex flex-col items-center justify-end gap-1 text-center">
+                  <p className="font-display text-lg text-copper leading-tight">Gold Roast</p>
+                  <p className="text-[10px] text-muted leading-snug max-w-[11rem]">
+                    Small batch bourbon with a coffee-kissed finish
+                  </p>
+                </div>
               </div>
             </div>
           </article>
@@ -117,7 +126,7 @@ export default function Brands() {
                   alt="Redemption"
                   width={220}
                   height={110}
-                  className="block h-14 sm:h-16 w-auto max-w-[min(220px,85vw)] object-contain object-center"
+                  className="redemption-logo-on-light block h-14 sm:h-16 w-auto max-w-[min(220px,85vw)] object-contain object-center"
                   unoptimized
                 />
               </div>

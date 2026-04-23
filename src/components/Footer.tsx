@@ -56,13 +56,13 @@ export default function Footer() {
                 />
               </Link>
               <span className="w-px h-8 bg-white/20 flex-shrink-0" aria-hidden />
-              <Link href="#brands" className="opacity-90 hover:opacity-100 transition-opacity [&_img]:[filter:brightness(0)_invert(1)]">
+              <Link href="#brands" className="opacity-90 hover:opacity-100 transition-opacity">
                 <Image
                   src={REDEMPTION_LOGO}
                   alt="Redemption"
                   width={160}
                   height={64}
-                  className="h-10 w-auto object-contain"
+                  className="redemption-logo-footer h-10 w-auto object-contain"
                   unoptimized
                 />
               </Link>

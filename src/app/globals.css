@@ -146,6 +146,16 @@ h1, h2, h3, h4, h5, h6,
 .text-ink { color: var(--ink); }
 .border-rule { border-color: var(--rule); }
 
+/* Redemption eagle mark: light artwork — darken on cream/white for readability */
+.redemption-logo-on-light {
+  filter: brightness(0.62) contrast(1.25) saturate(0.88);
+}
+
+/* Footer: monochrome invert — extra contrast so fine lines read on ink */
+.redemption-logo-footer {
+  filter: brightness(0) invert(1) contrast(1.2);
+}
+
 /* Dark CTA boxes: force light text so global h1–h6 (color: ink) don’t override */
 .bg-ink,
 .bg-ink h1, .bg-ink h2, .bg-ink h3, .bg-ink h4, .bg-ink h5, .bg-ink h6,

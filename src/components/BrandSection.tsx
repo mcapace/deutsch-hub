@@ -76,7 +76,7 @@ export default function BrandSection({
               alt={brandName}
               width={280}
               height={100}
-              className="h-20 md:h-28 w-auto object-contain"
+              className={`h-20 md:h-28 w-auto object-contain ${theme === 'redemption' ? 'redemption-logo-on-light' : ''}`}
               unoptimized={true}
             />
           </div>
