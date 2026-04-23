@@ -11,9 +11,16 @@ import {
   REDEMPTION_LOGO,
 } from '@/lib/brand-images';
 
-/** Fixed box + `fill` + object-contain so every SKU uses the same on-screen bounds */
-const bibBottleCellClass =
-  'relative mx-auto h-[236px] sm:h-[252px] w-[104px] sm:w-[118px] shrink-0';
+/**
+ * Fixed slot + `fill` + object-contain. Classic Six source is much taller (2653px) than
+ * Double Char / Gold Roast (1278px), so without a scale it dominates the row; ~0.59
+ * matches their width-limited render height in this slot.
+ */
+const bibBottleSlotClass =
+  'relative h-[236px] sm:h-[252px] w-[104px] sm:w-[118px] shrink-0 overflow-hidden';
+const bibBottleImageBaseClass = 'object-contain object-bottom';
+/** Bottom-origin scale keeps feet aligned in the shared slot */
+const bibBottleClassicSixImageClass = `${bibBottleImageBaseClass} scale-[0.59] origin-bottom`;
 
 export default function Brands() {
   return (
@@ -60,52 +67,58 @@ export default function Brands() {
                 </a>
               </div>
             </div>
-            {/* Expression row: shared baseline + cap height so columns align */}
-            <div className="relative z-10 mt-10 grid grid-cols-3 gap-3 sm:gap-4 max-w-xl mx-auto w-full">
-              <div className="flex flex-col items-center text-center justify-end">
-                <div className={bibBottleCellClass}>
-                  <Image
-                    src={BIB_TUCKER_CLASSIC_SIX_BOTTLE}
-                    alt="Bib & Tucker Classic Six"
-                    fill
-                    unoptimized
-                    className="object-contain object-bottom"
-                    sizes="118px"
-                  />
+            {/* Two-row grid: bottles share one baseline; captions share column gutters */}
+            <div className="relative z-10 mt-10 max-w-xl mx-auto w-full space-y-4">
+              <div className="grid grid-cols-3 gap-4 sm:gap-5 w-full items-end min-h-[248px] sm:min-h-[264px]">
+                <div className="flex justify-center">
+                  <div className={bibBottleSlotClass}>
+                    <Image
+                      src={BIB_TUCKER_CLASSIC_SIX_BOTTLE}
+                      alt="Bib & Tucker Classic Six"
+                      fill
+                      unoptimized
+                      className={bibBottleClassicSixImageClass}
+                      sizes="118px"
+                    />
+                  </div>
                 </div>
-                <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-3 min-h-[3.25rem] flex items-end justify-center text-center">
-                  Classic Six
-                </p>
+                <div className="flex justify-center">
+                  <div className={bibBottleSlotClass}>
+                    <Image
+                      src={BIB_TUCKER_DOUBLE_CHAR_BOTTLE}
+                      alt="Bib & Tucker Double Char bourbon bottle"
+                      fill
+                      unoptimized
+                      className={bibBottleImageBaseClass}
+                      sizes="118px"
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <div className={bibBottleSlotClass}>
+                    <Image
+                      src={BIB_TUCKER_GOLD_ROAST_BOTTLE}
+                      alt="Bib & Tucker Gold Roast bourbon bottle"
+                      fill
+                      unoptimized
+                      className={bibBottleImageBaseClass}
+                      sizes="118px"
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col items-center text-center justify-end">
-                <div className={bibBottleCellClass}>
-                  <Image
-                    src={BIB_TUCKER_DOUBLE_CHAR_BOTTLE}
-                    alt="Bib & Tucker Double Char bourbon bottle"
-                    fill
-                    unoptimized
-                    className="object-contain object-bottom"
-                    sizes="118px"
-                  />
+              <div className="grid grid-cols-3 gap-4 sm:gap-5 w-full">
+                <div className="flex flex-col items-center text-center px-0.5">
+                  <p className="text-[9px] tracking-[0.18em] uppercase text-muted">Classic Six</p>
+                  <div className="mt-1 min-h-[2.75rem] w-full max-w-[11rem]" aria-hidden="true" />
                 </div>
-                <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-3 min-h-[3.25rem] flex items-end justify-center text-center">
-                  Double Char
-                </p>
-              </div>
-              <div className="flex flex-col items-center text-center justify-end">
-                <div className={bibBottleCellClass}>
-                  <Image
-                    src={BIB_TUCKER_GOLD_ROAST_BOTTLE}
-                    alt="Bib & Tucker Gold Roast bourbon bottle"
-                    fill
-                    unoptimized
-                    className="object-contain object-bottom"
-                    sizes="118px"
-                  />
+                <div className="flex flex-col items-center text-center px-0.5">
+                  <p className="text-[9px] tracking-[0.18em] uppercase text-muted">Double Char</p>
+                  <div className="mt-1 min-h-[2.75rem] w-full max-w-[11rem]" aria-hidden="true" />
                 </div>
-                <div className="mt-3 min-h-[3.25rem] flex flex-col items-center justify-end gap-0.5 text-center">
+                <div className="flex flex-col items-center text-center px-0.5">
                   <p className="text-[9px] tracking-[0.18em] uppercase text-copper">Gold Roast</p>
-                  <p className="text-[10px] text-muted leading-snug max-w-[11rem]">
+                  <p className="text-[10px] text-muted leading-snug max-w-[11rem] mt-1 min-h-[2.75rem]">
                     Small batch bourbon with a coffee-kissed finish
                   </p>
                 </div>
