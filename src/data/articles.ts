@@ -9,6 +9,66 @@ export interface Article {
 
 export const storiesArticles: Article[] = [
   {
+    id: 'redemption-turns-up-the-rye',
+    title: 'Redemption Turns Up the Rye',
+    excerpt: 'No fuss cocktails that rise above the ordinary.',
+    brand: 'redemption',
+    readTime: '14 min read',
+    content: `Sponsored content for M. Shanken Communication Inc.
+
+To be honest, most home mixologists will know this feeling. You come across a tempting cocktail recipe, only to realize it stretches to longer than 7 or 8 ingredients. At least one of the items looks obscure or is not readily to hand, necessitating a shopping trip to the grocery store or a lengthy prep process to procure. By the time you track everything down, the craving for that particular cocktail has faded. Recipes that reach that level of complexity are usually best left to the professionals behind the bar, where something special requiring that level of skill and proficiency can be crafted for you. When it comes to making cocktails at home, the golden rule is this: keep it simple. Start with a quality whiskey like Redemption as your base. This is a smart choice because the core range offers three distinctive rye mash bills, enabling the cocktail lover to adjust the rye levels to taste in the finished drink. With a solid foundation in place, a wide range of delicious cocktails can be created in just four or five steps.
+
+Once on the brink of disappearance, historic whiskey styles like rye and Irish single pot still have roared back in the 21st century. Redemption, founded in 2010, was part of the early wave of revivalists, determined to restore rye's heritage and build momentum in the category until the day rye whiskey can re-establish itself as the most consumed style in the U.S. whiskey. Part of Deutsch Family Wine & Spirits since 2015, Redemption is produced in partnership with MGP in Indiana—alongside a number of other trusted distilling partners—and is guided by master blender Alan Kennedy, who oversees its rye-forward house style. Kennedy developed his whiskey skills working alongside established distillers and blenders after an early foundation in culinary arts and a role as a certified sommelier, giving him a wider background in the art of flavor integration than many other blenders. Relocating from Nashville, Tennessee to Lexington, Kentucky, he gained technical expertise in all areas of whiskey production and maturation. Kennedy's training enabled him to explore the sensory and creative aspects of blending, focusing on balance, flavor development, and aromatic expression in order to channel that knowledge into the recipes for these rye-forward whiskeys while keeping a strong emphasis on structure, intensity, and consistency.
+
+Rye is a bold and flavorsome grain, prized for its ability to hold its own in mixed drinks. The grain is included in the mashbill of many bourbons and rye whiskeys, though only those made from 51% rye or higher can be designated as rye whiskey. Think about the percentage of rye in a whiskey's mashbill like a flavor dial that allows you to control spice, dryness, and intensity as easily as adjusting the brightness of the light or the volume on your headphones. The three Redemption whiskey mashbills form an intuitive spectrum that enables you to heighten or soften the rye intensity as you please. Redemption Straight Bourbon includes 21% rye, the High-Rye Bourbon uses 36% rye, while the Straight Rye is made from 95% rye, forming a rye-forward portfolio for your bar cart that makes a versatile partner for building characterful cocktails.
+
+Let's begin by looking at three riffs on the Old Fashioned that match the rye content of the Redemption Rye and High-Rye Bourbon with complimentary flavors, bringing out the personality of each expression in the cocktail. Each drink is a breeze to make; simply stir all ingredients in a mixing glass filled with ice, strain over fresh ice into a double Old Fashioned glass, and garnish with expressed orange peel. Discover a new favorite, and these can all be easily batched ahead of time and stored in the freezer door.
+
+**Redemption Black Walnut Old Fashioned**
+
+A classic Old Fashioned with a little extra depth. Black walnut bitters bring out subtle sweetness and add a soft, nutty layer to Redemption Rye. Ingredients: 2 oz Redemption Rye, 0.5 oz demerara syrup, 2 dashes black walnut bitters. Garnish with orange peel.
+
+**Redemption High Rye Maple Syrup Old Fashioned**
+
+An easy way to add warmth to a classic. Maple syrup and Redemption High Rye Bourbon come together for a balanced Old Fashioned with depth. Ingredients: 2 oz Redemption High Rye Bourbon, 0.5 oz maple syrup, 2 dashes Angostura bitters. Garnish with orange peel.
+
+**Redemption Rye Black Cherry Old Fashioned**
+
+The spiciness of Redemption Rye pairs naturally with black cherry flavors, adding contrast while keeping the classic structure intact. Ingredients: 2 oz Redemption Rye, 0.5 oz black cherry syrup, 2 dashes Angostura bitters. Garnish with orange peel.
+
+When you are ready to step things up without sacrificing balance or drinkability, these next two cocktails, built around Redemption Bourbon, offer a natural next move. It's a straight bourbon made in Indiana from a mashbill of 75% corn, 21% rye, and 4% malted barley. As a neat sipper, it has generous aromas of honey, vanilla, and toasted oak, with sweet flavors of corn, vanilla, and caramel spreading across the palate. Cinnamon, dried fruit, and oak give it a supportive lift, and it rounds off with hints of vanilla, corn sweetness, and soft oak on the finish. Non-chill filtered and bottled at 46%, the rye content is higher than many standard bourbons, enabling it to punch above its weight in drinks calling for this level of dilution.
+
+**Redemption Bourbon Peach Palmer Highball**
+
+Bright, refreshing, and built for easy sipping. Peach tea and citrus pair naturally with Redemption Bourbon in this classic-inspired highball. Ingredients: 2 oz Redemption Bourbon, 2 oz peach tea, 2 oz sparkling lemonade, 0.5 oz simple syrup. Directions: Add all ingredients into a Collins glass over ice. Gently stir to combine and garnish with a lemon twist.
+
+**Redemption Bourbon Paper Plane**
+
+Bright, balanced, and endlessly drinkable. Redemption Bourbon shines in this cocktail, which is regarded as a modern classic. Ingredients: 1.5 oz Redemption Bourbon, 0.75 oz Amaro Montenegro, 0.75 oz Aperol, 0.75 oz lemon juice. Directions: Combine all ingredients in a shaker with ice and shake vigorously for 10–15 seconds. Double strain into a coupe and garnish with a lemon twist.
+
+Redemption High Rye Bourbon is a more robust whiskey than many straight bourbons, with a hefty 36% rye in the mashbill, along with 60% corn and 4% malted barley. The rye is expressed through enticing notes of spicy woodiness and baking spices on the palate, complementing the vanilla, sweet corn, red berry, and gentle oak flavors. Coupled with the citrus and herbal notes of the amaro, the High Rye Bourbon delivers a more layered take on a classic bourbon & cola, while composing a Velvet Sour will impress your guests with its silky textures.
+
+**Redemption High Rye Cola Highball**
+
+Redemption High Rye Bourbon meets amaro and tonic for a crisp, refreshing highball. Ingredients: 1.5 oz Redemption High Rye Bourbon, 0.75 oz Amaro Averna, 4 oz tonic water. Directions: Add all ingredients into a Collins glass over ice. Gently stir to combine and garnish with a lemon twist.
+
+**Redemption High Rye Velvet Sour**
+
+Silky and layered, with plenty of balance. Citrus and bitters highlight the depth and spice of Redemption High Rye Bourbon in this must-try Velvet Sour. Ingredients: 2 oz Redemption High Rye Bourbon, 0.75 oz lemon juice, 0.75 oz orange juice, 0.5 oz grenadine, 2 dashes vanilla bitters. Directions: Combine all ingredients in a shaker and shake 10–15 seconds. Double strain into a coupe glass and garnish with a lemon twist and a cherry.
+
+The Redemption Straight Rye should be experienced neat to appreciate the distinctive rye spiciness it offers before you experiment with it in cocktails. Made from a mashbill of 95% rye and 5% malted barley, this whiskey is matured in new charred oak casks and bottled without chill filtration at 46%. Those spice notes leap from the glass, showcasing allspice, toasted oak, and caramel notes on the nose. The rye grain flavors are abundant with notes of dark rye spices and black pepper on the palate, with bright citrus notes and hints of mint on the finish. Try these two fantastic Redemption Rye recipes to finish with; the first where the ginger and the rye pair together perfectly, and the second, an elegant sour made with maple syrup which is sure to turn heads.
+
+**Redemption Rye Gingersnap Highball**
+
+Crisp. Dry. Effortless. Rye spice meets ginger and soda in this refreshing take on the classic highball. Ingredients: 1.5 oz Redemption Rye, 0.5 oz ginger liqueur, 4 oz club soda. Directions: Build over ice, stir gently, and finish with a lemon twist.
+
+**Redemption Rye Maple Whiskey Sour**
+
+Maple adds roundness, while Redemption Rye keeps the finish bright and focused. Ingredients: 2 oz Redemption Rye, 0.75 oz lemon juice, 0.75 oz maple syrup. Optional: egg white or aquafaba, Angostura bitters. Directions: Dry shake all ingredients for 10–15 seconds. Add ice and shake again for 10–15 seconds. Double strain into a coupe glass and garnish with Angostura bitters.
+
+Redemption's range extends well beyond these three whiskeys, with a proven track record of age-stated releases and limited editions. For the home cocktail enthusiast, however, this core trio opens the door to a world of flavorful, rye-forward cocktails that are both easy and rewarding to make at home.`,
+  },
+  {
     id: 'coffee-bourbon',
     title: 'Coffee, Bourbon, and the Rituals That Connect Us',
     excerpt: 'At the turn of the twentieth century, two rituals bookended the American day. Fresh-roasted coffee warmed early mornings—fuel for the work ahead. Smooth bourbon brought people together at day\'s end.',
