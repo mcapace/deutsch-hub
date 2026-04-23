@@ -3,6 +3,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { STORE_BIB_TUCKER, STORE_REDEMPTION } from '@/lib/store-links';
+import {
+  BIB_TUCKER_CLASSIC_SIX_BOTTLE,
+  BIB_TUCKER_DOUBLE_CHAR_LOGO,
+  REDEMPTION_CORE_TRIO_BOTTLES,
+} from '@/lib/brand-images';
 
 export default function Brands() {
   return (
@@ -37,7 +42,7 @@ export default function Brands() {
             <div className="mt-10 grid grid-cols-3 gap-4 items-end max-w-lg mx-auto">
               <div className="flex flex-col items-center text-center">
                 <Image
-                  src="/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png"
+                  src={BIB_TUCKER_CLASSIC_SIX_BOTTLE}
                   alt="Bib & Tucker Classic Six"
                   width={100}
                   height={220}
@@ -48,7 +53,7 @@ export default function Brands() {
               </div>
               <div className="flex flex-col items-center text-center">
                 <Image
-                  src="/BAT_FY24_DoubleChar_Logo.png"
+                  src={BIB_TUCKER_DOUBLE_CHAR_LOGO}
                   alt="Bib & Tucker Double Char"
                   width={120}
                   height={120}
@@ -85,7 +90,7 @@ export default function Brands() {
             </div>
             <div className="mt-10 flex justify-center">
               <Image
-                src="/Redemption Bottle Images/dfws_rdpn_trio-set_750ml_BLK_14OCT25.png"
+                src={REDEMPTION_CORE_TRIO_BOTTLES}
                 alt="Redemption Rye, Bourbon, and High Rye Bourbon"
                 width={360}
                 height={200}

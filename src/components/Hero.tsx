@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { BIB_TUCKER_CLASSIC_SIX_BOTTLE, REDEMPTION_CORE_TRIO_BOTTLES } from '@/lib/brand-images';
 
 export default function Hero() {
   return (
@@ -38,24 +39,24 @@ export default function Hero() {
 
       <div className="bg-warm relative flex items-end justify-center px-4 sm:px-8 py-12 sm:py-16 lg:py-24 order-1 lg:order-2 min-h-[50vh] lg:min-h-0 overflow-hidden" data-reveal>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_60%,rgba(196,135,62,0.08),transparent)] pointer-events-none" />
-        <div className="relative flex items-end justify-center gap-2 sm:gap-4 lg:gap-8 w-full max-w-full">
-          <div className="w-72 sm:w-80 lg:w-[24rem] xl:w-[28rem] 2xl:w-[30rem] h-96 sm:h-[28rem] lg:h-[32rem] xl:h-[36rem] 2xl:h-[40rem] flex items-end drop-shadow-2xl" style={{ transform: 'rotate(-2.5deg)' }}>
+        <div className="relative grid grid-cols-2 items-end justify-items-center gap-3 sm:gap-5 lg:gap-8 w-full max-w-3xl mx-auto px-3 sm:px-6">
+          <div className="w-full min-w-0 flex items-end justify-center h-[min(40vh,420px)] sm:h-[min(44vh,450px)] lg:h-[min(48vh,480px)] drop-shadow-2xl">
             <Image
-              src="/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png"
+              src={BIB_TUCKER_CLASSIC_SIX_BOTTLE}
               alt="Bib & Tucker Classic Six"
-              width={224}
-              height={508}
-              className="w-full h-full object-contain object-bottom"
+              width={400}
+              height={900}
+              className="h-full w-auto max-h-full max-w-[min(220px,78%)] object-contain object-bottom [transform:rotate(-1.5deg)]"
               unoptimized
             />
           </div>
-          <div className="w-72 sm:w-80 lg:w-[24rem] xl:w-[28rem] 2xl:w-[30rem] h-96 sm:h-[28rem] lg:h-[32rem] xl:h-[36rem] 2xl:h-[40rem] flex items-end drop-shadow-2xl" style={{ transform: 'rotate(2deg)' }}>
+          <div className="w-full min-w-0 flex items-end justify-center h-[min(40vh,420px)] sm:h-[min(44vh,450px)] lg:h-[min(48vh,480px)] drop-shadow-2xl">
             <Image
-              src="/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png"
-              alt="Redemption Bourbon"
-              width={224}
-              height={508}
-              className="w-full h-full object-contain object-bottom"
+              src={REDEMPTION_CORE_TRIO_BOTTLES}
+              alt="Redemption Rye, Bourbon, and High Rye Bourbon"
+              width={900}
+              height={500}
+              className="h-full w-auto max-h-full max-w-full object-contain object-bottom [transform:rotate(1.5deg)]"
               unoptimized
             />
           </div>
@@ -63,11 +64,13 @@ export default function Hero() {
         <div className="absolute bottom-0 left-0 right-0 grid grid-cols-2 border-t border-white/20 py-3 sm:py-4 px-4 sm:px-6 bg-ink">
           <div className="text-center">
             <p className="font-display text-white text-sm">Bib & Tucker</p>
-            <p className="text-white/85 text-[9px] tracking-[0.2em] uppercase">Tennessee Bourbon</p>
+            <p className="text-white/85 text-[8px] sm:text-[9px] tracking-[0.18em] sm:tracking-[0.2em] uppercase leading-snug px-1">
+              Tennessee Small Batch Bourbon Whiskey
+            </p>
           </div>
           <div className="text-center border-l border-white/20">
             <p className="font-display text-white text-sm">Redemption</p>
-            <p className="text-white/85 text-[9px] tracking-[0.2em] uppercase">American Rye</p>
+            <p className="text-white/85 text-[9px] tracking-[0.2em] uppercase">Rye-Built Whiskeys</p>
           </div>
         </div>
       </div>

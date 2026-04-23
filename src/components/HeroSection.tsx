@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { STORE_BIB_TUCKER, STORE_REDEMPTION } from '@/lib/store-links';
+import { BIB_TUCKER_CLASSIC_SIX_BOTTLE, REDEMPTION_CORE_TRIO_BOTTLES } from '@/lib/brand-images';
 
 const styles: Record<string, React.CSSProperties> = {
   heroWrap: {
@@ -58,7 +59,7 @@ const styles: Record<string, React.CSSProperties> = {
     bottom: '130px',
     left: '50%',
     transform: 'translateX(-50%)',
-    width: '300px',
+    width: 'min(420px, 72vw)',
     height: '0.5px',
     background: 'linear-gradient(90deg, transparent, rgba(200,155,70,0.6) 20%, rgba(220,175,90,0.9) 50%, rgba(200,155,70,0.6) 80%, transparent)',
     zIndex: 4,
@@ -147,39 +148,71 @@ const styles: Record<string, React.CSSProperties> = {
     left: '50%',
     transform: 'translateX(-50%)',
     width: '100%',
-    maxWidth: '640px',
-    height: '460px',
+    maxWidth: 'min(880px, 100%)',
+    height: 'min(480px, 52vh)',
     zIndex: 5,
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'center',
     perspective: '1200px',
     perspectiveOrigin: '50% 100%',
+    paddingLeft: 'clamp(0.75rem, 4vw, 1.75rem)',
+    paddingRight: 'clamp(0.75rem, 4vw, 1.75rem)',
+    paddingBottom: '2px',
+    boxSizing: 'border-box',
   },
+  /** Two equal columns: each brand centered in its half (balanced layout with mixed assets). */
+  bottlesGrid: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    alignItems: 'end',
+    justifyItems: 'center',
+    columnGap: 'clamp(0.5rem, 3vw, 1.75rem)',
+    width: '100%',
+    maxWidth: '800px',
+    margin: '0 auto',
+    minHeight: 0,
+  },
+  bottleSlot: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    width: '100%',
+    minWidth: 0,
+    height: 'clamp(270px, 42vh, 420px)',
+  },
+  /** Single bottle (portrait) — centered in left column */
   bottleLeft: {
-    width: '200px',
-    height: '400px',
+    height: '100%',
+    width: 'auto',
+    maxHeight: '100%',
+    maxWidth: 'min(220px, 78%)',
     objectFit: 'contain',
     objectPosition: 'bottom center',
     filter: 'brightness(0.85) contrast(1.05)',
+    display: 'block',
   },
+  /** Trio — centered in right column, uses column width */
   bottleRight: {
-    width: '200px',
-    height: '400px',
+    height: '100%',
+    width: 'auto',
+    maxHeight: '100%',
+    maxWidth: 'min(420px, 100%)',
     objectFit: 'contain',
     objectPosition: 'bottom center',
     filter: 'brightness(0.80) contrast(1.08)',
+    display: 'block',
   },
   bottleShadow: {
     position: 'absolute',
-    bottom: '30px',
+    bottom: '28px',
     left: '50%',
     transform: 'translateX(-50%)',
-    width: '280px',
-    height: '30px',
-    background: 'radial-gradient(ellipse, rgba(0,0,0,0.55) 0%, transparent 70%)',
+    width: 'min(560px, 88vw)',
+    height: '34px',
+    background: 'radial-gradient(ellipse, rgba(0,0,0,0.5) 0%, transparent 72%)',
     zIndex: 4,
-    filter: 'blur(8px)',
+    filter: 'blur(10px)',
     pointerEvents: 'none',
   },
   brandBar: {
@@ -188,15 +221,25 @@ const styles: Record<string, React.CSSProperties> = {
     left: '50%',
     transform: 'translateX(-50%)',
     zIndex: 10,
-    display: 'flex',
-    gap: '24px',
+    display: 'grid',
+    gridTemplateColumns: '1fr auto 1fr',
     alignItems: 'center',
+    columnGap: 'clamp(14px, 3vw, 26px)',
+    width: 'min(720px, 94vw)',
+    boxSizing: 'border-box',
+  },
+  brandBarSide: {
+    minWidth: 0,
+    display: 'flex',
+    justifyContent: 'center',
   },
   brandTag: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     gap: '3px',
+    textAlign: 'center',
+    maxWidth: '280px',
   },
   brandTagName: {
     fontSize: '9px',
@@ -401,50 +444,65 @@ export default function HeroSection() {
           style={{
             perspective: '1200px',
             transformStyle: 'preserve-3d',
-            display: 'flex',
-            alignItems: 'flex-end',
-            justifyContent: 'center',
-            gap: '2rem',
+            width: '100%',
           }}
-          animate={{ y: [0, -10, 0] }}
+          animate={{ y: [0, -8, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <motion.div
-            style={{ transformStyle: 'preserve-3d', transformOrigin: 'bottom center', rotateY, rotateX }}
-          >
-            <img
-              src="/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png"
-              alt="Bib & Tucker Classic Six"
-              className="hero-bottle-left-el"
-              style={styles.bottleLeft}
-            />
-          </motion.div>
-          <motion.div
-            style={{ transformStyle: 'preserve-3d', transformOrigin: 'bottom center', rotateY, rotateX }}
-          >
-            <img
-              src="/Redemption Bottle Images/dfws_rdpn_trio-set_750ml_BLK_14OCT25.png"
-              alt="Redemption Rye, Bourbon, and High Rye Bourbon"
-              className="hero-bottle-right-el"
-              style={{ ...styles.bottleRight, width: 'min(260px, 42vw)', maxHeight: '400px' }}
-            />
-          </motion.div>
+          <div style={styles.bottlesGrid}>
+            <motion.div
+              style={{
+                ...styles.bottleSlot,
+                transformStyle: 'preserve-3d',
+                transformOrigin: 'bottom center',
+                rotateY,
+                rotateX,
+              }}
+            >
+              <img
+                src={BIB_TUCKER_CLASSIC_SIX_BOTTLE}
+                alt="Bib & Tucker Classic Six"
+                className="hero-bottle-left-el"
+                style={styles.bottleLeft}
+              />
+            </motion.div>
+            <motion.div
+              style={{
+                ...styles.bottleSlot,
+                transformStyle: 'preserve-3d',
+                transformOrigin: 'bottom center',
+                rotateY,
+                rotateX,
+              }}
+            >
+              <img
+                src={REDEMPTION_CORE_TRIO_BOTTLES}
+                alt="Redemption Rye, Bourbon, and High Rye Bourbon"
+                className="hero-bottle-right-el"
+                style={styles.bottleRight}
+              />
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 
       <div style={styles.bottleShadow} />
 
       <div style={styles.brandBar} className="hero-brand-bar-el">
-        <div style={styles.brandTag}>
-          <span style={styles.brandTagName}>Bib &amp; Tucker</span>
-          <span style={{ ...styles.brandTagSub, fontSize: '7px', letterSpacing: '0.12em' }}>
-            Tennessee Small Batch Bourbon Whiskey
-          </span>
+        <div style={styles.brandBarSide}>
+          <div style={styles.brandTag}>
+            <span style={styles.brandTagName}>Bib &amp; Tucker</span>
+            <span style={{ ...styles.brandTagSub, fontSize: '7px', letterSpacing: '0.12em' }}>
+              Tennessee Small Batch Bourbon Whiskey
+            </span>
+          </div>
         </div>
-        <div style={styles.brandDot} />
-        <div style={styles.brandTag}>
-          <span style={styles.brandTagName}>Redemption</span>
-          <span style={styles.brandTagSub}>Rye-Built Whiskeys</span>
+        <div style={styles.brandDot} aria-hidden />
+        <div style={styles.brandBarSide}>
+          <div style={styles.brandTag}>
+            <span style={styles.brandTagName}>Redemption</span>
+            <span style={styles.brandTagSub}>Rye-Built Whiskeys</span>
+          </div>
         </div>
       </div>
 
@@ -503,12 +561,12 @@ export default function HeroSection() {
           100% { opacity: 1; }
         }
         @keyframes heroBottleRevealLeft {
-          0% { opacity: 0; transform: translateX(30px) rotate(-4deg) translateY(40px); }
-          100% { opacity: 1; transform: translateX(30px) rotate(-4deg) translateY(0); }
+          0% { opacity: 0; transform: translateY(32px) rotate(-1.5deg); }
+          100% { opacity: 1; transform: translateY(0) rotate(-1.5deg); }
         }
         @keyframes heroBottleRevealRight {
-          0% { opacity: 0; transform: translateX(-30px) rotate(4deg) translateY(50px); }
-          100% { opacity: 1; transform: translateX(-30px) rotate(4deg) translateY(0); }
+          0% { opacity: 0; transform: translateY(32px) rotate(1.5deg); }
+          100% { opacity: 1; transform: translateY(0) rotate(1.5deg); }
         }
         @keyframes heroTicker {
           0% { transform: translateX(0); }
