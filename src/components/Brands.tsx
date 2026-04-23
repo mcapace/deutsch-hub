@@ -19,18 +19,24 @@ export default function Brands() {
           <p className="text-muted max-w-xl">Two houses. One standard: exceptional American whiskey.</p>
         </header>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-          <article className="border border-rule p-8 lg:p-10 hover:bg-warm transition-colors relative" data-reveal>
-            <span className="font-display text-mist text-6xl lg:text-7xl absolute top-6 right-6 opacity-40">01</span>
-            <div className="relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 lg:items-stretch">
+          <article
+            className="border border-rule p-8 lg:p-10 hover:bg-warm transition-colors relative flex flex-col h-full min-h-0"
+            data-reveal
+          >
+            <span className="font-display text-mist text-6xl lg:text-7xl absolute top-6 right-6 opacity-40 pointer-events-none">
+              01
+            </span>
+            <div className="relative z-10 flex flex-col flex-1 min-h-0">
               <Image src="/BAT_3D_Copper_Logo.png" alt="Bib & Tucker" width={200} height={80} className="h-16 w-auto mb-6" unoptimized />
               <h3 className="font-display text-2xl lg:text-3xl text-ink mb-4">
                 Where Bold <span className="italic text-copper">&amp; Refined</span> Come Together
               </h3>
-              <p className="text-muted leading-relaxed mb-6">
+              <p className="text-muted leading-relaxed">
                 Our name, bottle, and small batch approach were inspired by the turn of the century in America. A time of unprecedented progress and adventure when all bourbon was small batch and the time was taken to break out the best and raise a glass. Inspired by that time, we create award-winning small batch bourbon following the Lincoln County Process. Bold and refined, Bib &amp; Tucker is the perfect companion on your life&apos;s grand adventure.
               </p>
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex-1 min-h-4" aria-hidden />
+              <div className="flex flex-wrap items-center gap-4 pt-8">
                 <Link href="#collection" className="text-walnut text-[9px] tracking-[0.22em] uppercase after:content-['→'] after:ml-1 hover:text-copper transition-colors">
                   Explore Bib & Tucker
                 </Link>
@@ -39,47 +45,68 @@ export default function Brands() {
                 </a>
               </div>
             </div>
-            <div className="mt-10 grid grid-cols-3 gap-4 items-end max-w-lg mx-auto">
-              <div className="flex flex-col items-center text-center">
-                <Image
-                  src={BIB_TUCKER_CLASSIC_SIX_BOTTLE}
-                  alt="Bib & Tucker Classic Six"
-                  width={100}
-                  height={220}
-                  className="object-contain object-bottom h-36 w-auto"
-                  unoptimized
-                />
-                <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-2">Classic Six</p>
+            {/* Expression row: shared baseline + cap height so columns align */}
+            <div className="relative z-10 mt-10 grid grid-cols-3 gap-3 sm:gap-4 max-w-xl mx-auto w-full">
+              <div className="flex flex-col items-center text-center min-h-[220px] sm:min-h-[240px] justify-end">
+                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center">
+                  <Image
+                    src={BIB_TUCKER_CLASSIC_SIX_BOTTLE}
+                    alt="Bib & Tucker Classic Six"
+                    width={140}
+                    height={300}
+                    className="object-contain object-bottom w-auto max-h-[min(200px,28vw)] sm:max-h-[220px]"
+                    unoptimized
+                  />
+                </div>
+                <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-3 min-h-[2.25rem] flex items-end justify-center">
+                  Classic Six
+                </p>
               </div>
-              <div className="flex flex-col items-center text-center">
-                <Image
-                  src={BIB_TUCKER_DOUBLE_CHAR_LOGO}
-                  alt="Bib & Tucker Double Char"
-                  width={120}
-                  height={120}
-                  className="object-contain h-24 w-auto mb-2"
-                  unoptimized
-                />
-                <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-2">Double Char</p>
+              <div className="flex flex-col items-center text-center min-h-[220px] sm:min-h-[240px] justify-end">
+                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center pb-1">
+                  <Image
+                    src={BIB_TUCKER_DOUBLE_CHAR_LOGO}
+                    alt="Bib & Tucker Double Char"
+                    width={160}
+                    height={160}
+                    className="object-contain object-bottom w-auto max-h-[min(100px,20vw)] sm:max-h-[112px]"
+                    unoptimized
+                  />
+                </div>
+                <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-3 min-h-[2.25rem] flex items-end justify-center">
+                  Double Char
+                </p>
               </div>
-              <div className="flex flex-col items-center justify-end text-center pb-1">
-                <span className="font-display text-lg text-copper leading-tight">Gold Roast</span>
-                <p className="text-[10px] text-muted mt-1 leading-snug">Small batch bourbon with a coffee-kissed finish</p>
+              <div className="flex flex-col items-center text-center min-h-[220px] sm:min-h-[240px] justify-end">
+                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center px-1">
+                  <span className="font-display text-xl sm:text-2xl text-copper leading-tight text-center max-w-[9rem]">
+                    Gold Roast
+                  </span>
+                </div>
+                <p className="text-[10px] text-muted mt-3 leading-snug max-w-[10rem] mx-auto min-h-[2.25rem] flex items-end justify-center">
+                  Small batch bourbon with a coffee-kissed finish
+                </p>
               </div>
             </div>
           </article>
 
-          <article className="border border-rule p-8 lg:p-10 bg-warm hover:bg-cream transition-colors relative" data-reveal>
-            <span className="font-display text-mist text-6xl lg:text-7xl absolute top-6 right-6 opacity-40">02</span>
-            <div className="relative z-10">
+          <article
+            className="border border-rule p-8 lg:p-10 bg-warm hover:bg-cream transition-colors relative flex flex-col h-full min-h-0"
+            data-reveal
+          >
+            <span className="font-display text-mist text-6xl lg:text-7xl absolute top-6 right-6 opacity-40 pointer-events-none">
+              02
+            </span>
+            <div className="relative z-10 flex flex-col flex-1 min-h-0">
               <p className="text-[9px] tracking-[0.28em] uppercase text-muted mb-4 max-w-md">
                 Born to Rise Above Ordinary Whiskey
               </p>
               <Image src="/Redemption logo /Redemption_Whiskey_Logo.png" alt="Redemption" width={200} height={80} className="h-16 w-auto mb-6" unoptimized />
-              <p className="text-muted leading-relaxed mb-6">
+              <p className="text-muted leading-relaxed">
                 Redemption was created to unlock the potential of rye. Our ongoing journey to master its nuances has taught us to blend smooth whiskeys with extraordinary depth and character.
               </p>
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex-1 min-h-4" aria-hidden />
+              <div className="flex flex-wrap items-center gap-4 pt-8">
                 <Link href="#collection" className="text-walnut text-[9px] tracking-[0.22em] uppercase after:content-['→'] after:ml-1 hover:text-copper transition-colors">
                   Explore Redemption
                 </Link>
@@ -88,15 +115,20 @@ export default function Brands() {
                 </a>
               </div>
             </div>
-            <div className="mt-10 flex justify-center">
-              <Image
-                src={REDEMPTION_CORE_TRIO_BOTTLES}
-                alt="Redemption Rye, Bourbon, and High Rye Bourbon"
-                width={360}
-                height={200}
-                className="object-contain object-bottom w-full max-w-md h-auto max-h-52"
-                unoptimized
-              />
+            <div className="relative z-10 mt-10 flex flex-col items-center justify-end min-h-[220px] sm:min-h-[240px] max-w-xl mx-auto w-full">
+              <div className="flex flex-1 w-full min-h-[140px] items-end justify-center">
+                <Image
+                  src={REDEMPTION_CORE_TRIO_BOTTLES}
+                  alt="Redemption Rye, Bourbon, and High Rye Bourbon"
+                  width={480}
+                  height={280}
+                  className="object-contain object-bottom w-full max-w-[min(100%,420px)] max-h-[min(220px,40vw)] sm:max-h-[240px]"
+                  unoptimized
+                />
+              </div>
+              <p className="text-[9px] tracking-[0.18em] uppercase text-muted mt-3 min-h-[2.25rem] flex items-end justify-center text-center">
+                Rye · Bourbon · High Rye Bourbon
+              </p>
             </div>
           </article>
         </div>

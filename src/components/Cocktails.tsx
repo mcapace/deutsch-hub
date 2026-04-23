@@ -119,6 +119,38 @@ const cocktails: Cocktail[] = [
   { id: 'campfire-of', name: 'Campfire Old Fashioned', brand: 'bib', spirit: 'Bib & Tucker Double Char', tagline: 'Smoky, rich, unforgettable', ingredients: ['2 oz Bib & Tucker Double Char', '0.25 oz Maple Syrup', '2 dashes Coffee Pecan Bitters', '2 dashes Black Walnut Bitters'], instructions: ['Add all ingredients to a mixing glass with ice', 'Stir until well chilled', 'Strain into a rocks glass over a large ice cube', 'Express orange peel and garnish'], garnish: 'Orange peel', glassware: 'Rocks glass', occasion: 'Fireside sipping' },
   { id: 'sazerac', name: 'Sazerac', brand: 'redemption', spirit: 'Redemption Rye', tagline: 'New Orleans classic', ingredients: ['2 oz Redemption Rye', '0.5 oz Simple Syrup', "3 dashes Peychaud's Bitters", 'Absinthe rinse'], instructions: ['Rinse a chilled rocks glass with absinthe', 'Stir rye, simple syrup, and bitters with ice', 'Strain into the absinthe-rinsed glass', 'Express lemon peel over the drink'], garnish: 'Lemon peel', glassware: 'Rocks glass', occasion: 'Classic cocktail hour' },
   { id: 'redemption-manhattan', name: 'Redemption Manhattan', brand: 'redemption', spirit: 'Redemption Rye', tagline: 'Rye-forward perfection', ingredients: ['2 oz Redemption Rye', '1 oz Sweet Vermouth', '2 dashes Angostura Bitters'], instructions: ['Stir all ingredients with ice until well chilled', 'Strain into a chilled coupe glass', 'Garnish with a brandied cherry'], garnish: 'Brandied cherry', glassware: 'Coupe', occasion: 'Evening sipping' },
+  {
+    id: 'redemption-black-cherry-old-fashioned',
+    name: 'Black Cherry Old Fashioned',
+    brand: 'redemption',
+    spirit: 'Redemption Rye',
+    tagline: 'Rye, black cherry syrup, Angostura',
+    ingredients: ['2 oz Redemption Rye', '0.5 oz black cherry syrup', '2 dashes Angostura Bitters'],
+    instructions: [
+      'Stir all ingredients with ice',
+      'Pour over a large ice cube',
+      'Garnish with a dark cherry and orange peel',
+    ],
+    garnish: 'Dark cherry and orange peel',
+    glassware: 'Rocks glass',
+    occasion: 'After dinner',
+  },
+  {
+    id: 'redemption-maple-old-fashioned',
+    name: 'Maple Old Fashioned',
+    brand: 'redemption',
+    spirit: 'Redemption High Rye Bourbon',
+    tagline: 'High rye bourbon and maple, stirred',
+    ingredients: ['2 oz Redemption High Rye Bourbon', '0.5 oz maple syrup', '2 dashes Angostura Bitters'],
+    instructions: [
+      'Stir all ingredients with ice',
+      'Pour over a large ice cube',
+      'Garnish with orange peel',
+    ],
+    garnish: 'Orange peel',
+    glassware: 'Rocks glass',
+    occasion: 'Cool evenings, classic sip',
+  },
 ];
 
 function CocktailCard({ cocktail, onSelect }: { cocktail: Cocktail; onSelect: () => void }) {

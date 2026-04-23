@@ -218,6 +218,48 @@ const cocktails: Cocktail[] = [
     glassware: 'Coupe',
     occasion: 'Evening sipping',
   },
+  {
+    id: 'redemption-black-cherry-old-fashioned',
+    name: 'Black Cherry Old Fashioned',
+    brand: 'redemption',
+    spirit: 'Redemption Rye',
+    tagline: 'Rye, black cherry syrup, Angostura',
+    category: 'classic',
+    ingredients: [
+      '2 oz Redemption Rye',
+      '0.5 oz black cherry syrup',
+      '2 dashes Angostura Bitters',
+    ],
+    instructions: [
+      'Stir all ingredients with ice',
+      'Pour over a large ice cube',
+      'Garnish with a dark cherry and orange peel',
+    ],
+    garnish: 'Dark cherry and orange peel',
+    glassware: 'Rocks glass',
+    occasion: 'After dinner',
+  },
+  {
+    id: 'redemption-maple-old-fashioned',
+    name: 'Maple Old Fashioned',
+    brand: 'redemption',
+    spirit: 'Redemption High Rye Bourbon',
+    tagline: 'High rye bourbon and maple, stirred',
+    category: 'classic',
+    ingredients: [
+      '2 oz Redemption High Rye Bourbon',
+      '0.5 oz maple syrup',
+      '2 dashes Angostura Bitters',
+    ],
+    instructions: [
+      'Stir all ingredients with ice',
+      'Pour over a large ice cube',
+      'Garnish with orange peel',
+    ],
+    garnish: 'Orange peel',
+    glassware: 'Rocks glass',
+    occasion: 'Cool evenings, classic sip',
+  },
 ];
 
 const brandColors = {
