@@ -5,12 +5,12 @@
 export const BIB_TUCKER_CLASSIC_SIX_BOTTLE =
   '/Bib & Tucker Bottle Images/BT_FY24_Classic 6_New Bottles_BS_Render.png';
 
-/** Product photography (Whisky Advocate store). */
+/** Product shots — trimmed to opaque bounds so trio matches Classic Six framing in UI. */
 export const BIB_TUCKER_DOUBLE_CHAR_BOTTLE =
-  '/Bib & Tucker Bottle Images/BT_Double_Char_Bottle.png';
+  '/Bib & Tucker Bottle Images/BT_Double_Char_Bottle_trim.png';
 
 export const BIB_TUCKER_GOLD_ROAST_BOTTLE =
-  '/Bib & Tucker Bottle Images/BT_Gold_Roast_Bottle.webp';
+  '/Bib & Tucker Bottle Images/BT_Gold_Roast_Bottle_trim.webp';
 
 export const BIB_TUCKER_DOUBLE_CHAR_LOGO = '/BAT_FY24_DoubleChar_Logo.png';
 

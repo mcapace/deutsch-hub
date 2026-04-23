@@ -11,18 +11,10 @@ import {
   REDEMPTION_LOGO,
 } from '@/lib/brand-images';
 
-/**
- * Fixed slot + `fill` + object-contain.
- * Classic Six art fills its canvas; Double Char / Gold Roast share 1000×1278 files where
- * the opaque bottle only occupies ~48% of the width (heavy transparent padding). With
- * plain contain, Classic Six reads ~2× taller. Scale Classic Six to match the *bottle*
- * height the other two get (~48% of slot height vs full slot when height-limited).
- */
+/** Fixed slot + `fill` + object-bottom — sources share similar aspect after alpha-trim on Double/Gold. */
 const bibBottleSlotClass =
   'relative h-[284px] sm:h-[304px] w-[124px] sm:w-[142px] shrink-0 overflow-hidden';
-const bibBottleImageBaseClass = 'object-contain object-bottom';
-/** ~146px bottle vs ~304px full-frame in this slot → 0.48 (see comment above) */
-const bibBottleClassicSixImageClass = `${bibBottleImageBaseClass} scale-[0.48] origin-bottom`;
+const bibBottleImageClass = 'object-contain object-bottom';
 
 export default function Brands() {
   return (
@@ -79,7 +71,7 @@ export default function Brands() {
                       alt="Bib & Tucker Classic Six"
                       fill
                       unoptimized
-                      className={bibBottleClassicSixImageClass}
+                      className={bibBottleImageClass}
                       sizes="142px"
                     />
                   </div>
@@ -91,7 +83,7 @@ export default function Brands() {
                       alt="Bib & Tucker Double Char bourbon bottle"
                       fill
                       unoptimized
-                      className={bibBottleImageBaseClass}
+                      className={bibBottleImageClass}
                       sizes="142px"
                     />
                   </div>
@@ -103,7 +95,7 @@ export default function Brands() {
                       alt="Bib & Tucker Gold Roast bourbon bottle"
                       fill
                       unoptimized
-                      className={bibBottleImageBaseClass}
+                      className={bibBottleImageClass}
                       sizes="142px"
                     />
                   </div>
