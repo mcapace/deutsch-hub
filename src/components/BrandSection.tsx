@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
+import { REDEMPTION_LOGO } from '@/lib/brand-images';
 
 interface Product {
   name: string;
@@ -71,7 +72,7 @@ export default function BrandSection({
           </span>
           <div className="flex justify-center mb-4">
             <Image
-              src={theme === 'bib' ? '/BAT_3D_Copper_Logo.png' : '/Redemption logo /Redemption_Whiskey_Logo.png'}
+              src={theme === 'bib' ? '/BAT_3D_Copper_Logo.png' : REDEMPTION_LOGO}
               alt={brandName}
               width={280}
               height={100}

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { STORE_BIB_TUCKER, STORE_REDEMPTION, STORE_HOME } from '@/lib/store-links';
+import { REDEMPTION_LOGO } from '@/lib/brand-images';
 
 const exploreLinks = [
   { name: 'Bib & Tucker', href: '#brands' },
@@ -57,7 +58,7 @@ export default function Footer() {
               <span className="w-px h-8 bg-white/20 flex-shrink-0" aria-hidden />
               <Link href="#brands" className="opacity-90 hover:opacity-100 transition-opacity [&_img]:[filter:brightness(0)_invert(1)]">
                 <Image
-                  src="/Redemption logo /Redemption_Whiskey_Logo.png"
+                  src={REDEMPTION_LOGO}
                   alt="Redemption"
                   width={160}
                   height={64}

@@ -7,6 +7,7 @@ import {
   BIB_TUCKER_CLASSIC_SIX_BOTTLE,
   BIB_TUCKER_DOUBLE_CHAR_LOGO,
   REDEMPTION_CORE_TRIO_BOTTLES,
+  REDEMPTION_LOGO,
 } from '@/lib/brand-images';
 
 export default function Brands() {
@@ -27,8 +28,17 @@ export default function Brands() {
             <span className="font-display text-mist text-6xl lg:text-7xl absolute top-6 right-6 opacity-40 pointer-events-none">
               01
             </span>
-            <div className="relative z-10 flex flex-col flex-1 min-h-0">
-              <Image src="/BAT_3D_Copper_Logo.png" alt="Bib & Tucker" width={200} height={80} className="h-16 w-auto mb-6" unoptimized />
+            <div className="relative z-10 flex flex-col flex-1 min-h-0 items-stretch">
+              <div className="mb-6 self-start w-fit max-w-full shrink-0">
+                <Image
+                  src="/BAT_3D_Copper_Logo.png"
+                  alt="Bib & Tucker"
+                  width={240}
+                  height={96}
+                  className="block h-14 sm:h-16 w-auto max-w-[min(240px,85vw)] object-contain object-center"
+                  unoptimized
+                />
+              </div>
               <h3 className="font-display text-2xl lg:text-3xl text-ink mb-4">
                 Where Bold <span className="italic text-copper">&amp; Refined</span> Come Together
               </h3>
@@ -48,13 +58,13 @@ export default function Brands() {
             {/* Expression row: shared baseline + cap height so columns align */}
             <div className="relative z-10 mt-10 grid grid-cols-3 gap-3 sm:gap-4 max-w-xl mx-auto w-full">
               <div className="flex flex-col items-center text-center min-h-[220px] sm:min-h-[240px] justify-end">
-                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center">
+                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center [&_img]:max-w-full">
                   <Image
                     src={BIB_TUCKER_CLASSIC_SIX_BOTTLE}
                     alt="Bib & Tucker Classic Six"
                     width={140}
                     height={300}
-                    className="object-contain object-bottom w-auto max-h-[min(200px,28vw)] sm:max-h-[220px]"
+                    className="block object-contain object-bottom w-auto h-auto max-h-[min(200px,28vw)] sm:max-h-[220px]"
                     unoptimized
                   />
                 </div>
@@ -63,13 +73,13 @@ export default function Brands() {
                 </p>
               </div>
               <div className="flex flex-col items-center text-center min-h-[220px] sm:min-h-[240px] justify-end">
-                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center pb-1">
+                <div className="flex flex-1 w-full min-h-[140px] items-end justify-center pb-1 [&_img]:max-w-full">
                   <Image
                     src={BIB_TUCKER_DOUBLE_CHAR_LOGO}
                     alt="Bib & Tucker Double Char"
                     width={160}
                     height={160}
-                    className="object-contain object-bottom w-auto max-h-[min(100px,20vw)] sm:max-h-[112px]"
+                    className="block object-contain object-bottom w-auto h-auto max-h-[min(100px,20vw)] sm:max-h-[112px] max-w-[min(160px,40vw)]"
                     unoptimized
                   />
                 </div>
@@ -97,11 +107,20 @@ export default function Brands() {
             <span className="font-display text-mist text-6xl lg:text-7xl absolute top-6 right-6 opacity-40 pointer-events-none">
               02
             </span>
-            <div className="relative z-10 flex flex-col flex-1 min-h-0">
+            <div className="relative z-10 flex flex-col flex-1 min-h-0 items-stretch">
               <p className="text-[9px] tracking-[0.28em] uppercase text-muted mb-4 max-w-md">
                 Born to Rise Above Ordinary Whiskey
               </p>
-              <Image src="/Redemption logo /Redemption_Whiskey_Logo.png" alt="Redemption" width={200} height={80} className="h-16 w-auto mb-6" unoptimized />
+              <div className="mb-6 self-start w-fit max-w-full shrink-0">
+                <Image
+                  src={REDEMPTION_LOGO}
+                  alt="Redemption"
+                  width={220}
+                  height={110}
+                  className="block h-14 sm:h-16 w-auto max-w-[min(220px,85vw)] object-contain object-center"
+                  unoptimized
+                />
+              </div>
               <p className="text-muted leading-relaxed">
                 Redemption was created to unlock the potential of rye. Our ongoing journey to master its nuances has taught us to blend smooth whiskeys with extraordinary depth and character.
               </p>
@@ -116,13 +135,13 @@ export default function Brands() {
               </div>
             </div>
             <div className="relative z-10 mt-10 flex flex-col items-center justify-end min-h-[220px] sm:min-h-[240px] max-w-xl mx-auto w-full">
-              <div className="flex flex-1 w-full min-h-[140px] items-end justify-center">
+              <div className="flex flex-1 w-full min-h-[140px] items-end justify-center px-1">
                 <Image
                   src={REDEMPTION_CORE_TRIO_BOTTLES}
                   alt="Redemption Rye, Bourbon, and High Rye Bourbon"
                   width={480}
                   height={280}
-                  className="object-contain object-bottom w-full max-w-[min(100%,420px)] max-h-[min(220px,40vw)] sm:max-h-[240px]"
+                  className="block object-contain object-bottom w-auto h-auto max-w-full max-h-[min(220px,40vw)] sm:max-h-[240px]"
                   unoptimized
                 />
               </div>

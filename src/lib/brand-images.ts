@@ -10,3 +10,6 @@ export const REDEMPTION_CORE_TRIO_BOTTLES =
   '/Redemption Bottle Images/dfws_rdpn_trio-set_750ml_BLK_14OCT25.png';
 
 export const BIB_TUCKER_DOUBLE_CHAR_LOGO = '/BAT_FY24_DoubleChar_Logo.png';
+
+/** Redemption wordmark / eagle lockup (replaces legacy circular logo asset). */
+export const REDEMPTION_LOGO = '/Bib & Tucker Bottle Images/redemption-logo.png';
