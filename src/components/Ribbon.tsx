@@ -1,7 +1,8 @@
 'use client';
 
 export default function Ribbon() {
-  const part = 'Bib & Tucker · Tennessee Bourbon · Gold Roast · Double Char · Tennessee Ten · Redemption · American Rye · High Rye Bourbon · Whisky Advocate ';
+  const part =
+    'Bib & Tucker · Tennessee Bourbon · Classic Six · Gold Roast · Double Char · Tennessee Ten · Redemption · Rye · Bourbon · High Rye Bourbon · Whisky Advocate ';
   const full = part + part;
 
   return (

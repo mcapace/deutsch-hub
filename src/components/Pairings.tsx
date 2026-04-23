@@ -24,7 +24,7 @@ const pairingsData: BrandPairings[] = [
   {
     brand: 'Bib & Tucker',
     brandId: 'bib',
-    tagline: 'Bold flavors for bold pairings',
+    tagline: 'Bold Flavors. Standout Pairings',
     whiskeys: [
       { name: 'The Classic Six', proof: '92 Proof', pairings: [{ food: 'Grilled Ribeye', description: 'The caramel notes complement charred meat beautifully' }, { food: 'Dark Chocolate Truffles', description: 'Vanilla and oak meet rich cocoa' }, { food: 'Aged Cheddar', description: 'Sharp cheese balances the bourbon sweetness' }] },
       { name: 'Double Char', proof: '88 Proof', pairings: [{ food: 'BBQ Brisket', description: 'Smoke meets smoke in perfect harmony' }, { food: 'Maple-Glazed Bacon', description: 'Sugar maple notes amplified' }] },
@@ -34,7 +34,7 @@ const pairingsData: BrandPairings[] = [
   {
     brand: 'Redemption',
     brandId: 'redemption',
-    tagline: 'Spice-forward whiskeys, bold pairings',
+    tagline: 'Rye-Built Whiskeys for pairings with soul',
     whiskeys: [
       { name: 'Bourbon', proof: '88 Proof', pairings: [{ food: 'Bacon-Wrapped Dates', description: 'Sweet and savory with caramel notes' }, { food: 'Brie & Crackers', description: 'Creamy cheese softens the spice' }] },
       { name: 'Rye', proof: '92 Proof', pairings: [{ food: 'Pastrami on Rye', description: 'The ultimate rye-on-rye experience' }, { food: 'Sharp Aged Cheese', description: 'Bold flavors match bold whiskey' }] },

@@ -25,7 +25,7 @@ const pairingsData: BrandPairings[] = [
   {
     brand: 'Bib & Tucker',
     brandId: 'bib',
-    tagline: 'Bold flavors for bold pairings',
+    tagline: 'Bold Flavors. Standout Pairings',
     whiskeys: [
       {
         name: 'The Classic Six',
@@ -72,7 +72,7 @@ const pairingsData: BrandPairings[] = [
   {
     brand: 'Redemption',
     brandId: 'redemption',
-    tagline: 'Spice-forward whiskeys, bold pairings',
+    tagline: 'Rye-Built Whiskeys for pairings with soul',
     whiskeys: [
       {
         name: 'Bourbon',

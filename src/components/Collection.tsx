@@ -5,9 +5,9 @@ import { STORE_BIB_TUCKER, STORE_REDEMPTION, STORE_HOME } from '@/lib/store-link
 
 const collectionFeatures = [
   { id: 'gift-guide', title: 'Gift Guide', description: 'Perfect whiskey selections for every person on your list', brand: 'both', link: '#cocktails' },
-  { id: 'gold-roast-feature', title: 'Gold Roast Bourbon', description: 'The perfect after-dinner bourbon for any gathering', brand: 'bib', link: '#brands' },
   { id: 'cocktail-party', title: 'Cocktail Recipes', description: 'Classic recipes that shine at any celebration', brand: 'both', link: '#cocktails' },
   { id: 'food-pairings', title: 'Food Pairings', description: 'Elevate your table with expert whiskey pairings', brand: 'both', link: '#pairings' },
+  { id: 'gold-roast-feature', title: 'Gold Roast Bourbon', description: 'The perfect after-dinner bourbon for any gathering', brand: 'bib', link: '#brands' },
 ];
 
 export default function Collection() {
@@ -37,7 +37,9 @@ export default function Collection() {
 
         <div className="grid lg:grid-cols-2 gap-6 mb-16">
           <div className="bg-ink text-white p-8 lg:p-10 min-h-[280px] flex flex-col" data-reveal>
-            <span className="text-[10px] tracking-[0.2em] uppercase text-white font-medium block mb-2">Tennessee Bourbon</span>
+            <span className="text-[10px] tracking-[0.2em] uppercase text-white font-medium block mb-2">
+              Tennessee Small Batch Bourbon Whiskey
+            </span>
             <h3 className="font-display text-3xl lg:text-4xl mb-3 text-white">Bib & Tucker</h3>
             <p className="text-sm lg:text-base text-white mb-6 flex-grow">
               From Gold Roast after-dinner sipping to Double Char by the fire — award-winning bourbons for every moment.
@@ -52,10 +54,13 @@ export default function Collection() {
             </div>
           </div>
           <div className="bg-ink text-white p-8 lg:p-10 min-h-[280px] flex flex-col" data-reveal>
-            <span className="text-[10px] tracking-[0.2em] uppercase text-white font-medium block mb-2">American Rye</span>
+            <span className="text-[10px] tracking-[0.2em] uppercase text-white font-medium block mb-2">Rye-Built Whiskeys</span>
             <h3 className="font-display text-3xl lg:text-4xl mb-3 text-white">Redemption</h3>
+            <p className="text-sm lg:text-base text-white/95 mb-3">
+              Three classic expressions all crafted with a rye backbone for depth and character.
+            </p>
             <p className="text-sm lg:text-base text-white mb-6 flex-grow">
-              High-rye character with rich warmth. Perfect for Manhattans and all your favorite classics.
+              Redemption was created to unlock the potential of rye. Our ongoing journey to master its nuances has taught us to blend smooth whiskeys with extraordinary depth and character.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="#brands" className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-amber-100 transition-colors">

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { REDEMPTION_COCKTAILS_URL } from '@/lib/external-links';
 
 interface Cocktail {
   id: string;
@@ -20,7 +21,6 @@ interface Cocktail {
 }
 
 const cocktails: Cocktail[] = [
-  { id: 'gold-roast-fashioned', name: 'Gold Roast Elevated', brand: 'bib', spirit: 'Bib & Tucker Gold Roast', tagline: 'Coffee lovers rejoice', featured: true, ingredients: ['2 oz Bib & Tucker Gold Roast', '0.25 oz Demerara Syrup', '2 dashes Angostura Bitters'], instructions: ['Add ingredients to a mixing glass with ice', 'Stir until well chilled', 'Strain over a large ice cube', 'Express orange peel over the drink'], garnish: 'Orange peel', glassware: 'Rocks glass', occasion: 'After dinner' },
   {
     id: 'gold-roast-old-fashioned',
     name: 'Gold Roast Old Fashioned',
@@ -243,7 +243,15 @@ export default function Cocktails() {
           <span className="text-[9px] tracking-[0.3em] uppercase text-copper block mb-3">Crafted Recipes</span>
           <h2 className="font-display text-4xl lg:text-5xl text-ink mb-4">Signature <span className="italic text-copper">Cocktails</span></h2>
           <p className="text-muted max-w-xl mx-auto">
-            Expertly crafted recipes that showcase the distinct character of each spirit.
+            Expertly crafted recipes that showcase the distinct character of each spirit.{' '}
+            <a
+              href={REDEMPTION_COCKTAILS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-copper underline underline-offset-4 hover:opacity-90"
+            >
+              More Redemption recipes on Redemption Whiskey ↗
+            </a>
           </p>
         </header>
 

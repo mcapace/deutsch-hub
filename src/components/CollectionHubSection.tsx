@@ -21,13 +21,6 @@ const collectionFeatures: CollectionFeature[] = [
     link: '#cocktails',
   },
   {
-    id: 'gold-roast-feature',
-    title: 'Gold Roast Bourbon',
-    description: 'The perfect after-dinner bourbon for any gathering',
-    brand: 'bib',
-    link: '#bib-tucker',
-  },
-  {
     id: 'cocktail-party',
     title: 'Cocktail Recipes',
     description: 'Classic recipes that shine at any celebration',
@@ -40,6 +33,13 @@ const collectionFeatures: CollectionFeature[] = [
     description: 'Elevate your table with expert whiskey pairings',
     brand: 'both',
     link: '#pairings',
+  },
+  {
+    id: 'gold-roast-feature',
+    title: 'Gold Roast Bourbon',
+    description: 'The perfect after-dinner bourbon for any gathering',
+    brand: 'bib',
+    link: '#bib-tucker',
   },
 ];
 
@@ -151,7 +151,9 @@ export default function CollectionHubSection() {
               style={{ background: 'linear-gradient(135deg, var(--bt-rust), var(--bt-gold))', minHeight: '280px' }}
             >
               <div className="p-8 md:p-10 text-white flex flex-col h-full">
-                <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">Tennessee Bourbon</span>
+                <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">
+                  Tennessee Small Batch Bourbon Whiskey
+                </span>
                 <h3 className="font-serif text-3xl md:text-4xl mb-3">Bib & Tucker</h3>
                 <p className="text-sm md:text-base opacity-90 mb-6 flex-grow">
                   From Gold Roast after-dinner sipping to Double Char by the fire — award-winning bourbons for every moment.
@@ -189,10 +191,13 @@ export default function CollectionHubSection() {
               style={{ background: 'linear-gradient(135deg, var(--redemption-orange), var(--bt-gold))', minHeight: '280px' }}
             >
               <div className="p-8 md:p-10 text-white flex flex-col h-full">
-                <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">American Rye</span>
+                <span className="text-xs tracking-[0.2em] uppercase opacity-80 block mb-2">Rye-Built Whiskeys</span>
                 <h3 className="font-serif text-3xl md:text-4xl mb-3">Redemption</h3>
+                <p className="text-sm md:text-base opacity-90 mb-3">
+                  Three classic expressions all crafted with a rye backbone for depth and character.
+                </p>
                 <p className="text-sm md:text-base opacity-90 mb-6 flex-grow">
-                  High-rye character with rich warmth. Perfect for Manhattans and all your favorite classics.
+                  Redemption was created to unlock the potential of rye. Our ongoing journey to master its nuances has taught us to blend smooth whiskeys with extraordinary depth and character.
                 </p>
                 <div className="flex flex-wrap items-center gap-4">
                   <Link href="#redemption" className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all">

@@ -155,6 +155,11 @@ h1, h2, h3, h4, h5, h6,
 .bg-ink a:hover {
   color: rgba(255, 255, 255, 0.9);
 }
+/* Pill / inverse CTAs on dark cards use bg-white + text-ink — beat rule above */
+.bg-ink a.text-ink,
+.bg-ink a.text-ink:hover {
+  color: var(--ink);
+}
 
 @keyframes ribbon {
   0% { transform: translateX(0); }

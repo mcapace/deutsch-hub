@@ -8,7 +8,7 @@ WHISKY ADVOCATE STORE — these are the actual bottles available to buy; weave t
 Bib & Tucker collection (shop all Bib & Tucker): https://store.whiskyadvocate.com/collections/bib-tucker
 - Bib & Tucker Gold Roast Small Batch Bourbon Whiskey — coffee-infused, Muletown Coffee, after-dinner pour.
 - Bib & Tucker Double Char Small Batch Bourbon Whiskey — sugar maple smoke, fireside sipping.
-- Bib & Tucker 6 year old Small Batch (No. 24) — flagship-style six-year Tennessee bourbon (93-rated expression on store).
+- Bib & Tucker Classic Six Small Batch Bourbon Whiskey — flagship-style six-year Tennessee bourbon (93-rated expression on store).
 
 Redemption collection (shop all Redemption): https://store.whiskyadvocate.com/collections/redemption
 - Redemption Bourbon Whiskey — approachable 21% rye bourbon, cocktails and neat.

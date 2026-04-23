@@ -333,7 +333,7 @@ export default function HeroSection() {
         </h1>
         <div style={styles.heroDivider} className="hero-divider-el" />
         <p style={styles.heroSub} className="hero-sub-el">
-          Bib &amp; Tucker &nbsp;·&nbsp; Gold Roast &nbsp;·&nbsp; Redemption
+          Bib &amp; Tucker &nbsp;·&nbsp; Redemption
         </p>
         <div style={{ ...styles.heroCtas, perspective: '800px' }} className="hero-ctas-el">
           <motion.a
@@ -423,10 +423,10 @@ export default function HeroSection() {
             style={{ transformStyle: 'preserve-3d', transformOrigin: 'bottom center', rotateY, rotateX }}
           >
             <img
-              src="/Redemption Bottle Images/Redpt_FY27_FLOW_Pho_BS_AmW_HR Bour_Ind_750ML.png"
-              alt="Redemption Bourbon"
+              src="/Redemption Bottle Images/dfws_rdpn_trio-set_750ml_BLK_14OCT25.png"
+              alt="Redemption Rye, Bourbon, and High Rye Bourbon"
               className="hero-bottle-right-el"
-              style={styles.bottleRight}
+              style={{ ...styles.bottleRight, width: 'min(260px, 42vw)', maxHeight: '400px' }}
             />
           </motion.div>
         </motion.div>
@@ -437,12 +437,14 @@ export default function HeroSection() {
       <div style={styles.brandBar} className="hero-brand-bar-el">
         <div style={styles.brandTag}>
           <span style={styles.brandTagName}>Bib &amp; Tucker</span>
-          <span style={styles.brandTagSub}>Tennessee Bourbon</span>
+          <span style={{ ...styles.brandTagSub, fontSize: '7px', letterSpacing: '0.12em' }}>
+            Tennessee Small Batch Bourbon Whiskey
+          </span>
         </div>
         <div style={styles.brandDot} />
         <div style={styles.brandTag}>
           <span style={styles.brandTagName}>Redemption</span>
-          <span style={styles.brandTagSub}>American Rye</span>
+          <span style={styles.brandTagSub}>Rye-Built Whiskeys</span>
         </div>
       </div>
 
@@ -463,11 +465,13 @@ export default function HeroSection() {
               {[
                 'Bib & Tucker',
                 'Tennessee Bourbon',
+                'Classic Six',
                 'Gold Roast',
                 'Double Char',
                 'Tennessee Ten',
                 'Redemption Whiskey',
-                'American Rye',
+                'Rye',
+                'Bourbon',
                 'High Rye Bourbon',
                 'Whisky Advocate',
               ].map((item, j) => (

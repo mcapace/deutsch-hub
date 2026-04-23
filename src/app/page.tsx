@@ -5,7 +5,6 @@ import Nav from '@/components/Nav';
 import HeroSection from '@/components/HeroSection';
 import Ribbon from '@/components/Ribbon';
 import Brands from '@/components/Brands';
-import Stats from '@/components/Stats';
 import Collection from '@/components/Collection';
 import Stories from '@/components/Stories';
 import Cocktails from '@/components/Cocktails';
@@ -26,9 +25,6 @@ export default function Home() {
       </ParallaxSection>
       <ParallaxSection speed={0.1}>
         <Brands />
-      </ParallaxSection>
-      <ParallaxSection speed={-0.06}>
-        <Stats />
       </ParallaxSection>
       <ParallaxSection speed={0.08}>
         <Collection />

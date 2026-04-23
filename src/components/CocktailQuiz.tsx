@@ -136,12 +136,12 @@ const cocktailResults: Record<string, CocktailResult> = {
   },
   // Default/catch-all results
   'default-bib': {
-    name: 'Gold Roast Elevated',
+    name: 'Gold Roast Espresso Martini',
     brand: 'bib',
     spirit: 'Bib & Tucker Gold Roast',
-    description: 'A unique coffee-infused bourbon cocktail. Perfect for those who appreciate complexity.',
-    ingredients: ['2 oz Bib & Tucker Gold Roast', '0.25 oz demerara syrup', '2 dashes Angostura bitters', 'Orange peel'],
-    occasion: 'After dinner',
+    description: 'Shaken with fresh espresso and coffee liqueur — a bold, modern take on the classic.',
+    ingredients: ['1.5 oz Bib & Tucker Gold Roast', '1 oz fresh espresso', '0.5 oz coffee liqueur', '0.25 oz simple syrup'],
+    occasion: 'Brunch or dessert',
   },
   'default-redemption': {
     name: 'Whiskey Sour',
