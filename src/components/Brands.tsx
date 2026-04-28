@@ -149,14 +149,14 @@ export default function Brands() {
                 </a>
               </div>
             </div>
-            <div className="relative z-10 mt-10 flex flex-col items-center justify-end min-h-[220px] sm:min-h-[240px] max-w-xl mx-auto w-full">
-              <div className="flex flex-1 w-full min-h-[140px] items-end justify-center px-1">
+            <div className="relative z-10 mt-10 flex flex-col items-center justify-end min-h-[296px] sm:min-h-[316px] max-w-xl mx-auto w-full">
+              <div className="flex flex-1 w-full min-h-[248px] sm:min-h-[268px] items-end justify-center px-1">
                 <Image
                   src={REDEMPTION_CORE_TRIO_BOTTLES}
                   alt="Redemption Rye, Bourbon, and High Rye Bourbon"
                   width={480}
                   height={280}
-                  className="block object-contain object-bottom w-auto h-auto max-w-full max-h-[min(220px,40vw)] sm:max-h-[240px]"
+                  className="block w-full max-w-full max-h-[min(284px,52vw)] sm:max-h-[304px] object-contain object-bottom"
                   unoptimized
                 />
               </div>
